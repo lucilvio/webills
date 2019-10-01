@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.suo
+/.vs
+/src/lucilvio.solo.Webills/.vs/lucilvio.solo.Webills
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp2.2
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/obj
