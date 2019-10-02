@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Tests
 {
-    internal class UserCannotAddNullExpanse : Exception
+    internal class UserCannotAddNullExpense : Exception
     {
     }
 }

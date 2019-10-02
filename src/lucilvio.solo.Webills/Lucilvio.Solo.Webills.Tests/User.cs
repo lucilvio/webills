@@ -7,31 +7,31 @@ namespace Lucilvio.Solo.Webills.Tests
     internal class User
     {
         private readonly List<Income> _incomes;
-        private readonly List<Expanse> _expanses;
+        private readonly List<Expense> _expenses;
 
         public User()
         {
             this._incomes = new List<Income>();
-            this._expanses = new List<Expanse>();
+            this._expenses = new List<Expense>();
         }
 
         public ReadOnlyCollection<Income> Incomes => this._incomes.AsReadOnly();
 
-        internal void AddExpanse(Expanse expanse)
+        internal void AddExpense(Expense expense)
         {
-            if (expanse == null)
-                throw new UserCannotAddNullExpanse();
+            if (expense == null)
+                throw new UserCannotAddNullExpense();
 
-            this._expanses.Add(expanse);
+            this._expenses.Add(expense);
         }
 
-        public ReadOnlyCollection<Expanse> Expanses => this._expanses.AsReadOnly();
+        public ReadOnlyCollection<Expense> Expenses => this._expenses.AsReadOnly();
 
 
         public bool HasIncomes => this._incomes.Any();
-        public bool HasExpanses => this._expanses.Any();
+        public bool HasExpenses => this._expenses.Any();
 
-        public decimal Balance => this.Incomes.Sum(i => i.Value.Value) - this.Expanses.Sum(e => e.Value.Value);
+        public decimal Balance => this.Incomes.Sum(i => i.Value.Value) - this.Expenses.Sum(e => e.Value.Value);
 
         internal void AddIncome(Income income)
         {

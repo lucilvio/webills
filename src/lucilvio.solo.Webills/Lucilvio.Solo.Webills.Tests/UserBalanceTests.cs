@@ -34,12 +34,12 @@ namespace Lucilvio.Solo.Webills.Tests
         }
 
         [TestMethod]
-        public void BalanceEqualsToIncomeAddedValuesAndSubtractedByExpansesValues()
+        public void BalanceEqualsToIncomeAddedValuesAndSubtractedByExpensesValues()
         {
             var user = new User();
             user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
             user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(200)));
-            user.AddExpanse(new Expanse("Test Expanse", new DateTime(2018, 10, 23), new TransactionValue(24)));
+            user.AddExpense(new Expense("Test Expense", new DateTime(2018, 10, 23), new TransactionValue(24)));
 
             Assert.AreEqual(476, user.Balance);
 

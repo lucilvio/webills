@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Tests
 {
-    internal class ExpanseTransactionValueCannotBeNull : Exception
+    internal class ExpenseTransactionValueCannotBeNull : Exception
     {
     }
 }
