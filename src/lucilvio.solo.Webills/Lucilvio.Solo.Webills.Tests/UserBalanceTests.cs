@@ -6,42 +6,46 @@ namespace Lucilvio.Solo.Webills.Tests
     [TestClass]
     public class UserBalanceTests
     {
+        private User _user;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this._user = new User();
+        }
+
         [TestMethod]
         public void UserHasBalance()
         {
-            var user = new User();
-            Assert.IsNotNull(user.Balance);
+            Assert.IsNotNull(this._user.Balance);
         }
 
         [TestMethod]
         public void BalanceEqualsTo300IfUserAddsIncomeValueOf300()
         {
-            var user = new User();
-            user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
+            this._user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
 
-            Assert.AreEqual(300, user.Balance);
+            Assert.AreEqual(300, this._user.Balance);
         }
 
         [TestMethod]
         public void BalanceEqualsToIncomesAddedValues()
         {
-            var user = new User();
-            user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
-            user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(200)));
-            user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(35)));
+            this._user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
+            this._user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(200)));
+            this._user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(35)));
 
-            Assert.AreEqual(535, user.Balance);
+            Assert.AreEqual(535, this._user.Balance);
         }
 
         [TestMethod]
         public void BalanceEqualsToIncomeAddedValuesAndSubtractedByExpensesValues()
         {
-            var user = new User();
-            user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
-            user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(200)));
-            user.AddExpense(new Expense("Test Expense", new DateTime(2018, 10, 23), new TransactionValue(24)));
+            this._user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300)));
+            this._user.AddIncome(new Income("Test Income", new DateTime(2018, 10, 23), new TransactionValue(200)));
+            this._user.AddExpense(new Expense("Test Expense", new DateTime(2018, 10, 23), new TransactionValue(24)));
 
-            Assert.AreEqual(476, user.Balance);
+            Assert.AreEqual(476, this._user.Balance);
 
         }
     }

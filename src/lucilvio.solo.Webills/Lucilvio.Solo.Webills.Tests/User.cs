@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Lucilvio.Solo.Webills.Tests
 {
-    internal class User
+    public class User
     {
         private readonly List<Income> _incomes;
         private readonly List<Expense> _expenses;
@@ -27,13 +28,12 @@ namespace Lucilvio.Solo.Webills.Tests
 
         public ReadOnlyCollection<Expense> Expenses => this._expenses.AsReadOnly();
 
-
         public bool HasIncomes => this._incomes.Any();
         public bool HasExpenses => this._expenses.Any();
 
         public decimal Balance => this.Incomes.Sum(i => i.Value.Value) - this.Expenses.Sum(e => e.Value.Value);
 
-        internal void AddIncome(Income income)
+        public void AddIncome(Income income)
         {
             if (income == null)
                 throw new UserCannotAddNullIncome();

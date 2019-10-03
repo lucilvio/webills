@@ -4,5 +4,44 @@
 
 <div class="row">
     <div class="col-lg-12">
+
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h5 class="panel-title">Striped rows<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var income in User.Incomes)
+                        {
+                            <tr>
+                                <td>@income.Name</td>
+                                <td>@income.Date</td>
+                                <td>@income.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <form action="/Home/AddNewIncome" method="post">
+            <button type="submit" class="btn btn-primary"> New Income </button>
+        </form>
     </div>
 </div>

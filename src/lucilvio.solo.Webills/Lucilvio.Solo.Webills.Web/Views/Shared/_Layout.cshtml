@@ -46,6 +46,7 @@
             @Html.PartialAsync("_SideBar.cshtml").GetAwaiter().GetResult()
             
             <div class="content-wrapper">
+                @Html.PartialAsync("_PageHeader.cshtml").GetAwaiter().GetResult()
                 <div class="content">
                     @RenderBody()
 

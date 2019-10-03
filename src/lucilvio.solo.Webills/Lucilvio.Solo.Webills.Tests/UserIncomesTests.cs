@@ -6,45 +6,48 @@ namespace Lucilvio.Solo.Webills.Tests
     [TestClass]
     public class UserIncomesTests
     {
+        private User _user;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this._user = new User();
+        }
+
         [TestMethod]
         public void UserHasIncomes()
         {
-            var user = new User();
-            Assert.IsNotNull(user.Incomes);
+            Assert.IsNotNull(this._user.Incomes);
         }
 
         [TestMethod]
         public void UserCanRegisterIncome()
         {
-            var user = new User();
-            user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), new TransactionValue(300)));
+            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), new TransactionValue(300)));
 
-            Assert.IsNotNull(user.Incomes);
-            Assert.IsTrue(user.HasIncomes);
+            Assert.IsNotNull(this._user.Incomes);
+            Assert.IsTrue(this._user.HasIncomes);
         }
 
         [TestMethod]
         [ExpectedException(typeof(UserCannotAddNullIncome))]
         public void UserCantRegisterNullIncome()
         {
-            var user = new User();
-            user.AddIncome(null);
+            this._user.AddIncome(null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(IncomeTransactionValueCannotBeNull))]
         public void UserCannorAddNullIncomeValue()
         {
-            var user = new User();
-            user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), null));
+            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), null));
         }
 
         [TestMethod]
         [ExpectedException(typeof(TransactionValueCannotBeNegative))]
         public void UserCannotAddNegativeIncomeValues()
         {
-            var user = new User();
-            user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), new TransactionValue(-100)));
+            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), new TransactionValue(-100)));
         }
     }
 }

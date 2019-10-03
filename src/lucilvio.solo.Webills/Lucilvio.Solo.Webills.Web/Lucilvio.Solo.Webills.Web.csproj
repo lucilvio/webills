@@ -10,4 +10,8 @@
     <Folder Include="wwwroot\js\libs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj" />
+  </ItemGroup>
+
 </Project>

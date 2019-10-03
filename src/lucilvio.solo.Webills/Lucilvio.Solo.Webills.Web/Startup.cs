@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Lucilvio.Solo.Webills.Web.Home;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,10 @@ namespace Lucilvio.Solo.Webills.Web
                 options.ViewLocationFormats.Add("/Shared");
                 options.ViewLocationFormats.Add("/{1}/{0}/{0}" + RazorViewEngine.ViewExtension);
             });
+
+            services.AddSingleton<IAddNewIncomeDataStorage, AddNewIcomeDataStorageInMemory>();
             
+            services.AddScoped<IAddNewIncome, AddNewIncome>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

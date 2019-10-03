@@ -12,6 +12,8 @@
             this._value = value;
         }
 
+        public static TransactionValue Zero => new TransactionValue(0);
+
         public decimal Value => this._value;
     }
 }
