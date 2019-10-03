@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Tests", "Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj", "{74DD8268-4EF2-430E-AFFB-8235B42F02E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Tests", "Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj", "{74DD8268-4EF2-430E-AFFB-8235B42F02E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

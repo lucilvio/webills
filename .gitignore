@@ -7,3 +7,6 @@
 /src/lucilvio.solo.Webills/.vs/lucilvio.solo.Webills
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp2.2
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Web/bin/Debug
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Web/obj
+*.user
