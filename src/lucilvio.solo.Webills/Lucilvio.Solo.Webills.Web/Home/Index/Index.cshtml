@@ -1,4 +1,4 @@
-﻿@model Lucilvio.Solo.Webills.Web.Home.UserIncomesViewModel
+﻿@model Lucilvio.Solo.Webills.Web.Home.UserTransactionsInformationViewModel
 @{
     Layout = "_Layout";
     ViewData["title"] = "Home";
@@ -13,7 +13,7 @@
                 <h6 class="panel-title"><span class="text-semibold">Balance</span></h6>
                 <div class="col-4">
                     <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
-                    <h3 class="font-weight-semibold mb-0 text-success">R$ 9.693,00 </h3>
+                    <h3 class="font-weight-semibold mb-0 text-success"> @Model.Balance </h3>
                 </div>
 
             </div>
@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var income in Model.Incomes)
+                        @foreach (var income in Model.Expenses)
                         {
                             <tr>
                                 <td>@income.Name</td>

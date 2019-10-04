@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Lucilvio.Solo.Webills.Web
 {
-    public class AddNewExpenseDataStorage : IAddNewExpenseDataStorage
+    public class AddNewExpenseDataStorageInMemoryu : IAddNewExpenseDataStorage
     {
         private readonly DataStorageContext _dataStorage;
 
-        public AddNewExpenseDataStorage(DataStorageContext dataStorage)
+        public AddNewExpenseDataStorageInMemoryu(DataStorageContext dataStorage)
         {
             this._dataStorage = dataStorage;
         }

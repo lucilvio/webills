@@ -6,20 +6,21 @@ namespace Lucilvio.Solo.Webills.Web.Home
     {
         private readonly IAddNewIncome _addNewIncome;
         private readonly IAddNewExpense _addNewExpense;
-        private readonly ISearchForUserIncomes _searchForUserIncomes;
+        private readonly ISearchForUserTransactionsInformation _searchForUserTransactionsInformation;
 
-        public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, ISearchForUserIncomes searchForUserIncomes)
+        public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, 
+            ISearchForUserTransactionsInformation searchForUserTransactionsInformation)
         {
             this._addNewIncome = addNewIncome;
             this._addNewExpense = addNewExpense;
-            this._searchForUserIncomes = searchForUserIncomes;
+            this._searchForUserTransactionsInformation = searchForUserTransactionsInformation;
         }
 
         public IActionResult Index()
         {
-            var userIncomes = this._searchForUserIncomes.Execute();
+            var result = this._searchForUserTransactionsInformation.Execute();
 
-            return View(new UserIncomesViewModel(userIncomes));
+            return View(new UserTransactionsInformationViewModel(result));
         }
 
         public IActionResult AddNewIncome([FromForm]AddNewIncomeViewModel viewModel)

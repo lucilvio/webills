@@ -19,12 +19,11 @@ namespace Lucilvio.Solo.Webills.Web
                 options.ViewLocationFormats.Add("/{1}/{0}/{0}" + RazorViewEngine.ViewExtension);
             });
 
-
             services.AddSingleton(new DataStorageContext());
 
             services.AddScoped<IAddNewIncomeDataStorage, AddNewIcomeDataStorageInMemory>();
-            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorage>();
-            services.AddScoped<ISearchForUserIncomes, SearchForUserIncomesInMemory>();
+            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageInMemoryu>();
+            services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
             services.AddScoped<IAddNewExpense, AddNewExpense>();
         }

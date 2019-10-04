@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Lucilvio.Solo.Webills.Tests
 {
@@ -16,7 +14,8 @@ namespace Lucilvio.Solo.Webills.Tests
             this._expenses = new List<Expense>();
         }
 
-        public ReadOnlyCollection<Income> Incomes => this._incomes.AsReadOnly();
+        public IEnumerable<Income> Incomes => this._incomes;
+        public IEnumerable<Expense> Expenses => this._expenses;
 
         public void AddExpense(Expense expense)
         {
@@ -25,8 +24,6 @@ namespace Lucilvio.Solo.Webills.Tests
 
             this._expenses.Add(expense);
         }
-
-        public ReadOnlyCollection<Expense> Expenses => this._expenses.AsReadOnly();
 
         public bool HasIncomes => this._incomes.Any();
         public bool HasExpenses => this._expenses.Any();

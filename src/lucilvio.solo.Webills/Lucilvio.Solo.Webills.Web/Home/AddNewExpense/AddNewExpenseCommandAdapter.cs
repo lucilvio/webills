@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Lucilvio.Solo.Webills.Tests;
 
 namespace Lucilvio.Solo.Webills.Web.Home
@@ -12,7 +13,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
             this.Name = viewModel.Name;
             this.Date = !string.IsNullOrEmpty(viewModel.Date) ? DateTime.Parse(viewModel.Date) : DateTime.MinValue;
-            this.Value = !string.IsNullOrEmpty(viewModel.Value) ? new TransactionValue(decimal.Parse(viewModel.Value)) : TransactionValue.Zero;
+            this.Value = !string.IsNullOrEmpty(viewModel.Value) ? new TransactionValue(decimal.Parse(viewModel.Value, CultureInfo.InvariantCulture)) : TransactionValue.Zero;
         }
     }
 }
