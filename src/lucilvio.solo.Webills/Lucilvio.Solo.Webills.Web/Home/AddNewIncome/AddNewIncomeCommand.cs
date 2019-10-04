@@ -3,7 +3,7 @@ using Lucilvio.Solo.Webills.Tests;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
-    public class UserIncomesResponse
+    public abstract class AddNewIncomeCommand
     {
         public string Name { get; protected set; }
         public DateTime Date { get; protected set; }

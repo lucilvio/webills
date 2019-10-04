@@ -7,22 +7,21 @@ namespace Lucilvio.Solo.Webills.Web
 {
     internal class AddNewIcomeDataStorageInMemory : IAddNewIncomeDataStorage
     {
-        public IList<User> Users { get; set; }
+        private readonly DataStorageContext _context;
 
-        public AddNewIcomeDataStorageInMemory()
+        public AddNewIcomeDataStorageInMemory(DataStorageContext context)
         {
-            this.Users = new List<User>();
-            this.Users.Add(new User());
+            this._context = context;
         }
 
         public void AddUserIncomeData(User user)
         {
-            var foundUser = this.Users.FirstOrDefault();
+            var foundUser = this._context.Users.FirstOrDefault();
 
             if (foundUser == null)
                 return;
 
-            foundUser.AddIncome(user.Incomes.FirstOrDefault());
+            foundUser.AddIncome(user.Incomes.LastOrDefault());
         }
     }
 }

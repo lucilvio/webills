@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Tests
 
         public ReadOnlyCollection<Income> Incomes => this._incomes.AsReadOnly();
 
-        internal void AddExpense(Expense expense)
+        public void AddExpense(Expense expense)
         {
             if (expense == null)
                 throw new UserCannotAddNullExpense();

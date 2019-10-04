@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.Tests;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
-    internal class NewIncomeCommandAdapter : NewIncomeCommand
+    internal class AddNewIncomeCommandAdapter : AddNewIncomeCommand
     {
-        public NewIncomeCommandAdapter(NewIncomeViewModel viewModel)
+        public AddNewIncomeCommandAdapter(AddNewIncomeViewModel viewModel)
         {
             if (viewModel == null)
                 return;

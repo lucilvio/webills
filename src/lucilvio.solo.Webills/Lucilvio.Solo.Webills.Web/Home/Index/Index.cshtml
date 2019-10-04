@@ -1,20 +1,30 @@
-﻿@{
+﻿@model Lucilvio.Solo.Webills.Web.Home.UserIncomesViewModel
+@{
     Layout = "_Layout";
+    ViewData["title"] = "Home";
+    ViewData["icon"] = "icon-home";
 }
 
 <div class="row">
     <div class="col-lg-12">
 
+        <div class="panel panel-flat border-left-info">
+            <div class="panel-body">
+                <h6 class="panel-title"><span class="text-semibold">Balance</span></h6>
+                <div class="col-4">
+                    <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
+                    <h3 class="font-weight-semibold mb-0 text-success">R$ 9.693,00 </h3>
+                </div>
+
+            </div>
+        </div>
+
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <h5 class="panel-title">Striped rows<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
+                <h6 class="panel-title">
+                    <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
+                    <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
+                </h6>
             </div>
 
             <div class="table-responsive">
@@ -27,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var income in User.Incomes)
+                        @foreach (var income in Model.Incomes)
                         {
                             <tr>
                                 <td>@income.Name</td>
@@ -40,8 +50,38 @@
             </div>
         </div>
 
-        <form action="/Home/AddNewIncome" method="post">
-            <button type="submit" class="btn btn-primary"> New Income </button>
-        </form>
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <span class="text-semibold"><i class="icon-subtract error"></i> &nbsp; Expenses </span>
+                    <button type="submit" data-toggle="modal" data-target="#modal-new-expense" class="btn btn-primary btn-xs pull-right"> New Expense </button>
+                </h6>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var income in Model.Incomes)
+                        {
+                            <tr>
+                                <td>@income.Name</td>
+                                <td>@income.Date</td>
+                                <td>@income.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+@Html.PartialAsync("../AddNewIncome/AddNewIncome.cshtml").GetAwaiter().GetResult()
+@Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()

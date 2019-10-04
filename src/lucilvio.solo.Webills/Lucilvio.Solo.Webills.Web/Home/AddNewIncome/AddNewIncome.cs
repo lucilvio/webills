@@ -11,7 +11,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this._dataStorage = dataStorage;
         }
 
-        public void Execute(NewIncomeCommand command)
+        public void Execute(AddNewIncomeCommand command)
         {
             var user = new User();
             user.AddIncome(new Income(command.Name, command.Date, command.Value));

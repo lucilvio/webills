@@ -2,6 +2,6 @@
 {
     public interface IAddNewIncome
     {
-        void Execute(NewIncomeCommand command);
+        void Execute(AddNewIncomeCommand command);
     }
 }

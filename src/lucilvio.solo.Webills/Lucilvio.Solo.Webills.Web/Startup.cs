@@ -14,13 +14,19 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddControllersWithViews();
             services.Configure<RazorViewEngineOptions>(options =>
             {
-                options.ViewLocationFormats.Add("/Shared");
+                options.ViewLocationExpanders.Clear();
+                options.ViewLocationFormats.Add("/Shared/{0}" + RazorViewEngine.ViewExtension);
                 options.ViewLocationFormats.Add("/{1}/{0}/{0}" + RazorViewEngine.ViewExtension);
             });
 
-            services.AddSingleton<IAddNewIncomeDataStorage, AddNewIcomeDataStorageInMemory>();
-            
+
+            services.AddSingleton(new DataStorageContext());
+
+            services.AddScoped<IAddNewIncomeDataStorage, AddNewIcomeDataStorageInMemory>();
+            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorage>();
+            services.AddScoped<ISearchForUserIncomes, SearchForUserIncomesInMemory>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
+            services.AddScoped<IAddNewExpense, AddNewExpense>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
