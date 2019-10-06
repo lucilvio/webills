@@ -31,7 +31,7 @@ namespace Lucilvio.Solo.Webills.Web.Login
                 ExpiresUtc = DateTime.UtcNow.AddYears(10)
             });
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Home");
         } 
     }
 }

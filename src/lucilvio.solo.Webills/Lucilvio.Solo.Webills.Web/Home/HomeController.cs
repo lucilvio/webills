@@ -1,6 +1,6 @@
-﻿using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
+﻿using Microsoft.AspNetCore.Mvc;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
-using Microsoft.AspNetCore.Mvc;
+using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this._searchForUserTransactionsInformation = searchForUserTransactionsInformation;
         }
 
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
             var result = this._searchForUserTransactionsInformation.Execute();
 
