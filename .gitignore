@@ -13,3 +13,10 @@
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Release/netcoreapp3.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Web/bin/Release/netcoreapp3.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Web/Properties/PublishProfiles
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases/bin/Debug/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp3.0/Lucilvio.Solo.Webills.Domain.pdb
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp3.0/Lucilvio.Solo.Webills.Domain.dll
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp3.0/Lucilvio.Solo.Webills.UseCases.pdb
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp3.0/Lucilvio.Solo.Webills.UseCases.dll

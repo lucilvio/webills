@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain\Lucilvio.Solo.Webills.Domain.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

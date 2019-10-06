@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Tests", "Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj", "{74DD8268-4EF2-430E-AFFB-8235B42F02E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Domain", "Lucilvio.Solo.Webills.Domain\Lucilvio.Solo.Webills.Domain.csproj", "{CC92038B-A120-48F8-BDB6-492AC36052D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.UseCases", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC92038B-A120-48F8-BDB6-492AC36052D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC92038B-A120-48F8-BDB6-492AC36052D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC92038B-A120-48F8-BDB6-492AC36052D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC92038B-A120-48F8-BDB6-492AC36052D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28658996-B811-4069-A4AD-FDBB3185B840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28658996-B811-4069-A4AD-FDBB3185B840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28658996-B811-4069-A4AD-FDBB3185B840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28658996-B811-4069-A4AD-FDBB3185B840}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

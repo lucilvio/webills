@@ -1,4 +1,7 @@
-﻿using Lucilvio.Solo.Webills.Web.Home;
+﻿using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
+using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
+using Lucilvio.Solo.Webills.Web.Home;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -19,10 +22,16 @@ namespace Lucilvio.Solo.Webills.Web
                 options.ViewLocationFormats.Add("/{1}/{0}/{0}" + RazorViewEngine.ViewExtension);
             });
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/Login";
+                });
+
             services.AddSingleton(new DataStorageContext());
 
             services.AddScoped<IAddNewIncomeDataStorage, AddNewIcomeDataStorageInMemory>();
-            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageInMemoryu>();
+            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageInMemory>();
             services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
             services.AddScoped<IAddNewExpense, AddNewExpense>();
@@ -35,13 +44,14 @@ namespace Lucilvio.Solo.Webills.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller}/{action}/{id?}", new
                 {
-                    Controller = "Home",
+                    Controller = "Login",
                     Action = "Index"
                 });
             });

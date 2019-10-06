@@ -1,26 +1,27 @@
-﻿using Lucilvio.Solo.Webills.Tests;
+﻿using System.Linq;
+using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
 using Lucilvio.Solo.Webills.Web.Home;
-using System.Linq;
 
 namespace Lucilvio.Solo.Webills.Web
 {
-    public class AddNewExpenseDataStorageInMemoryu : IAddNewExpenseDataStorage
+    public class AddNewExpenseDataStorageInMemory : IAddNewExpenseDataStorage
     {
         private readonly DataStorageContext _dataStorage;
 
-        public AddNewExpenseDataStorageInMemoryu(DataStorageContext dataStorage)
+        public AddNewExpenseDataStorageInMemory(DataStorageContext dataStorage)
         {
             this._dataStorage = dataStorage;
         }
 
-        public void AddUserExpenseData(User user)
+        public User GetUser()
         {
-            var foundUser = this._dataStorage.Users.FirstOrDefault();
+            return this._dataStorage.Users.FirstOrDefault();
+        }
 
-            if (foundUser == null)
-                return;
-
-            foundUser.AddExpense(user.Expenses.LastOrDefault());
+        public void Persist(User user)
+        {
+            return;
         }
     }
 }

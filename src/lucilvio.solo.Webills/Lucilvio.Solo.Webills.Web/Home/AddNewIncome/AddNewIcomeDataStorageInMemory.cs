@@ -1,6 +1,7 @@
 ﻿using System.Linq;
-using System.Collections.Generic;
+using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.Tests;
+using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
 using Lucilvio.Solo.Webills.Web.Home;
 
 namespace Lucilvio.Solo.Webills.Web
@@ -14,14 +15,14 @@ namespace Lucilvio.Solo.Webills.Web
             this._context = context;
         }
 
-        public void AddUserIncomeData(User user)
+        public User GetUser()
         {
-            var foundUser = this._context.Users.FirstOrDefault();
+            return this._context.Users.FirstOrDefault();
+        }
 
-            if (foundUser == null)
-                return;
-
-            foundUser.AddIncome(user.Incomes.LastOrDefault());
+        public void Persist(User user)
+        {
+            return;
         }
     }
 }
