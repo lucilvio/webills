@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
 using Lucilvio.Solo.Webills.Web.Home;
@@ -19,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Web
             return this._dataStorage.Users.FirstOrDefault();
         }
 
-        public void Persist(User user)
+        public async Task Persist(User user)
         {
             return;
         }

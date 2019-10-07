@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.Tests;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

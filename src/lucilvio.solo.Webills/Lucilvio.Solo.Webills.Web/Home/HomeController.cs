@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
+using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -25,18 +26,18 @@ namespace Lucilvio.Solo.Webills.Web.Home
             return View(new UserTransactionsInformationViewModel(result));
         }
 
-        public IActionResult AddNewIncome([FromForm]AddNewIncomeViewModel viewModel)
+        public async Task<IActionResult> AddNewIncome([FromForm]AddNewIncomeViewModel viewModel)
         {
-            this._addNewIncome.Execute(new AddNewIncomeCommandAdapter(viewModel));
+            await this._addNewIncome.Execute(new AddNewIncomeCommandAdapter(viewModel));
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Dashboard));
         }
 
-        public IActionResult AddNewExpense([FromForm]AddNewExpenseViewModel viewModel)
+        public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseViewModel viewModel)
         {
-            this._addNewExpense.Execute(new AddNewExpenseCommandAdapter(viewModel));
+            await this._addNewExpense.Execute(new AddNewExpenseCommandAdapter(viewModel));
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Dashboard));
         }
     }
 }

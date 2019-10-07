@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -28,10 +30,13 @@ namespace Lucilvio.Solo.Webills.Web
                     options.LoginPath = "/Login";
                 });
 
-            services.AddSingleton(new DataStorageContext());
+            services.AddDbContext<WebillsContext>(options =>
+            {
+                options.UseSqlServer(@"Server=localhost;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;");
+            });
 
-            services.AddScoped<IAddNewIncomeDataStorage, AddNewIcomeDataStorageInMemory>();
-            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageInMemory>();
+            services.AddScoped<IAddNewIncomeDataStorage, AddNewIncomeDataStorageWithEf>();
+            services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageWithEf>();
             services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
             services.AddScoped<IAddNewExpense, AddNewExpense>();

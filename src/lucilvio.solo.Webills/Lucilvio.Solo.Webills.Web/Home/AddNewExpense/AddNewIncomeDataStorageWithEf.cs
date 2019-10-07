@@ -2,15 +2,14 @@
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
-using Lucilvio.Solo.Webills.Web.Home;
 
 namespace Lucilvio.Solo.Webills.Web
 {
-    internal class AddNewIcomeDataStorageInMemory : IAddNewIncomeDataStorage
+    public class AddNewIncomeDataStorageWithEf : IAddNewIncomeDataStorage
     {
-        private readonly DataStorageContext _context;
+        private readonly WebillsContext _context;
 
-        public AddNewIcomeDataStorageInMemory(DataStorageContext context)
+        public AddNewIncomeDataStorageWithEf(WebillsContext context)
         {
             this._context = context;
         }
@@ -22,7 +21,7 @@ namespace Lucilvio.Solo.Webills.Web
 
         public async Task Persist(User user)
         {
-            return;
+            await this._context.SaveChangesAsync();
         }
     }
 }

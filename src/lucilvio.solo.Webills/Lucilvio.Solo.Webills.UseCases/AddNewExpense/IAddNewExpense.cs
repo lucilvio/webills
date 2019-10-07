@@ -1,7 +1,9 @@
-﻿namespace Lucilvio.Solo.Webills.UseCases.AddNewExpense
+﻿using System.Threading.Tasks;
+
+namespace Lucilvio.Solo.Webills.UseCases.AddNewExpense
 {
     public interface IAddNewExpense
     {
-        void Execute(AddNewExpenseCommand command);
+        Task Execute(AddNewExpenseCommand command);
     }
 }

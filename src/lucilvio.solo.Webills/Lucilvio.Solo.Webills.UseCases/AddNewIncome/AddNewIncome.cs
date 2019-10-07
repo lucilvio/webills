@@ -1,4 +1,5 @@
 ﻿using Lucilvio.Solo.Webills.Domain.User;
+using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 {
@@ -11,7 +12,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
             this._dataStorage = dataStorage;
         }
 
-        public void Execute(AddNewIncomeCommand command)
+        public async Task Execute(AddNewIncomeCommand command)
         {
             if (command == null)
                 throw new CommandNotInformed();
@@ -23,7 +24,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 
             foundUser.AddIncome(new Income(command.Name, command.Date, command.Value));
 
-            this._dataStorage.Persist(foundUser);
+            await this._dataStorage.Persist(foundUser);
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
+﻿using System.Threading.Tasks;
+
+namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 {
     public interface IAddNewIncome
     {
-        void Execute(AddNewIncomeCommand command);
+        Task Execute(AddNewIncomeCommand command);
     }
 }

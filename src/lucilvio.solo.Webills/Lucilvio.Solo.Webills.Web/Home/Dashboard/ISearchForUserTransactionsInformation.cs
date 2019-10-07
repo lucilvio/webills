@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -9,23 +10,23 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
     public class SearchForUserTransactionsInformation : ISearchForUserTransactionsInformation
     {
-        private readonly DataStorageContext _context;
+        private readonly WebillsContext _context;
 
-        public SearchForUserTransactionsInformation(DataStorageContext context)
+        public SearchForUserTransactionsInformation(WebillsContext context)
         {
             this._context = context;
         }
 
         public SearchForUserTransactionsInformationResult Execute()
         {
-            var foundUserTransactionsInformation = this._context.Users.FirstOrDefault();
+            var user = this._context.Users.Include(u => u.Incomes).Include(u => u.Expenses).AsNoTracking().FirstOrDefault();
 
-            if (foundUserTransactionsInformation == null)
+            if (user == null)
                 return SearchForUserTransactionsInformationResult.Empty;
 
-            return new SearchForUserTransactionsInformationResult(foundUserTransactionsInformation.Balance,
-                foundUserTransactionsInformation.Incomes.Select(i => new UserIncomeData(i.Name, i.Date, i.Value)), 
-                foundUserTransactionsInformation.Expenses.Select(e => new UserExpenseData(e.Name, e.Date, e.Value)));
+            return new SearchForUserTransactionsInformationResult(user.Balance,
+                user.Incomes.Select(i => new UserIncomeData(i.Name, i.Date, i.Value)),
+                user.Expenses.Select(e => new UserExpenseData(e.Name, e.Date, e.Value)));
         }
     }
 

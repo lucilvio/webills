@@ -1,5 +1,6 @@
 ﻿using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
+using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
@@ -10,8 +11,9 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
             return new User("Test User");
         }
 
-        public void Persist(User user)
+        public async Task Persist(User user)
         {
+            return;
         }
     }
 }
