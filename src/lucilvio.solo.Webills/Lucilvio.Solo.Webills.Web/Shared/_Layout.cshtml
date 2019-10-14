@@ -50,6 +50,7 @@
                     @RenderBody()
 
                     @Html.PartialAsync("_Footer.cshtml").GetAwaiter().GetResult()
+                    @RenderSection("Scripts", required: false)
                 </div>
             </div>
         </div>

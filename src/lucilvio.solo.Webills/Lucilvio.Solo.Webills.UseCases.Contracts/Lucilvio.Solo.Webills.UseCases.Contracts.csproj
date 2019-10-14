@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain\Lucilvio.Solo.Webills.Domain.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases.Contracts\Lucilvio.Solo.Webills.UseCases.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

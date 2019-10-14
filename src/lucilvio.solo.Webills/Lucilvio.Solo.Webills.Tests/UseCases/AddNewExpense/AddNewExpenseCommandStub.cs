@@ -1,6 +1,7 @@
 ﻿using System;
 using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {

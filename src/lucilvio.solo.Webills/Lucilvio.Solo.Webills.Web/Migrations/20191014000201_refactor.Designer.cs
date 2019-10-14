@@ -4,14 +4,16 @@ using Lucilvio.Solo.Webills.Web;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lucilvio.Solo.Webills.Web.Migrations
 {
     [DbContext(typeof(WebillsContext))]
-    partial class WebillsContextModelSnapshot : ModelSnapshot
+    [Migration("20191014000201_refactor")]
+    partial class refactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

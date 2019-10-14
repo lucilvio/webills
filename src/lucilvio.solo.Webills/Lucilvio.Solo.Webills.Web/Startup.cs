@@ -1,6 +1,11 @@
 ﻿using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
+using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
+using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.UseCases.EditIncome;
 using Lucilvio.Solo.Webills.Web.Home;
+using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,9 +42,12 @@ namespace Lucilvio.Solo.Webills.Web
 
             services.AddScoped<IAddNewIncomeDataStorage, AddNewIncomeDataStorageWithEf>();
             services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageWithEf>();
+            services.AddScoped<IEditIncomeDataStorage, EditIncomeDataStorageWithEf>();
             services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
+            services.AddScoped<ISearchForUserIncomeByNumber, SarchForUserIncomeByNumber>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
             services.AddScoped<IAddNewExpense, AddNewExpense>();
+            services.AddScoped<IEditIncome, EditIncome>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
+namespace Lucilvio.Solo.Webills.UseCases.Common
 {
     public class UserNotFound : Exception
     {

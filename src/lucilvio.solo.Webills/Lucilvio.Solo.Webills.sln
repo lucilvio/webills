@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Domain", "Lucilvio.Solo.Webills.Domain\Lucilvio.Solo.Webills.Domain.csproj", "{CC92038B-A120-48F8-BDB6-492AC36052D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Domain", "Lucilvio.Solo.Webills.Domain\Lucilvio.Solo.Webills.Domain.csproj", "{CC92038B-A120-48F8-BDB6-492AC36052D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.UseCases", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UseCases", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.UseCases.Contracts", "Lucilvio.Solo.Webills.UseCases.Contracts\Lucilvio.Solo.Webills.UseCases.Contracts.csproj", "{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{28658996-B811-4069-A4AD-FDBB3185B840}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28658996-B811-4069-A4AD-FDBB3185B840}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28658996-B811-4069-A4AD-FDBB3185B840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
+namespace Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome
 {
     public interface IAddNewIncome
     {

@@ -34,6 +34,7 @@
                             <th>Name</th>
                             <th>Date</th>
                             <th>Value</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,6 +44,7 @@
                                 <td>@income.Name</td>
                                 <td>@income.Date</td>
                                 <td>@income.Value</td>
+                                <td><a href="#" class="edit-income" data-id="@income.Number"><i class="icon-pencil"></i></a></td>
                             </tr>
                         }
                     </tbody>
@@ -85,3 +87,25 @@
 
 @Html.PartialAsync("../AddNewIncome/AddNewIncome.cshtml").GetAwaiter().GetResult()
 @Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()
+@Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
+
+@section Scripts {
+    <script>
+        $(".edit-income").click(function () {
+            var incomeNumber = $(this).data("id");
+
+            $.getJSON("/Home/EditIncome", { incomeNumber: incomeNumber })
+                .done(function (data) {
+                    var income = data.income;
+
+                    $.each(income, function (name, value) {
+                        $("#form-edit-income input[name='" + name + "']").val(value);
+                    });
+
+                    $("#modal-edit-income").modal("show");
+                }).fail(function (error) {
+                    alert(error.responseText);
+                });
+        });
+    </script>
+}

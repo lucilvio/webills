@@ -17,5 +17,20 @@ namespace Lucilvio.Solo.Webills.Domain.User
         public static TransactionValue Zero => new TransactionValue(0);
 
         public decimal Value => this._value;
+
+        public override bool Equals(object obj)
+        {
+            var tv = obj as TransactionValue;
+
+            if (tv == null)
+                return false;
+
+            return this.Value.Equals(tv.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Value.GetHashCode();
+        }
     }
 }
