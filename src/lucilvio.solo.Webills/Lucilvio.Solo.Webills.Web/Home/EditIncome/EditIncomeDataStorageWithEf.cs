@@ -18,11 +18,15 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 
         public User GetUser()
         {
-            return this._context.Users.Include(u => u.Incomes).FirstOrDefault();
+            return this._context.Users.Include(u => u.Incomes
+            ).FirstOrDefault();
         }
 
         public async Task Persist(Guid incomeNumber, User foundUser)
         {
+            var income = this._context.Set<Income>().FirstOrDefault(i => i.Number == incomeNumber);
+            this._context.Entry<Income>(income).State = EntityState.Deleted;
+
             await this._context.SaveChangesAsync();
         }
     }
