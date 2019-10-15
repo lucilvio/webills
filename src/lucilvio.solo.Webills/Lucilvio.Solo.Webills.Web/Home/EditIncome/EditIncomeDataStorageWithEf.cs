@@ -16,10 +16,9 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
             this._context = context;
         }
 
-        public User GetUser()
+        public async Task<User> GetUser()
         {
-            return this._context.Users.Include(u => u.Incomes
-            ).FirstOrDefault();
+            return await this._context.Users.Include(u => u.Incomes).FirstOrDefaultAsync();
         }
 
         public async Task Persist(Guid incomeNumber, User foundUser)

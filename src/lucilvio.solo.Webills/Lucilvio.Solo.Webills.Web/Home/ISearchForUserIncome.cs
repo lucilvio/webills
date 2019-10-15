@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
     public interface ISearchForUserIncomeByNumber
     {
-        SearchForUserIncomeByNumberResult Execute(SearchForUserIncomeByNumberQuery query);
+        Task<SearchForUserIncomeByNumberResult> Execute(SearchForUserIncomeByNumberQuery query);
     }
 
     public class SarchForUserIncomeByNumber : ISearchForUserIncomeByNumber
@@ -17,12 +18,12 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this._context = context;
         }
 
-        public SearchForUserIncomeByNumberResult Execute(SearchForUserIncomeByNumberQuery query)
+        public async Task<SearchForUserIncomeByNumberResult> Execute(SearchForUserIncomeByNumberQuery query)
         {
-            var income = this._context.Users.AsNoTracking().Include(u => u.Incomes).FirstOrDefault().Incomes
-                .FirstOrDefault(i => i.Number == query.Number);
+            var foundUser = await this._context.Users.AsNoTracking().Include(u => u.Incomes).FirstOrDefaultAsync();
+            var foundIncome = foundUser.Incomes.FirstOrDefault(i => i.Number == query.Number);
 
-            return new SearchForUserIncomeByNumberResult(income);
+            return new SearchForUserIncomeByNumberResult(foundIncome);
         }
     }
 }

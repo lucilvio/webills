@@ -37,12 +37,14 @@ namespace Lucilvio.Solo.Webills.Domain.User
             return income.Number;
         }
 
-        public void AddExpense(Expense expense)
+        public Guid AddExpense(Expense expense)
         {
             if (expense == null)
                 throw new UserCannotAddNullExpense();
 
             this._expenses.Add(expense);
+
+            return expense.Number;
         }
 
         public void AlterIncome(Guid incomeNumber, Income income)
@@ -54,6 +56,17 @@ namespace Lucilvio.Solo.Webills.Domain.User
                 throw new IncomeNotFound();
 
             this._incomes[foundIncomeIndex] = income;
+        }
+
+        public void AlterExpense(Guid expenseNumber, Expense expense)
+        {
+            var foundExpense = this._expenses.FirstOrDefault(e => e.Number == expenseNumber);
+            var foundExpenseIndex = this._expenses.IndexOf(foundExpense);
+
+            if (foundExpenseIndex < 0)
+                throw new ExpenseNotFound();
+
+            this._expenses[foundExpenseIndex] = expense;
         }
     }
 }

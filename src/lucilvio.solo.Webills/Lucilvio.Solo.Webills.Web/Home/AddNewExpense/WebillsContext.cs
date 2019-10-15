@@ -21,7 +21,8 @@ namespace Lucilvio.Solo.Webills.Web
                 e.HasKey("Id");
 
                 e.Property(p => p.Name);
-                e.Property(p => p.Date);    
+                e.Property(p => p.Date);
+                e.Property(p => p.Number);
                 e.Property(p => p.Value).HasConversion(v => v.Value, v => new TransactionValue(v));
             });
 

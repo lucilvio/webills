@@ -6,7 +6,7 @@ namespace Lucilvio.Solo.Webills.UseCases.EditIncome
 {
     public interface IEditIncomeDataStorage
     {
-        User GetUser();
+        Task<User> GetUser();
         Task Persist(Guid incomeNumber, User foundUser);
     }
 }

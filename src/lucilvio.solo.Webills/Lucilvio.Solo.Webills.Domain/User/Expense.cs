@@ -14,8 +14,11 @@ namespace Lucilvio.Solo.Webills.Domain.User
                 throw new ExpenseTransactionValueCannotBeNull();
 
             this.Value = value;
+
+            this.Number = Guid.NewGuid();
         }
 
+        public Guid Number { get; }
         public string Name { get; }
         public DateTime Date { get; }
         public TransactionValue Value { get; }

@@ -1,24 +1,22 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
+namespace Lucilvio.Solo.Webills.Web.Home
 {
-    public class EditIncomeViewModel
+    public class EditExpenseViewModel
     {
-        public EditIncomeViewModel()
+        public EditExpenseViewModel()
         {
         }
 
-        public EditIncomeViewModel(SearchForUserIncomeByNumberResult result)
+        public EditExpenseViewModel(SearchForUserExpenseByNumberResult result)
         {
-            if (result == null || result.Number == Guid.Empty)
-
+            if (result == null)
                 return;
 
             this.Number = result.Number.ToString();
             this.Name = result.Name;
             this.Date = result.Date.ToString("yyyy-MM-dd");
-            this.Value = result.Value.Value.ToString();
+            this.Value = result.Value.Value.ToString("N0");
         }
 
         public string Number { get; set; }

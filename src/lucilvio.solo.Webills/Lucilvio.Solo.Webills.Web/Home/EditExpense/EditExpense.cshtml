@@ -1,0 +1,39 @@
+﻿<div id="modal-edit-expense" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa-minus"></i> Edit Expense - <span id="expense-title-name"></span> </h5>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <form id="form-edit-expense" action="/Home/EditExpense" method="post">
+                <input type="hidden" name="number" />
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Name</label>
+                                <input type="text" name="name" placeholder="Expense name" class="form-control">
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label>Date</label>
+                                <input type="date" name="date" placeholder="Expense date" class="form-control">
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label>Value</label>
+                                <input type="text" name="value" placeholder="Expense value" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn bg-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

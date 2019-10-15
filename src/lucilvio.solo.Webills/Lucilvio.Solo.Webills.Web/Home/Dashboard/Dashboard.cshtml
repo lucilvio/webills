@@ -13,7 +13,7 @@
                 <h6 class="panel-title"><span class="text-semibold">Balance</span></h6>
                 <div class="col-4">
                     <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
-                    <h3 class="font-weight-semibold mb-0 text-success"> @Model.Balance </h3>
+                    <h3 class="font-weight-semibold mb-0 text-success"> @Model.Balance.Value </h3>
                 </div>
 
             </div>
@@ -43,7 +43,7 @@
                             <tr>
                                 <td>@income.Name</td>
                                 <td>@income.Date</td>
-                                <td>@income.Value</td>
+                                <td>@income.Value.Value </td>
                                 <td><a href="#" class="edit-income" data-id="@income.Number"><i class="icon-pencil"></i></a></td>
                             </tr>
                         }
@@ -70,13 +70,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var income in Model.Expenses)
+                        @foreach (var expense in Model.Expenses)
                         {
-                            <tr>
-                                <td>@income.Name</td>
-                                <td>@income.Date</td>
-                                <td>@income.Value</td>
-                            </tr>
+                        <tr>
+                            <td>@expense.Name</td>
+                            <td>@expense.Date</td>
+                            <td>@expense.Value.Value </td>
+                            <td><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -88,6 +89,7 @@
 @Html.PartialAsync("../AddNewIncome/AddNewIncome.cshtml").GetAwaiter().GetResult()
 @Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()
 @Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
+@Html.PartialAsync("../EditExpense/EditExpense.cshtml").GetAwaiter().GetResult()
 
 @section Scripts {
     <script>
@@ -103,6 +105,23 @@
                     });
 
                     $("#modal-edit-income").modal("show");
+                }).fail(function (error) {
+                    alert(error.responseText);
+                });
+        });
+
+        $(".edit-expense").click(function () {
+            var expenseNumber = $(this).data("id");
+
+            $.getJSON("/Home/EditExpense", { expenseNumber: expenseNumber })
+                .done(function (data) {
+                    var expense = data.expense;
+
+                    $.each(expense, function (name, value) {
+                        $("#form-edit-expense input[name='" + name + "']").val(value);
+                    });
+
+                    $("#modal-edit-expense").modal("show");
                 }).fail(function (error) {
                     alert(error.responseText);
                 });

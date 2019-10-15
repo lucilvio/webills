@@ -2,9 +2,12 @@
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
+using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.UseCases.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.EditIncome;
 using Lucilvio.Solo.Webills.Web.Home;
+using Lucilvio.Solo.Webills.Web.Home.EditExpense;
 using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -43,11 +46,14 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IAddNewIncomeDataStorage, AddNewIncomeDataStorageWithEf>();
             services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageWithEf>();
             services.AddScoped<IEditIncomeDataStorage, EditIncomeDataStorageWithEf>();
+            services.AddScoped<IEditExpenseDataStorage, EditExpenseDataStorageWithEf>();
             services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
             services.AddScoped<ISearchForUserIncomeByNumber, SarchForUserIncomeByNumber>();
+            services.AddScoped<ISearchForUserExpenseByNumber, SearchForUserExpenseByNumber>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
             services.AddScoped<IAddNewExpense, AddNewExpense>();
             services.AddScoped<IEditIncome, EditIncome>();
+            services.AddScoped<IEditExpense, EditExpense>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
