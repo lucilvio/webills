@@ -12,12 +12,12 @@ namespace Lucilvio.Solo.Webills.Web.Home.Index
             this.Name = expense.Name;
             this.Number = expense.Number.ToString();
             this.Date = expense.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            this.Value = new MoneyViewModel(expense.Value.Value.ToString());
+            this.Value = expense.Value.Value.ToMoney();
         }
 
         public string Number { get; set; }
         public string Name { get; }
         public string Date { get; }
-        public MoneyViewModel Value { get; }
+        public string Value { get; }
     }
 }

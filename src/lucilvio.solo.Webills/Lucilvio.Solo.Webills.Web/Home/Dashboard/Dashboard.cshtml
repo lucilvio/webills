@@ -13,7 +13,7 @@
                 <h6 class="panel-title"><span class="text-semibold">Balance</span></h6>
                 <div class="col-4">
                     <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
-                    <h3 class="font-weight-semibold mb-0 text-success"> @Model.Balance.Value </h3>
+                    <h3 class="font-weight-semibold mb-0 text-success"> @Model.Balance </h3>
                 </div>
 
             </div>
@@ -43,7 +43,7 @@
                             <tr>
                                 <td>@income.Name</td>
                                 <td>@income.Date</td>
-                                <td>@income.Value.Value </td>
+                                <td>@income.Value </td>
                                 <td><a href="#" class="edit-income" data-id="@income.Number"><i class="icon-pencil"></i></a></td>
                             </tr>
                         }
@@ -75,7 +75,7 @@
                         <tr>
                             <td>@expense.Name</td>
                             <td>@expense.Date</td>
-                            <td>@expense.Value.Value </td>
+                            <td>@expense.Value </td>
                             <td><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
                         </tr>
                         }
@@ -99,6 +99,8 @@
             $.getJSON("/Home/EditIncome", { incomeNumber: incomeNumber })
                 .done(function (data) {
                     var income = data.income;
+
+                    $("#income-title-name").val(income.name);
 
                     $.each(income, function (name, value) {
                         $("#form-edit-income input[name='" + name + "']").val(value);

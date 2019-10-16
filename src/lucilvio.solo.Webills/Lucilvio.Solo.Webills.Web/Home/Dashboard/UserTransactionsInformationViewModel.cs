@@ -11,12 +11,12 @@ namespace Lucilvio.Solo.Webills.Web.Home
             if (searchResult == null)
                 return;
 
-            this.Balance = new MoneyViewModel(searchResult.Balance.ToString());
+            this.Balance = searchResult.Balance.ToMoney();
             this.Incomes = searchResult.Incomes.Select(i => new UserIncomeViewModel(i));
             this.Expenses = searchResult.Expenses.Select(e => new UserExpenseViewModel(e));
         }
 
-        public MoneyViewModel Balance { get; }
+        public string Balance { get; }
         public IEnumerable<UserIncomeViewModel> Incomes { get; }
         public IEnumerable<UserExpenseViewModel> Expenses { get; }
     }

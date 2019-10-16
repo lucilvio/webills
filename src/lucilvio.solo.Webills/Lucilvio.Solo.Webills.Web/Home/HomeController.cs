@@ -38,6 +38,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             var result = this._searchForUserTransactionsInformation.Execute();
 
             return View(new UserTransactionsInformationViewModel(result));
+        
         }
 
         [HttpPost]

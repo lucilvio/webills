@@ -12,11 +12,13 @@ using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Globalization;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -62,6 +64,9 @@ namespace Lucilvio.Solo.Webills.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-PT");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-PT");
 
             app.UseAuthentication();
             app.UseStaticFiles();

@@ -17,8 +17,8 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 
             this.Number = result.Number.ToString();
             this.Name = result.Name;
-            this.Date = result.Date.ToString("yyyy-MM-dd");
-            this.Value = result.Value.Value.ToString();
+            this.Date = result.Date.ToString("dd/MM/yyyy");
+            this.Value = result.Value.Value.ToMoney();
         }
 
         public string Number { get; set; }
