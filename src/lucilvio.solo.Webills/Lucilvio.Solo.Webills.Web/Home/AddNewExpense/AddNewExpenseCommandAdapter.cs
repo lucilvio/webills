@@ -1,7 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using Lucilvio.Solo.Webills.Web.Shared;
 using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
@@ -14,8 +12,8 @@ namespace Lucilvio.Solo.Webills.Web.Home
                 return;
 
             this.Name = viewModel.Name;
-            this.Date = !string.IsNullOrEmpty(viewModel.Date) ? DateTime.Parse(viewModel.Date) : DateTime.MinValue;
-            this.Value = !string.IsNullOrEmpty(viewModel.Value) ? new TransactionValue(viewModel.Value.MoneyToDecimal()) : TransactionValue.Zero;
+            this.Date = viewModel.Date.StringToDate();
+            this.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
         }
     }
 }

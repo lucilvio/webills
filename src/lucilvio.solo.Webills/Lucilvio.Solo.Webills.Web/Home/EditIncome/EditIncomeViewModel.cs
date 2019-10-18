@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 {
@@ -15,9 +15,9 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 
                 return;
 
-            this.Number = result.Number.ToString();
             this.Name = result.Name;
-            this.Date = result.Date.ToString("dd/MM/yyyy");
+            this.Number = result.Number.ToString();
+            this.Date = result.Date.ToDateString(); 
             this.Value = result.Value.Value.DecimalToMoney();
         }
 
