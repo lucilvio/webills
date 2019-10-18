@@ -3,6 +3,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Lucilvio.Solo.Webills.Domain.User;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -16,6 +17,8 @@ namespace Lucilvio.Solo.Webills.Web
             {
                 using (var context = scope.ServiceProvider.GetService<WebillsContext>())
                 {
+                    context.Database.Migrate();
+
                     var user = context.Users.FirstOrDefault();
 
                     if(user == null)

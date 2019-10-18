@@ -24,3 +24,6 @@
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Tests/bin/Debug/netcoreapp3.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases.Contracts/obj
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases.Contracts/bin/Debug/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain/bin/Release/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases/bin/Release/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases.Contracts/bin/Release/netstandard2.0

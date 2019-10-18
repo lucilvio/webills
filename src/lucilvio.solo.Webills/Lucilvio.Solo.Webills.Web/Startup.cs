@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
@@ -24,6 +25,13 @@ namespace Lucilvio.Solo.Webills.Web
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            this._configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -42,7 +50,7 @@ namespace Lucilvio.Solo.Webills.Web
 
             services.AddDbContext<WebillsContext>(options =>
             {
-                options.UseSqlServer(@"Server=localhost;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;");
+                options.UseSqlServer(this._configuration.GetConnectionString("Webills"));
             });
 
             services.AddScoped<IAddNewIncomeDataStorage, AddNewIncomeDataStorageWithEf>();
