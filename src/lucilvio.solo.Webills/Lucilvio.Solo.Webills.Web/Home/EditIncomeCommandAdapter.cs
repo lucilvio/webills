@@ -16,15 +16,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             base.Name = viewModel.Name;
             base.Number = new Guid(viewModel.Number);
             base.Date = DateTime.ParseExact(viewModel.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            var nf = new CultureInfo("en-US", false).NumberFormat;
-            nf.NumberDecimalSeparator = ",";
-            nf.PerMilleSymbol = ".";
-            nf.CurrencyDecimalSeparator = " ";
-            nf.CurrencySymbol = "€";
-            nf.NumberGroupSeparator = ".";
-
-            base.Value = new TransactionValue(decimal.Parse(viewModel.Value, nf));
+            base.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
         }
     }
 }

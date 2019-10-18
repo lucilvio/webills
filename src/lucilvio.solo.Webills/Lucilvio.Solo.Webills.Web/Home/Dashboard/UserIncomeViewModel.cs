@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this.Name = income.Name;
             this.Number = income.Number.ToString();
             this.Date = income.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            this.Value = income.Value.Value.ToMoney();
+            this.Value = income.Value.Value.DecimalToMoney();
         }
 
 

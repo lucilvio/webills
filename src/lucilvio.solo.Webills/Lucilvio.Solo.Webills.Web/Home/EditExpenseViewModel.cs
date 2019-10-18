@@ -16,7 +16,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this.Number = result.Number.ToString();
             this.Name = result.Name;
             this.Date = result.Date.ToString("dd-MM-yyyy");
-            this.Value = result.Value.Value.ToString("N0");
+            this.Value = result.Value.Value.DecimalToMoney();
         }
 
         public string Number { get; set; }

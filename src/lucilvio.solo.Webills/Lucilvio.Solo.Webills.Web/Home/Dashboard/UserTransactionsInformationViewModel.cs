@@ -11,7 +11,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             if (searchResult == null)
                 return;
 
-            this.Balance = searchResult.Balance.ToMoney();
+            this.Balance = searchResult.Balance.DecimalToMoney();
             this.Incomes = searchResult.Incomes.Select(i => new UserIncomeViewModel(i));
             this.Expenses = searchResult.Expenses.Select(e => new UserExpenseViewModel(e));
         }
