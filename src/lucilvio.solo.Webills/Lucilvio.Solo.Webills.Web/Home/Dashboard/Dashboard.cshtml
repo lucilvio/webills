@@ -10,12 +10,25 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <div class="panel panel-flat border-left-info">
+                <div class="panel panel-flat border-left-blue">
                     <div class="panel-body">
                         <h2 class="panel-title"><span class="text-semibold">Balance</span></h2>
                         <div class="col-12">
+                            <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-blue"></i></p>
+                            <h3 class="font-weight-semibold mb-0 text-blue"> @Model.Balance </h3>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="panel panel-flat border-left-info">
+                    <div class="panel-body">
+                        <h2 class="panel-title"><span class="text-semibold">Total Earns</span></h2>
+                        <div class="col-12">
                             <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-success"></i></p>
-                            <h3 class="font-weight-semibold mb-0 text-success"> @Model.Balance </h3>
+                            <h3 class="font-weight-semibold mb-0 text-success"> @Model.TotalEarns </h3>
                         </div>
 
                     </div>
@@ -71,7 +84,7 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">
-                    <span class="text-semibold"><i class="icon-subtract error"></i> &nbsp; Expenses </span>
+                    <span class="text-semibold"><i class="icon-subtract text-warning"></i> &nbsp; Expenses </span>
                     <button type="submit" data-toggle="modal" data-target="#modal-new-expense" class="btn btn-primary btn-xs pull-right"> New Expense </button>
                 </h6>
             </div>

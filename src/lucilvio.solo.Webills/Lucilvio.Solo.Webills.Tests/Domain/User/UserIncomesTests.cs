@@ -87,5 +87,14 @@ namespace Lucilvio.Solo.Webills.Tests
             Assert.AreEqual(new DateTime(2019, 3, 3), this._user.Incomes.First().Date);
             Assert.AreEqual(new TransactionValue(20m), this._user.Incomes.First().Value);
         }
+
+        [TestMethod]
+        public void TotalEarnsOfTheUserIsTheSumOfAllIncomes()
+        {
+            this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
+            this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(2131m)));
+
+            Assert.AreEqual(32131.20m, this._user.TotalIncomes);
+        }
     }
 }

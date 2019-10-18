@@ -26,6 +26,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
             return new SearchForUserTransactionsInformationResult(
                 user.Balance,
+                user.TotalIncomes,
                 user.TotalExpenses,
                 user.Incomes.Select(i => new UserIncomeData(i.Number, i.Name, i.Date, i.Value)),
                 user.Expenses.Select(e => new UserExpenseData(e.Number, e.Name, e.Date, e.Value)));

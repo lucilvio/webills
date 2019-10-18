@@ -27,6 +27,7 @@ namespace Lucilvio.Solo.Webills.Domain.User
         public bool HasExpenses => this._expenses.Any();
         public decimal Balance => this.Incomes.Sum(i => i.Value.Value) - this.TotalExpenses;
 
+        public decimal TotalIncomes => this.Incomes.Sum(i => i.Value.Value);
         public decimal TotalExpenses => this.Expenses.Sum(e => e.Value.Value);
 
         public Guid AddIncome(Income income)

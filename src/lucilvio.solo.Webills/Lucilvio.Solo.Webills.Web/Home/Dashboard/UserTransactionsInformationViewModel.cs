@@ -13,12 +13,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
             this.Balance = searchResult.Balance.DecimalToMoney();
             this.TotalSpent = searchResult.TotalSpent.DecimalToMoney();
+            this.TotalEarns = searchResult.TotalIncomes.DecimalToMoney();
             this.Incomes = searchResult.Incomes.Select(i => new UserIncomeViewModel(i));
             this.Expenses = searchResult.Expenses.Select(e => new UserExpenseViewModel(e));
         }
 
         public string Balance { get; }
-        public string TotalSpent { get; set; }
+        public string TotalEarns { get; }
+        public string TotalSpent { get; }
         public IEnumerable<UserIncomeViewModel> Incomes { get; }
         public IEnumerable<UserExpenseViewModel> Expenses { get; }
     }
