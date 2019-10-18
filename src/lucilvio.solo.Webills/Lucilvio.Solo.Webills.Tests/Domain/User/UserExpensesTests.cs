@@ -72,5 +72,16 @@ namespace Lucilvio.Solo.Webills.Tests
             Assert.AreEqual(new TransactionValue(303m), this._user.Expenses.First().Value);
         }
 
+        [TestMethod]
+        public void TotalSpentOfTheUserIsTheSumOfAllExpenses()
+        {
+            this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(342.12m)));
+            this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(300.12m)));
+            this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(1000.12m)));
+            this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(1.12m)));
+
+            Assert.AreEqual(1643.48m, this._user.TotalExpenses);
+        }
+
     }
 }
