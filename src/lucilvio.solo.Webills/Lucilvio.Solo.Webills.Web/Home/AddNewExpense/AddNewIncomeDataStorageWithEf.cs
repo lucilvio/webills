@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -14,9 +15,9 @@ namespace Lucilvio.Solo.Webills.Web
             this._context = context;
         }
 
-        public User GetUser()
+        public async Task<User> GetUser()
         {
-            return this._context.Users.FirstOrDefault();
+            return await this._context.Users.FirstOrDefaultAsync();
         }
 
         public async Task Persist(User user)

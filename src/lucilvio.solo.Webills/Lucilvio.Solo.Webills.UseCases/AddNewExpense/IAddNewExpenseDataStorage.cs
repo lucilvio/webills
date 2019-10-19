@@ -5,7 +5,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewExpense
 {
     public interface IAddNewExpenseDataStorage
     {
-        User GetUser();
+        Task<User> GetUser();
         Task Persist(User user);
     }
 }

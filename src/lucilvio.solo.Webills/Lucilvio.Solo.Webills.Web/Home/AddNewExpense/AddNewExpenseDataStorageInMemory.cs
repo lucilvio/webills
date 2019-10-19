@@ -15,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Web
             this._dataStorage = dataStorage;
         }
 
-        public User GetUser()
+        public async Task<User> GetUser()
         {
             return this._dataStorage.Users.FirstOrDefault();
         }

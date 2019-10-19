@@ -4,18 +4,18 @@ using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
 using Lucilvio.Solo.Webills.UseCases.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.EditIncome;
+using Lucilvio.Solo.Webills.UseCases.RemoveExpense;
 using Lucilvio.Solo.Webills.Web.Home;
 using Lucilvio.Solo.Webills.Web.Home.EditExpense;
 using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -57,6 +57,7 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageWithEf>();
             services.AddScoped<IEditIncomeDataStorage, EditIncomeDataStorageWithEf>();
             services.AddScoped<IEditExpenseDataStorage, EditExpenseDataStorageWithEf>();
+            services.AddScoped<IRemoveExpenseDataStorage, RemoveExpenseDataStorageWithEf>();
             services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
             services.AddScoped<ISearchForUserIncomeByNumber, SarchForUserIncomeByNumber>();
             services.AddScoped<ISearchForUserExpenseByNumber, SearchForUserExpenseByNumber>();
@@ -64,6 +65,7 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IAddNewExpense, AddNewExpense>();
             services.AddScoped<IEditIncome, EditIncome>();
             services.AddScoped<IEditExpense, EditExpense>();
+            services.AddScoped<IRemoveExpense, RemoveExpense>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

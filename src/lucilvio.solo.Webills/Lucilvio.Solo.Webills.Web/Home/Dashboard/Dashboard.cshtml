@@ -96,22 +96,59 @@
                             <th>Name</th>
                             <th>Date</th>
                             <th>Value</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var expense in Model.Expenses)
                         {
-                        <tr>
-                            <td>@expense.Name</td>
-                            <td>@expense.Date</td>
-                            <td>@expense.Value </td>
-                            <td><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
-                        </tr>
+                            <tr>
+                                <td>@expense.Name</td>
+                                <td>@expense.Date</td>
+                                <td>@expense.Value </td>
+                                <td><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
+                                <td><a href="#" class="remove-expense" data-id="@expense.Number"><i class="icon-cross"></i></a></td>
+                            </tr>
                         }
                     </tbody>
                 </table>
             </div>
         </div>
+        <ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="click">
+            <li>
+                <a class="fab-menu-btn btn bg-teal-400 btn-float btn-rounded btn-icon legitRipple">
+                    <i class="fab-icon-open icon-paragraph-justify3"></i>
+                    <i class="fab-icon-close icon-cross2"></i>
+                </a>
+
+                <ul class="fab-menu-inner">
+                    <li>
+                        <div data-fab-label="Compose email">
+                            <a href="#" class="btn btn-default btn-rounded btn-icon btn-float legitRipple">
+                                <i class="icon-pencil"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div data-fab-label="Conversations">
+                            <a href="#" class="btn btn-default btn-rounded btn-icon btn-float legitRipple">
+                                <i class="icon-bubbles7"></i>
+                            </a>
+                            <span class="badge bg-primary-400">5</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div data-fab-label="Chat with Jack">
+                            <a href="#" class="btn bg-pink-400 btn-rounded btn-icon btn-float legitRipple">
+                                <img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="img-responsive" alt="">
+                            </a>
+                            <span class="status-mark border-pink-400"></span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -119,6 +156,7 @@
 @Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()
 @Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
 @Html.PartialAsync("../EditExpense/EditExpense.cshtml").GetAwaiter().GetResult()
+@Html.PartialAsync("../RemoveExpense/RemoveExpense.cshtml").GetAwaiter().GetResult()
 
 @section Scripts {
     <script>
@@ -154,6 +192,19 @@
 
                     $("#modal-edit-expense").modal("show");
                 }).fail(function (error) {
+                    alert(error.responseText);
+                });
+        });
+
+        $(".remove-expense").click(function () {
+            var expenseNumber = $(this).data("id");
+
+            $.post("/Home/RemoveExpense", { expenseNumber: expenseNumber })
+                .done(function (data) {
+                    alert(data.message);
+                    location.reload();
+                })
+                .fail(function (error) {
                     alert(error.responseText);
                 });
         });

@@ -5,7 +5,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 {
     public class AddNewIncomeDataStorageWithTestUserStub : IAddNewIncomeDataStorage
     {
-        public User GetUser()
+        public async Task<User> GetUser()
         {
             return new User("Test User");
         }

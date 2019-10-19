@@ -5,7 +5,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 {
     public interface IAddNewIncomeDataStorage
     {
-        User GetUser();
+        Task<User> GetUser();
         Task Persist(User user);
     }
 }

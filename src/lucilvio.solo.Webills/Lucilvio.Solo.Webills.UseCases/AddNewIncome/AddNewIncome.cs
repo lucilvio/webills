@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
             if (command == null)
                 throw new CommandNotInformed();
 
-            var foundUser = this._dataStorage.GetUser();
+            var foundUser = await this._dataStorage.GetUser();
 
             if (foundUser == null)
                 throw new UserNotFound();

@@ -15,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Web
             this._context = context;
         }
 
-        public User GetUser()
+        public async Task<User> GetUser()
         {
             return this._context.Users.FirstOrDefault();
         }

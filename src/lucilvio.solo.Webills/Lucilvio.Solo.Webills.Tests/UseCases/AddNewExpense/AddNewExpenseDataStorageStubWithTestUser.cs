@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
-    public class AddNewExpenseDataStorageWithNullUserStub : IAddNewExpenseDataStorage
+    public class AddNewExpenseDataStorageStubWithTestUser : IAddNewExpenseDataStorage
     {
-        public User GetUser()
+        public async Task<User> GetUser()
         {
-            return null;
+            return new User("Test User");
         }
 
         public async Task Persist(User user)
         {
+            return;
         }
     }
 }

@@ -6,6 +6,7 @@ using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -18,15 +19,17 @@ namespace Lucilvio.Solo.Webills.Web.Home
         private readonly ISearchForUserIncomeByNumber _searchForUserIncomeByNumber;
         private readonly ISearchForUserExpenseByNumber _searchForUserExpenseByNumber;
         private readonly ISearchForUserTransactionsInformation _searchForUserTransactionsInformation;
+        private readonly IRemoveExpense _removeExpense;
 
         public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, IEditIncome editIncome, IEditExpense editExpense,
             ISearchForUserTransactionsInformation searchForUserTransactionsInformation, ISearchForUserIncomeByNumber searchForUserIncome,
-            ISearchForUserExpenseByNumber searchForUserExpenseByNumber)
+            ISearchForUserExpenseByNumber searchForUserExpenseByNumber, IRemoveExpense removeExpense)
         {
             this._editIncome = editIncome;
             this._editExpense = editExpense;
             this._addNewIncome = addNewIncome;
             this._addNewExpense = addNewExpense;
+            this._removeExpense = removeExpense;
             this._searchForUserIncomeByNumber = searchForUserIncome;
             this._searchForUserExpenseByNumber = searchForUserExpenseByNumber;
             this._searchForUserTransactionsInformation = searchForUserTransactionsInformation;
@@ -93,6 +96,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
             await this._editExpense.Execute(new EditExpenseCommandAdapter(viewModel));
 
             return RedirectToAction(nameof(Dashboard));
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> RemoveExpense(RemoveExpenseViewModel viewModel)
+        {
+            await this._removeExpense.Execute(new RemoveExpenseCommandAdapter(viewModel));
+
+            return new JsonResult(new { message = "Expense removed" });
         }
     }
 }

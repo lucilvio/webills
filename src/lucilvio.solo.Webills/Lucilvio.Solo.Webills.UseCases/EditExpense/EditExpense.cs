@@ -28,6 +28,7 @@ namespace Lucilvio.Solo.Webills.UseCases.EditExpense
             foundUser.AlterExpense(command.Number, new Expense(command.Name, command.Date, command.Value));
 
             await this._dataStorage.Persist(command.Number, foundUser);
+
         }
     }
 }

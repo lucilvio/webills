@@ -1,9 +1,8 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
+﻿using System;
+using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
@@ -14,7 +13,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
         [ExpectedException(typeof(CommandNotInformed))]
         public async Task ThrowsCommandNotInformedWhenCommandIsNull()
         {
-            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageWithTestUserStub());
+            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageStubWithTestUser());
             await addNewExpense.Execute(null);
         }
 
@@ -22,7 +21,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
         [ExpectedException(typeof(UserNotFound))]
         public async Task ThrowsUerNotFoundExceptionWhenTheUserIsNotFound()
         {
-            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageWithNullUserStub());
+            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageStubWithoutUser());
             await addNewExpense.Execute(new AddNewExpenseCommandStub("Test income", DateTime.Now, TransactionValue.Zero));
         }
     }

@@ -83,5 +83,25 @@ namespace Lucilvio.Solo.Webills.Tests
             Assert.AreEqual(1643.48m, this._user.TotalExpenses);
         }
 
+        [TestMethod]
+        public void UserCanRemoveExpense()
+        {
+            var expenseNumber1 = this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(200.90m)));
+            var expenseNumber2 = this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(200.90m)));
+            this._user.RemoveExpense(expenseNumber1);
+
+            Assert.AreEqual(1, this._user.Expenses.Count());
+            Assert.AreEqual(expenseNumber2, this._user.Expenses.First().Number);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExpenseNotFound))]
+        public void ThrowsExpenseNotFoundWhenUSerTriesToRemoveAnInexisten()
+        {
+            this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(200.90m)));
+            this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(200.90m)));
+            
+            this._user.RemoveExpense(Guid.NewGuid());
+        }
     }
 }
