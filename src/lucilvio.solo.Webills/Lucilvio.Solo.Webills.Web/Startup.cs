@@ -5,9 +5,11 @@ using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
 using Lucilvio.Solo.Webills.UseCases.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.EditIncome;
 using Lucilvio.Solo.Webills.UseCases.RemoveExpense;
+using Lucilvio.Solo.Webills.UseCases.RemoveIncome;
 using Lucilvio.Solo.Webills.Web.Home;
 using Lucilvio.Solo.Webills.Web.Home.EditExpense;
 using Lucilvio.Solo.Webills.Web.Home.EditIncome;
@@ -57,6 +59,7 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IAddNewExpenseDataStorage, AddNewExpenseDataStorageWithEf>();
             services.AddScoped<IEditIncomeDataStorage, EditIncomeDataStorageWithEf>();
             services.AddScoped<IEditExpenseDataStorage, EditExpenseDataStorageWithEf>();
+            services.AddScoped<IRemoveIncomeDataStorage, RemoveIncomeDataStorageWithEf>();
             services.AddScoped<IRemoveExpenseDataStorage, RemoveExpenseDataStorageWithEf>();
             services.AddScoped<ISearchForUserTransactionsInformation, SearchForUserTransactionsInformation>();
             services.AddScoped<ISearchForUserIncomeByNumber, SarchForUserIncomeByNumber>();
@@ -65,6 +68,7 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IAddNewExpense, AddNewExpense>();
             services.AddScoped<IEditIncome, EditIncome>();
             services.AddScoped<IEditExpense, EditExpense>();
+            services.AddScoped<IRemoveIncome, RemoveIncome>();
             services.AddScoped<IRemoveExpense, RemoveExpense>();
         }
 

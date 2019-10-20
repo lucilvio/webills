@@ -1,4 +1,6 @@
-﻿<div id="modal-new-income" class="modal fade" tabindex="-1">
+﻿@using Lucilvio.Solo.Webills.Web.Shared
+
+<div id="modal-new-income" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,12 +18,12 @@
 
                         <div class="col-sm-12 form-group">
                             <label>Date</label>
-                            <input type="text" name="date" class="form-control date" required>
+                            <input type="text" name="date" class="form-control date" required value="@DateTime.Now.ToDateString()">
                         </div>
 
                         <div class="col-sm-12 form-group">
                             <label>Value</label>
-                            <input type="text" name="value" class="form-control money" required>
+                            <input type="text" name="value" class="form-control money" value="" required>
                         </div>
                     </div>
                 </div>

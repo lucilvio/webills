@@ -7,6 +7,7 @@ using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -15,6 +16,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
         private readonly IEditIncome _editIncome;
         private readonly IEditExpense _editExpense;
         private readonly IAddNewIncome _addNewIncome;
+        private readonly IRemoveIncome _removeIncome;
         private readonly IAddNewExpense _addNewExpense;
         private readonly ISearchForUserIncomeByNumber _searchForUserIncomeByNumber;
         private readonly ISearchForUserExpenseByNumber _searchForUserExpenseByNumber;
@@ -23,12 +25,13 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
         public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, IEditIncome editIncome, IEditExpense editExpense,
             ISearchForUserTransactionsInformation searchForUserTransactionsInformation, ISearchForUserIncomeByNumber searchForUserIncome,
-            ISearchForUserExpenseByNumber searchForUserExpenseByNumber, IRemoveExpense removeExpense)
+            ISearchForUserExpenseByNumber searchForUserExpenseByNumber, IRemoveIncome removeIncome, IRemoveExpense removeExpense)
         {
             this._editIncome = editIncome;
             this._editExpense = editExpense;
             this._addNewIncome = addNewIncome;
             this._addNewExpense = addNewExpense;
+            this._removeIncome = removeIncome;
             this._removeExpense = removeExpense;
             this._searchForUserIncomeByNumber = searchForUserIncome;
             this._searchForUserExpenseByNumber = searchForUserExpenseByNumber;
@@ -96,6 +99,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
             await this._editExpense.Execute(new EditExpenseCommandAdapter(viewModel));
 
             return RedirectToAction(nameof(Dashboard));
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> RemoveIncome(RemoveIncomeViewModel viewModel)
+        {
+            await this._removeIncome.Execute(new RemoveIncomeCommandAdapter(viewModel));
+
+            return new JsonResult(new { message = "Income removed" });
         }
 
         [HttpPost]

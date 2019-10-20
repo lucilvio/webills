@@ -96,12 +96,12 @@ namespace Lucilvio.Solo.Webills.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ExpenseNotFound))]
-        public void ThrowsExpenseNotFoundWhenUSerTriesToRemoveAnInexisten()
+        public void ThrowsExpenseNotFoundWhenUserTriesToRemoveAnInexistentExpense()
         {
             this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(200.90m)));
             this._user.AddExpense(new Expense("Test expense", DateTime.Now, new TransactionValue(200.90m)));
             
-            this._user.RemoveExpense(Guid.NewGuid());
+            this._user.RemoveExpense(Guid.Empty);
         }
     }
 }

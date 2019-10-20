@@ -96,5 +96,25 @@ namespace Lucilvio.Solo.Webills.Tests
 
             Assert.AreEqual(32131.20m, this._user.TotalIncomes);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(IncomeNotFound))]
+        public void ThrowsIncomeNotFoundWhenUserTriesToRemoveAnInexistentIncome()
+        {
+            this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
+            this._user.RemoveIncome(Guid.Empty);
+        }
+
+        [TestMethod]
+        public void UserCanRemoveIncome()
+        {
+            var incomeNumber1 = this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
+            var incomeNumber2 = this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
+            
+            this._user.RemoveIncome(incomeNumber1);
+
+            Assert.AreEqual(1, this._user.Incomes.Count());
+            Assert.AreEqual(incomeNumber2, this._user.Incomes.First().Number);
+        }
     }
 }

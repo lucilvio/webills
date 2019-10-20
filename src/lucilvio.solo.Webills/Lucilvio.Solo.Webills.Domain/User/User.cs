@@ -81,5 +81,15 @@ namespace Lucilvio.Solo.Webills.Domain.User
 
             this._expenses.Remove(foundExpense);
         }
+
+        public void RemoveIncome(Guid incomeNumber)
+        {
+            var foundIncome = this._incomes.FirstOrDefault(i => i.Number == incomeNumber);
+
+            if (foundIncome == null)
+                throw new IncomeNotFound();
+
+            this._incomes.Remove(foundIncome);
+        }
     }
 }
