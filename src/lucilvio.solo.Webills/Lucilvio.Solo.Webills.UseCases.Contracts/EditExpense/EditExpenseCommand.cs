@@ -7,6 +7,7 @@ namespace Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense
     {
         public Guid Number { get; set; }
         public string Name { get; protected set; }
+        public Category Category { get; protected set; }
         public DateTime Date { get; protected set; }
         public TransactionValue Value { get; protected set; }
     }

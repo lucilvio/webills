@@ -7,11 +7,12 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
     public class AddNewExpenseCommandStub : AddNewExpenseCommand
     {
-        public AddNewExpenseCommandStub(string name, DateTime date, TransactionValue value)
+        public AddNewExpenseCommandStub(string name, Category category, DateTime date, TransactionValue value)
         {
             base.Name = name;
             base.Date = date;
             base.Value = value;
+            base.Category = category;
         }
     }
 }

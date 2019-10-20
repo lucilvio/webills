@@ -37,9 +37,9 @@ namespace Lucilvio.Solo.Webills.Domain.User
             return income.Number;
         }
 
-        public Guid AddExpense(string name, DateTime date, TransactionValue value)
+        public Guid AddExpense(string name, Category category, DateTime date, TransactionValue value)
         {
-            var newExpense = new Expense(name, date, value);
+            var newExpense = new Expense(name, category, date, value);
             this._expenses.Add(newExpense);
 
             return newExpense.Number;
@@ -56,7 +56,7 @@ namespace Lucilvio.Solo.Webills.Domain.User
             this._incomes[foundIncomeIndex] = new Income(name, date, value);
         }
 
-        public void AlterExpense(Guid expenseNumber, string name, DateTime date, TransactionValue value)
+        public void AlterExpense(Guid expenseNumber, string name, Category category, DateTime date, TransactionValue value)
         {
             var foundExpense = this._expenses.FirstOrDefault(e => e.Number == expenseNumber);
             var foundExpenseIndex = this._expenses.IndexOf(foundExpense);
@@ -64,7 +64,7 @@ namespace Lucilvio.Solo.Webills.Domain.User
             if (foundExpenseIndex < 0)
                 throw new ExpenseNotFound();
 
-            this._expenses[foundExpenseIndex] = new Expense(name, date, value);
+            this._expenses[foundExpenseIndex] = new Expense(name, category, date, value);
         }
 
         public void RemoveExpense(Guid expenseNumber)

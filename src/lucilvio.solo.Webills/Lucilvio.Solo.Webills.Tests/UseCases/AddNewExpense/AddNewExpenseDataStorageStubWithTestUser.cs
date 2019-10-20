@@ -6,9 +6,16 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
     public class AddNewExpenseDataStorageStubWithTestUser : IAddNewExpenseDataStorage
     {
+        private readonly User _user;
+
+        public AddNewExpenseDataStorageStubWithTestUser()
+        {
+            this._user = new User("Test User");
+        }
+
         public async Task<User> GetUser()
         {
-            return new User("Test User");
+            return this._user;
         }
 
         public async Task Persist(User user)

@@ -25,7 +25,7 @@ namespace Lucilvio.Solo.Webills.UseCases.EditExpense
             if (foundUser == null)
                 throw new UserNotFound();
 
-            foundUser.AlterExpense(command.Number, command.Name, command.Date, command.Value);
+            foundUser.AlterExpense(command.Number, command.Name, command.Category, command.Date, command.Value);
 
             await this._dataStorage.Persist(command.Number, foundUser);
 

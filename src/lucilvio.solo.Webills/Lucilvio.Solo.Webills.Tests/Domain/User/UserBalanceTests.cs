@@ -44,7 +44,7 @@ namespace Lucilvio.Solo.Webills.Tests
         {
             this._user.AddIncome("Test Income", new DateTime(2018, 10, 23), new TransactionValue(300));
             this._user.AddIncome("Test Income", new DateTime(2018, 10, 23), new TransactionValue(200));
-            this._user.AddExpense("Test Expense", new DateTime(2018, 10, 23), new TransactionValue(24));
+            this._user.AddExpense("Test Expense", Category.Others, new DateTime(2018, 10, 23), new TransactionValue(24));
 
             Assert.AreEqual(476, this._user.Balance);
 

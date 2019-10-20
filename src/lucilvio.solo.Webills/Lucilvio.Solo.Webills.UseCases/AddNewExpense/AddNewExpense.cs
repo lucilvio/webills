@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Common;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 
@@ -25,7 +23,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewExpense
             if (foundUser == null)
                 throw new UserNotFound();
 
-            foundUser.AddExpense(command.Name, command.Date, command.Value);
+            foundUser.AddExpense(command.Name, command.Category, command.Date, command.Value);
 
             await this._dataStorage.Persist(foundUser);
         }

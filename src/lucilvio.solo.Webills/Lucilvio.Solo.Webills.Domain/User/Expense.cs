@@ -5,10 +5,14 @@ namespace Lucilvio.Solo.Webills.Domain.User
 {
     public class Expense
     {
-        internal Expense(string name, DateTime date, TransactionValue value)
+        internal Expense(string name, Category category, DateTime date, TransactionValue value)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new ExpenseMustHaveName();
+
             this.Name = name;
             this.Date = date;
+            this.Category = category;
 
             if (value == null)
                 throw new ExpenseTransactionValueCannotBeNull();
@@ -21,6 +25,7 @@ namespace Lucilvio.Solo.Webills.Domain.User
         public Guid Number { get; }
         public string Name { get; }
         public DateTime Date { get; }
+        public Category Category { get; set; }
         public TransactionValue Value { get; }
     }
 }
