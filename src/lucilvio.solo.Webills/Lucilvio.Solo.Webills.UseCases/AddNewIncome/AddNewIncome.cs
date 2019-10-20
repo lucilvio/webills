@@ -24,7 +24,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
             if (foundUser == null)
                 throw new UserNotFound();
 
-            foundUser.AddIncome(new Income(command.Name, command.Date, command.Value));
+            foundUser.AddIncome(command.Name, command.Date, command.Value);
 
             await this._dataStorage.Persist(foundUser);
         }

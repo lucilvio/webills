@@ -12,9 +12,9 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.EditIncome
         public void EditIncome()
         {
             var user = new User("Test User");
-            var incomeNumber = user.AddIncome(new Income("Salary", DateTime.Now, new TransactionValue(2675.89m)));
+            var incomeNumber = user.AddIncome("Salary", DateTime.Now, new TransactionValue(2675.89m));
 
-            user.AlterIncome(incomeNumber, new Income("Salary2", new DateTime(2019, 1, 20), new TransactionValue(2600.80m)));
+            user.AlterIncome(incomeNumber, "Salary2", new DateTime(2019, 1, 20), new TransactionValue(2600.80m));
 
             var alteredIncome = user.Incomes.First();
 

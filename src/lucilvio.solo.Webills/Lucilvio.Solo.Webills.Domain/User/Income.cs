@@ -1,11 +1,11 @@
-﻿using Lucilvio.Solo.Webills.Domain.User.BusinessErrors;
-using System;
+﻿using System;
+using Lucilvio.Solo.Webills.Domain.User.BusinessErrors;
 
 namespace Lucilvio.Solo.Webills.Domain.User
 {
     public class Income
     {
-        public Income(string name, DateTime date, TransactionValue value)
+        internal Income(string name, DateTime date, TransactionValue value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new IncomeMustHaveName();

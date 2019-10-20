@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveIncome
         public RemoveIncomeDataStorageStubWithOneUserWithIncome()
         {
             this._user = new User("Test User");
-            this._user.AddIncome(new Income("Test Income", DateTime.Now, TransactionValue.Zero));
+            this._user.AddIncome("Test Income", DateTime.Now, TransactionValue.Zero);
         }
 
         public async Task<User> GetUser()

@@ -26,44 +26,37 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestMethod]
         public void UserCanRegisterIncome()
         {
-            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), new TransactionValue(300)));
+            this._user.AddIncome("Test income", new DateTime(2018, 10, 23), new TransactionValue(300));
 
             Assert.IsNotNull(this._user.Incomes);
             Assert.IsTrue(this._user.HasIncomes);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserCannotAddNullIncome))]
-        public void UserCantRegisterNullIncome()
-        {
-            this._user.AddIncome(null);
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(IncomeMustHaveName))]
         public void UserCannotAddNamelessIncome()
         {
-            this._user.AddIncome(new Income("", new DateTime(2018, 10, 23), new TransactionValue(43)));
+            this._user.AddIncome("", new DateTime(2018, 10, 23), new TransactionValue(43));
         }
 
         [TestMethod]
         [ExpectedException(typeof(IncomeTransactionValueCannotBeNull))]
         public void UserCannorAddNullIncomeValue()
         {
-            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), null));
+            this._user.AddIncome("Test income", new DateTime(2018, 10, 23), null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(TransactionValueCannotBeNegative))]
         public void UserCannotAddNegativeIncomeValues()
         {
-            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), new TransactionValue(-100)));
+            this._user.AddIncome("Test income", new DateTime(2018, 10, 23), new TransactionValue(-100));
         }
 
         [TestMethod]
         public void UserIncomeHasNumber()
         {
-            this._user.AddIncome(new Income("Test income", new DateTime(2018, 10, 23), TransactionValue.Zero));
+            this._user.AddIncome("Test income", new DateTime(2018, 10, 23), TransactionValue.Zero);
 
             Assert.IsNotNull(this._user.Incomes.First().Number);
             Assert.AreNotEqual(Guid.Empty, this._user.Incomes.First().Number);
@@ -73,15 +66,15 @@ namespace Lucilvio.Solo.Webills.Tests
         [ExpectedException(typeof(IncomeNotFound))]
         public void ThrowsIncomeNotFoundWhenUserTrysToAlterAnIncomeThatDoesntExist()
         {
-            this._user.AddIncome(new Income("Salary", DateTime.Now, new TransactionValue(2675.89m)));
-            this._user.AlterIncome(Guid.NewGuid(), new Income("Salary2", new DateTime(2019, 1, 20), new TransactionValue(2600.80m)));
+            this._user.AddIncome("Salary", DateTime.Now, new TransactionValue(2675.89m));
+            this._user.AlterIncome(Guid.NewGuid(), "Salary2", new DateTime(2019, 1, 20), new TransactionValue(2600.80m));
         }
 
         [TestMethod]
         public void UserCanAlterIncome()
         {
-            var newIncome = this._user.AddIncome(new Income("Salary", new DateTime(2019, 1, 20), new TransactionValue(3908.3m)));
-            this._user.AlterIncome(newIncome, new Income("Salary edited", new DateTime(2019, 3, 3), new TransactionValue(20m)));
+            var newIncome = this._user.AddIncome("Salary", new DateTime(2019, 1, 20), new TransactionValue(3908.3m));
+            this._user.AlterIncome(newIncome, "Salary edited", new DateTime(2019, 3, 3), new TransactionValue(20m));
 
             Assert.AreEqual("Salary edited", this._user.Incomes.First().Name);
             Assert.AreEqual(new DateTime(2019, 3, 3), this._user.Incomes.First().Date);
@@ -91,8 +84,8 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestMethod]
         public void TotalEarnsOfTheUserIsTheSumOfAllIncomes()
         {
-            this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
-            this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(2131m)));
+            this._user.AddIncome("Test Income", DateTime.Now, new TransactionValue(30000.20m));
+            this._user.AddIncome("Test Income", DateTime.Now, new TransactionValue(2131m));
 
             Assert.AreEqual(32131.20m, this._user.TotalIncomes);
         }
@@ -101,15 +94,15 @@ namespace Lucilvio.Solo.Webills.Tests
         [ExpectedException(typeof(IncomeNotFound))]
         public void ThrowsIncomeNotFoundWhenUserTriesToRemoveAnInexistentIncome()
         {
-            this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
+            this._user.AddIncome("Test Income", DateTime.Now, new TransactionValue(30000.20m));
             this._user.RemoveIncome(Guid.Empty);
         }
 
         [TestMethod]
         public void UserCanRemoveIncome()
         {
-            var incomeNumber1 = this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
-            var incomeNumber2 = this._user.AddIncome(new Income("Test Income", DateTime.Now, new TransactionValue(30000.20m)));
+            var incomeNumber1 = this._user.AddIncome("Test Income", DateTime.Now, new TransactionValue(30000.20m));
+            var incomeNumber2 = this._user.AddIncome("Test Income", DateTime.Now, new TransactionValue(30000.20m));
             
             this._user.RemoveIncome(incomeNumber1);
 

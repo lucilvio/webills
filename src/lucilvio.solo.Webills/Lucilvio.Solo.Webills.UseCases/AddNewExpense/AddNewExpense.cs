@@ -25,7 +25,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewExpense
             if (foundUser == null)
                 throw new UserNotFound();
 
-            foundUser.AddExpense(new Expense(command.Name, command.Date, command.Value));
+            foundUser.AddExpense(command.Name, command.Date, command.Value);
 
             await this._dataStorage.Persist(foundUser);
         }
