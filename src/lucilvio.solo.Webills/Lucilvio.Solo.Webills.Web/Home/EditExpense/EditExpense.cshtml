@@ -1,4 +1,6 @@
-﻿<div id="modal-edit-expense" class="modal fade" tabindex="-1">
+﻿@using Lucilvio.Solo.Webills.Domain.User
+
+<div id="modal-edit-expense" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,17 +14,27 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 form-group">
                                 <label>Name</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 form-group">
                                 <label>Date</label>
                                 <input type="text" name="date" class="form-control date" required>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 form-group">
+                                <label>Category</label>
+                                <select name="category" class="form-control" required>
+                                    @foreach(var category in Enum.GetValues(typeof(Category)))
+                                    {
+                                        <option value="@category">@category</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 form-group">
                                 <label>Value</label>
                                 <input type="text" name="value" class="form-control money" required>
                             </div>

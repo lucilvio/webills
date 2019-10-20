@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Lucilvio.Solo.Webills.Web.Shared;
+using System.Globalization;
 
 namespace Lucilvio.Solo.Webills.Web.Home.Index
 {
@@ -11,11 +12,13 @@ namespace Lucilvio.Solo.Webills.Web.Home.Index
 
             this.Name = expense.Name;
             this.Number = expense.Number.ToString();
-            this.Date = expense.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            this.Category = expense.Category.ToString();
+            this.Date = expense.Date.ToDateString();
             this.Value = expense.Value.Value.DecimalToMoney();
         }
 
-        public string Number { get; set; }
+        public string Number { get;  }
+        public string Category { get;  }
         public string Name { get; }
         public string Date { get; }
         public string Value { get; }

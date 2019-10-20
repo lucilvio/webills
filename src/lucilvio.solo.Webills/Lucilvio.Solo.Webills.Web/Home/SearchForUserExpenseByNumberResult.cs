@@ -14,11 +14,13 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this.Name = expense.Name;
             this.Date = expense.Date;
             this.Value = expense.Value;
+            this.Category = expense.Category;
         }
 
         public Guid Number { get; }
         public string Name { get; }
         public DateTime Date { get; }
         public TransactionValue Value { get; }
+        public Category Category { get; }
     }
 }

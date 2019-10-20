@@ -96,6 +96,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Date</th>
                             <th>Value</th>
                             <th></th>
@@ -105,13 +106,14 @@
                     <tbody>
                         @foreach (var expense in Model.Expenses)
                         {
-                            <tr>
-                                <td class="col-lg-4">@expense.Name</td>
-                                <td class="col-lg-1">@expense.Date</td>
-                                <td class="col-lg-1">@expense.Value </td>
-                                <td class="col-lg-1 text-right"><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
-                                <td class="col-lg-1 text-right"><a href="#" class="remove-expense" data-id="@expense.Number"><i class="icon-cross"></i></a></td>
-                            </tr>
+                        <tr>
+                            <td class="col-lg-4">@expense.Name</td>
+                            <td class="col-lg-4">@expense.Category</td>
+                            <td class="col-lg-1">@expense.Date</td>
+                            <td class="col-lg-1">@expense.Value </td>
+                            <td class="col-lg-1 text-right"><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
+                            <td class="col-lg-1 text-right"><a href="#" class="remove-expense" data-id="@expense.Number"><i class="icon-cross"></i></a></td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -170,7 +172,7 @@
                     var expense = data.expense;
 
                     $.each(expense, function (name, value) {
-                        $("#form-edit-expense input[name='" + name + "']").val(value);
+                        $("#form-edit-expense").find("[name = '" + name + "']").val(value);
                     });
 
                     $("#modal-edit-expense").modal("show");

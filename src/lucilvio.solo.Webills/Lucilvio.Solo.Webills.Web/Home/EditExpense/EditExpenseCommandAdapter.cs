@@ -16,6 +16,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this.Number = new Guid(viewModel.Number);
             base.Date = viewModel.Date.StringToDate();
             base.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
+            base.Category = (Category)Enum.Parse(typeof(Category), viewModel.Category);
         }
     }
 }

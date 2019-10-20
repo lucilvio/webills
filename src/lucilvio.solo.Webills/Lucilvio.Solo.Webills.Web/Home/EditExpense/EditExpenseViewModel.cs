@@ -16,12 +16,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this.Name = result.Name;
             this.Number = result.Number.ToString();
             this.Date = result.Date.ToDateString();
+            this.Category = result.Category.ToString();
             this.Value = result.Value.Value.DecimalToMoney();
         }
 
         public string Number { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
+        public string Category { get; set; }
         public string Value { get; set; }
     }
 }
