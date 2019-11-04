@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -14,10 +15,10 @@ namespace Lucilvio.Solo.Webills.Web.Home
             IEnumerable<UserIncomeData> incomes, IEnumerable<UserExpenseData> expenses)
         {
             this.Balance = balance;
-            this.Incomes = incomes;
-            this.Expenses = expenses;
             this.TotalSpent = totalSpent;
             this.TotalIncomes = totalIncomes;
+            this.Incomes = incomes.OrderByDescending(i => i.Date);
+            this.Expenses = expenses.OrderByDescending(e => e.Date);
         }
 
         public static SearchForUserTransactionsInformationResult Empty => new SearchForUserTransactionsInformationResult();

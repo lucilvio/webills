@@ -20,10 +20,10 @@ namespace Lucilvio.Solo.Webills.Web
                 e.Property<int>("Id").ValueGeneratedOnAdd();
                 e.HasKey("Id");
 
-                e.Property(p => p.Name);
-                e.Property(p => p.Date);
-                e.Property(p => p.Number);
-                e.Property(p => p.Value).HasConversion(v => v.Value, v => new TransactionValue(v));
+                e.Property(p => p.Name).IsRequired().HasMaxLength(256);
+                e.Property(p => p.Date).IsRequired();
+                e.Property(p => p.Number).IsRequired();
+                e.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
             });
 
             modelBuilder.Entity<Income>(i =>
@@ -32,10 +32,10 @@ namespace Lucilvio.Solo.Webills.Web
                 i.Property<int>("Id").ValueGeneratedOnAdd();
                 i.HasKey("Id");
 
-                i.Property(p => p.Name);
-                i.Property(p => p.Date);
-                i.Property(p => p.Number).HasColumnName("Number");
-                i.Property(p => p.Value).HasConversion(v => v.Value, v => new TransactionValue(v));
+                i.Property(p => p.Name).IsRequired().HasMaxLength(256);
+                i.Property(p => p.Date).IsRequired();
+                i.Property(p => p.Number).IsRequired().HasColumnName("Number");
+                i.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
             });
 
             modelBuilder.Entity<User>(u =>
@@ -44,7 +44,7 @@ namespace Lucilvio.Solo.Webills.Web
                 u.Property<int>("Id").ValueGeneratedOnAdd();
                 u.HasKey("Id");
 
-                u.Property(p => p.Name);
+                u.Property(p => p.Name).IsRequired().HasMaxLength(256);
             });
         }
 

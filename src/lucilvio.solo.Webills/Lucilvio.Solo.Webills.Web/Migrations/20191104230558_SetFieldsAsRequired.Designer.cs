@@ -4,14 +4,16 @@ using Lucilvio.Solo.Webills.Web;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lucilvio.Solo.Webills.Web.Migrations
 {
     [DbContext(typeof(WebillsContext))]
-    partial class WebillsContextModelSnapshot : ModelSnapshot
+    [Migration("20191104230558_SetFieldsAsRequired")]
+    partial class SetFieldsAsRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +36,7 @@ namespace Lucilvio.Solo.Webills.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Number")
                         .HasColumnType("uniqueidentifier");
@@ -65,8 +66,7 @@ namespace Lucilvio.Solo.Webills.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Number")
                         .HasColumnName("Number")
@@ -94,8 +94,7 @@ namespace Lucilvio.Solo.Webills.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
