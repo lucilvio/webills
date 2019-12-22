@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Lucilvio.Solo.Webills.Domain.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,13 +13,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestInitialize]
         public void Setup()
         {
-            this._user = new User("Test User");
-        }
-
-        [TestMethod]
-        public void UserHasBalance()
-        {
-            Assert.IsNotNull(this._user.Balance);
+            this._user = new User("Test User", new Login("user@mail.com"), new Password("123456"));
         }
 
         [TestMethod]

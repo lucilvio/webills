@@ -11,7 +11,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveIncome
 
         public RemoveIncomeDataStorageStubWithOneUserWithIncome()
         {
-            this._user = new User("Test User");
+            this._user = new User("Test User", new Login("user@mail.com"), new Password("123456"));
             this._user.AddIncome("Test Income", DateTime.Now, TransactionValue.Zero);
         }
 

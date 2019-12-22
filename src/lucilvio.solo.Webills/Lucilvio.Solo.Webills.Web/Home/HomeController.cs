@@ -1,16 +1,20 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
+using Lucilvio.Solo.Webills.Web.Home.Sample;
 using Lucilvio.Solo.Webills.Web.Home.EditIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
+using Lucilvio.Solo.Webills.Web.Home.EditExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
+using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IEditIncome _editIncome;
@@ -18,101 +22,102 @@ namespace Lucilvio.Solo.Webills.Web.Home
         private readonly IAddNewIncome _addNewIncome;
         private readonly IRemoveIncome _removeIncome;
         private readonly IAddNewExpense _addNewExpense;
-        private readonly ISearchForUserIncomeByNumber _searchForUserIncomeByNumber;
-        private readonly ISearchForUserExpenseByNumber _searchForUserExpenseByNumber;
-        private readonly ISearchForUserTransactionsInformation _searchForUserTransactionsInformation;
         private readonly IRemoveExpense _removeExpense;
 
+        private readonly IGetUserIncomesQueryHandler _getUserIncomesQueryHandler;
+        private readonly IGetUserExpensesQueryHandler _getUserExpensesQueryHandler;
+        private readonly IUserDashboardQueryHandler _userDashboardQueryHandler;
+
         public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, IEditIncome editIncome, IEditExpense editExpense,
-            ISearchForUserTransactionsInformation searchForUserTransactionsInformation, ISearchForUserIncomeByNumber searchForUserIncome,
-            ISearchForUserExpenseByNumber searchForUserExpenseByNumber, IRemoveIncome removeIncome, IRemoveExpense removeExpense)
+            IUserDashboardQueryHandler userDashboardQueryHandler, IGetUserIncomesQueryHandler searchForUserIncome,
+            IGetUserExpensesQueryHandler searchForUserExpenseByNumber, IRemoveIncome removeIncome, IRemoveExpense removeExpense)
         {
             this._editIncome = editIncome;
             this._editExpense = editExpense;
             this._addNewIncome = addNewIncome;
-            this._addNewExpense = addNewExpense;
             this._removeIncome = removeIncome;
+            this._addNewExpense = addNewExpense;
             this._removeExpense = removeExpense;
-            this._searchForUserIncomeByNumber = searchForUserIncome;
-            this._searchForUserExpenseByNumber = searchForUserExpenseByNumber;
-            this._searchForUserTransactionsInformation = searchForUserTransactionsInformation;
+
+            this._getUserIncomesQueryHandler = searchForUserIncome;
+            this._getUserExpensesQueryHandler = searchForUserExpenseByNumber;
+            this._userDashboardQueryHandler = userDashboardQueryHandler;
         }
 
         [HttpGet]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
-            var result = this._searchForUserTransactionsInformation.Execute();
+            var result = await this._userDashboardQueryHandler.Execute(new UserDashboardQuery(1));
 
-            return View(new UserTransactionsInformationViewModel(result));
-        
+            return View(new UserTransactionsInformationResponse(result));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewIncome([FromForm]AddNewIncomeViewModel viewModel)
+        public async Task<IActionResult> AddNewIncome([FromForm]AddNewIncomeRequest request)
         {
-            await this._addNewIncome.Execute(new AddNewIncomeCommandAdapter(viewModel));
+            await this._addNewIncome.Execute(new AddNewIncomeCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseViewModel viewModel)
+        public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseRequest request)
         {
-            await this._addNewExpense.Execute(new AddNewExpenseCommandAdapter(viewModel));
+            await this._addNewExpense.Execute(new AddNewExpenseCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpGet]
-        public async Task<JsonResult> EditIncome(string incomeNumber)
+        public async Task<JsonResult> EditIncome([FromQuery]GetIncomeRequest request)
         {
-            var foundIncome = await this._searchForUserIncomeByNumber.Execute(new SearchForUserIncomeByNumberQuery(Guid.Parse(incomeNumber)));
+            var foundIncome = await this._getUserIncomesQueryHandler.Execute(new GetUserIncomesQueryByNumber(1, request.Number));
 
             if (foundIncome == null)
                 return new JsonResult(new { error = "Income not found" });
 
-            return new JsonResult(new { income = new EditIncomeViewModel(foundIncome) });
+            return new JsonResult(new { income = new EditIncomeResponse(foundIncome) });
         }
 
         [HttpGet]
-        public async Task<JsonResult> EditExpense(string expenseNumber)
+        public async Task<JsonResult> EditExpense([FromQuery]GetExpenseRequest request)
         {
-            var foundExpense = await this._searchForUserExpenseByNumber.Execute(new SearchForUserExpenseByNumberQuery(Guid.Parse(expenseNumber)));
+            var foundExpense = await this._getUserExpensesQueryHandler.Execute(new GetUserExpensesByNumberQuery(1, request.Number));
 
             if (foundExpense == null)
                 return new JsonResult(new { error = "Expense not found" });
-
-            return new JsonResult(new { expense = new EditExpenseViewModel(foundExpense) });
+                
+            return new JsonResult(new { expense = new EditExpenseResponse(foundExpense) });
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditIncome([FromForm]EditIncomeViewModel viewModel)
+        public async Task<ActionResult> EditIncome([FromForm]EditIncomeRequest request)
         {
-            await this._editIncome.Execute(new EditIncomeCommandAdapter(viewModel));
+            await this._editIncome.Execute(new EditIncomeCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditExpense([FromForm]EditExpenseViewModel viewModel)
+        public async Task<ActionResult> EditExpense([FromForm]EditExpenseRequest request)
         {
-            await this._editExpense.Execute(new EditExpenseCommandAdapter(viewModel));
+            await this._editExpense.Execute(new EditExpenseCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<JsonResult> RemoveIncome(RemoveIncomeViewModel viewModel)
+        public async Task<JsonResult> RemoveIncome(RemoveIncomeRequest request)
         {
-            await this._removeIncome.Execute(new RemoveIncomeCommandAdapter(viewModel));
+            await this._removeIncome.Execute(new RemoveIncomeCommandAdapter(request));
 
             return new JsonResult(new { message = "Income removed" });
         }
 
         [HttpPost]
-        public async Task<JsonResult> RemoveExpense(RemoveExpenseViewModel viewModel)
+        public async Task<JsonResult> RemoveExpense(RemoveExpenseRequest request)
         {
-            await this._removeExpense.Execute(new RemoveExpenseCommandAdapter(viewModel));
+            await this._removeExpense.Execute(new RemoveExpenseCommandAdapter(request));
 
             return new JsonResult(new { message = "Expense removed" });
         }

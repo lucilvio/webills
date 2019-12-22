@@ -5,9 +5,9 @@ namespace Lucilvio.Solo.Webills.Web.Home
 {
     internal class RemoveExpenseCommandAdapter : RemoveExpenseCommand
     {
-        public RemoveExpenseCommandAdapter(RemoveExpenseViewModel viewModel)
+        public RemoveExpenseCommandAdapter(RemoveExpenseRequest request)
         {
-            base.ExpenseNumber = new Guid(viewModel.ExpenseNumber);
+            base.ExpenseNumber = new Guid(request.ExpenseNumber);
         }
     }
 }

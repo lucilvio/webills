@@ -7,16 +7,16 @@ namespace Lucilvio.Solo.Webills.Web.Home
 {
     internal class EditExpenseCommandAdapter : EditExpenseCommand
     {
-        public EditExpenseCommandAdapter(EditExpenseViewModel viewModel)
+        public EditExpenseCommandAdapter(EditExpenseRequest request)
         {
-            if (viewModel == null)
+            if (request == null)
                 return;
 
-            base.Name = viewModel.Name;
-            this.Number = new Guid(viewModel.Number);
-            base.Date = viewModel.Date.StringToDate();
-            base.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
-            base.Category = (Category)Enum.Parse(typeof(Category), viewModel.Category);
+            base.Name = request.Name;
+            this.Number = new Guid(request.Number);
+            base.Date = request.Date.StringToDate();
+            base.Value = new TransactionValue(request.Value.MoneyToDecimal());
+            base.Category = (Category)Enum.Parse(typeof(Category), request.Category);
         }
     }
 }

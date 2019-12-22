@@ -10,7 +10,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
         public DataStorageContext()
         {
             this.Users = new List<User>();
-            this.Users.Add(new User("Test User"));
+            Users.Add(new User("Test User", new Login("user@mail.com"), new Password("123456")));
         }
     }
 }

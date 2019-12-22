@@ -20,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 
         [TestMethod]
         [ExpectedException(typeof(UserNotFound))]
-        public async Task ThrowsUerNotFoundExceptionWhenTheUserIsNotFound()
+        public async Task ThrowsUserNotFoundExceptionWhenTheUserIsNotFound()
         {
             var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageStubWithoutUser());
             await addNewExpense.Execute(new AddNewExpenseCommandStub("Test expense", Category.Others, new DateTime(2019, 03, 01), TransactionValue.Zero));

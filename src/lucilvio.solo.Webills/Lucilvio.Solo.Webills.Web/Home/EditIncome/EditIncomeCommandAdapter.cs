@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
 {
     internal class EditIncomeCommandAdapter : EditIncomeCommand
     {
-        public EditIncomeCommandAdapter(EditIncomeViewModel viewModel)
+        public EditIncomeCommandAdapter(EditIncomeRequest viewModel)
         {
             if (viewModel == null)
                 return;

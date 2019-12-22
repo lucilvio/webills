@@ -3,20 +3,22 @@ using Lucilvio.Solo.Webills.Domain.User.BusinessErrors;
 
 namespace Lucilvio.Solo.Webills.Domain.User
 {
-    public class Expense
+    public partial class Expense
     {
-        internal Expense(string name, Category category, DateTime date, TransactionValue value)
+        public Expense(string name, Category category, DateTime date, TransactionValue value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ExpenseMustHaveName();
 
-            this.Name = name;
-            this.Date = date;
-            this.Category = category;
+            if (date < DateTime.Now.AddYears(-100))
+                throw new ExpenseCannotBeOlderThanOneHundredYears();
 
             if (value == null)
                 throw new ExpenseTransactionValueCannotBeNull();
 
+            this.Name = name;
+            this.Date = date;
+            this.Category = category;
             this.Value = value;
 
             this.Number = Guid.NewGuid();
@@ -25,7 +27,7 @@ namespace Lucilvio.Solo.Webills.Domain.User
         public Guid Number { get; }
         public string Name { get; }
         public DateTime Date { get; }
-        public Category Category { get; set; }
+        public Category Category { get; }
         public TransactionValue Value { get; }
     }
 }

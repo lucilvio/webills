@@ -5,9 +5,9 @@ namespace Lucilvio.Solo.Webills.Web.Home
 {
     internal class RemoveIncomeCommandAdapter : RemoveIncomeCommand
     {
-        public RemoveIncomeCommandAdapter(RemoveIncomeViewModel viewModel)
+        public RemoveIncomeCommandAdapter(RemoveIncomeRequest request)
         {
-            base.IncomeNumber = new Guid(viewModel.IncomeNumber);
+            base.IncomeNumber = new Guid(request.IncomeNumber);
         }
     }
 }

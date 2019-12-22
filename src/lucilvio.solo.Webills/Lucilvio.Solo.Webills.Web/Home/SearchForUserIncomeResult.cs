@@ -5,9 +5,9 @@ using System;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
-    public class SearchForUserIncomeByNumberResult
+    public class GetUserIncomeQueryResult
     {
-        public SearchForUserIncomeByNumberResult(Income income)
+        public GetUserIncomeQueryResult(Income income)
         {
             if (income == null)
                 return;

@@ -19,11 +19,11 @@ namespace Lucilvio.Solo.Webills.Web
                 {
                     context.Database.Migrate();
 
-                    var user = context.Users.FirstOrDefault();
+                    var user = context.Users.FirstOrDefault(u => u.Login == new Login("admin@mail.com"));
 
                     if(user == null)
                     {
-                        context.Users.Add(new User("Test User"));
+                        context.Users.Add(new User("Admin", new Login("admin@mail.com"), new Password("123456")));
                         context.SaveChanges();
                     }
                 }

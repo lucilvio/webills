@@ -11,7 +11,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.EditExpenses
 
         public EditExpenseDataStorageStubWithOneUserWithExpense()
         {
-            this._user = new User("Test User");
+            this._user = new User("Test User", new Login("user@mail.com"), new Password("123456"));
             this._user.AddExpense("Test expanse", Category.Education, new DateTime(2000, 10, 10), TransactionValue.Zero);
         }
 

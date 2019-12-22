@@ -47,7 +47,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveExpense
 
         public RemoveExpenseDataStorageStubWithOneUserWithExpense()
         {
-            this._user = new User("test user");
+            this._user = new User("test user", new Login("user@mail.com"), new Password("123456"));
             this._user.AddExpense("Test income", Category.Others, DateTime.Now, TransactionValue.Zero);
         }
 

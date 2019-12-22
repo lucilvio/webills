@@ -9,7 +9,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestMethod]
         public void UserHasName()
         {
-            var user = new User("Test User");
+            var user = new User("Test User", new Login("user@mail.com"), new Password("1234456"));
             Assert.IsTrue(!string.IsNullOrEmpty(user.Name));
         }
     }

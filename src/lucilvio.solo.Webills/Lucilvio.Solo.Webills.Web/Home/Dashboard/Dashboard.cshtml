@@ -1,4 +1,4 @@
-﻿@model Lucilvio.Solo.Webills.Web.Home.UserTransactionsInformationViewModel
+﻿@model Lucilvio.Solo.Webills.Web.Home.UserTransactionsInformationResponse
 @{
     Layout = "_Layout";
     ViewData["title"] = "Dashboard";
@@ -48,7 +48,8 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-flat">
+        
+        @*<div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">
                     <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
@@ -81,12 +82,12 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>*@
 
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">
-                    <span class="text-semibold"><i class="icon-subtract text-warning"></i> &nbsp; Expenses </span>
+                    <span class="text-semibold"><i class="icon-subtract text-warning"></i> &nbsp;Today Expenses</span>
                     <button type="submit" data-toggle="modal" data-target="#modal-new-expense" class="btn btn-primary btn-xs pull-right"> New Expense </button>
                 </h6>
             </div>
@@ -97,19 +98,17 @@
                         <tr>
                             <th>Name</th>
                             <th>Category</th>
-                            <th>Date</th>
                             <th>Value</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var expense in Model.Expenses)
+                        @foreach (var expense in Model.TodayExpenses)
                         {
                         <tr>
                             <td class="col-lg-4">@expense.Name</td>
                             <td class="col-lg-4">@expense.Category</td>
-                            <td class="col-lg-1">@expense.Date</td>
                             <td class="col-lg-1">@expense.Value </td>
                             <td class="col-lg-1 text-right"><a href="#" class="edit-expense" data-id="@expense.Number"><i class="icon-pencil"></i></a></td>
                             <td class="col-lg-1 text-right"><a href="#" class="remove-expense" data-id="@expense.Number"><i class="icon-cross"></i></a></td>
@@ -146,9 +145,9 @@
 @section Scripts {
     <script>
         $(".edit-income").click(function () {
-            var incomeNumber = $(this).data("id");
+            var number = $(this).data("id");
 
-            $.getJSON("/Home/EditIncome", { incomeNumber: incomeNumber })
+            $.getJSON("/Home/EditIncome", { number: number })
                 .done(function (data) {
                     var income = data.income;
 
@@ -165,9 +164,9 @@
         });
 
         $(".edit-expense").click(function () {
-            var expenseNumber = $(this).data("id");
+            var number = $(this).data("id");
 
-            $.getJSON("/Home/EditExpense", { expenseNumber: expenseNumber })
+            $.getJSON("/Home/EditExpense", { number: number })
                 .done(function (data) {
                     var expense = data.expense;
 

@@ -7,15 +7,15 @@ namespace Lucilvio.Solo.Webills.Web.Home
 {
     public class AddNewExpenseCommandAdapter : AddNewExpenseCommand
     {
-        public AddNewExpenseCommandAdapter(AddNewExpenseViewModel viewModel)
+        public AddNewExpenseCommandAdapter(AddNewExpenseRequest request)
         {
-            if (viewModel == null)
+            if (request == null)
                 return;
 
-            this.Name = viewModel.Name;
-            this.Date = viewModel.Date.StringToDate();
-            this.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
-            this.Category = (Category)Enum.Parse(typeof(Category), viewModel.Category);
+            this.Name = request.Name;
+            this.Date = request.Date.StringToDate();
+            this.Value = new TransactionValue(request.Value.MoneyToDecimal());
+            this.Category = (Category)Enum.Parse(typeof(Category), request.Category);
         }
     }
 }

@@ -2,13 +2,15 @@
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
-    public class SearchForUserIncomeByNumberQuery
+    public class GetUserIncomesQueryByNumber
     {
-        public SearchForUserIncomeByNumberQuery(Guid number)
+        public GetUserIncomesQueryByNumber(int userId, Guid number)
         {
-            Number = number;
+            this.UserId = userId;
+            this.Number = number;
         }
 
-        public Guid Number { get; set; }
+        public int UserId { get; }
+        public Guid Number { get; }
     }
 }

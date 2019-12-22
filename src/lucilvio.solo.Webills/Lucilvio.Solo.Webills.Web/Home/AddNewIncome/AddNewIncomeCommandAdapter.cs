@@ -8,14 +8,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
 {
     internal class AddNewIncomeCommandAdapter : AddNewIncomeCommand
     {
-        public AddNewIncomeCommandAdapter(AddNewIncomeViewModel viewModel)
+        public AddNewIncomeCommandAdapter(AddNewIncomeRequest request)
         {
-            if (viewModel == null)
+            if (request == null)
                 return;
 
-            this.Name = viewModel.Name;
-            this.Date = viewModel.Date.StringToDate();
-            this.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
+            this.Name = request.Name;
+            this.Date = request.Date.StringToDate();
+            this.Value = new TransactionValue(request.Value.MoneyToDecimal());
         }
     }
 }

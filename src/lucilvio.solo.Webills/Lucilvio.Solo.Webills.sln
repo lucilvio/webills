@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UseCases", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.UseCases.Contracts", "Lucilvio.Solo.Webills.UseCases.Contracts\Lucilvio.Solo.Webills.UseCases.Contracts.csproj", "{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UseCases.Contracts", "Lucilvio.Solo.Webills.UseCases.Contracts\Lucilvio.Solo.Webills.UseCases.Contracts.csproj", "{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Queries", "Lucilvio.Solo.Webills.Queries\Lucilvio.Solo.Webills.Queries.csproj", "{D08A4630-34B1-4F84-806B-D37BB4B13549}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B2BAC5C-E151-47FD-B40A-3B2CBFBC0BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08A4630-34B1-4F84-806B-D37BB4B13549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08A4630-34B1-4F84-806B-D37BB4B13549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08A4630-34B1-4F84-806B-D37BB4B13549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08A4630-34B1-4F84-806B-D37BB4B13549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

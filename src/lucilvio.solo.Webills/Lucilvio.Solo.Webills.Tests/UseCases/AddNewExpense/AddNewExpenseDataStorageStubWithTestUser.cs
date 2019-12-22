@@ -10,7 +10,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 
         public AddNewExpenseDataStorageStubWithTestUser()
         {
-            this._user = new User("Test User");
+            this._user = new User("Test User", new Login("user@mail.com"), new Password("123456"));
         }
 
         public async Task<User> GetUser()

@@ -23,6 +23,7 @@ namespace Lucilvio.Solo.Webills.Web
                 e.Property(p => p.Name).IsRequired().HasMaxLength(256);
                 e.Property(p => p.Date).IsRequired();
                 e.Property(p => p.Number).IsRequired();
+                e.Property(p => p.Category).IsRequired();
                 e.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
             });
 
@@ -45,6 +46,8 @@ namespace Lucilvio.Solo.Webills.Web
                 u.HasKey("Id");
 
                 u.Property(p => p.Name).IsRequired().HasMaxLength(256);
+                u.Property(p => p.Login).IsRequired().HasMaxLength(256).HasConversion(l => l.Value, l => new Login(l));
+                u.Property(p => p.Password).IsRequired().HasMaxLength(256).HasConversion(p => p.Value, p => new Password(p));
             });
         }
 

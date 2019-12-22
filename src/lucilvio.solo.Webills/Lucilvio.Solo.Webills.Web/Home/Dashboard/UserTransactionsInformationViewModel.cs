@@ -1,27 +1,28 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+
 using Lucilvio.Solo.Webills.Web.Home.Index;
+using Lucilvio.Solo.Webills.Web.Home.Sample;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
-    public class UserTransactionsInformationViewModel
+    public class UserTransactionsInformationResponse
     {
-        public UserTransactionsInformationViewModel(SearchForUserTransactionsInformationResult searchResult)
+        public UserTransactionsInformationResponse(UserDashboardQueryResult searchResult)
         {
             if (searchResult == null)
                 return;
 
-            this.Balance = searchResult.Balance.DecimalToMoney();
-            this.TotalSpent = searchResult.TotalSpent.DecimalToMoney();
-            this.TotalEarns = searchResult.TotalIncomes.DecimalToMoney();
-            this.Incomes = searchResult.Incomes.Select(i => new UserIncomeViewModel(i));
-            this.Expenses = searchResult.Expenses.Select(e => new UserExpenseViewModel(e));
+            this.Balance = searchResult.Values.Balance.DecimalToMoney();
+            this.TotalSpent = searchResult.Values.TotalSpent.DecimalToMoney();
+            this.TotalEarns = searchResult.Values.TotalIncomes.DecimalToMoney();
+
+            this.TodayExpenses = searchResult.TodayExpenses.Select(e => new TodayExpensesResponse(e));
         }
 
         public string Balance { get; }
         public string TotalEarns { get; }
         public string TotalSpent { get; }
-        public IEnumerable<UserIncomeViewModel> Incomes { get; }
-        public IEnumerable<UserExpenseViewModel> Expenses { get; }
+        public IEnumerable<TodayExpensesResponse> TodayExpenses { get; }
     }
 }
