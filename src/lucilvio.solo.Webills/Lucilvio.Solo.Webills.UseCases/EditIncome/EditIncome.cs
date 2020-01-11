@@ -24,9 +24,9 @@ namespace Lucilvio.Solo.Webills.UseCases.EditIncome
             if (foundUser == null)
                 throw new UserNotFound();
 
-            foundUser.AlterIncome(command.Number, command.Name, command.Date, command.Value);
+            foundUser.AlterIncome(command.Id, command.Name, command.Date, command.Value);
 
-            await this._dataStorage.Persist(command.Number, foundUser);
+            await this._dataStorage.Persist(command.Id, foundUser);
         }
     }
 }

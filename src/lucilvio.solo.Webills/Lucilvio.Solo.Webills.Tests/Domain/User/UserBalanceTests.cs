@@ -13,7 +13,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestInitialize]
         public void Setup()
         {
-            this._user = new User("Test User", new Login("user@mail.com"), new Password("123456"));
+            this._user = new User("Test User");
         }
 
         [TestMethod]

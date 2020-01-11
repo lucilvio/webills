@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Lucilvio.Solo.Webills.Domain.User;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+using Lucilvio.Solo.Webills.Domain.Profile.User;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -23,7 +24,7 @@ namespace Lucilvio.Solo.Webills.Web
 
                     if(user == null)
                     {
-                        context.Users.Add(new User("Admin", new Login("admin@mail.com"), new Password("123456")));
+                        context.Users.Add(new User("Admin", new Login("admin@mail.com"), new Password("123456"), true));
                         context.SaveChanges();
                     }
                 }

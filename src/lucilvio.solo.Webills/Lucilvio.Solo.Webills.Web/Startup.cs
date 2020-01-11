@@ -60,6 +60,21 @@ namespace Lucilvio.Solo.Webills.Web
                 options.UseSqlServer(this._configuration.GetConnectionString("Webills"));
             });
 
+            services.AddDbContext<WebillsCoreContext>(options =>
+            {
+                options.UseSqlServer(this._configuration.GetConnectionString("Webills"));
+            });
+
+            services.AddDbContext<WebillsProfileContext>(options =>
+            {
+                options.UseSqlServer(this._configuration.GetConnectionString("Webills"));
+            });
+
+            services.AddDbContext<WebillsSecurityContext>(options =>
+            {
+                options.UseSqlServer(this._configuration.GetConnectionString("Webills"));
+            });
+
             services.AddTransient(readContext =>
             {
                 return new WebillsReadContext(this._configuration.GetConnectionString("Webills"));
@@ -67,7 +82,7 @@ namespace Lucilvio.Solo.Webills.Web
 
             services.AddHttpContextAccessor();
 
-            services.AddScoped<ISecurityService>(service =>
+            services.AddScoped<IAuthentication>(service =>
             {
                 return new SecurityService(service.GetService<IHttpContextAccessor>().HttpContext);
             });

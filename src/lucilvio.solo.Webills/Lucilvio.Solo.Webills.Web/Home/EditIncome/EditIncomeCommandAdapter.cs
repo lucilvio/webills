@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
                 return;
 
             base.Name = viewModel.Name;
-            base.Number = new Guid(viewModel.Number);
+            base.Id = new Guid(viewModel.Id);
             base.Date = viewModel.Date.StringToDate();
             base.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
         }

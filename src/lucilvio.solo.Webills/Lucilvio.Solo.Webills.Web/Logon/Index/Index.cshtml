@@ -22,14 +22,17 @@
                 <i class="icon-lock2 text-muted"></i>
             </div>
         </div>
-
+        
+        <div class="text-right">
+            <a href="login_password_recover.html">Forgot password?</a>
+        </div>
+        
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 position-right"></i></button>
         </div>
 
-        <div class="text-center">
-            <a href="login_password_recover.html">Forgot password?</a>
-        </div>
+        <div class="content-divider text-muted form-group"><span>Don't have an account?</span></div>
+        <a href="@Url.Action("Index", "SignUp")" class="btn btn-default btn-block content-group legitRipple">Sign up</a>
     </div>
 </form>
 

@@ -11,9 +11,9 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
     public class GetUserExpensesQueryHandler : IGetUserExpensesQueryHandler
     {
-        private readonly WebillsContext _context;
+        private readonly WebillsCoreContext _context;
 
-        public GetUserExpensesQueryHandler(WebillsContext context)
+        public GetUserExpensesQueryHandler(WebillsCoreContext context)
         {
             this._context = context;
         }
@@ -21,7 +21,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
         public async Task<GetUserExpensesQueryResult> Execute(GetUserExpensesByNumberQuery query)
         {
             var foundUser = await this._context.Users.AsNoTracking().Include(u => u.Expenses).FirstOrDefaultAsync();
-            var foundIncome = foundUser.Expenses.FirstOrDefault(e => e.Number == query.Number);
+            var foundIncome = foundUser.Expenses.FirstOrDefault(e => e.Id == query.Number);
 
             return new GetUserExpensesQueryResult(foundIncome);
         }

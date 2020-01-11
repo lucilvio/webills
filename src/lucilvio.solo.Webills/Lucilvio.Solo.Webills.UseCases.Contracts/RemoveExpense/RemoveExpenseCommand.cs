@@ -4,6 +4,13 @@ namespace Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense
 {
     public abstract class RemoveExpenseCommand
     {
-        public Guid ExpenseNumber { get; protected set; }
+        protected RemoveExpenseCommand(Guid userId, Guid expenseId)
+        {
+            UserId = userId;
+            ExpenseId = expenseId;
+        }
+
+        public Guid UserId { get; }
+        public Guid ExpenseId { get; }
     }
 }

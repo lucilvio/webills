@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.Domain.Security.User;
 using Lucilvio.Solo.Webills.UseCases.Common;
 using Lucilvio.Solo.Webills.UseCases.Contracts.Logon;
 
@@ -27,7 +26,7 @@ namespace Lucilvio.Solo.Webills.UseCases.Logon
             userLogonRule.Verify();
 
             if (onLogon != null)
-                await onLogon.Invoke(new LoggedUser(user.Name, user.Login));
+                await onLogon.Invoke(new LoggedUser(user.Id, user.Name, user.Login));
         }
     }
 }

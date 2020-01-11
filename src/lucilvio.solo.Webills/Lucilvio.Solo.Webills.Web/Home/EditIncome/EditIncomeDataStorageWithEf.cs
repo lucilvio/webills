@@ -9,9 +9,9 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 {
     public class EditIncomeDataStorageWithEf : IEditIncomeDataStorage
     {
-        private readonly WebillsContext _context;
+        private readonly WebillsCoreContext _context;
 
-        public EditIncomeDataStorageWithEf(WebillsContext context)
+        public EditIncomeDataStorageWithEf(WebillsCoreContext context)
         {
             this._context = context;
         }
@@ -23,7 +23,7 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 
         public async Task Persist(Guid incomeNumber, User foundUser)
         {
-            var income = this._context.Set<Income>().FirstOrDefault(i => i.Number == incomeNumber);
+            var income = this._context.Set<Income>().FirstOrDefault(i => i.Id == incomeNumber);
             this._context.Entry<Income>(income).State = EntityState.Deleted;
 
             await this._context.SaveChangesAsync();

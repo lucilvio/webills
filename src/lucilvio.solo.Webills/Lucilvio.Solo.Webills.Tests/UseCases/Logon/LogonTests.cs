@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.UseCases.Logon;
 using Lucilvio.Solo.Webills.UseCases.Common;
 using Lucilvio.Solo.Webills.UseCases.Contracts.Logon;
-using Lucilvio.Solo.Webills.UseCases.Logon;
-using Lucilvio.Solo.Webills.Domain.User.BusinessErrors;
+using Lucilvio.Solo.Webills.Domain.Security.User.BusinessErrors;
+using Lucilvio.Solo.Webills.Domain.Security.User;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.Logon
 {
@@ -32,11 +32,11 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.Logon
         public async Task ThrowsInvalidUserOrPasswordIfNoUserCanBeFoundWithLoginAndPasswordInformed()
         {
             var dataStorageWithoutUsersMock = new Mock<ILogonDataStorage>();
-            dataStorageWithoutUsersMock.Setup(mock => mock.GetUserByLogin(It.IsAny<Login>()))
+            dataStorageWithoutUsersMock.Setup(mock => mock.GetUserByLogin(It.IsAny<string>()))
                 .ReturnsAsync(null as User);
 
             await new Webills.UseCases.Logon.Logon(dataStorageWithoutUsersMock.Object).Execute(
-                new CommandMock(new Login("sample@mail.com"), new Password("123456")));
+                new CommandMock("sample@mail.com", "123456"));
         }
 
         [TestMethod]
@@ -46,11 +46,11 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.Logon
             var userLogin = "user@mail.com";
 
             var dataStorageWithUsersMock = new Mock<ILogonDataStorage>();
-            dataStorageWithUsersMock.Setup(mock => mock.GetUserByLogin(new Login(userLogin)))
-                .ReturnsAsync(new User("Sample User", new Login(userLogin), new Password("654321")));
+            dataStorageWithUsersMock.Setup(mock => mock.GetUserByLogin(userLogin))
+                .ReturnsAsync(new User(userLogin, "654321"));
 
             await new Webills.UseCases.Logon.Logon(dataStorageWithUsersMock.Object).Execute(
-                new CommandMock(new Login(userLogin), new Password(userLogin)));
+                new CommandMock(userLogin, userLogin));
         }
 
         [TestMethod]
@@ -60,18 +60,18 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.Logon
             var userPassword = "123456";
 
             var dataStorageWithUsersMock = new Mock<ILogonDataStorage>();
-            dataStorageWithUsersMock.Setup(mock => mock.GetUserByLogin(new Login(userLogin)))
-                .ReturnsAsync(new User("Sample User", new Login(userLogin), new Password(userPassword)));
+            dataStorageWithUsersMock.Setup(mock => mock.GetUserByLogin(userLogin))
+                .ReturnsAsync(new User(userLogin, userPassword));
 
             var useCase = new Webills.UseCases.Logon.Logon(dataStorageWithUsersMock.Object);
             
-            await useCase.Execute(new CommandMock(new Login(userLogin), new Password(userPassword)));
+            await useCase.Execute(new CommandMock(userLogin, userPassword));
         }
     }
 
     public class CommandMock : LogonCommand
     {
-        public CommandMock(Login login, Password password)
+        public CommandMock(string login, string password)
         {
             base.Login = login;
             base.Password = password;

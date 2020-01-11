@@ -5,7 +5,7 @@ namespace Lucilvio.Solo.Webills.Domain.User
 {
     public class FixedExpense : Expense
     {
-        public FixedExpense(string name, Category category, DateTime date, TransactionValue value, Recurrency recurrency, DateTime until)
+        internal FixedExpense(string name, Category category, DateTime date, TransactionValue value, Recurrency recurrency, DateTime until)
             : base(name, category, date, value)
         {
             if (until < date)

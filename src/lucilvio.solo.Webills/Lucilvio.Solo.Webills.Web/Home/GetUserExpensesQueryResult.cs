@@ -10,14 +10,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
             if (expense == null)
                 return;
 
-            this.Number = expense.Number;
+            this.Id = expense.Id;
             this.Name = expense.Name;
             this.Date = expense.Date;
             this.Value = expense.Value;
             this.Category = expense.Category;
         }
 
-        public Guid Number { get; }
+        public Guid Id { get; }
         public string Name { get; }
         public DateTime Date { get; }
         public TransactionValue Value { get; }

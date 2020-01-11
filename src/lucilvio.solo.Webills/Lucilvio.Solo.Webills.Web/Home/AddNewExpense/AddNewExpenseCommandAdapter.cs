@@ -12,6 +12,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             if (request == null)
                 return;
 
+            this.UserId = new Guid(request.UserId);
             this.Name = request.Name;
             this.Date = request.Date.StringToDate();
             this.Value = new TransactionValue(request.Value.MoneyToDecimal());

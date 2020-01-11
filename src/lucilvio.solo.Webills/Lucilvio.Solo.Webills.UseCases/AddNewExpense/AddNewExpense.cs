@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Domain;
+using Lucilvio.Solo.Webills.Domain.Shared;
 using Lucilvio.Solo.Webills.UseCases.Common;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 
@@ -18,14 +20,14 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewExpense
             if (command == null)
                 throw new CommandNotInformed();
 
-            var foundUser = await this._dataStorage.GetUser();
+            var user = await this._dataStorage.GetUserById(command.UserId);
 
-            if (foundUser == null)
+            if (user.NotDefined())
                 throw new UserNotFound();
 
-            foundUser.AddExpense(command.Name, command.Category, command.Date, command.Value);
+            user.AddExpense(command.Name, command.Category, command.Date, command.Value);
 
-            await this._dataStorage.Persist(foundUser);
+            await this._dataStorage.Persist(user);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.EditExpenses
             var user = await dataStorage.GetUser();
 
             var useCase = new EditExpense(dataStorage);
-            await useCase.Execute(new EditExpenseCommandStub(user.Expenses.First().Number, "Test expense edited", Category.Clothing,
+            await useCase.Execute(new EditExpenseCommandStub(user.Expenses.First().Id, "Test expense edited", Category.Clothing,
                 new DateTime(2019, 2, 20), new TransactionValue(320.89m)));
 
             Assert.AreEqual("Test expense edited", user.Expenses.First().Name);

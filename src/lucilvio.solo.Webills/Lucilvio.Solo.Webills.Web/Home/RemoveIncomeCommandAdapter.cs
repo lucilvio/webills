@@ -7,7 +7,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
     {
         public RemoveIncomeCommandAdapter(RemoveIncomeRequest request)
         {
-            base.IncomeNumber = new Guid(request.IncomeNumber);
+            base.IncomeNumber = new Guid(request.IncomeId);
         }
     }
 }

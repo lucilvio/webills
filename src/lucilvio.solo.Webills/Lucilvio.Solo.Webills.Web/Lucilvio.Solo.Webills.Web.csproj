@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191226120748_Initil.cs" />
+    <Compile Remove="Migrations\20191226120748_Initil.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\css\libs\" />
     <Folder Include="wwwroot\js\libs\" />
   </ItemGroup>

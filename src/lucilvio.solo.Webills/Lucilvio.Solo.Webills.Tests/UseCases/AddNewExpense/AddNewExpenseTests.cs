@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Lucilvio.Solo.Webills.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
+using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
@@ -14,7 +18,9 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
         [ExpectedException(typeof(CommandNotInformed))]
         public async Task ThrowsCommandNotInformedWhenCommandIsNull()
         {
-            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageStubWithTestUser());
+            var dataStorageWithoutBehavior = new Mock<IAddNewExpenseDataStorage>();
+
+            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(dataStorageWithoutBehavior.Object);
             await addNewExpense.Execute(null);
         }
 
@@ -22,24 +28,37 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
         [ExpectedException(typeof(UserNotFound))]
         public async Task ThrowsUserNotFoundExceptionWhenTheUserIsNotFound()
         {
-            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(new AddNewExpenseDataStorageStubWithoutUser());
-            await addNewExpense.Execute(new AddNewExpenseCommandStub("Test expense", Category.Others, new DateTime(2019, 03, 01), TransactionValue.Zero));
+            var dataStorageWithoutUser = new Mock<IAddNewExpenseDataStorage>();
+
+            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(dataStorageWithoutUser.Object);
+            await addNewExpense.Execute(new AddNewExpenseCommandMock(Guid.NewGuid(), "Test expense", Category.Others, new DateTime(2019, 03, 01), TransactionValue.Zero));
         }
 
         [TestMethod]
         public async Task UserAddNewExpense()
         {
-            var dataStorage = new AddNewExpenseDataStorageStubWithTestUser();
-            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(dataStorage);
-            await addNewExpense.Execute(new AddNewExpenseCommandStub("Test expense", Category.Taxes, new DateTime(2019, 03, 01), TransactionValue.Zero));
+            var userId = Guid.NewGuid();
+            var user = new User("sample user");
 
-            var user = await dataStorage.GetUser();
-            var addedExpense = user.Expenses.First();
+            var dataStorageWithUser = new Mock<IAddNewExpenseDataStorage>();
+            dataStorageWithUser.Setup(obj => obj.GetUserById(userId)).ReturnsAsync(user);
 
-            Assert.AreEqual("Test expense", addedExpense.Name);
-            Assert.AreEqual(Category.Taxes, addedExpense.Category);
-            Assert.AreEqual(new DateTime(2019, 03, 01), addedExpense.Date);
-            Assert.AreEqual(TransactionValue.Zero, addedExpense.Value);
+            var addNewExpense = new Webills.UseCases.AddNewExpense.AddNewExpense(dataStorageWithUser.Object);
+            await addNewExpense.Execute(new AddNewExpenseCommandMock(userId, "Test expense", Category.Taxes, new DateTime(2019, 03, 01), TransactionValue.Zero));
+
+            Assert.IsTrue(user.Expenses.Count() == 1);
+        }
+    }
+
+    internal class AddNewExpenseCommandMock : AddNewExpenseCommand
+    {
+        public AddNewExpenseCommandMock(Guid userId, string name, Category category, DateTime date, TransactionValue value)
+        {
+            base.UserId = userId;
+            base.Name = name;
+            base.Category = category;
+            base.Date = date;
+            base.Value = value;
         }
     }
 }

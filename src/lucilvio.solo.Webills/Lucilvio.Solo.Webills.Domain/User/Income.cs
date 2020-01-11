@@ -5,7 +5,12 @@ namespace Lucilvio.Solo.Webills.Domain.User
 {
     public class Income
     {
-        internal Income(string name, DateTime date, TransactionValue value)
+        private Income()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
+        internal Income(string name, DateTime date, TransactionValue value) : this()
         {
             if (string.IsNullOrEmpty(name))
                 throw new IncomeMustHaveName();
@@ -17,11 +22,9 @@ namespace Lucilvio.Solo.Webills.Domain.User
                 throw new IncomeTransactionValueCannotBeNull();
 
             this.Value = value;
-
-            this.Number = Guid.NewGuid();
         }
 
-        public Guid Number { get; }
+        public Guid Id { get; }
         public string Name { get; }
         public DateTime Date { get; }
         public TransactionValue Value { get; }

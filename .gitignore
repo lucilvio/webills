@@ -29,3 +29,9 @@
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases.Contracts/bin/Release/netstandard2.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Queries/bin/Debug/netstandard2.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Queries/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain.Profile/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain.Profile/bin/Debug/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain.Security/bin/Debug/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain.Security/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain.Shared/bin/Debug/netstandard2.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Domain.Shared/obj

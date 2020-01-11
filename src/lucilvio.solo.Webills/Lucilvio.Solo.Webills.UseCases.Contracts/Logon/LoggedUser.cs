@@ -1,17 +1,18 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Domain.User;
 
 namespace Lucilvio.Solo.Webills.UseCases.Contracts.Logon
 {
     public class LoggedUser
     {
-        public LoggedUser(string name, Login login)
+        public LoggedUser(Guid id, string name, string login)
         {
+            this.Id = id;
             this.Name = name;
             this.Login = login;
         }
 
+        public Guid Id { get; }
         public string Name { get; }
-        public Login Login { get; }
+        public string Login { get; }
     }
 }

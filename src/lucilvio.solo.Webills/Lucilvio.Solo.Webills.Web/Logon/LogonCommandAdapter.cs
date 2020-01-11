@@ -10,8 +10,8 @@ namespace Lucilvio.Solo.Webills.Web.Logon
             if (request == null)
                 return;
 
-            base.Login = new Login(request.Login);
-            base.Password = new Password(request.Password);
+            base.Login = request.Login;
+            base.Password = request.Password;
         }
     }
 }

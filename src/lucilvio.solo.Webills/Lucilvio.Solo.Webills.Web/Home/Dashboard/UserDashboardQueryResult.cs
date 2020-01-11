@@ -12,8 +12,11 @@ namespace Lucilvio.Solo.Webills.Web.Home.Sample
 
         public UserDashboardQueryResult(ValuesData values, IEnumerable<TodayExpensesData> todayExpenses) : this()
         {
-            this.Values = values;
-            this.TodayExpenses = todayExpenses;
+            if(values != null)
+                this.Values = values;
+
+            if(todayExpenses != null)
+                this.TodayExpenses = todayExpenses;
         }
 
         public ValuesData Values { get; }

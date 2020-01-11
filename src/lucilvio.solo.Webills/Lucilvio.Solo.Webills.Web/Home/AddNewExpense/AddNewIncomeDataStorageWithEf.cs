@@ -8,9 +8,9 @@ namespace Lucilvio.Solo.Webills.Web
 {
     public class AddNewIncomeDataStorageWithEf : IAddNewIncomeDataStorage
     {
-        private readonly WebillsContext _context;
+        private readonly WebillsCoreContext _context;
 
-        public AddNewIncomeDataStorageWithEf(WebillsContext context)
+        public AddNewIncomeDataStorageWithEf(WebillsCoreContext context)
         {
             this._context = context;
         }

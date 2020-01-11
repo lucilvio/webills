@@ -13,7 +13,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
                 return;
 
             base.Name = request.Name;
-            this.Number = new Guid(request.Number);
+            this.Id = new Guid(request.Id);
             base.Date = request.Date.StringToDate();
             base.Value = new TransactionValue(request.Value.MoneyToDecimal());
             base.Category = (Category)Enum.Parse(typeof(Category), request.Category);

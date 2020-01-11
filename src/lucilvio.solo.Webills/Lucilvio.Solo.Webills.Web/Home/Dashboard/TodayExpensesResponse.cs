@@ -8,12 +8,12 @@
                 return;
 
             this.Name = expense.Name;
-            this.Number = expense.Number.ToString();
+            this.Id = expense.Id.ToString();
             this.Category = expense.Category.ToString();
             this.Value = expense.Value.DecimalToMoney();
         }
 
-        public string Number { get;  }
+        public string Id { get;  }
         public string Category { get;  }
         public string Name { get; }
         public string Date { get; }

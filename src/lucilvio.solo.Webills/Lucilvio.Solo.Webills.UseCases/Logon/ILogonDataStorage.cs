@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.Domain.Security.User;
 
 namespace Lucilvio.Solo.Webills.UseCases.Logon
 {
     public interface ILogonDataStorage
     {
-        Task<User> GetUserByLogin(Login login);
+        Task<User> GetUserByLogin(string login);
     }
 }

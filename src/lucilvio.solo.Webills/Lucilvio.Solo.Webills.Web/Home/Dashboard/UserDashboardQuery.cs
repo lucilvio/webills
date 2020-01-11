@@ -1,12 +1,14 @@
-﻿namespace Lucilvio.Solo.Webills.Web.Home
+﻿using System;
+
+namespace Lucilvio.Solo.Webills.Web.Home
 {
     public class UserDashboardQuery
     {
-        public UserDashboardQuery(int userId)
+        public UserDashboardQuery(Guid login)
         {
-            this.UserId = userId;
+            this.UserId = login;
         }
 
-        public int UserId { get; }
+        public Guid UserId { get; }
     }
 }

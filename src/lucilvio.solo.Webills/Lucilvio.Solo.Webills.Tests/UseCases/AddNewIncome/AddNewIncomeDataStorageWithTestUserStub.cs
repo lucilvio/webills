@@ -9,7 +9,7 @@ namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 
         public AddNewIncomeDataStorageWithTestUserStub()
         {
-            this._user = new User("Test user", new Domain.User.Login("user@mail.com"), new Password("123456"));
+            this._user = new User("Test user");
         }
 
         public async Task<User> GetUser()

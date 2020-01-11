@@ -14,8 +14,8 @@
         </ul>
                 
         <div class="navbar-right">
-            <p class="navbar-text">Hello, @User.Identity.Name !</p>
-            <p class="navbar-text"><span class="label bg-success">Online</span></p>
+            <p class="navbar-text">Hello, <b> @User.Identity.Name </b> !</p>
+            <a href="@Url.Action("SignOut", "SignOut")"><p class="navbar-text"><span class="label label-default">Sign Out</span></p></a>
 
             @*<ul class="nav navbar-nav">
                 <li class="dropdown">

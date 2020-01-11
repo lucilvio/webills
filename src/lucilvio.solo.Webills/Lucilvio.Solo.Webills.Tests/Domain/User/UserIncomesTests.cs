@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestInitialize]
         public void Setup()
         {
-            this._user = new User("Test User", new Login("user@mail.com"), new Password("123456"));
+            this._user = new User("Test User");
         }
 
         [TestMethod]
@@ -58,8 +58,8 @@ namespace Lucilvio.Solo.Webills.Tests
         {
             this._user.AddIncome("Test income", new DateTime(2018, 10, 23), TransactionValue.Zero);
 
-            Assert.IsNotNull(this._user.Incomes.First().Number);
-            Assert.AreNotEqual(Guid.Empty, this._user.Incomes.First().Number);
+            Assert.IsNotNull(this._user.Incomes.First().Id);
+            Assert.AreNotEqual(Guid.Empty, this._user.Incomes.First().Id);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@ namespace Lucilvio.Solo.Webills.Tests
             this._user.RemoveIncome(incomeNumber1);
 
             Assert.AreEqual(1, this._user.Incomes.Count());
-            Assert.AreEqual(incomeNumber2, this._user.Incomes.First().Number);
+            Assert.AreEqual(incomeNumber2, this._user.Incomes.First().Id);
         }
     }
 }

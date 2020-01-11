@@ -11,6 +11,7 @@ using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
 using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
 using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
 using Microsoft.AspNetCore.Authorization;
+using Lucilvio.Solo.Webills.Web.Logon;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -23,14 +24,15 @@ namespace Lucilvio.Solo.Webills.Web.Home
         private readonly IRemoveIncome _removeIncome;
         private readonly IAddNewExpense _addNewExpense;
         private readonly IRemoveExpense _removeExpense;
-
+        private readonly IAuthentication _authentication;
         private readonly IGetUserIncomesQueryHandler _getUserIncomesQueryHandler;
         private readonly IGetUserExpensesQueryHandler _getUserExpensesQueryHandler;
         private readonly IUserDashboardQueryHandler _userDashboardQueryHandler;
 
         public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, IEditIncome editIncome, IEditExpense editExpense,
             IUserDashboardQueryHandler userDashboardQueryHandler, IGetUserIncomesQueryHandler searchForUserIncome,
-            IGetUserExpensesQueryHandler searchForUserExpenseByNumber, IRemoveIncome removeIncome, IRemoveExpense removeExpense)
+            IGetUserExpensesQueryHandler searchForUserExpenseByNumber, IRemoveIncome removeIncome, IRemoveExpense removeExpense,
+            IAuthentication authentication)
         {
             this._editIncome = editIncome;
             this._editExpense = editExpense;
@@ -38,7 +40,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this._removeIncome = removeIncome;
             this._addNewExpense = addNewExpense;
             this._removeExpense = removeExpense;
-
+            this._authentication = authentication;
             this._getUserIncomesQueryHandler = searchForUserIncome;
             this._getUserExpensesQueryHandler = searchForUserExpenseByNumber;
             this._userDashboardQueryHandler = userDashboardQueryHandler;
@@ -47,7 +49,8 @@ namespace Lucilvio.Solo.Webills.Web.Home
         [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
-            var result = await this._userDashboardQueryHandler.Execute(new UserDashboardQuery(1));
+            var loggedUser = this._authentication.User();
+            var result = await this._userDashboardQueryHandler.Execute(new UserDashboardQuery(loggedUser.Id));
 
             return View(new UserTransactionsInformationResponse(result));
         }
@@ -82,7 +85,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
         [HttpGet]
         public async Task<JsonResult> EditExpense([FromQuery]GetExpenseRequest request)
         {
-            var foundExpense = await this._getUserExpensesQueryHandler.Execute(new GetUserExpensesByNumberQuery(1, request.Number));
+            var foundExpense = await this._getUserExpensesQueryHandler.Execute(new GetUserExpensesByNumberQuery(1, request.Id));
 
             if (foundExpense == null)
                 return new JsonResult(new { error = "Expense not found" });

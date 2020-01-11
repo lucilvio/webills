@@ -38,7 +38,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveIncome
             var user = await dataStorage.GetUser();
             
             var useCase = new Webills.UseCases.RemoveIncome.RemoveIncome(dataStorage);
-            await useCase.Execute(new RemoveIncomeCommandStub(user.Incomes.First().Number));
+            await useCase.Execute(new RemoveIncomeCommandStub(user.Incomes.First().Id));
 
             Assert.AreEqual(0, user.Incomes.Count());
         }

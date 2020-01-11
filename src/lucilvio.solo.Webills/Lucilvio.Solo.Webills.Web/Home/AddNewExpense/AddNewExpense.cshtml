@@ -1,4 +1,6 @@
-﻿@using Lucilvio.Solo.Webills.Web.Shared
+﻿@inject Lucilvio.Solo.Webills.Web.Logon.IAuthentication Authentication
+
+@using Lucilvio.Solo.Webills.Web.Shared
 @using Lucilvio.Solo.Webills.Domain.User
 
 <div id="modal-new-expense" class="modal fade" tabindex="-1">
@@ -10,6 +12,7 @@
             </div>
 
             <form action="/Home/AddNewExpense" method="post">
+                <input type="hidden" name="userId" value="@Authentication.User().Id" />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12 form-group">

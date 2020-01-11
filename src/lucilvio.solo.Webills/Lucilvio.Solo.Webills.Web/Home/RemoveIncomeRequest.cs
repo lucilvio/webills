@@ -2,6 +2,6 @@
 {
     public class RemoveIncomeRequest
     {
-        public string IncomeNumber { get; internal set; }
+        public string IncomeId { get; internal set; }
     }
 }

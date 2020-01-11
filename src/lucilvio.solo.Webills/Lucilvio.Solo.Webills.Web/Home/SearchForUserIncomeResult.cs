@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             if (income == null)
                 return;
 
-            this.Number = income.Number;
+            this.Number = income.Id;
             this.Name = income.Name;
             this.Date = income.Date;
             this.Value = income.Value;

@@ -3,9 +3,14 @@ using Lucilvio.Solo.Webills.Domain.User.BusinessErrors;
 
 namespace Lucilvio.Solo.Webills.Domain.User
 {
-    public partial class Expense
+    public class Expense
     {
-        public Expense(string name, Category category, DateTime date, TransactionValue value)
+        private Expense()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
+        internal Expense(string name, Category category, DateTime date, TransactionValue value) : this()
         {
             if (string.IsNullOrEmpty(name))
                 throw new ExpenseMustHaveName();
@@ -20,11 +25,9 @@ namespace Lucilvio.Solo.Webills.Domain.User
             this.Date = date;
             this.Category = category;
             this.Value = value;
-
-            this.Number = Guid.NewGuid();
         }
 
-        public Guid Number { get; }
+        public Guid Id { get; }
         public string Name { get; }
         public DateTime Date { get; }
         public Category Category { get; }

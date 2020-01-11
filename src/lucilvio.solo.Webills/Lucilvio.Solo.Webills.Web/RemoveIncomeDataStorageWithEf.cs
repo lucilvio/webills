@@ -7,9 +7,9 @@ namespace Lucilvio.Solo.Webills.Web
 {
     internal class RemoveIncomeDataStorageWithEf : IRemoveIncomeDataStorage
     {
-        private readonly WebillsContext _context;
+        private readonly WebillsCoreContext _context;
 
-        public RemoveIncomeDataStorageWithEf(WebillsContext context)
+        public RemoveIncomeDataStorageWithEf(WebillsCoreContext context)
         {
             this._context = context;
         }

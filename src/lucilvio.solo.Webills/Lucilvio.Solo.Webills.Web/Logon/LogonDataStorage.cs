@@ -1,24 +1,21 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Logon;
+﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Lucilvio.Solo.Webills.UseCases.Logon;
+using Lucilvio.Solo.Webills.Domain.Security.User;
 
 namespace Lucilvio.Solo.Webills.Web.Logon
 {
     public class LogonDataStorage : ILogonDataStorage
     {
-        private readonly WebillsContext _context;
+        private readonly WebillsSecurityContext _context;
 
-        public LogonDataStorage(WebillsContext context)
+        public LogonDataStorage(WebillsSecurityContext context)
         {
             this._context = context;
         }
 
-        public async Task<User> GetUserByLogin(Login login)
+        public async Task<User> GetUserByLogin(string login)
         {
             return await this._context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Login == login).ConfigureAwait(false);
         }

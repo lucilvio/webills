@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestInitialize]
         public void Init()
         {
-            this._user = new User("Tests User", new Login("user@mail.com"), new Password("123456"));
+            this._user = new User("Tests User");
         }
 
         [TestMethod]
@@ -278,7 +278,7 @@ namespace Lucilvio.Solo.Webills.Tests
             this._user.RemoveExpense(expenseNumber1);
 
             Assert.AreEqual(1, this._user.Expenses.Count());
-            Assert.AreEqual(expenseNumber2, this._user.Expenses.First().Number);
+            Assert.AreEqual(expenseNumber2, this._user.Expenses.First().Id);
         }
 
         [TestMethod]

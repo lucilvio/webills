@@ -9,9 +9,9 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditExpense
 {
     public class EditExpenseDataStorageWithEf : IEditExpenseDataStorage
     {
-        private readonly WebillsContext _context;
+        private readonly WebillsCoreContext _context;
 
-        public EditExpenseDataStorageWithEf(WebillsContext context)
+        public EditExpenseDataStorageWithEf(WebillsCoreContext context)
         {
             this._context = context;
         }
@@ -23,7 +23,7 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditExpense
 
         public async Task Persist(Guid expenseNumber, User foundUser)
         {
-            var expense = this._context.Set<Expense>().FirstOrDefault(i => i.Number == expenseNumber);
+            var expense = this._context.Set<Expense>().FirstOrDefault(i => i.Id == expenseNumber);
             this._context.Entry<Expense>(expense).State = EntityState.Deleted;
 
             await this._context.SaveChangesAsync();
