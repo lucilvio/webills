@@ -25,8 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.Domain\Lucilvio.Solo.Webills.Core.Domain.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.UseCases.Contracts\Lucilvio.Solo.Webills.Profile.UseCases.Contracts.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-
-using Lucilvio.Solo.Webills.UseCases.RegisterUser;
-using Lucilvio.Solo.Webills.Domain.Profile.User;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Profile.Domain.User;
+using Lucilvio.Solo.Webills.Profile.UseCases.RegisterUser;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web.SignUp
 {

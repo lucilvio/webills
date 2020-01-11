@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.UseCases.RemoveExpense
 {

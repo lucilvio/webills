@@ -1,7 +1,7 @@
-﻿using Lucilvio.Solo.Webills.Domain.Security.User.BusinessErrors;
-using Lucilvio.Solo.Webills.Domain.Shared;
+﻿using Lucilvio.Solo.Webills.Domain.Shared;
+using Lucilvio.Solo.Webills.Security.Domain.User.BusinessErrors;
 
-namespace Lucilvio.Solo.Webills.Domain.Security.User
+namespace Lucilvio.Solo.Webills.Security.Domain.User
 {
     public class UserLogonRule
     {

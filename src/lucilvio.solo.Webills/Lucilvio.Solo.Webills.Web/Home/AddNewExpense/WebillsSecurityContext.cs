@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Lucilvio.Solo.Webills.Domain.Security.User;
+using Lucilvio.Solo.Webills.Security.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -18,8 +18,6 @@ namespace Lucilvio.Solo.Webills.Web
             {
                 u.HasNoKey();
                 u.ToTable("Users");
-
-                //u.HasOne<Domain.Profile.User.User>().WithOne().HasForeignKey<Domain.Security.User.User>(e => e.Id);
             });
         }
 

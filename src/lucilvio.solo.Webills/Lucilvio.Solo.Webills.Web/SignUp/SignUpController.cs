@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 using Lucilvio.Solo.Webills.Web.Logon;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RegisterUser;
+using Lucilvio.Solo.Webills.Profile.UseCases.Contracts.RegisterUser;
 
 namespace Lucilvio.Solo.Webills.Web.SignUp
 {

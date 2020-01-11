@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Lucilvio.Solo.Webills.UseCases.Logon;
-using Lucilvio.Solo.Webills.Domain.Security.User;
+using Lucilvio.Solo.Webills.Security.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web.Logon
 {

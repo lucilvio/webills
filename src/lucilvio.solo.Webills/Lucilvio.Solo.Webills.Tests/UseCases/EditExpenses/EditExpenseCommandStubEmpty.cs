@@ -1,4 +1,4 @@
-﻿using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
+﻿using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.EditExpenses
 {

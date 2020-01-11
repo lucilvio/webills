@@ -1,6 +1,4 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Domain.Profile.User;
-using Lucilvio.Solo.Webills.Domain.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web
@@ -16,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Web
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Expense>(e =>
+            modelBuilder.Entity < Core.Domain.User.Expense>(e =>
             {
                 e.ToTable("Expenses");
 
@@ -27,12 +25,12 @@ namespace Lucilvio.Solo.Webills.Web
                 e.Property(p => p.Date).IsRequired();
                 e.Property(p => p.Id).IsRequired();
                 e.Property(p => p.Category).IsRequired();
-                e.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
+                e.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new Core.Domain.User.TransactionValue(v));
 
                 
             });
 
-            modelBuilder.Entity<Income>(i =>
+            modelBuilder.Entity<Core.Domain.User.Income>(i =>
             {
                 i.ToTable("Incomes");
 
@@ -42,28 +40,28 @@ namespace Lucilvio.Solo.Webills.Web
                 i.Property(p => p.Name).IsRequired().HasMaxLength(256);
                 i.Property(p => p.Date).IsRequired();
                 i.Property(p => p.Id).IsRequired().HasColumnName("Number");
-                i.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
+                i.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new Core.Domain.User.TransactionValue(v));
             });
 
-            modelBuilder.Entity<Domain.User.User>(u =>
+            modelBuilder.Entity<Core.Domain.User.User>(u =>
             {
                 u.ToTable("Users");
                 u.HasKey(u => u.Id);
                 u.Ignore(u => u.Name);
 
-                u.HasOne<Domain.Profile.User.User>().WithOne().HasForeignKey<Domain.User.User>(e => e.Id);
+                u.HasOne<Profile.Domain.User.User>().WithOne().HasForeignKey<Core.Domain.User.User>(e => e.Id);
             });
 
-            modelBuilder.Entity<Domain.Security.User.User>(u =>
+            modelBuilder.Entity<Security.Domain.User.User>(u =>
             {
                 u.ToTable("Users");
                 u.HasKey(u => u.Id);
                 u.Ignore(u => u.Name);
                 
-                u.HasOne<Domain.Profile.User.User>().WithOne().HasForeignKey<Domain.Security.User.User>(e => e.Id);
+                u.HasOne<Profile.Domain.User.User>().WithOne().HasForeignKey<Security.Domain.User.User>(e => e.Id);
             });
 
-            modelBuilder.Entity<Domain.Profile.User.User>(u =>
+            modelBuilder.Entity<Profile.Domain.User.User>(u =>
             {
                 u.ToTable("Users");
 
@@ -71,13 +69,13 @@ namespace Lucilvio.Solo.Webills.Web
                 u.Property(p => p.Id).ValueGeneratedNever();
 
                 u.Property(p => p.Name).IsRequired().HasMaxLength(256);
-                u.Property(p => p.Login).IsRequired().HasMaxLength(256).HasConversion(l => l.Value, l => new Login(l));
-                u.Property(p => p.Password).IsRequired().HasMaxLength(256).HasConversion(p => p.Value, p => new Password(p));
+                u.Property(p => p.Login).IsRequired().HasMaxLength(256).HasConversion(l => l.Value, l => new Profile.Domain.User.Login(l));
+                u.Property(p => p.Password).IsRequired().HasMaxLength(256).HasConversion(p => p.Value, p => new Profile.Domain.User.Password(p));
                 u.Property(p => p.TermsAccepted).IsRequired();
 
             });
         }
 
-        public DbSet<Domain.Profile.User.User> Users { get; set; }
+        public DbSet<Profile.Domain.User.User> Users { get; set; }
     }
 }

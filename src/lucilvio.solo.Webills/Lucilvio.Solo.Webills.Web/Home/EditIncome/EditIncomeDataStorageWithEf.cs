@@ -1,9 +1,10 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using System;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UseCases.EditIncome;
+﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+
+using Lucilvio.Solo.Webills.Core.UseCases.EditIncome;
+using Lucilvio.Solo.Webills.Core.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Domain.Security.User.BusinessErrors
+namespace Lucilvio.Solo.Webills.Security.Domain.User.BusinessErrors
 {
     public class InvalidUserOrPassword : Exception
     {

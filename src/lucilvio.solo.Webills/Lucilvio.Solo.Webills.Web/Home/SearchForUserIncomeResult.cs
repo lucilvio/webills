@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Lucilvio.Solo.Webills.Domain.User;
-using System;
+﻿using System;
+using Lucilvio.Solo.Webills.Core.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

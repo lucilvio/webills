@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Common;
-using Lucilvio.Solo.Webills.UseCases.RemoveExpense;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
+﻿using Moq;
 using System;
 using System.Linq;
-using Moq;
+using System.Threading.Tasks;
+
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
+using Lucilvio.Solo.Webills.Core.UseCases.RemoveExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveExpense
 {
@@ -19,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveExpense
         {
             var dataStorageWithoutBehavior = new Mock<IRemoveExpenseDataStorage>().Object;
 
-            await new Webills.UseCases.RemoveExpense.RemoveExpense(dataStorageWithoutBehavior).Execute(null);
+            await new Core.UseCases.RemoveExpense.RemoveExpense(dataStorageWithoutBehavior).Execute(null);
         }
 
         [TestMethod]
@@ -29,7 +30,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveExpense
             var dataStorageWithoutUser = new Mock<IRemoveExpenseDataStorage>();
             dataStorageWithoutUser.Setup(obj => obj.GetUserById(It.IsAny<Guid>())).ReturnsAsync(null as User);
 
-            await new Webills.UseCases.RemoveExpense.RemoveExpense(dataStorageWithoutUser.Object).Execute(new RemoveExpenseCommandStub(Guid.Empty, Guid.Empty));
+            await new Core.UseCases.RemoveExpense.RemoveExpense(dataStorageWithoutUser.Object).Execute(new RemoveExpenseCommandStub(Guid.Empty, Guid.Empty));
         }
 
         [TestMethod]
@@ -41,7 +42,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveExpense
             var dataStorageWithUser = new Mock<IRemoveExpenseDataStorage>();
             dataStorageWithUser.Setup(obj => obj.GetUserById(user.Id)).ReturnsAsync(user);
 
-            await new Webills.UseCases.RemoveExpense.RemoveExpense(dataStorageWithUser.Object).Execute(new RemoveExpenseCommandStub(user.Id, expenseId));
+            await new Core.UseCases.RemoveExpense.RemoveExpense(dataStorageWithUser.Object).Execute(new RemoveExpenseCommandStub(user.Id, expenseId));
 
             Assert.AreEqual(0, user.Expenses.Count());
         }

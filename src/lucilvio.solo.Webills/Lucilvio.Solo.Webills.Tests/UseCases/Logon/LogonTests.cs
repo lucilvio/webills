@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Lucilvio.Solo.Webills.UseCases.Logon;
-using Lucilvio.Solo.Webills.UseCases.Common;
-using Lucilvio.Solo.Webills.UseCases.Contracts.Logon;
-using Lucilvio.Solo.Webills.Domain.Security.User.BusinessErrors;
-using Lucilvio.Solo.Webills.Domain.Security.User;
+using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
+using Lucilvio.Solo.Webills.Security.Domain.User.BusinessErrors;
+using Lucilvio.Solo.Webills.Security.Domain.User;
+using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.Logon
 {

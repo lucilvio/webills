@@ -1,10 +1,9 @@
 ﻿using System.Linq;
+using Lucilvio.Solo.Webills.Profile.Domain.User;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
-using Lucilvio.Solo.Webills.Domain.Profile.User;
 
 namespace Lucilvio.Solo.Webills.Web
 {

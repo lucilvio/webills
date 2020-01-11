@@ -1,9 +1,9 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.EditExpense;
 using Microsoft.EntityFrameworkCore;
-using Lucilvio.Solo.Webills.UseCases.EditExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home.EditExpense
 {

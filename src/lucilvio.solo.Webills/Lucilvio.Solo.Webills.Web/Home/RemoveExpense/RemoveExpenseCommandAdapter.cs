@@ -1,5 +1,5 @@
-﻿using System;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
+﻿using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
+using System;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

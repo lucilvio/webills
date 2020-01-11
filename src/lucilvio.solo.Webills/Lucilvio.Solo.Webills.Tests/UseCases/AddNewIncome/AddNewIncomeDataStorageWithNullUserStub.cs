@@ -1,5 +1,7 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.AddNewIncome;
 
 namespace Lucilvio.Solo.Webills.UseCases.AddNewIncome
 {

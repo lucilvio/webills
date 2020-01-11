@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.RemoveIncome;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.RemoveIncome;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web

@@ -1,6 +1,5 @@
 using System;
-using System.Linq;
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.Core.Domain.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucilvio.Solo.Webills.Tests

@@ -1,9 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Web.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
 {

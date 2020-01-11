@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.Core.Domain.User;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
-using Lucilvio.Solo.Webills.UseCases.Common;
+using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewIncome
@@ -15,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewIncome
         [ExpectedException(typeof(CommandNotInformed))]
         public async Task ThrowsCommandNotInformedWhenCommandIsNull()
         {
-            var userCase = new Webills.UseCases.AddNewIncome.AddNewIncome(new AddNewIncomeDataStorageWithTestUserStub());
+            var userCase = new Core.UseCases.AddNewIncome.AddNewIncome(new AddNewIncomeDataStorageWithTestUserStub());
             await userCase.Execute(null);
         }
 
@@ -23,7 +23,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewIncome
         [ExpectedException(typeof(UserNotFound))]
         public async Task ThrowsUerNotFoundExceptionWhenTheUserIsNotFound()
         {
-            var userCase = new Webills.UseCases.AddNewIncome.AddNewIncome(new AddNewIncomeDataStorageWithNullUserStub());
+            var userCase = new Core.UseCases.AddNewIncome.AddNewIncome(new AddNewIncomeDataStorageWithNullUserStub());
             await userCase.Execute(new AddNewIncomeCommandStub("test income", DateTime.Now, TransactionValue.Zero));
         }
 
@@ -32,7 +32,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewIncome
         {
             var dataStorage = new AddNewIncomeDataStorageWithTestUserStub();
 
-            var userCase = new Webills.UseCases.AddNewIncome.AddNewIncome(dataStorage);
+            var userCase = new Core.UseCases.AddNewIncome.AddNewIncome(dataStorage);
             await userCase.Execute(new AddNewIncomeCommandStub("test income", new DateTime(2019, 10, 1), new TransactionValue(300.23m)));
 
             var user = await dataStorage.GetUser();

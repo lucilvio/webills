@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Lucilvio.Solo.Webills.Domain.Profile.User;
+
+using Lucilvio.Solo.Webills.Profile.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -14,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Web
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Domain.Profile.User.User>(u =>
+            modelBuilder.Entity<User>(u =>
             {
                 u.ToTable("Users");
 
@@ -29,6 +30,6 @@ namespace Lucilvio.Solo.Webills.Web
             });
         }
 
-        public DbSet<Domain.Profile.User.User> Users { get; internal set; }
+        public DbSet<User> Users { get; internal set; }
     }
 }

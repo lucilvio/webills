@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Domain.Security.User
+namespace Lucilvio.Solo.Webills.Security.Domain.User
 {
     public class User
     {

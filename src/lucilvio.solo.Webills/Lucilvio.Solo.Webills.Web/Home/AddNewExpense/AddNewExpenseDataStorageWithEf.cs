@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.AddNewExpense;
 using Microsoft.EntityFrameworkCore;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
-using System;
 
 namespace Lucilvio.Solo.Webills.Web
 {

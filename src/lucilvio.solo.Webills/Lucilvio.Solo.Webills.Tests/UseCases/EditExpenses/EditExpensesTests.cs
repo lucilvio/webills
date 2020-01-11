@@ -1,10 +1,10 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Common;
-using Lucilvio.Solo.Webills.UseCases.EditExpense;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.EditExpense;
+using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.EditExpenses
 {

@@ -1,7 +1,6 @@
 ﻿using System;
-
+using Lucilvio.Solo.Webills.Core.Domain.User;
 using Microsoft.EntityFrameworkCore;
-using Lucilvio.Solo.Webills.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web
 {

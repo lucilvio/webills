@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.AddNewIncome;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Web

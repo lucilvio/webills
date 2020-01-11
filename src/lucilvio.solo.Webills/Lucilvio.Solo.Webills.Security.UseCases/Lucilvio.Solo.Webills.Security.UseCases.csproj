@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Security.Domain.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Security.UseCases.Contracts\Lucilvio.Solo.Webills.Security.UseCases.Contracts.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

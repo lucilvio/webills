@@ -1,17 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
+using Lucilvio.Solo.Webills.Web.Logon;
 using Lucilvio.Solo.Webills.Web.Home.Sample;
 using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Lucilvio.Solo.Webills.Web.Home.EditExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
-using Microsoft.AspNetCore.Authorization;
-using Lucilvio.Solo.Webills.Web.Logon;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

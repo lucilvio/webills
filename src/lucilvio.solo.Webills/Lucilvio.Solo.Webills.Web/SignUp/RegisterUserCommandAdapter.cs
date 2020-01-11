@@ -1,5 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Domain.Profile.User;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RegisterUser;
+﻿using Lucilvio.Solo.Webills.Profile.Domain.User;
+using Lucilvio.Solo.Webills.Profile.UseCases.Contracts.RegisterUser;
 
 namespace Lucilvio.Solo.Webills.Web.SignUp
 {

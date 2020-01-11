@@ -1,5 +1,6 @@
-﻿using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
-using System;
+﻿using System;
+
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveIncome
 {

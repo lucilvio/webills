@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.RemoveIncome;
+using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.RemoveIncome;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveIncome
 {

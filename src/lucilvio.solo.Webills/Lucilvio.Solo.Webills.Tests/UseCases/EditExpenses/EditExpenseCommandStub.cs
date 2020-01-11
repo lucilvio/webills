@@ -1,6 +1,7 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
-using System;
+﻿using System;
+
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.EditExpenses
 {

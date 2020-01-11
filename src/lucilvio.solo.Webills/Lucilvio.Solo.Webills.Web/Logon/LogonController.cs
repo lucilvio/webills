@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Lucilvio.Solo.Webills.Web.Home;
-using Lucilvio.Solo.Webills.UseCases.Contracts.Logon;
+using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
 
 namespace Lucilvio.Solo.Webills.Web.Logon
 {

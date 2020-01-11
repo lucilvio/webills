@@ -1,5 +1,5 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

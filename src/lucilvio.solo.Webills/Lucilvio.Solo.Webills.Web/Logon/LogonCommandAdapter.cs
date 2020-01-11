@@ -1,5 +1,4 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Contracts.Logon;
+﻿using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
 
 namespace Lucilvio.Solo.Webills.Web.Logon
 {

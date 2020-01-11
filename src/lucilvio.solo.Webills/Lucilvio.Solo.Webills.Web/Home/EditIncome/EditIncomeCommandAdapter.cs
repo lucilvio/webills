@@ -1,8 +1,7 @@
 ﻿using System;
 using Lucilvio.Solo.Webills.Web.Shared;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.Web.Home.EditIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.Core.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

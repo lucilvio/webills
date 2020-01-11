@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Profile\Lucilvio.Solo.Webills.Domain.Profile.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Domain.Security.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain\Lucilvio.Solo.Webills.Domain.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Security.Domain.csproj" />
   </ItemGroup>
 
 </Project>

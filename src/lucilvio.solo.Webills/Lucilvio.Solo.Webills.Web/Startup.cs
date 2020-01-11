@@ -1,16 +1,4 @@
-﻿using Lucilvio.Solo.Webills.UseCases.AddNewExpense;
-using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.Logon;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveExpense;
-using Lucilvio.Solo.Webills.UseCases.Contracts.RemoveIncome;
-using Lucilvio.Solo.Webills.UseCases.EditExpense;
-using Lucilvio.Solo.Webills.UseCases.EditIncome;
-using Lucilvio.Solo.Webills.UseCases.RemoveExpense;
-using Lucilvio.Solo.Webills.UseCases.RemoveIncome;
+﻿using Lucilvio.Solo.Webills.UseCases.RemoveExpense;
 using Lucilvio.Solo.Webills.UseCases.Logon;
 using Lucilvio.Solo.Webills.Web.Home;
 using Lucilvio.Solo.Webills.Web.Home.EditExpense;
@@ -27,6 +15,19 @@ using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using Lucilvio.Solo.Webills.Web.Logon;
 using Microsoft.AspNetCore.Http;
+using Lucilvio.Solo.Webills.Core.UseCases.AddNewIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.AddNewExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.EditIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.EditExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.RemoveIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.RemoveExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
 
 namespace Lucilvio.Solo.Webills.Web
 {

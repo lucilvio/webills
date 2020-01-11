@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using Lucilvio.Solo.Webills.Domain.User;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.Domain.User.BusinessErrors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lucilvio.Solo.Webills.Domain.User.BusinessErrors;
 
 namespace Lucilvio.Solo.Webills.Tests
 {

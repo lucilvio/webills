@@ -1,7 +1,8 @@
 ﻿using System;
+
 using Lucilvio.Solo.Webills.Web.Shared;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Contracts.EditExpense;
+using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

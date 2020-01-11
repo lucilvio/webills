@@ -1,7 +1,5 @@
-﻿using System;
-using Lucilvio.Solo.Webills.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
-using Lucilvio.Solo.Webills.UseCases.Contracts.AddNewIncome;
+﻿using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Web.Home

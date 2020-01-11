@@ -1,5 +1,4 @@
-﻿using Lucilvio.Solo.Webills.Domain.User;
-using System;
+﻿using System;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
