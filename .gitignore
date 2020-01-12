@@ -68,3 +68,5 @@
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Security.UseCases/bin/Debug/netstandard2.1
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Security.UseCases.Contracts/bin/Debug/netstandard2.1
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.UseCases/bin/Debug/netstandard2.1
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Clients.Web.DependencyProxy/obj/Debug
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Infraestructure.NativeDependencyResolver/obj
