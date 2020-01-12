@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 using Lucilvio.Solo.Webills.Web.Logon;
-using Lucilvio.Solo.Webills.Web.Home.Sample;
 using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Lucilvio.Solo.Webills.Web.Home.EditExpense;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditIncome;
@@ -12,6 +11,7 @@ using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewIncome;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewExpense;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -25,13 +25,10 @@ namespace Lucilvio.Solo.Webills.Web.Home
         private readonly IAddNewExpense _addNewExpense;
         private readonly IRemoveExpense _removeExpense;
         private readonly IAuthentication _authentication;
-        private readonly IGetUserIncomesQueryHandler _getUserIncomesQueryHandler;
-        private readonly IGetUserExpensesQueryHandler _getUserExpensesQueryHandler;
         private readonly IUserDashboardQueryHandler _userDashboardQueryHandler;
 
         public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, IEditIncome editIncome, IEditExpense editExpense,
-            IUserDashboardQueryHandler userDashboardQueryHandler, IGetUserIncomesQueryHandler searchForUserIncome,
-            IGetUserExpensesQueryHandler searchForUserExpenseByNumber, IRemoveIncome removeIncome, IRemoveExpense removeExpense,
+            IUserDashboardQueryHandler userDashboardQueryHandler, IRemoveIncome removeIncome, IRemoveExpense removeExpense,
             IAuthentication authentication)
         {
             this._editIncome = editIncome;
@@ -41,8 +38,6 @@ namespace Lucilvio.Solo.Webills.Web.Home
             this._addNewExpense = addNewExpense;
             this._removeExpense = removeExpense;
             this._authentication = authentication;
-            this._getUserIncomesQueryHandler = searchForUserIncome;
-            this._getUserExpensesQueryHandler = searchForUserExpenseByNumber;
             this._userDashboardQueryHandler = userDashboardQueryHandler;
         }
 
@@ -74,23 +69,23 @@ namespace Lucilvio.Solo.Webills.Web.Home
         [HttpGet]
         public async Task<JsonResult> EditIncome([FromQuery]GetIncomeRequest request)
         {
-            var foundIncome = await this._getUserIncomesQueryHandler.Execute(new GetUserIncomesQueryByNumber(1, request.Number));
+            //var foundIncome = await this._getUserIncomesQueryHandler.Execute(new GetUserIncomesQueryByNumber(1, request.Number));
 
-            if (foundIncome == null)
-                return new JsonResult(new { error = "Income not found" });
+            //if (foundIncome == null)
+            //    return new JsonResult(new { error = "Income not found" });
 
-            return new JsonResult(new { income = new EditIncomeResponse(foundIncome) });
+            return new JsonResult(new { income = new EditIncomeResponse(null) });
         }
 
         [HttpGet]
         public async Task<JsonResult> EditExpense([FromQuery]GetExpenseRequest request)
         {
-            var foundExpense = await this._getUserExpensesQueryHandler.Execute(new GetUserExpensesByNumberQuery(1, request.Id));
+            //var foundExpense = await this._getUserExpensesQueryHandler.Execute(new GetUserExpensesByNumberQuery(1, request.Id));
 
-            if (foundExpense == null)
-                return new JsonResult(new { error = "Expense not found" });
+            //if (foundExpense == null)
+            //    return new JsonResult(new { error = "Expense not found" });
                 
-            return new JsonResult(new { expense = new EditExpenseResponse(foundExpense) });
+            return new JsonResult(new { expense = new EditExpenseResponse(null) });
         }
 
         [HttpPost]

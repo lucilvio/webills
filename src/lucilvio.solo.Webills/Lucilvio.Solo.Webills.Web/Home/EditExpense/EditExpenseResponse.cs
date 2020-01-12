@@ -1,4 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Web.Shared;
+﻿using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Web.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

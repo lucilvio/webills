@@ -1,10 +1,11 @@
-﻿namespace Lucilvio.Solo.Webills.Web.Home.EditIncome
+﻿namespace Lucilvio.Solo.Webills.Web.Home
 {
     public class EditIncomeRequest
     {
-        public string Number { get; private set; }
-        public string Name { get; private set; }
-        public string Date { get; private set; }
-        public string Value { get; private set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Date { get; set; }
+        public string Category { get; set; }
+        public string Value { get; set; }
     }
 }

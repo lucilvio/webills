@@ -1,9 +1,4 @@
-﻿using Lucilvio.Solo.Webills.UseCases.RemoveExpense;
-using Lucilvio.Solo.Webills.UseCases.Logon;
-using Lucilvio.Solo.Webills.Web.Home;
-using Lucilvio.Solo.Webills.Web.Home.EditExpense;
-using Lucilvio.Solo.Webills.Web.Home.EditIncome;
-using Lucilvio.Solo.Webills.Web.Home.Sample;
+﻿using Lucilvio.Solo.Webills.UseCases.Logon;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +23,11 @@ using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
 using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
+using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage;
+using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Profile;
+using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Security;
+using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Core;
+using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -95,16 +95,14 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IRemoveIncomeDataStorage, RemoveIncomeDataStorageWithEf>();
             services.AddScoped<IRemoveExpenseDataStorage, RemoveExpenseDataStorageWithEf>();
             services.AddScoped<IUserDashboardQueryHandler, UserTransactionsInformationQuery>();
-            services.AddScoped<IGetUserIncomesQueryHandler, GetUserIncomeQueryHandler>();
-            services.AddScoped<IGetUserExpensesQueryHandler, GetUserExpensesQueryHandler>();
             services.AddScoped<IAddNewIncome, AddNewIncome>();
             services.AddScoped<IAddNewExpense, AddNewExpense>();
             services.AddScoped<IEditIncome, EditIncome>();
             services.AddScoped<IEditExpense, EditExpense>();
             services.AddScoped<IRemoveIncome, RemoveIncome>();
             services.AddScoped<IRemoveExpense, RemoveExpense>();
-            services.AddScoped<ILogon, Webills.UseCases.Logon.Logon>();
-            services.AddScoped<ILogonDataStorage, LogonDataStorage>();
+            services.AddScoped<ILogon, UseCases.Logon.Logon>();
+            services.AddScoped<ILogonDataStorage, LogonDataStorageWithEf>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

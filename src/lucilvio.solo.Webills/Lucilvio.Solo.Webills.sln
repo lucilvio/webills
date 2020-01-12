@@ -9,37 +9,45 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Web",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UseCases.Shared", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Security.Domain", "Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Security.Domain.csproj", "{46E09E48-49DC-41E6-B70E-148D4F02D69A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Security.Domain", "Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Security.Domain.csproj", "{46E09E48-49DC-41E6-B70E-148D4F02D69A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Domain.Shared", "Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Domain.Shared.csproj", "{91AE0BC9-8AD5-4281-8A62-315670181F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Domain.Shared", "Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Domain.Shared.csproj", "{91AE0BC9-8AD5-4281-8A62-315670181F0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1E79E325-CDBD-456E-8FDA-7490D6C0D1D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{10D07A6C-28DE-41A3-9E8F-B249BB0CDEB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Security.UseCases", "Lucilvio.Solo.Webills.Security.UseCases\Lucilvio.Solo.Webills.Security.UseCases.csproj", "{E74C9ECA-DFF8-4BAC-8FED-8ECC8077DAE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Security.UseCases", "Lucilvio.Solo.Webills.Security.UseCases\Lucilvio.Solo.Webills.Security.UseCases.csproj", "{E74C9ECA-DFF8-4BAC-8FED-8ECC8077DAE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Security.UseCases.Contracts", "Lucilvio.Solo.Webills.Security.UseCases.Contracts\Lucilvio.Solo.Webills.Security.UseCases.Contracts.csproj", "{85DE6D5D-D306-41AC-B663-138A2904CED2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Security.UseCases.Contracts", "Lucilvio.Solo.Webills.Security.UseCases.Contracts\Lucilvio.Solo.Webills.Security.UseCases.Contracts.csproj", "{85DE6D5D-D306-41AC-B663-138A2904CED2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7CB90D73-590E-44E4-AA26-0C6229FE502D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Core.Domain", "Lucilvio.Solo.Webills.Core.Domain\Lucilvio.Solo.Webills.Core.Domain.csproj", "{756872C0-A7AF-4260-8D9E-555A82285828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Core.Domain", "Lucilvio.Solo.Webills.Core.Domain\Lucilvio.Solo.Webills.Core.Domain.csproj", "{756872C0-A7AF-4260-8D9E-555A82285828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Core.UseCases", "Lucilvio.Solo.Webills.Core.UseCases\Lucilvio.Solo.Webills.Core.UseCases.csproj", "{50F2F970-0316-49B3-A97F-A1674AC4746E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Core.UseCases", "Lucilvio.Solo.Webills.Core.UseCases\Lucilvio.Solo.Webills.Core.UseCases.csproj", "{50F2F970-0316-49B3-A97F-A1674AC4746E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Core.UseCases.Contracts", "Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj", "{376A48D8-E6DC-420F-B464-03324BF4CC30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Core.UseCases.Contracts", "Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj", "{376A48D8-E6DC-420F-B464-03324BF4CC30}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profile", "Profile", "{753089D2-0F2B-4C02-958E-E83739D2A666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Profile.Domain", "Lucilvio.Solo.Webills.Profile.Domain\Lucilvio.Solo.Webills.Profile.Domain.csproj", "{4DA16537-1BD4-4574-AAB8-87BDD2E08822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Profile.Domain", "Lucilvio.Solo.Webills.Profile.Domain\Lucilvio.Solo.Webills.Profile.Domain.csproj", "{4DA16537-1BD4-4574-AAB8-87BDD2E08822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Profile.UseCases", "Lucilvio.Solo.Webills.Profile.UseCases\Lucilvio.Solo.Webills.Profile.UseCases.csproj", "{4B8FD054-8DA2-465B-94BB-541781B42DD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Profile.UseCases", "Lucilvio.Solo.Webills.Profile.UseCases\Lucilvio.Solo.Webills.Profile.UseCases.csproj", "{4B8FD054-8DA2-465B-94BB-541781B42DD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Profile.UseCases.Contracts", "Lucilvio.Solo.Webills.Profile.UseCases.Contracts\Lucilvio.Solo.Webills.Profile.UseCases.Contracts.csproj", "{7EEBEAF6-E7D9-4F3C-900C-CD4B89DD94FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Profile.UseCases.Contracts", "Lucilvio.Solo.Webills.Profile.UseCases.Contracts\Lucilvio.Solo.Webills.Profile.UseCases.Contracts.csproj", "{7EEBEAF6-E7D9-4F3C-900C-CD4B89DD94FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D11ED011-EE4F-4882-A21E-D8DC8E1B46E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{BC1980B6-3B22-42D7-937E-37FE2DF65BE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{D5B4294C-C887-49B0-BD3B-542B4BE8E9DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataStorage", "DataStorage", "{A518ADEC-712D-4C0D-89F1-D7D528C51DA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Infraestructure.EFDataStorage", "Lucilvio.Solo.Webills.Infraestructure.EFDataStorage\Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.csproj", "{6C7A5076-0B00-4AB0-AB41-A1CE4F6B842F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage", "Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage.csproj", "{44982CE8-3504-4EDE-A3A6-4A5717088AC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +107,14 @@ Global
 		{7EEBEAF6-E7D9-4F3C-900C-CD4B89DD94FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EEBEAF6-E7D9-4F3C-900C-CD4B89DD94FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EEBEAF6-E7D9-4F3C-900C-CD4B89DD94FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C7A5076-0B00-4AB0-AB41-A1CE4F6B842F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C7A5076-0B00-4AB0-AB41-A1CE4F6B842F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C7A5076-0B00-4AB0-AB41-A1CE4F6B842F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7A5076-0B00-4AB0-AB41-A1CE4F6B842F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +136,9 @@ Global
 		{4DA16537-1BD4-4574-AAB8-87BDD2E08822} = {753089D2-0F2B-4C02-958E-E83739D2A666}
 		{4B8FD054-8DA2-465B-94BB-541781B42DD7} = {753089D2-0F2B-4C02-958E-E83739D2A666}
 		{7EEBEAF6-E7D9-4F3C-900C-CD4B89DD94FE} = {753089D2-0F2B-4C02-958E-E83739D2A666}
+		{A518ADEC-712D-4C0D-89F1-D7D528C51DA9} = {D5B4294C-C887-49B0-BD3B-542B4BE8E9DD}
+		{6C7A5076-0B00-4AB0-AB41-A1CE4F6B842F} = {A518ADEC-712D-4C0D-89F1-D7D528C51DA9}
+		{44982CE8-3504-4EDE-A3A6-4A5717088AC4} = {A518ADEC-712D-4C0D-89F1-D7D528C51DA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

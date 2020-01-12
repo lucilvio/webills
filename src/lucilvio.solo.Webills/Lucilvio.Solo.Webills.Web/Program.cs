@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage;
 using Lucilvio.Solo.Webills.Profile.Domain.User;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;

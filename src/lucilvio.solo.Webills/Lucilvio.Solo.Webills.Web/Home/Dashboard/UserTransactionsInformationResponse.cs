@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using Lucilvio.Solo.Webills.Web.Home.Index;
-using Lucilvio.Solo.Webills.Web.Home.Sample;
+using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

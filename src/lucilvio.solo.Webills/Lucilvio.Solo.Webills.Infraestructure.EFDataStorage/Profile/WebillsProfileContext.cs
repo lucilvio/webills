@@ -1,0 +1,34 @@
+﻿using Lucilvio.Solo.Webills.Profile.Domain.User;
+using Microsoft.EntityFrameworkCore;
+
+namespace Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Profile
+{
+    public class WebillsProfileContext : DbContext
+    {
+        public WebillsProfileContext(DbContextOptions<WebillsProfileContext> options) : base(options)
+        {
+                
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>(u =>
+            {
+                u.ToTable("Users");
+
+                u.HasKey(p => p.Id);
+                u.Property(p => p.Id).ValueGeneratedNever();
+
+                u.Property(p => p.Name).IsRequired().HasMaxLength(256);
+                u.Property(p => p.Login).IsRequired().HasMaxLength(256).HasConversion(l => l.Value, l => new Login(l));
+                u.Property(p => p.Password).IsRequired().HasMaxLength(256).HasConversion(p => p.Value, p => new Password(p));
+                u.Property(p => p.TermsAccepted).IsRequired();
+                
+            });
+        }
+
+        public DbSet<User> Users { get; internal set; }
+    }
+}

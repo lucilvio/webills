@@ -6,19 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191226120748_Initil.cs" />
-    <Compile Remove="Migrations\20191226120748_Initil.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\css\libs\" />
     <Folder Include="wwwroot\js\libs\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -27,8 +21,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.Domain\Lucilvio.Solo.Webills.Core.Domain.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Infraestructure.EFDataStorage\Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.UseCases.Contracts\Lucilvio.Solo.Webills.Profile.UseCases.Contracts.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj" />
   </ItemGroup>
 
