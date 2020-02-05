@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.Core.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage
 {
-    public class GetUserExpensesQueryResult
+    public class GetUserTodayExpensesQueryResult
     {
-        public GetUserExpensesQueryResult(Expense expense)
+        public GetUserTodayExpensesQueryResult(Expense expense)
         {
             if (expense == null)
                 return;

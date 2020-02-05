@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.Domain.Shared
+﻿namespace Lucilvio.Solo.Webills.Shared.Domain
 {
     public static class ObjectExtensions
     {

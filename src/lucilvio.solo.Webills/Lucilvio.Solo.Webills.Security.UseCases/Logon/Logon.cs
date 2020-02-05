@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Security.Domain.User;
 using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
-using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
+using Lucilvio.Solo.Webills.Shared.UseCases.Errors;
 
 namespace Lucilvio.Solo.Webills.UseCases.Logon
 {

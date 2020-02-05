@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>

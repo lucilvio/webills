@@ -1,5 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Domain.Shared;
-using Lucilvio.Solo.Webills.Security.Domain.User.BusinessErrors;
+﻿using Lucilvio.Solo.Webills.Security.Domain.User.BusinessErrors;
+using Lucilvio.Solo.Webills.Shared.Domain;
 
 namespace Lucilvio.Solo.Webills.Security.Domain.User
 {

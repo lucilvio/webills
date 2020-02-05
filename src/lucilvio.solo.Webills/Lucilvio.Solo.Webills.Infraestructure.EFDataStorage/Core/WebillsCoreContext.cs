@@ -36,9 +36,9 @@ namespace Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Core
                 i.HasKey("Id");
                 i.Property<Guid>("Id").ValueGeneratedNever();
 
-                i.Property(p => p.Name).IsRequired().HasMaxLength(256);
+                i.Property(p => p.Id).IsRequired();
                 i.Property(p => p.Date).IsRequired();
-                i.Property(p => p.Id).IsRequired().HasColumnName("Number");
+                i.Property(p => p.Name).IsRequired().HasMaxLength(256);
                 i.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
             });
 

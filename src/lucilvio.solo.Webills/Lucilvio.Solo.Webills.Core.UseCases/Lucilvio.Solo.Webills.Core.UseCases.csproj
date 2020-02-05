@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Domain.Shared.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Shared.Domain.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.Shared.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

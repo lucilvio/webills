@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-
-using Lucilvio.Solo.Webills.Domain.Shared;
 using Lucilvio.Solo.Webills.Profile.Domain.User;
-using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
 using Lucilvio.Solo.Webills.Profile.UseCases.Contracts.RegisterUser;
+using Lucilvio.Solo.Webills.Shared.Domain;
+using Lucilvio.Solo.Webills.Shared.UseCases.Errors;
 
 namespace Lucilvio.Solo.Webills.Profile.UseCases.RegisterUser
 {

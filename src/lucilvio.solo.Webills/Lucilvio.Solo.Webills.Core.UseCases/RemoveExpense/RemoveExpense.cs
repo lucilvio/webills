@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-
-using Lucilvio.Solo.Webills.Domain.Shared;
-using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.Shared.Domain;
+using Lucilvio.Solo.Webills.Shared.UseCases.Errors;
 
 namespace Lucilvio.Solo.Webills.Core.UseCases.RemoveExpense
 {

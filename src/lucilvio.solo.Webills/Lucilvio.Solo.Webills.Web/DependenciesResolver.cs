@@ -22,6 +22,7 @@ using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Core;
 using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Profile;
 using Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.Security;
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Clients.Web.Incomes;
 
 namespace Lucilvio.Solo.Webills.Web
 {
@@ -40,6 +41,8 @@ namespace Lucilvio.Solo.Webills.Web
             });
             
             services.AddScoped<IUserDashboardQueryHandler, UserTransactionsInformationQuery>();
+            services.AddScoped<IGetUserIncomesByFilterQueryHandler, GetUserIncomesByFilterQueryHandler>();
+            services.AddScoped<IGetUserExpensesByFilterQueryHandler, GetUserExpensesByFilterQueryHandler>();
 
             ResolveCoreDependencies(services, configuration);
             ResolveProfileDependencies(services, configuration);

@@ -1,0 +1,110 @@
+﻿@inject Lucilvio.Solo.Webills.Web.Logon.IAuthentication Authentication
+
+@model Lucilvio.Solo.Webills.Clients.Web.Expenses.Index.ExpensesResponse
+@{
+    Layout = "_Layout";
+    ViewData["title"] = "Expenses";
+    ViewData["icon"] = "icon-subtract";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <input type="hidden" id="userId" value="@Authentication.User().Id" />
+
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <span class="text-semibold"><i class="icon-subtract text-danger"></i> &nbsp; Incomes</span>
+                    <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
+                </h6>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Value</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var income in Model.Expenses)
+                        {
+                        <tr>
+                            <td class="col-lg-4">@income.Name</td>
+                            <td class="col-lg-4">@income.Category</td>
+                            <td class="col-lg-1">@income.Date</td>
+                            <td class="col-lg-1">@income.Value </td>
+                            <td class="col-lg-1 text-right"><a href="#" class="edit-income" data-id="@income.Id"><i class="icon-pencil"></i></a></td>
+                            <td class="col-lg-1 text-right"><a href="#" class="remove-income" data-id="@income.Id"><i class="icon-cross"></i></a></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @*<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="click">
+                <li>
+                    <a href="#" class="fab-menu-btn btn bg-blue btn-float btn-rounded btn-icon legitRipple">
+                        <i class="fab-icon-open icon-plus3"></i>
+                        <i class="fab-icon-close icon-cross2"></i>
+                    </a>
+                    <a href="#" class="fab-menu-btn btn btn-warning btn-float btn-rounded btn-icon legitRipple">
+                        <i class="fab-icon-open icon-plus3"></i>
+                        <i class="fab-icon-close icon-cross2"></i>
+                    </a>
+                </li>
+                <li>
+
+                </li>
+            </ul>*@
+    </div>
+</div>
+
+@*@Html.PartialAsync("../AddNewIncome/AddNewIncome.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../EditExpense/EditExpense.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../RemoveExpense/RemoveExpense.cshtml").GetAwaiter().GetResult()*@
+
+@section Scripts {
+    <script>
+        $(".edit-income").click(function () {
+            var id = $(this).data("id");
+
+            $.getJSON("/Home/EditIncome", { id: id })
+                .done(function (data) {
+                    var income = data.income;
+
+                    $("#income-title-name").val(income.name);
+
+                    $.each(income, function (name, value) {
+                        $("#form-edit-income input[name='" + name + "']").val(value);
+                    });
+
+                    $("#modal-edit-income").modal("show");
+                }).fail(function (error) {
+                    alert(error.responseText);
+                });
+        });
+
+        $(".remove-income").click(function () {
+            var id = $(this).data("id");
+
+            $.post("/Home/RemoveIncome", { incomeId: id })
+                .done(function (data) {
+                    alert(data.message);
+                    location.reload();
+                })
+                .fail(function (error) {
+                    alert(error.responseText);
+                });
+        });
+    </script>
+}

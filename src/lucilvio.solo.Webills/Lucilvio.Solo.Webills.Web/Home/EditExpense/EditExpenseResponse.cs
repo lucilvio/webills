@@ -10,7 +10,7 @@ namespace Lucilvio.Solo.Webills.Web.Home.EditExpense
 {
     public class EditExpenseResponse
     {
-        public EditExpenseResponse(GetUserExpensesQueryResult result)
+        public EditExpenseResponse(GetUserTodayExpensesQueryResult result)
         {
             if (result == null)
                 return;

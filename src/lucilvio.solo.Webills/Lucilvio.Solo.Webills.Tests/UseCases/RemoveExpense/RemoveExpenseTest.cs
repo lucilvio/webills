@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Core.Domain.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
 using Lucilvio.Solo.Webills.Core.UseCases.RemoveExpense;
 using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
+using Lucilvio.Solo.Webills.Shared.UseCases.Errors;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.RemoveExpense
 {

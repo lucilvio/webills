@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Clients.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Clients.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UseCases.Shared", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Shared.UseCases", "Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.Shared.UseCases.csproj", "{28658996-B811-4069-A4AD-FDBB3185B840}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Security.Domain", "Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Security.Domain.csproj", "{46E09E48-49DC-41E6-B70E-148D4F02D69A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Domain.Shared", "Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Domain.Shared.csproj", "{91AE0BC9-8AD5-4281-8A62-315670181F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Shared.Domain", "Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Shared.Domain.csproj", "{91AE0BC9-8AD5-4281-8A62-315670181F0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1E79E325-CDBD-456E-8FDA-7490D6C0D1D6}"
 EndProject

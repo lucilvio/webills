@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Shared.UseCases.Errors;
 using Lucilvio.Solo.Webills.UseCases.AddNewIncome;
-using Lucilvio.Solo.Webills.UseCases.Shared.Errors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewIncome

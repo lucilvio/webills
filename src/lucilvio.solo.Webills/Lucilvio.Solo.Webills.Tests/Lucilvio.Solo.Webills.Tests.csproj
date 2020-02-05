@@ -18,13 +18,13 @@
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.UseCases\Lucilvio.Solo.Webills.Core.UseCases.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Security\Lucilvio.Solo.Webills.Security.Domain.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Shared.Domain.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.Domain\Lucilvio.Solo.Webills.Profile.Domain.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.UseCases.Contracts\Lucilvio.Solo.Webills.Profile.UseCases.Contracts.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.UseCases\Lucilvio.Solo.Webills.Profile.UseCases.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Security.UseCases.Contracts\Lucilvio.Solo.Webills.Security.UseCases.Contracts.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Security.UseCases\Lucilvio.Solo.Webills.Security.UseCases.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.UseCases.Shared.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.UseCases\Lucilvio.Solo.Webills.Shared.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

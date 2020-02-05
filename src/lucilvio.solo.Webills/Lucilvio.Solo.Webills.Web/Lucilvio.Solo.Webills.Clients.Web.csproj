@@ -11,10 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.Domain\Lucilvio.Solo.Webills.Core.Domain.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.UseCases.Contracts\Lucilvio.Solo.Webills.Core.UseCases.Contracts.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Infraestructure.EFDataStorage\Lucilvio.Solo.Webills.Infraestructure.EFDataStorage.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.Domain\Lucilvio.Solo.Webills.Profile.Domain.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Profile.UseCases.Contracts\Lucilvio.Solo.Webills.Profile.UseCases.Contracts.csproj" />
   </ItemGroup>
 
