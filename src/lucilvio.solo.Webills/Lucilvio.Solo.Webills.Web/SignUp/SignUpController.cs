@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.Web.Logon;
 
@@ -16,9 +17,13 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromServices]ICreateUserAccountUseCase createUserAccount, [FromForm]RegisterRequest request)
+        public async Task<IActionResult> Register([FromServices]ICreateUserAccountUseCase createUserAccount, 
+            [FromServices]ISyncUser syncUser, [FromForm]RegisterRequest request)
         {
-            await createUserAccount.Execute(new CreateUserAccountCommandAdapter(request));
+            await createUserAccount.Execute(new CreateUserAccountCommandAdapter(request), async createdUser =>
+            {
+                await syncUser.Execute(createdUser.Id);
+            });
 
             return RedirectToAction(nameof(LogonController.Index), "Logon");
         }

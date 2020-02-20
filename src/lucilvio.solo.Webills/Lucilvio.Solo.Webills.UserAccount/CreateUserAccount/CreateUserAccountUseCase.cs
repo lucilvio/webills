@@ -29,7 +29,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 
             await _dataAccess.Persist(newUser);
 
-            await onUserAccountCreate?.Invoke(new UserAccountCreated(newUser.Id));
+            if(onUserAccountCreate != null)
+                await onUserAccountCreate.Invoke(new UserAccountCreated(newUser.Id));
         }
 
         internal class Error

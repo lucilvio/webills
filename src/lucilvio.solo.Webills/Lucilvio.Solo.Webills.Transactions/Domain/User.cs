@@ -4,18 +4,20 @@ using System.Linq;
 
 namespace Lucilvio.Solo.Webills.Transactions.Domain
 {
-    class User
+    internal class User
     {
         private readonly List<Income> _incomes;
         private readonly List<Expense> _expenses;
 
-        internal User()
+        internal User(Guid id)
         {
+            this.Id = id;
+
             this._incomes = new List<Income>();
             this._expenses = new List<Expense>();
         }
 
-        internal Guid Id { get; private set; }
+        internal Guid Id { get; }
         internal IEnumerable<Income> Incomes => _incomes;
         internal IEnumerable<Expense> Expenses => _expenses;
 
@@ -37,7 +39,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             return newExpense.Id;
         }
 
-        public void AddFixedExpense(string name, Category category, DateTime date, TransactionValue transactionValue, 
+        public void AddFixedExpense(string name, Category category, DateTime date, TransactionValue transactionValue,
             Recurrency recurrency, DateTime until)
         {
             _expenses.Add(new FixedExpense(name, category, date, transactionValue, recurrency, until));

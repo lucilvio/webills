@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
 {
-    class UserAccountContext : DbContext
+    internal class UserAccountContext : DbContext
     {
-        internal UserAccountContext()
+        public UserAccountContext()
         {
             base.Database.Migrate();
         }

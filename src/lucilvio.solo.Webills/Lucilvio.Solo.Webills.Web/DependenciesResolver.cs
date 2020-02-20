@@ -1,4 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Transactions;
+﻿using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
 using Lucilvio.Solo.Webills.UserAccount;
 
@@ -12,6 +13,14 @@ namespace Lucilvio.Solo.Webills.Web
     {
         public static void ResolveDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped(svc => new WebillsReadContext(configuration.GetConnectionString("Webills")));
+
+            services.AddScoped<IUserDashboardQueryHandler, UserTransactionsInformationQuery>();
+
+            services.AddScoped<IUserDashboardQueryHandler, UserTransactionsInformationQuery>();
+            services.AddScoped<IGetUserIncomesByFilterQueryHandler, GetUserIncomesByFilterQueryHandler>();
+            services.AddScoped<IGetUserExpensesByFilterQueryHandler, GetUserExpensesByFilterQueryHandler>();
+
             ResolveTransactionsComponentDependencies(services, configuration);
             ResolveUserAccountComponentDependencies(services, configuration);
         }
@@ -27,6 +36,8 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IAddNewIncomeUseCase>(services => services.GetService<TransactionsModule>());
             services.AddScoped<IEditIncomeUseCase>(services => services.GetService<TransactionsModule>());
             services.AddScoped<IRemoveIncomeUseCase>(services => services.GetService<TransactionsModule>());
+
+            services.AddScoped<ISyncUser>(services => services.GetService<TransactionsModule>());
         }
 
         private static void ResolveUserAccountComponentDependencies(IServiceCollection services, IConfiguration configuration)

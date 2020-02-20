@@ -1,17 +1,19 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
 using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
 using Lucilvio.Solo.Webills.Transactions.EditExpense;
 using Lucilvio.Solo.Webills.Transactions.EditIncome;
 using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.Transactions.Infraestructure.SyncUser;
 using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
 using Lucilvio.Solo.Webills.Transactions.RemoveIncome;
 
 namespace Lucilvio.Solo.Webills.Transactions
 {
     public class TransactionsModule : IAddNewExpenseUseCase, IAddNewIncomeUseCase, IEditExpenseUseCase, IEditIncomeUseCase, 
-        IRemoveExpenseUseCase, IRemoveIncomeUseCase
+        IRemoveExpenseUseCase, IRemoveIncomeUseCase, ISyncUser
     {
         private readonly string _connectionString;
 
@@ -56,6 +58,12 @@ namespace Lucilvio.Solo.Webills.Transactions
         {
             var dataAccess = new RemoveIncomeDataAccess(this.Context);
             await new RemoveIncomeUseCase(dataAccess).Execute(command);
+        }
+
+        public async Task Execute(Guid id)
+        {
+            var dataAccess = new SyncUserDataAccess(this.Context);
+            await new SyncUser(dataAccess).Execute(id);
         }
     }
 }

@@ -6,17 +6,19 @@ using Microsoft.AspNetCore.Authorization;
 namespace Lucilvio.Solo.Webills.Web.SignOut
 {
     [Authorize]
-    public class SignOutController : Controller
+    [Route("Logoff")]
+    public class LogoffController : Controller
     {
         private readonly IAuthentication _securityService;
 
-        public SignOutController(IAuthentication securityService)
+        public LogoffController(IAuthentication securityService)
         {
             this._securityService = securityService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> SignOut()
+        [Route("")]
+        public async Task<IActionResult> Get()
         {
             await this._securityService.SignOut();
 
