@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Lucilvio.Solo.Webills.Core.Domain.User;
-
 namespace Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewExpense
 {
     public abstract class AddNewExpenseCommand

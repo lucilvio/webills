@@ -1,8 +1,6 @@
 ﻿using System;
-
+using Lucilvio.Solo.Webills.Transactions.EditExpense;
 using Lucilvio.Solo.Webills.Web.Shared;
-using Lucilvio.Solo.Webills.Core.Domain.User;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -16,8 +14,8 @@ namespace Lucilvio.Solo.Webills.Web.Home
             base.Name = request.Name;
             this.Id = new Guid(request.Id);
             base.Date = request.Date.StringToDate();
-            base.Value = new TransactionValue(request.Value.MoneyToDecimal());
-            base.Category = (Category)Enum.Parse(typeof(Category), request.Category);
+            base.Value = request.Value.MoneyToDecimal();
+            base.Category = request.Category;
         }
     }
 }

@@ -1,31 +1,24 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-
+using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.Web.Logon;
-using Lucilvio.Solo.Webills.Profile.UseCases.Contracts.RegisterUser;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucilvio.Solo.Webills.Web.SignUp
 {
     [AllowAnonymous]
     public class SignUpController : Controller
     {
-        private readonly IRegisterUser _registerUser;
-
-        public SignUpController(IRegisterUser registerUser)
-        {
-            this._registerUser = registerUser;
-        }
-
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterUserRequest request)
+        public async Task<IActionResult> Register([FromServices]ICreateUserAccountUseCase createUserAccount, [FromForm]RegisterRequest request)
         {
-            await this._registerUser.Execute(new RegisterUserCommandAdapter(request));
+            await createUserAccount.Execute(new CreateUserAccountCommandAdapter(request));
 
             return RedirectToAction(nameof(LogonController.Index), "Logon");
         }

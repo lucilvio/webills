@@ -1,5 +1,6 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
+
+using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
@@ -7,7 +8,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
     {
         public RemoveIncomeCommandAdapter(RemoveIncomeRequest request)
         {
-            base.IncomeNumber = new Guid(request.IncomeId);
+            base.IncomeId = new Guid(request.IncomeId);
         }
     }
 }

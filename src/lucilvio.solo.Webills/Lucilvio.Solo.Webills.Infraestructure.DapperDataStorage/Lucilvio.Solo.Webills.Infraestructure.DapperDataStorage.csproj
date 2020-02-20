@@ -9,9 +9,4 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Core.Domain\Lucilvio.Solo.Webills.Core.Domain.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Domain.Shared\Lucilvio.Solo.Webills.Shared.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

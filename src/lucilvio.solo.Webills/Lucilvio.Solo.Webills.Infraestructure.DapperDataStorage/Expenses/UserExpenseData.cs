@@ -1,5 +1,4 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Core.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage
 {

@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
-using Lucilvio.Solo.Webills.Web.Home.Index;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Web.Home.Index;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {

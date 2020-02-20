@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
-using Lucilvio.Solo.Webills.Web.Logon;
 using Lucilvio.Solo.Webills.Clients.Web.Expenses.Index;
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Web.Logon;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
 {

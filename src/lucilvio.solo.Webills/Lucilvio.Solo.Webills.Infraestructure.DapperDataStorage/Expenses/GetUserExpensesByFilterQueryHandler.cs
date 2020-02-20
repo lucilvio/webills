@@ -20,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage
 		                            e.Name,
                                     e.Date,
                                     e.Value
-                           from	    Expenses e
+                           from	    Transactions.Expenses e
                            where	e.UserId = @userId;";
 
             using (var con = this._context.GetConnection())

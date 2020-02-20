@@ -1,21 +1,20 @@
 ﻿using System;
+using Lucilvio.Solo.Webills.Transactions.EditIncome;
 using Lucilvio.Solo.Webills.Web.Shared;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditIncome;
-using Lucilvio.Solo.Webills.Core.Domain.User;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
     internal class EditIncomeCommandAdapter : EditIncomeCommand
     {
-        public EditIncomeCommandAdapter(EditIncomeRequest viewModel)
+        public EditIncomeCommandAdapter(EditIncomeRequest request)
         {
-            if (viewModel == null)
+            if (request == null)
                 return;
 
-            base.Name = viewModel.Name;
-            base.Id = new Guid(viewModel.Id);
-            base.Date = viewModel.Date.StringToDate();
-            base.Value = new TransactionValue(viewModel.Value.MoneyToDecimal());
+            base.Name = request.Name;
+            base.Id = new Guid(request.Id);
+            base.Date = request.Date.StringToDate();
+            base.Value = request.Value.MoneyToDecimal();
         }
     }
 }

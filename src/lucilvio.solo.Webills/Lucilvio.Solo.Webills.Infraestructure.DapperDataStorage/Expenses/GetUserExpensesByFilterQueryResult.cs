@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
-using Lucilvio.Solo.Webills.Shared.Domain;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage
 {
@@ -14,12 +12,12 @@ namespace Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage
 
         public GetUserExpensesByFilterQueryResult(IEnumerable<UserExpenseData> expenses) : this()
         {
-            if (expenses.IsDefined())
+            if (expenses != null)
                 this.Expenses = expenses;
         }
 
         public IEnumerable<UserExpenseData> Expenses { get; private set; }
 
-        public bool HasExpenses => this.Expenses.IsDefined() && this.Expenses.Any();
+        public bool HasExpenses => this.Expenses != null && this.Expenses.Any();
     }
 }

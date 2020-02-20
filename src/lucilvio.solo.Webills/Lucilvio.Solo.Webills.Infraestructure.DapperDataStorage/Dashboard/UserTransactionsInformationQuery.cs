@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage
 		                            TotalExpenses.Value as TotalSpent,
 		                            TotalIncomes.Value as TotalIncomes,
 		                            TotalIncomes.Value - TotalExpenses.Value as Balance
-                           from	    Users u
+                           from	    Transactions.Users u
 		                            left join (select i.UserId userId, Sum(i.Value) as Value from Incomes i where i.UserId = @userId group by i.UserId) 
                                     as TotalIncomes on TotalIncomes.userId = u.id
 		                            left join (select e.UserId userId, Sum(e.Value) as Value from Expenses e where e.UserId = @userId group by e.UserId) 

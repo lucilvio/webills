@@ -1,16 +1,21 @@
-﻿using Lucilvio.Solo.Webills.Security.UseCases.Contracts.Logon;
+﻿using Lucilvio.Solo.Webills.UserAccount.Login;
 
 namespace Lucilvio.Solo.Webills.Web.Logon
 {
-    internal class LogonCommandAdapter : LogonCommand
+    internal class LoginCommandAdapter : LoginCommand
     {
-        public LogonCommandAdapter(LogonRequest request)
+        private readonly LogonRequest _request;
+
+        public LoginCommandAdapter(LogonRequest request)
         {
             if (request == null)
                 return;
 
-            base.Login = request.Login;
-            base.Password = request.Password;
+            this._request = request;
         }
+
+        public override string Login => this._request.Login;
+
+        public override string Password => this._request.Password;
     }
 }

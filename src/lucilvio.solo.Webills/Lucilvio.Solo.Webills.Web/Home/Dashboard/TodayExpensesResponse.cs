@@ -15,8 +15,8 @@ namespace Lucilvio.Solo.Webills.Web.Home.Index
             this.Value = expense.Value.DecimalToMoney();
         }
 
-        public string Id { get;  }
-        public string Category { get;  }
+        public string Id { get; }
+        public string Category { get; }
         public string Name { get; }
         public string Date { get; }
         public string Value { get; }

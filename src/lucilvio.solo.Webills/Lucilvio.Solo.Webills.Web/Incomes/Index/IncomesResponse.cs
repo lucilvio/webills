@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 using Lucilvio.Solo.Webills.Web;
 using Lucilvio.Solo.Webills.Web.Shared;
-using Lucilvio.Solo.Webills.Shared.Domain;
-using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 {
@@ -14,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         {
             this.Incomes = new List<IncomeFromList>();
         }
-        
+
         public IncomesResponse(GetUserIncomesByFilterQueryResult result) : this()
         {
             if (result.HasIncomes)
@@ -27,7 +25,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         {
             public IncomeFromList(UserIncomeData income)
             {
-                if (income.NotDefined())
+                if (income == null)
                     return;
 
                 this.Id = income.Id.ToString();

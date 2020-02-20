@@ -1,67 +1,47 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-
-using Lucilvio.Solo.Webills.Web.Logon;
-using Lucilvio.Solo.Webills.Web.Home.EditIncome;
-using Lucilvio.Solo.Webills.Web.Home.EditExpense;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditIncome;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.EditExpense;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewIncome;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveIncome;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewExpense;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.RemoveExpense;
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
+using Lucilvio.Solo.Webills.Web.Home.EditExpense;
+using Lucilvio.Solo.Webills.Web.Home.EditIncome;
+using Lucilvio.Solo.Webills.Web.Logon;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IEditIncome _editIncome;
-        private readonly IEditExpense _editExpense;
-        private readonly IAddNewIncome _addNewIncome;
-        private readonly IRemoveIncome _removeIncome;
-        private readonly IAddNewExpense _addNewExpense;
-        private readonly IRemoveExpense _removeExpense;
         private readonly IAuthentication _authentication;
-        private readonly IUserDashboardQueryHandler _userDashboardQueryHandler;
 
-        public HomeController(IAddNewIncome addNewIncome, IAddNewExpense addNewExpense, IEditIncome editIncome, IEditExpense editExpense,
-            IUserDashboardQueryHandler userDashboardQueryHandler, IRemoveIncome removeIncome, IRemoveExpense removeExpense,
-            IAuthentication authentication)
+        public HomeController(IAuthentication authentication)
         {
-            this._editIncome = editIncome;
-            this._editExpense = editExpense;
-            this._addNewIncome = addNewIncome;
-            this._removeIncome = removeIncome;
-            this._addNewExpense = addNewExpense;
-            this._removeExpense = removeExpense;
             this._authentication = authentication;
-            this._userDashboardQueryHandler = userDashboardQueryHandler;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard([FromServices]IUserDashboardQueryHandler userDashBoardQueryHandler)
         {
             var loggedUser = this._authentication.User();
-            var result = await this._userDashboardQueryHandler.Execute(new UserDashboardQuery(loggedUser.Id));
+            var result = await userDashBoardQueryHandler.Execute(new UserDashboardQuery(loggedUser.Id));
 
             return View(new UserTransactionsInformationResponse(result));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewIncome([FromForm]AddNewIncomeRequest request)
+        public async Task<IActionResult> AddNewIncome([FromServices]IAddNewIncomeUseCase useCase, [FromForm]AddNewIncomeRequest request)
         {
-            await this._addNewIncome.Execute(new AddNewIncomeCommandAdapter(request));
+            await useCase.Execute(new AddNewIncomeCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseRequest request)
+        public async Task<IActionResult> AddNewExpense([FromServices]IAddNewExpenseUseCase useCase, [FromForm]AddNewExpenseRequest request)
         {
-            await this._addNewExpense.Execute(new AddNewExpenseCommandAdapter(request));
+            await useCase.Execute(new AddNewExpenseCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
@@ -74,7 +54,8 @@ namespace Lucilvio.Solo.Webills.Web.Home
             //if (foundIncome == null)
             //    return new JsonResult(new { error = "Income not found" });
 
-            return new JsonResult(new { income = new EditIncomeResponse(null) });
+            //return new JsonResult(new { income = new EditIncomeResponse(null) });
+            return new JsonResult(new { });
         }
 
         [HttpGet]
@@ -84,38 +65,39 @@ namespace Lucilvio.Solo.Webills.Web.Home
 
             //if (foundExpense == null)
             //    return new JsonResult(new { error = "Expense not found" });
-                
-            return new JsonResult(new { expense = new EditExpenseResponse(null) });
+
+            //return new JsonResult(new { expense = new EditExpenseResponse(null) });
+            return new JsonResult(new { });
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditIncome([FromForm]EditIncomeRequest request)
+        public async Task<ActionResult> EditIncome([FromServices]IEditIncomeUseCase useCase, [FromForm]EditIncomeRequest request)
         {
-            await this._editIncome.Execute(new EditIncomeCommandAdapter(request));
+            await useCase.Execute(new EditIncomeCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditExpense([FromForm]EditExpenseRequest request)
+        public async Task<ActionResult> EditExpense([FromServices]IEditExpenseUseCase useCase, [FromForm]EditExpenseRequest request)
         {
-            await this._editExpense.Execute(new EditExpenseCommandAdapter(request));
+            await useCase.Execute(new EditExpenseCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<JsonResult> RemoveIncome(RemoveIncomeRequest request)
+        public async Task<JsonResult> RemoveIncome([FromServices]IRemoveIncomeUseCase useCase, RemoveIncomeRequest request)
         {
-            await this._removeIncome.Execute(new RemoveIncomeCommandAdapter(request));
+            await useCase.Execute(new RemoveIncomeCommandAdapter(request));
 
             return new JsonResult(new { message = "Income removed" });
         }
 
         [HttpPost]
-        public async Task<JsonResult> RemoveExpense(RemoveExpenseRequest request)
+        public async Task<JsonResult> RemoveExpense([FromServices]IRemoveExpenseUseCase useCase, RemoveExpenseRequest request)
         {
-            await this._removeExpense.Execute(new RemoveExpenseCommandAdapter(request));
+            await useCase.Execute(new RemoveExpenseCommandAdapter(request));
 
             return new JsonResult(new { message = "Expense removed" });
         }
