@@ -1,13 +1,11 @@
-﻿using Moq;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
+using Lucilvio.Solo.Webills.Transactions.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Lucilvio.Solo.Webills.Core.Domain.User;
-using Lucilvio.Solo.Webills.Core.UseCases.AddNewExpense;
-using Lucilvio.Solo.Webills.Core.UseCases.Contracts.AddNewExpense;
-using Lucilvio.Solo.Webills.Shared.UseCases.Errors;
+using Moq;
 
 namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
 {
@@ -30,7 +28,7 @@ namespace Lucilvio.Solo.Webills.Tests.UseCases.AddNewExpense
         {
             var dataStorageWithoutUser = new Mock<IAddNewExpenseDataStorage>();
 
-            var addNewExpense = new Core.UseCases.AddNewExpense.AddNewExpense(dataStorageWithoutUser.Object);
+            var addNewExpense = new AddNewExpenseUseCase().AddNewExpense(dataStorageWithoutUser.Object);
             await addNewExpense.Execute(new AddNewExpenseCommandMock(Guid.NewGuid(), "Test expense", Category.Others, new DateTime(2019, 03, 01), TransactionValue.Zero));
         }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Lucilvio.Solo.Webills.Core.Domain.User;
-using Lucilvio.Solo.Webills.Core.Domain.User.BusinessErrors;
+using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
+using Lucilvio.Solo.Webills.Transactions.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucilvio.Solo.Webills.Tests
@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestInitialize]
         public void Init()
         {
-            this._user = new User("Tests User");
+            this._user = new User(Guid.NewGuid());
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Lucilvio.Solo.Webills.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FixedExpenseLimitDateMustBeGreaterThenExpenseDate))]
+        [ExpectedException(typeof(FixedExpense.Error.FixedExpenseLimitDateMustBeGreaterThenExpenseDate))]
         public void UserCannotRegisterFixedExpenseWithLimitDateLessThanExpenseDate()
         {
             this._user.AddFixedExpense("Test fixed expense", Category.Taxes, new DateTime(2018, 10, 23), new TransactionValue(300),
@@ -69,7 +69,7 @@ namespace Lucilvio.Solo.Webills.Tests
         {
             this._user.AddFixedExpense("Test fixed expense", Category.Taxes, DateTime.Now, new TransactionValue(300),
                 Recurrency.Daily, DateTime.Now.AddDays(20));
-            
+
             Assert.AreEqual(21, this._user.Expenses.Count());
         }
 
@@ -287,7 +287,7 @@ namespace Lucilvio.Solo.Webills.Tests
         {
             this._user.AddExpense("Test expense", Category.Others, DateTime.Now, new TransactionValue(200.90m));
             this._user.AddExpense("Test expense", Category.Others, DateTime.Now, new TransactionValue(200.90m));
-            
+
             this._user.RemoveExpense(Guid.Empty);
         }
     }

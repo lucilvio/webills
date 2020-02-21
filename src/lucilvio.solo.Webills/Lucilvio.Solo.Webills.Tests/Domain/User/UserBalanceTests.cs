@@ -1,5 +1,5 @@
 using System;
-using Lucilvio.Solo.Webills.Core.Domain.User;
+using Lucilvio.Solo.Webills.Transactions.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucilvio.Solo.Webills.Tests
@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Tests
         [TestInitialize]
         public void Setup()
         {
-            this._user = new User("Test User");
+            this._user = new User(Guid.NewGuid());
         }
 
         [TestMethod]

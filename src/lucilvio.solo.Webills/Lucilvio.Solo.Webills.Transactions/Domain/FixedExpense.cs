@@ -17,7 +17,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         public DateTime Until { get; set; }
         public Recurrency Recurrency { get; }
 
-        class Error
+        internal class Error
         {
             internal class FixedExpenseLimitDateMustBeGreaterThenExpenseDate : Exception { }
         }
