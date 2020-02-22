@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Transactions.EditIncome
 {
-    public abstract class EditIncomeCommand
+    public abstract class EditIncomeCommand : ICommand
     {
         public Guid UserId { get; protected set; }
         public Guid Id { get; protected set; }

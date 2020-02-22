@@ -4,7 +4,7 @@ using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
 {
-    internal class RemoveIncomeUseCase : IRemoveIncomeUseCase
+    internal class RemoveIncomeUseCase : IUseCase<RemoveIncomeCommand>
     {
         private readonly IRemoveIncomeDataAccess _dataAccess;
 

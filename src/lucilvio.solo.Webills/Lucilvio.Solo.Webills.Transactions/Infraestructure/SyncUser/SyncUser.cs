@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.SyncUser
 {
-    internal class SyncUser : ISyncUser
+    internal class SyncUser
     {
         private readonly ISyncUserDataAccess _dataAccess;
 

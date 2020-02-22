@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
-    internal class AddNewExpenseUseCase : IAddNewExpenseUseCase
+    internal class AddNewExpenseUseCase : IUseCase<AddNewExpenseCommand>
     {
         private readonly IAddNewExpenseDataAccess _dataAccess;
 
@@ -16,9 +16,6 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 
         public async Task Execute(AddNewExpenseCommand command)
         {
-            if (command == null)
-                throw new Error.CommandNotInformed();
-
             var foundUser = await this._dataAccess.GetUserById(command.UserId);
 
             if (foundUser == null)
@@ -31,7 +28,6 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 
         internal class Error
         {
-            public class CommandNotInformed : Exception { }
             public class UserNotFound : Exception { }
         }
     }

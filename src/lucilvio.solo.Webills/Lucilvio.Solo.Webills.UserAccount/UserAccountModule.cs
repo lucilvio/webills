@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-using Lucilvio.Solo.Webills.UserAccount.Login;
-
 namespace Lucilvio.Solo.Webills.UserAccount
 {
-    public class UserAccountModule : ICreateUserAccountUseCase, ILoginUseCase
+    public class UserAccountModule
     {
-        private readonly string _connectionString;
+        IUseCaseResolver _useCaseResolver;
 
-        public UserAccountModule(string connectionString)
+        public UserAccountModule()
         {
-            this._connectionString = connectionString;
+            this._useCaseResolver = new UserCaseResolverBySimpleInjector();
         }
 
-        public async Task Execute(LoginCommand command, Func<LoggedUser, Task> onLogin = null)
+        public async Task ExecuteCommand(ICommand command)
         {
-            var dataAccess = new LoginDataAccess(this.Context);
-            await new LoginUseCase(dataAccess).Execute(command, onLogin).ConfigureAwait(false);
+            if (command == null)
+                throw new Error.CommandNotInformed();
+
+            await this._useCaseResolver.Resolve(command);
         }
 
-        public async Task Execute(CreateUserAccountCommand command, Func<UserAccountCreated, Task> onUserAccountCreate = null)
+        internal class Error
         {
-            var dataStorage = new CreateUserAccountDataAccess(this.Context);
-            await new CreateUserAccountUseCase(dataStorage).Execute(command, onUserAccountCreate).ConfigureAwait(false);
+            public class CommandNotInformed : Exception { }
         }
-
-        private UserAccountContext Context => new UserAccountContext();
     }
 }

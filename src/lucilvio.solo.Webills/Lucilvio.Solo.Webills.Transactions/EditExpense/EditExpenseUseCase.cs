@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.EditExpense
 {
-    internal class EditExpenseUseCase : IEditExpenseUseCase
+    internal class EditExpenseUseCase : IUseCase<EditExpenseCommand>
     {
         private readonly IEditExpenseDataAccess _dataStorage;
 

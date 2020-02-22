@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    internal class LoginUseCase : ILoginUseCase
+    internal class LoginUseCase : IUseCase<LoginCommand>
     {
         private readonly ILoginDataAccess _dataAccess;
 
@@ -14,11 +14,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
             this._dataAccess = dataAccess;
         }
 
-        public async Task Execute(LoginCommand command, Func<LoggedUser, Task> onLogin)
+        public async Task Execute(LoginCommand command)
         {
-            if (command == null)
-                throw new Error.CommandNotInformed();
-
             var foundUser = await this._dataAccess.GetUserByLogin(command.Login);
 
             if (foundUser == null)
@@ -26,13 +23,10 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 
             if (foundUser.Password != new Sha1EncryptedPassword(new Password(command.Password)))
                 throw new Error.InvalidUserOrPassword();
-
-            await onLogin?.Invoke(new LoggedUser(foundUser.Id, foundUser.Name.Value, foundUser.Login.Value));
         }
 
         class Error
         {
-            internal class CommandNotInformed : Exception { }
             internal class InvalidUserOrPassword : Exception { }
         }
     }

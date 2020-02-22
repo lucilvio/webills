@@ -1,6 +1,6 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    public abstract class CreateUserAccountCommand
+    public abstract class CreateUserAccountCommand : ICommand
     {
         public abstract string Login { get; }
         public abstract string Password { get; }

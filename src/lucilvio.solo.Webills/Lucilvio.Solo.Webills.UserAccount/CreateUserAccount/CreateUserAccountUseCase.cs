@@ -5,20 +5,17 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    internal class CreateUserAccountUseCase : ICreateUserAccountUseCase
+    internal class CreateUserAccountUseCase : IUseCase<CreateUserAccountCommand>
     {
         private readonly ICreateUserAccountDataAccess _dataAccess;
 
-        internal CreateUserAccountUseCase(ICreateUserAccountDataAccess dataAccess)
+        public   CreateUserAccountUseCase(ICreateUserAccountDataAccess dataAccess)
         {
             this._dataAccess = dataAccess;
         }
 
-        public async Task Execute(CreateUserAccountCommand command, Func<UserAccountCreated, Task> onUserAccountCreate)
+        public async Task Execute(CreateUserAccountCommand command)
         {
-            if (command == null)
-                throw new Error.CommandNotInformed();
-
             var accountWithSameLogin = await _dataAccess.GetUserAccountByLogin(new Domain.Login(command.Login));
 
             var createUserAccountRule = new CreateUserAccountRule();
@@ -28,14 +25,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
                 new Sha1EncryptedPassword(new ComplexPassword(new Password(command.Password))), command.TermsAccepted);
 
             await _dataAccess.Persist(newUser);
-
-            if(onUserAccountCreate != null)
-                await onUserAccountCreate.Invoke(new UserAccountCreated(newUser.Id));
-        }
-
-        internal class Error
-        {
-            public class CommandNotInformed : Exception { }
-        }
+        } 
     }
 }

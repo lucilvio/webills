@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
+
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 using Lucilvio.Solo.Webills.Transactions;
-using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
-using Lucilvio.Solo.Webills.Web.Home.EditExpense;
-using Lucilvio.Solo.Webills.Web.Home.EditIncome;
 using Lucilvio.Solo.Webills.Web.Logon;
 
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +13,12 @@ namespace Lucilvio.Solo.Webills.Web.Home
     public class HomeController : Controller
     {
         private readonly IAuthentication _authentication;
+        private readonly TransactionsModule _transactionsModule;
 
-        public HomeController(IAuthentication authentication)
+        public HomeController(IAuthentication authentication, TransactionsModule transactionsModule)
         {
             this._authentication = authentication;
+            this._transactionsModule = transactionsModule;
         }
 
         [HttpGet]
@@ -31,17 +31,17 @@ namespace Lucilvio.Solo.Webills.Web.Home
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewIncome([FromServices]IAddNewIncomeUseCase useCase, [FromForm]AddNewIncomeRequest request)
+        public async Task<IActionResult> AddNewIncome([FromForm]AddNewIncomeRequest request)
         {
-            await useCase.Execute(new AddNewIncomeCommandAdapter(request));
+            await this._transactionsModule.ExecuteCommand(new AddNewIncomeCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewExpense([FromServices]IAddNewExpenseUseCase useCase, [FromForm]AddNewExpenseRequest request)
+        public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseRequest request)
         {
-            await useCase.Execute(new AddNewExpenseCommandAdapter(request));
+            await this._transactionsModule.ExecuteCommand(new AddNewExpenseCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
@@ -71,33 +71,33 @@ namespace Lucilvio.Solo.Webills.Web.Home
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditIncome([FromServices]IEditIncomeUseCase useCase, [FromForm]EditIncomeRequest request)
+        public async Task<ActionResult> EditIncome([FromForm]EditIncomeRequest request)
         {
-            await useCase.Execute(new EditIncomeCommandAdapter(request));
+            await this._transactionsModule.ExecuteCommand(new EditIncomeCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditExpense([FromServices]IEditExpenseUseCase useCase, [FromForm]EditExpenseRequest request)
+        public async Task<ActionResult> EditExpense([FromForm]EditExpenseRequest request)
         {
-            await useCase.Execute(new EditExpenseCommandAdapter(request));
+            await this._transactionsModule.ExecuteCommand(new EditExpenseCommandAdapter(request));
 
             return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
-        public async Task<JsonResult> RemoveIncome([FromServices]IRemoveIncomeUseCase useCase, RemoveIncomeRequest request)
+        public async Task<JsonResult> RemoveIncome(RemoveIncomeRequest request)
         {
-            await useCase.Execute(new RemoveIncomeCommandAdapter(request));
+            await this._transactionsModule.ExecuteCommand(new RemoveIncomeCommandAdapter(request));
 
             return new JsonResult(new { message = "Income removed" });
         }
 
         [HttpPost]
-        public async Task<JsonResult> RemoveExpense([FromServices]IRemoveExpenseUseCase useCase, RemoveExpenseRequest request)
+        public async Task<JsonResult> RemoveExpense(RemoveExpenseRequest request)
         {
-            await useCase.Execute(new RemoveExpenseCommandAdapter(request));
+            await this._transactionsModule.ExecuteCommand(new RemoveExpenseCommandAdapter(request));
 
             return new JsonResult(new { message = "Expense removed" });
         }

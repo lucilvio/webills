@@ -8,6 +8,13 @@ namespace Lucilvio.Solo.Webills.Web.Logon
 {
     public class LogonController : Controller
     {
+        private readonly UserAccountModule _userAccountModule;
+
+        public LogonController(UserAccountModule userAccountModule)
+        {
+            this._userAccountModule = userAccountModule;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -15,13 +22,14 @@ namespace Lucilvio.Solo.Webills.Web.Logon
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromForm]LogonRequest request, [FromServices]ILoginUseCase useCase,
+        public async Task<IActionResult> Login([FromForm]LogonRequest request,
             [FromServices]IAuthentication authenticationService)
         {
-            await useCase.Execute(new LoginCommandAdapter(request), async user =>
-            {
-                await authenticationService.SignIn(new AuthCredentials(user.Id, user.Login, user.Name));
-            });
+            await this._userAccountModule.ExecuteCommand(new LoginCommandAdapter(request));
+            //await useCase.Execute(, async user =>
+            //{
+            //    await authenticationService.SignIn(new AuthCredentials(user.Id, user.Login, user.Name));
+            //});
 
             return RedirectToAction(nameof(HomeController.Dashboard), "Home");
         }

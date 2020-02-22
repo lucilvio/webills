@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
-    public abstract class AddNewExpenseCommand
+    public abstract class AddNewExpenseCommand : ICommand
     {
         public Guid UserId { get; protected set; }
         public string Name { get; protected set; }

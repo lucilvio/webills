@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.EditIncome
 {
-    internal class EditIncomeUseCase : IEditIncomeUseCase
+    internal class EditIncomeUseCase : IUseCase<EditIncomeCommand>
     {
         private readonly IEditIncomeDataAccess _dataStorage;
 

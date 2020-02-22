@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
 {
-    internal class RemoveExpenseUseCase : IRemoveExpenseUseCase
+    internal class RemoveExpenseUseCase : IUseCase<RemoveExpenseCommand>
     {
         private readonly IRemoveIncomeDataAccess _dataAccess;
 

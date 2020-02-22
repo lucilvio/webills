@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
 {
-    internal class AddNewIncomeUseCase : IAddNewIncomeUseCase
+    internal class AddNewIncomeUseCase : IUseCase<AddNewIncomeCommand>
     {
         private readonly IAddNewIncomeDataAccess _dataStorage;
 

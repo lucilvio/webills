@@ -11,7 +11,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
     {
         private readonly UserAccountContext _context;
 
-        internal CreateUserAccountDataAccess(UserAccountContext context)
+        public CreateUserAccountDataAccess(UserAccountContext context)
         {
             _context = context;
         }

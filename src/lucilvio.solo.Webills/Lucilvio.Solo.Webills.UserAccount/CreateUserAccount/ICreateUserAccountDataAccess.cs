@@ -4,7 +4,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    interface ICreateUserAccountDataAccess
+    internal interface ICreateUserAccountDataAccess
     {
         Task<User> GetUserAccountByLogin(Domain.Login login);
         Task Persist(User user);

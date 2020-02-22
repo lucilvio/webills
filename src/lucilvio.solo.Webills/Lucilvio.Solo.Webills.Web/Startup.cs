@@ -45,7 +45,9 @@ namespace Lucilvio.Solo.Webills.Web
                 return new SecurityService(service.GetService<IHttpContextAccessor>().HttpContext);
             });
 
-            services.ResolveDependencies(this._configuration);
+            services.AddObsoleteModule(this._configuration);
+            services.AddUserAccoutModule(this._configuration);
+            services.AddTransactionsModule(this._configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
