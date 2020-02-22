@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Transactions
 {
-    public interface IUseCaseResolver
+    internal interface IUseCaseResolver
     {
         Task Resolve(ICommand commnad);
     }

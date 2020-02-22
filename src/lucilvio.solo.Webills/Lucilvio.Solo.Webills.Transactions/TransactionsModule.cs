@@ -5,11 +5,12 @@ namespace Lucilvio.Solo.Webills.Transactions
 {
     public class TransactionsModule
     {
-        IUseCaseResolver useCaseResolver;
+        private IQueryResolver _queryResolver;
+        private IUseCaseResolver _useCaseResolver;
 
         public TransactionsModule()
         {
-            this.useCaseResolver = new UseCaseResolverBySimpleInjector();
+            this._useCaseResolver = new UseCaseResolverBySimpleInjector();
         }
 
         public async Task ExecuteCommand(ICommand command)
@@ -17,12 +18,21 @@ namespace Lucilvio.Solo.Webills.Transactions
             if (command == null)
                 throw new Error.CommandNotInformed();
 
-            await this.useCaseResolver.Resolve(command);
+            await this._useCaseResolver.Resolve(command);
+        }
+
+        public async Task<TQueryResult> ExecuteQuery<TQueryResult>(IQuery query)
+        {
+            if (query == null)
+                throw new Error.QueryNotInformed();
+
+            return await this._queryResolver.Resolve<IQuery, TQueryResult>(query);
         }
 
         public class Error
         {
             public class CommandNotInformed : Exception { }
+            public class QueryNotInformed : Exception { }
         }
     }
 }

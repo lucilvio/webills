@@ -2,6 +2,8 @@
 
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Transactions.EditExpense;
+using Lucilvio.Solo.Webills.Transactions.GetIncomeById;
 using Lucilvio.Solo.Webills.Web.Logon;
 
 using Microsoft.AspNetCore.Authorization;
@@ -49,25 +51,23 @@ namespace Lucilvio.Solo.Webills.Web.Home
         [HttpGet]
         public async Task<JsonResult> EditIncome([FromQuery]GetIncomeRequest request)
         {
-            //var foundIncome = await this._getUserIncomesQueryHandler.Execute(new GetUserIncomesQueryByNumber(1, request.Number));
+            var foundIncome = await this._transactionsModule.ExecuteQuery<GetIncomeByIdQueryResult>(new GetIncomeByIdQuery(request.Id));
 
-            //if (foundIncome == null)
-            //    return new JsonResult(new { error = "Income not found" });
+            if (foundIncome == null)
+                return new JsonResult(new { error = "Income not found" });
 
-            //return new JsonResult(new { income = new EditIncomeResponse(null) });
-            return new JsonResult(new { });
+            return new JsonResult(new { income = foundIncome });
         }
 
         [HttpGet]
         public async Task<JsonResult> EditExpense([FromQuery]GetExpenseRequest request)
         {
-            //var foundExpense = await this._getUserExpensesQueryHandler.Execute(new GetUserExpensesByNumberQuery(1, request.Id));
+            var foundExpense = await this._transactionsModule.ExecuteQuery<GetExpenseByIdQueryResult>(new GetExpenseByIdQuery(request.Id));
 
-            //if (foundExpense == null)
-            //    return new JsonResult(new { error = "Expense not found" });
+            if (foundExpense == null)
+                return new JsonResult(new { error = "Expense not found" });
 
-            //return new JsonResult(new { expense = new EditExpenseResponse(null) });
-            return new JsonResult(new { });
+            return new JsonResult(new { expense = foundExpense });
         }
 
         [HttpPost]
