@@ -3,6 +3,7 @@
 using Lucilvio.Solo.Webills.Dashboard.Infraestructure.DataAccess;
 
 using SimpleInjector;
+using SimpleInjector.Lifestyles;
 
 namespace Lucilvio.Solo.Webills.Dashboard
 {
@@ -13,6 +14,7 @@ namespace Lucilvio.Solo.Webills.Dashboard
         public QueryResolverBySimpleInjector()
         {
             this._container = new Container();
+            this._container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             this._container.Register<DashBoardReadContext>(Lifestyle.Scoped);
 
@@ -24,10 +26,13 @@ namespace Lucilvio.Solo.Webills.Dashboard
 
         public async Task<TQueryResult> Resolve<TQueryResult>(IQuery query)
         {
-            var type = typeof(IQueryHandler<,>).MakeGenericType(query.GetType().BaseType);
+            using (AsyncScopedLifestyle.BeginScope(_container))
+            {
+                var type = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TQueryResult));
 
-            dynamic handler = _container.GetInstance(type);
-            return await handler.Handle((dynamic)query);
+                dynamic handler = _container.GetInstance(type);
+                return await handler.Handle((dynamic)query);
+            }
         }
     }
 }

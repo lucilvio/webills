@@ -18,18 +18,20 @@ namespace Lucilvio.Solo.Webills.Dashboard.Infraestructure.DataAccess
 
         private void CreateDatabaseIfNotExists()
         {
-            using (var connection = this.Connection)
-            {
-                var sql =
-                    @$"if not exists ( select name from master.dbo.sysdatabases where name = N'lucilvio.solo.webills' )
-                    create database [lucilvio.solo.webills] go
-                    if not exists ( select * from master.dbo.sysobjects where name = N'Transactions' and xType = 'U' )
-                    create table Expenses(UserId uniqueidentifier not null, Name varchar(256) not null, 
-                    Date datetime2 not null, Value decimal(18, 2) not null, Category int not null, Income bit not null,
-                    Expense bit not null) go";
+            using var connection = this.Connection;
 
-                connection.Execute(sql);
-            }
+            var sql = @$"
+                if not exists ( select name from master.dbo.sysdatabases where name = N'lucilvio.solo.webills' )
+	                create database [lucilvio.solo.webills]
+                use [lucilvio.solo.webills]
+                if not exists ( select name from sys.schemas where name = N'dashboard' )
+                    exec sp_executesql N'create schema dashboard' 
+                if not exists ( select * from [lucilvio.solo.webills].dbo.sysobjects where name = N'Transactions' and xType = 'U' )
+	                create table dashboard.Transactions(UserId uniqueidentifier not null, Name varchar(256) not null, 
+	                Date datetime2 not null, Value decimal(18, 2) not null, Category int not null, Income bit not null, Expense bit not null) 
+            ";
+
+            connection.Execute(sql);
         }
 
         public DbConnection Connection => new SqlConnection(_connectionString);

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 
+using Lucilvio.Solo.Webills.Bus;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
 
 using SimpleInjector;
@@ -12,11 +13,13 @@ namespace Lucilvio.Solo.Webills.UserAccount
     {
         private readonly Container _container;
 
-        public UserCaseResolverBySimpleInjector()
+        public UserCaseResolverBySimpleInjector(IBus bus)
         {
             this._container = new Container();
             this._container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+
             this._container.Register<UserAccountContext>(Lifestyle.Scoped);
+            this._container.Register<IBus>(() => (Bus.Bus)bus, Lifestyle.Singleton);
 
             var currentAssembly = typeof(IUseCase<>).Assembly;
 
@@ -25,7 +28,7 @@ namespace Lucilvio.Solo.Webills.UserAccount
 
             foreach (var dataAccessType in dataAccessTypes.Where(t => t.IsInterface))
             {
-                var concreteType = c.Where(t => dataAccessType.IsAssignableFrom(t)).First();
+                var concreteType = c.Where(t => dataAccessType.IsAssignableFrom(t)).FirstOrDefault();
 
                 if (concreteType != null)
                     this._container.Register(dataAccessType, concreteType);

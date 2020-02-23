@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
         {
             optionsBuilder.UseSqlServer("Server=localhost;Database=lucilvio.solo.webills; Trusted_Connection=True; MultipleActiveResultSets=true; Connection Timeout=300; ", opt =>
             {
-                opt.MigrationsHistoryTable($"__UserAccount_MigrationsHistory", "UserAccount");
+                opt.MigrationsHistoryTable($"__UserAccount_MigrationsHistory", "useraccount");
             });
         }
 
@@ -48,7 +48,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
         {
             modelBuilder.Entity<User>(u =>
             {
-                u.ToTable("Users", "UserAccount");
+                u.ToTable("Users", "useraccount");
 
                 u.HasKey(p => p.Id);
                 u.Property(p => p.Id).ValueGeneratedNever();

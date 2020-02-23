@@ -24,7 +24,7 @@ namespace Lucilvio.Solo.Webills.Transactions
 
         public async Task<TQueryResult> Resolve<TQuery, TQueryResult>(TQuery query)
         {
-            var type = typeof(IQueryHandler<,>).MakeGenericType(query.GetType().BaseType);
+            var type = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TQueryResult));
 
             dynamic handler = _container.GetInstance(type);
             return await handler.Handle((dynamic)query);

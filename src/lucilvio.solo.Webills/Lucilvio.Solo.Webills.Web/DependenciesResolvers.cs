@@ -1,4 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Dashboard;
+﻿using Lucilvio.Solo.Webills.Bus;
+using Lucilvio.Solo.Webills.Dashboard;
 using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.UserAccount;
@@ -12,6 +13,7 @@ namespace Lucilvio.Solo.Webills.Web
     {
         public static void AddObsoleteModule(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IBus>(svc => new Bus.Bus());
             services.AddScoped(svc => new WebillsReadContext(configuration.GetConnectionString("Webills")));
 
             services.AddScoped<IUserDashboardQueryHandler, UserTransactionsInformationQuery>();
@@ -28,6 +30,6 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddSingleton(services => new TransactionsModule());
 
         public static void AddUserAccoutModule(this IServiceCollection services, IConfiguration configuration) =>
-            services.AddSingleton(services => new UserAccountModule());
+            services.AddSingleton(services => new UserAccountModule(services.GetService<IBus>()));
     }
 }

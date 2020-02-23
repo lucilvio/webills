@@ -17,7 +17,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
         {
             optionsBuilder.UseSqlServer("Server=localhost;Database=lucilvio.solo.webills; Trusted_Connection=True; MultipleActiveResultSets=true; Connection Timeout=300;", opt =>
             {
-                opt.MigrationsHistoryTable($"__Transactions_MigrationsHistory", "Transactions");
+                opt.MigrationsHistoryTable($"__Transactions_MigrationsHistory", "transactions");
             });
         }
 
@@ -27,7 +27,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
 
             modelBuilder.Entity<Expense>(e =>
             {
-                e.ToTable("Expenses", "Transactions");
+                e.ToTable("Expenses", "transactions");
 
                 e.HasKey("Id");
                 e.Property<Guid>("Id").ValueGeneratedNever();
@@ -43,7 +43,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
 
             modelBuilder.Entity<Income>(i =>
             {
-                i.ToTable("Incomes", "Transactions");
+                i.ToTable("Incomes", "transactions");
 
                 i.HasKey("Id");
                 i.Property<Guid>("Id").ValueGeneratedNever();
@@ -58,7 +58,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
 
             modelBuilder.Entity<User>(u =>
             {
-                u.ToTable("Users", "Transactions");
+                u.ToTable("Users", "transactions");
 
                 u.HasKey(u => u.Id);
                 u.Property(p => p.Id).ValueGeneratedNever();

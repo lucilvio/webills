@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Webills.Dashboard.MainDashboard
         {
             using (var connection = this._context.Connection)
             {
-                var sql = "";
+                var sql = "select * from dashboard.transactions where userId = @userId";
 
                 return await connection.QueryFirstOrDefaultAsync<GetUserDashboardQueryResult>(sql, new { userId = query.UserId });
             }

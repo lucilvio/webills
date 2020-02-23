@@ -9,14 +9,15 @@ namespace Lucilvio.Solo.Webills.Web.Home
     {
         public UserTransactionsInformationResponse(GetUserDashboardQueryResult searchResult)
         {
-            if (searchResult == null)
-                return;
+            //if (searchResult == null)
+            //    return;
 
             //this.Balance = searchResult.Values.Balance.DecimalToMoney();
             //this.TotalSpent = searchResult.Values.TotalSpent.DecimalToMoney();
             //this.TotalEarns = searchResult.Values.TotalIncomes.DecimalToMoney();
 
             //this.TodayExpenses = searchResult.TodayExpenses.Select(e => new TodayExpensesResponse(e));
+            this.TodayExpenses = new List<TodayExpensesResponse>();
         }
 
         public string Balance { get; }

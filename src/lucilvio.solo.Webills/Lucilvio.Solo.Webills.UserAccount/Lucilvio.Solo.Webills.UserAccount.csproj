@@ -20,4 +20,8 @@
       <_Parameter1>Lucilvio.Solo.Webills.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Bus\Lucilvio.Solo.Webills.Bus.csproj" />
+  </ItemGroup>
 </Project>

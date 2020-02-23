@@ -2,9 +2,9 @@
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    public class LoggedUser
+    internal class UserLoggedInEvent
     {
-        public LoggedUser(Guid userId, string name, string login)
+        public UserLoggedInEvent(Guid userId, string name, string login)
         {
             this.Id = userId;
             this.Name = name;

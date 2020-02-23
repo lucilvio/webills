@@ -26,7 +26,7 @@ namespace Lucilvio.Solo.Webills.Transactions
 
             foreach (var dataAccessType in dataAccessTypes.Where(t => t.IsInterface))
             {
-                var concreteType = c.Where(t => dataAccessType.IsAssignableFrom(t)).First();
+                var concreteType = c.Where(t => dataAccessType.IsAssignableFrom(t)).FirstOrDefault();
 
                 if (concreteType != null)
                     _container.Register(dataAccessType, concreteType);

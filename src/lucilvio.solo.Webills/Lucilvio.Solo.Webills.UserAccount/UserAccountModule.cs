@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.Bus;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
@@ -7,9 +8,9 @@ namespace Lucilvio.Solo.Webills.UserAccount
     {
         IUseCaseResolver _useCaseResolver;
 
-        public UserAccountModule()
+        public UserAccountModule(IBus bus)
         {
-            this._useCaseResolver = new UserCaseResolverBySimpleInjector();
+            this._useCaseResolver = new UserCaseResolverBySimpleInjector(bus);
         }
 
         public async Task ExecuteCommand(ICommand command)

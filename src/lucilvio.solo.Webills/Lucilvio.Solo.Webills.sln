@@ -31,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Dashboard", "Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj", "{31C41583-4754-4724-B876-0FAE36846BD8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bus", "Bus", "{44AF7FF1-67DF-460C-A294-96739DB1A7CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Bus", "Lucilvio.Solo.Webills.Bus\Lucilvio.Solo.Webills.Bus.csproj", "{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,10 @@ Global
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +82,7 @@ Global
 		{8B23395B-025E-4C99-993C-481D872B345C} = {6F54AF99-997A-4727-907A-EDF26826C889}
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7} = {B4923F73-B61C-4AA8-958C-3957E7DB10FF}
 		{31C41583-4754-4724-B876-0FAE36846BD8} = {3A71E468-E0EF-4F90-BA34-101B927878D9}
+		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE} = {44AF7FF1-67DF-460C-A294-96739DB1A7CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}
