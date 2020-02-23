@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+
+using Lucilvio.Solo.Webills.Dashboard.MainDashboard;
 using Lucilvio.Solo.Webills.Web.Home.Index;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
     public class UserTransactionsInformationResponse
     {
-        public UserTransactionsInformationResponse(UserDashboardQueryResult searchResult)
+        public UserTransactionsInformationResponse(GetUserDashboardQueryResult searchResult)
         {
             if (searchResult == null)
                 return;
 
-            this.Balance = searchResult.Values.Balance.DecimalToMoney();
-            this.TotalSpent = searchResult.Values.TotalSpent.DecimalToMoney();
-            this.TotalEarns = searchResult.Values.TotalIncomes.DecimalToMoney();
+            //this.Balance = searchResult.Values.Balance.DecimalToMoney();
+            //this.TotalSpent = searchResult.Values.TotalSpent.DecimalToMoney();
+            //this.TotalEarns = searchResult.Values.TotalIncomes.DecimalToMoney();
 
-            this.TodayExpenses = searchResult.TodayExpenses.Select(e => new TodayExpensesResponse(e));
+            //this.TodayExpenses = searchResult.TodayExpenses.Select(e => new TodayExpensesResponse(e));
         }
 
         public string Balance { get; }

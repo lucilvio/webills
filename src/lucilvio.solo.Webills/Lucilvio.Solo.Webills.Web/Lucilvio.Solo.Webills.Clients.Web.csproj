@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.Transactions.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.UserAccount\Lucilvio.Solo.Webills.UserAccount.csproj" />

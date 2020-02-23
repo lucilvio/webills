@@ -1,4 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+﻿using Lucilvio.Solo.Webills.Dashboard;
+using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.UserAccount;
 
@@ -19,6 +20,9 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddScoped<IGetUserIncomesByFilterQueryHandler, GetUserIncomesByFilterQueryHandler>();
             services.AddScoped<IGetUserExpensesByFilterQueryHandler, GetUserExpensesByFilterQueryHandler>();
         }
+
+        public static void AddDashboardModule(this IServiceCollection services, IConfiguration configuration) =>
+            services.AddSingleton(services => new DashboardModule());
 
         public static void AddTransactionsModule(this IServiceCollection services, IConfiguration configuration) =>
             services.AddSingleton(services => new TransactionsModule());

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+using Lucilvio.Solo.Webills.Dashboard;
+using Lucilvio.Solo.Webills.Dashboard.MainDashboard;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.EditExpense;
 using Lucilvio.Solo.Webills.Transactions.GetIncomeById;
@@ -15,19 +16,21 @@ namespace Lucilvio.Solo.Webills.Web.Home
     public class HomeController : Controller
     {
         private readonly IAuthentication _authentication;
+        private readonly DashboardModule _dashboardModule;
         private readonly TransactionsModule _transactionsModule;
 
-        public HomeController(IAuthentication authentication, TransactionsModule transactionsModule)
+        public HomeController(IAuthentication authentication, DashboardModule dashboardModule, TransactionsModule transactionsModule)
         {
             this._authentication = authentication;
+            this._dashboardModule = dashboardModule;
             this._transactionsModule = transactionsModule;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard([FromServices]IUserDashboardQueryHandler userDashBoardQueryHandler)
+        public async Task<IActionResult> Dashboard()
         {
             var loggedUser = this._authentication.User();
-            var result = await userDashBoardQueryHandler.Execute(new UserDashboardQuery(loggedUser.Id));
+            var result = await this._dashboardModule.ExecuteQuery<GetUserDashboardQueryResult>(new GetUserDashboardQuery(loggedUser.Id));
 
             return View(new UserTransactionsInformationResponse(result));
         }

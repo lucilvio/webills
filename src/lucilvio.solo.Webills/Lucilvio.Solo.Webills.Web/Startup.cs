@@ -46,6 +46,7 @@ namespace Lucilvio.Solo.Webills.Web
             });
 
             services.AddObsoleteModule(this._configuration);
+            services.AddDashboardModule(this._configuration);
             services.AddUserAccoutModule(this._configuration);
             services.AddTransactionsModule(this._configuration);
         }
