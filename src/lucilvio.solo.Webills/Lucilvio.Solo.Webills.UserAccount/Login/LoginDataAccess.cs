@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    class LoginDataAccess : ILoginDataAccess
+    internal class LoginDataAccess : ILoginDataAccess
     {
         private readonly UserAccountContext _context;
 

@@ -1,4 +1,4 @@
-﻿@inject Lucilvio.Solo.Webills.Web.Logon.IAuthentication Authentication
+﻿@inject Lucilvio.Solo.Webills.Clients.Web.Login.IAuthentication Authentication
 
 @model Lucilvio.Solo.Webills.Clients.Web.Incomes.IncomesResponse
 @{
@@ -13,39 +13,39 @@
         <input type="hidden" id="userId" value="@Authentication.User().Id" />
 
         <div class="panel panel-flat">
-                <div class="panel-heading">
-                    <h6 class="panel-title">
-                        <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
-                        <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
-                    </h6>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Value</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var income in Model.Incomes)
-                            {
-                                <tr>
-                                    <td class="col-lg-4">@income.Name</td>
-                                    <td class="col-lg-1">@income.Date</td>
-                                    <td class="col-lg-1">@income.Value </td>
-                                    <td class="col-lg-1 text-right"><a href="#" class="edit-income" data-id="@income.Id"><i class="icon-pencil"></i></a></td>
-                                    <td class="col-lg-1 text-right"><a href="#" class="remove-income" data-id="@income.Id"><i class="icon-cross"></i></a></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
+                    <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
+                </h6>
             </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Value</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var income in Model.Incomes)
+                        {
+                            <tr>
+                                <td class="col-lg-4">@income.Name</td>
+                                <td class="col-lg-1">@income.Date</td>
+                                <td class="col-lg-1">@income.Value </td>
+                                <td class="col-lg-1 text-right"><a href="#" class="edit-income" data-id="@income.Id"><i class="icon-pencil"></i></a></td>
+                                <td class="col-lg-1 text-right"><a href="#" class="remove-income" data-id="@income.Id"><i class="icon-cross"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         @*<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="click">
                 <li>
@@ -66,10 +66,10 @@
 </div>
 
 @*@Html.PartialAsync("../AddNewIncome/AddNewIncome.cshtml").GetAwaiter().GetResult()
-@Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()
-@Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
-@Html.PartialAsync("../EditExpense/EditExpense.cshtml").GetAwaiter().GetResult()
-@Html.PartialAsync("../RemoveExpense/RemoveExpense.cshtml").GetAwaiter().GetResult()*@
+    @Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../EditExpense/EditExpense.cshtml").GetAwaiter().GetResult()
+    @Html.PartialAsync("../RemoveExpense/RemoveExpense.cshtml").GetAwaiter().GetResult()*@
 
 @section Scripts {
     <script>

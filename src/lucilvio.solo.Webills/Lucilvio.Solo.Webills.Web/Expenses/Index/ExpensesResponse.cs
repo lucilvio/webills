@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
-using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Index
 {
@@ -28,11 +25,11 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Index
                 if (expense == null)
                     return;
 
-                this.Id = expense.Id.ToString();
-                this.Name = expense.Name;
-                this.Date = expense.Date.ToDateString();
-                this.Value = expense.Value.DecimalToMoney();
-                this.Category = expense.Category;
+                //this.Id = expense.Id.ToString();
+                //this.Name = expense.Name;
+                //this.Date = expense.Date.ToDateString();
+                //this.Value = expense.Value.DecimalToMoney();
+                //this.Category = expense.Category;
             }
 
             public string Id { get; }

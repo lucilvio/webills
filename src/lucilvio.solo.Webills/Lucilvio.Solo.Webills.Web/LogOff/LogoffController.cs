@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Lucilvio.Solo.Webills.Web.Logon;
+
+using Lucilvio.Solo.Webills.Clients.Web.Login;
+
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lucilvio.Solo.Webills.Web.SignOut
 {
@@ -22,7 +24,7 @@ namespace Lucilvio.Solo.Webills.Web.SignOut
         {
             await this._securityService.SignOut();
 
-            return RedirectToAction(nameof(LogonController.Index), "Logon");
+            return RedirectToAction(nameof(LoginController.Index), "Login");
         }
     }
 }

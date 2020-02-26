@@ -1,7 +1,9 @@
-﻿namespace Lucilvio.Solo.Webills.Web.Home
+﻿using System;
+
+namespace Lucilvio.Solo.Webills.Web.Home
 {
     public class RemoveIncomeRequest
     {
-        public string IncomeId { get; internal set; }
+        public Guid IncomeId { get; internal set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Web.Home
+namespace Lucilvio.Solo.Webills.Clients.Web.Home.EditExpense
 {
     public class GetExpenseRequest
     {

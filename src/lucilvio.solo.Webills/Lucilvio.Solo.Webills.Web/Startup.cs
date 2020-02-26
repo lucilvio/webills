@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-using Lucilvio.Solo.Webills.Web.Logon;
+using Lucilvio.Solo.Webills.Clients.Web.Login;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -35,7 +35,7 @@ namespace Lucilvio.Solo.Webills.Web
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.LoginPath = "/Logon";
+                    options.LoginPath = "/Login";
                 });
 
             services.AddHttpContextAccessor();
@@ -45,10 +45,7 @@ namespace Lucilvio.Solo.Webills.Web
                 return new SecurityService(service.GetService<IHttpContextAccessor>().HttpContext);
             });
 
-            services.AddObsoleteModule(this._configuration);
-            services.AddDashboardModule(this._configuration);
-            services.AddUserAccoutModule(this._configuration);
-            services.AddTransactionsModule(this._configuration);
+            services.AddModules(this._configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 
-using Lucilvio.Solo.Webills.Dashboard.MainDashboard;
 using Lucilvio.Solo.Webills.Web.Home.Index;
 
 namespace Lucilvio.Solo.Webills.Web.Home
 {
     public class UserTransactionsInformationResponse
     {
-        public UserTransactionsInformationResponse(GetUserDashboardQueryResult searchResult)
+        public UserTransactionsInformationResponse(object searchResult)
         {
             //if (searchResult == null)
             //    return;

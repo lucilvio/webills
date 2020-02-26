@@ -31,12 +31,12 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             return income.Id;
         }
 
-        public Guid AddExpense(string name, Category category, DateTime date, TransactionValue value)
+        public Expense AddExpense(string name, Category category, DateTime date, TransactionValue value)
         {
             var newExpense = new Expense(name, category, date, value);
             _expenses.Add(newExpense);
 
-            return newExpense.Id;
+            return newExpense;
         }
 
         public void AddFixedExpense(string name, Category category, DateTime date, TransactionValue transactionValue,

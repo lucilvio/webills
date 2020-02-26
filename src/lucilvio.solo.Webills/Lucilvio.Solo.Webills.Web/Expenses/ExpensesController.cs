@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Expenses.Index;
-using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
-using Lucilvio.Solo.Webills.Web.Logon;
+using Lucilvio.Solo.Webills.Clients.Web.Login;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
 
         public async Task<IActionResult> Index()
         {
-            var result = await this._getUserExpensesByFilterQueryHandler.Execute(new GetUserExpensesByFilterQuery(this._auth.User().Id));
+            var result = await this._getUserExpensesByFilterQueryHandler.Execute(null);
 
             return View(new ExpensesResponse(result));
         }

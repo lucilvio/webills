@@ -3,19 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Tests", "Lucilvio.Solo.Webills.Tests\Lucilvio.Solo.Webills.Tests.csproj", "{74DD8268-4EF2-430E-AFFB-8235B42F02E1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Clients.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Clients.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D11ED011-EE4F-4882-A21E-D8DC8E1B46E3}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{BC1980B6-3B22-42D7-937E-37FE2DF65BE6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{D5B4294C-C887-49B0-BD3B-542B4BE8E9DD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataStorage", "DataStorage", "{A518ADEC-712D-4C0D-89F1-D7D528C51DA9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage", "Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage\Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage.csproj", "{44982CE8-3504-4EDE-A3A6-4A5717088AC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{95294BE7-92A0-4D1D-BE54-B7E3135542F7}"
 EndProject
@@ -25,15 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccount", "UserAccount"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transactions", "{B4923F73-B61C-4AA8-958C-3957E7DB10FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Transactions", "Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.Transactions.csproj", "{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Transactions", "Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.Transactions.csproj", "{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{3A71E468-E0EF-4F90-BA34-101B927878D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Dashboard", "Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj", "{31C41583-4754-4724-B876-0FAE36846BD8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bus", "Bus", "{44AF7FF1-67DF-460C-A294-96739DB1A7CD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Bus", "Lucilvio.Solo.Webills.Bus\Lucilvio.Solo.Webills.Bus.csproj", "{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Dashboard", "Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj", "{31C41583-4754-4724-B876-0FAE36846BD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,18 +27,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74DD8268-4EF2-430E-AFFB-8235B42F02E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44982CE8-3504-4EDE-A3A6-4A5717088AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B23395B-025E-4C99-993C-481D872B345C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B23395B-025E-4C99-993C-481D872B345C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B23395B-025E-4C99-993C-481D872B345C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,24 +43,16 @@ Global
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{74DD8268-4EF2-430E-AFFB-8235B42F02E1} = {D11ED011-EE4F-4882-A21E-D8DC8E1B46E3}
 		{6A0051AA-4850-40B4-84D0-8EEA67E98C70} = {95294BE7-92A0-4D1D-BE54-B7E3135542F7}
-		{A518ADEC-712D-4C0D-89F1-D7D528C51DA9} = {D5B4294C-C887-49B0-BD3B-542B4BE8E9DD}
-		{44982CE8-3504-4EDE-A3A6-4A5717088AC4} = {A518ADEC-712D-4C0D-89F1-D7D528C51DA9}
 		{95294BE7-92A0-4D1D-BE54-B7E3135542F7} = {BC1980B6-3B22-42D7-937E-37FE2DF65BE6}
 		{8B23395B-025E-4C99-993C-481D872B345C} = {6F54AF99-997A-4727-907A-EDF26826C889}
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7} = {B4923F73-B61C-4AA8-958C-3957E7DB10FF}
 		{31C41583-4754-4724-B876-0FAE36846BD8} = {3A71E468-E0EF-4F90-BA34-101B927878D9}
-		{D7C8D32B-A181-49E8-9AE2-F9C2613C9DBE} = {44AF7FF1-67DF-460C-A294-96739DB1A7CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

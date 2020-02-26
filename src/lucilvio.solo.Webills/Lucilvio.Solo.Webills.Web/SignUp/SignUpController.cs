@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 
+using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.UserAccount;
-using Lucilvio.Solo.Webills.Web.Logon;
+using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +13,11 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
     [AllowAnonymous]
     public class SignUpController : Controller
     {
-        private readonly UserAccountModule _userAccountModule;
+        private readonly TransactionsModule _transactionsModule;
 
-        public SignUpController(UserAccountModule userAccountModule)
+        public SignUpController(TransactionsModule transactionsModule)
         {
-            this._userAccountModule = userAccountModule;
+            this._transactionsModule = transactionsModule;
         }
 
         public IActionResult Index()
@@ -24,15 +26,16 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromForm]RegisterRequest request)
+        public async Task<IActionResult> Register([FromServices]UserAccountModule userAccountModule, [FromForm]SignUpRequest request)
         {
-            await this._userAccountModule.ExecuteCommand(new CreateUserAccountCommandAdapter(request));
-            //await createUserAccount.Execute(, async createdUser =>
-            //{
-            //    await syncUser.Execute(createdUser.Id);
-            //});
+            await userAccountModule.CreateNewUserAccount(new CreateUserAccountInputAdapter(request), this.OnUserAccountCreated);
 
-            return RedirectToAction(nameof(LogonController.Index), "Logon");
+            return RedirectToAction(nameof(LoginController.Index), "Login");
+        }
+
+        private async Task OnUserAccountCreated(UserAccountCreated userAccountCreated)
+        {
+            await this._transactionsModule.CreateUser(new CreateUserInputAdapter(userAccountCreated));
         }
     }
 }

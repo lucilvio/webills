@@ -1,8 +1,0 @@
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\bin\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.deps.json
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\bin\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.dll
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\bin\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.pdb
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\obj\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.csprojAssemblyReference.cache
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\obj\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.AssemblyInfoInputs.cache
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\obj\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.AssemblyInfo.cs
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\obj\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.dll
-C:\Users\lucil\source\repos\webills\src\lucilvio.solo.Webills\Lucilvio.Solo.Webills.Bus\obj\Debug\netcoreapp3.1\Lucilvio.Solo.Webills.Bus.pdb

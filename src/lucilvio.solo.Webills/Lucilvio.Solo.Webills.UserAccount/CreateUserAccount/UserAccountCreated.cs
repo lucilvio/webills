@@ -1,12 +1,14 @@
 ﻿using System;
 
+using Lucilvio.Solo.Webills.UserAccount.Domain;
+
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
     public class UserAccountCreated
     {
-        public UserAccountCreated(Guid userId)
+        internal UserAccountCreated(User user)
         {
-            this.Id = userId;
+            this.Id = user.Id;
         }
 
         public Guid Id { get; }

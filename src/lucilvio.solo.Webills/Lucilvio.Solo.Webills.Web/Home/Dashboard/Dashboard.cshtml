@@ -1,4 +1,4 @@
-﻿@inject Lucilvio.Solo.Webills.Web.Logon.IAuthentication Authentication
+﻿@inject Lucilvio.Solo.Webills.Clients.Web.Login.IAuthentication Authentication
 
 @model Lucilvio.Solo.Webills.Web.Home.UserTransactionsInformationResponse
 @{
@@ -52,41 +52,41 @@
                 </div>
             </div>
         </div>
-        
-        @*<div class="panel panel-flat">
-            <div class="panel-heading">
-                <h6 class="panel-title">
-                    <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
-                    <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
-                </h6>
-            </div>
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Value</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var income in Model.Incomes)
-                        {
+        @*<div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
+                        <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
+                    </h6>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td class="col-lg-4">@income.Name</td>
-                                <td class="col-lg-1">@income.Date</td>
-                                <td class="col-lg-1">@income.Value </td>
-                                <td class="col-lg-1 text-right"><a href="#" class="edit-income" data-id="@income.Number"><i class="icon-pencil"></i></a></td>
-                                <td class="col-lg-1 text-right"><a href="#" class="remove-income" data-id="@income.Number"><i class="icon-cross"></i></a></td>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Value</th>
+                                <th></th>
+                                <th></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>*@
+                        </thead>
+                        <tbody>
+                            @foreach (var income in Model.Incomes)
+                            {
+                                <tr>
+                                    <td class="col-lg-4">@income.Name</td>
+                                    <td class="col-lg-1">@income.Date</td>
+                                    <td class="col-lg-1">@income.Value </td>
+                                    <td class="col-lg-1 text-right"><a href="#" class="edit-income" data-id="@income.Number"><i class="icon-pencil"></i></a></td>
+                                    <td class="col-lg-1 text-right"><a href="#" class="remove-income" data-id="@income.Number"><i class="icon-cross"></i></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>*@
 
         <div class="panel panel-flat">
             <div class="panel-heading">
@@ -110,13 +110,13 @@
                     <tbody>
                         @foreach (var expense in Model.TodayExpenses)
                         {
-                        <tr>
-                            <td class="col-lg-4">@expense.Name</td>
-                            <td class="col-lg-4">@expense.Category</td>
-                            <td class="col-lg-1">@expense.Value </td>
-                            <td class="col-lg-1 text-right"><a href="#" class="edit-expense" data-id="@expense.Id"><i class="icon-pencil"></i></a></td>
-                            <td class="col-lg-1 text-right"><a href="#" class="remove-expense" data-id="@expense.Id"><i class="icon-cross"></i></a></td>
-                        </tr>
+                            <tr>
+                                <td class="col-lg-4">@expense.Name</td>
+                                <td class="col-lg-4">@expense.Category</td>
+                                <td class="col-lg-1">@expense.Value </td>
+                                <td class="col-lg-1 text-right"><a href="#" class="edit-expense" data-id="@expense.Id"><i class="icon-pencil"></i></a></td>
+                                <td class="col-lg-1 text-right"><a href="#" class="remove-expense" data-id="@expense.Id"><i class="icon-cross"></i></a></td>
+                            </tr>
                         }
                     </tbody>
                 </table>

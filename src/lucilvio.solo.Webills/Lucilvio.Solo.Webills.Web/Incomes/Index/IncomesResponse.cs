@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
+
 using Lucilvio.Solo.Webills.Web;
+using Lucilvio.Solo.Webills.Web.Home;
 using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
@@ -28,10 +29,10 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
                 if (income == null)
                     return;
 
-                this.Id = income.Id.ToString();
-                this.Name = income.Name;
-                this.Date = income.Date.ToDateString();
-                this.Value = income.Value.DecimalToMoney();
+                //this.Id = income.Id.ToString();
+                //this.Name = income.Name;
+                //this.Date = income.Date.ToDateString();
+                //this.Value = income.Value.DecimalToMoney();
             }
 
             public object Id { get; }

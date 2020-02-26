@@ -1,6 +1,4 @@
-﻿using Lucilvio.Solo.Webills.Infraestructure.DapperDataStorage;
-
-namespace Lucilvio.Solo.Webills.Web.Home.Index
+﻿namespace Lucilvio.Solo.Webills.Web.Home.Index
 {
     public class TodayExpensesResponse
     {
@@ -9,10 +7,10 @@ namespace Lucilvio.Solo.Webills.Web.Home.Index
             if (expense == null)
                 return;
 
-            this.Name = expense.Name;
-            this.Id = expense.Id.ToString();
-            this.Category = expense.Category.ToString();
-            this.Value = expense.Value.DecimalToMoney();
+            //this.Name = expense.Name;
+            //this.Id = expense.Id.ToString();
+            //this.Category = expense.Category.ToString();
+            //this.Value = expense.Value.DecimalToMoney();
         }
 
         public string Id { get; }
