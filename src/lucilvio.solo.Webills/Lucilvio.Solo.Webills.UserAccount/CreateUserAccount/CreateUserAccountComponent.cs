@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    internal class CreateUserAccountComponent : IComponent
+    internal class CreateUserAccountComponent
     {
         private readonly ICreateUserAccountDataAccess _dataAccess;
 

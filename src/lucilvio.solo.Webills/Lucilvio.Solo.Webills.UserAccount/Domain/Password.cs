@@ -24,6 +24,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             return Value == ((Password)obj).Value;
         }
 
+
         public override int GetHashCode()
         {
             return Value.GetHashCode();

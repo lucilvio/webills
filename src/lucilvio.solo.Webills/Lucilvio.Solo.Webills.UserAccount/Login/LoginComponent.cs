@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    internal class LoginComponent : IComponent
+    internal class LoginComponent
     {
 
         private readonly ILoginDataAccess _dataAccess;

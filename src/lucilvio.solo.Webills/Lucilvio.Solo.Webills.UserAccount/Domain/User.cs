@@ -19,11 +19,16 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             this.TermAccepted = termsAccepted;
         }
 
+        internal void ChangePassword(IPassword newPassword)
+        {
+            this.Password = newPassword;
+        }
+
         public Guid Id { get; }
         public Name Name { get; }
         public Login Login { get; }
-        public IPassword Password { get; }
         public bool TermAccepted { get; }
+        public IPassword Password { get; private set; }
 
         internal class Error
         {

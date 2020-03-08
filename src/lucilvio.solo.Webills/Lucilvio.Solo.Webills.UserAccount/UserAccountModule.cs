@@ -1,25 +1,33 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
 using Lucilvio.Solo.Webills.UserAccount.Login;
 
-using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
     public class UserAccountModule
     {
-        private readonly Container _container;
+        DependencyResolverWithSimpleInjector _dependencyResolver;
 
         public UserAccountModule()
         {
-            this._container = new Container();
-            this.ResolveModuleDependencies();
+            this._dependencyResolver = new DependencyResolverWithSimpleInjector();
+        }
+
+        public async Task GenerateNewPassword(SendNewPasswordInput input, Func<GeneratedPassword, Task> onPasswordGenerate)
+        {
+            if (input == null)
+                throw new Error.ComponentInputNotInformed();
+
+            using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
+            {
+                var component = this._dependencyResolver.Container.GetInstance<GenerateNewPasswordComponent>();
+                await component.Execute(input, onPasswordGenerate);
+            }
         }
 
         public async Task Login(LoginInput input, Func<LoggedUser, Task> onLogin)
@@ -27,9 +35,9 @@ namespace Lucilvio.Solo.Webills.UserAccount
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
-            using (AsyncScopedLifestyle.BeginScope(this._container))
+            using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
-                var component = this._container.GetInstance<LoginComponent>();
+                var component = this._dependencyResolver.Container.GetInstance<LoginComponent>();
                 await component.Execute(input, onLogin);
             }
         }
@@ -39,9 +47,9 @@ namespace Lucilvio.Solo.Webills.UserAccount
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
-            using (AsyncScopedLifestyle.BeginScope(this._container))
+            using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
-                var component = this._container.GetInstance<CreateUserAccountComponent>();
+                var component = this._dependencyResolver.Container.GetInstance<CreateUserAccountComponent>();
                 await component.Execute(input, onCreate);
             }
         }
@@ -49,30 +57,6 @@ namespace Lucilvio.Solo.Webills.UserAccount
         internal class Error
         {
             public class ComponentInputNotInformed : Exception { }
-        }
-
-        private void ResolveModuleDependencies()
-        {
-            this._container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
-
-            this._container.Register<UserAccountContext>(Lifestyle.Scoped);
-
-            var currentAssembly = Assembly.GetExecutingAssembly();
-
-            var dataAccessTypes = currentAssembly.GetTypes().Where(t => t.Name.Contains("DataAccess"));
-            var c = dataAccessTypes.Where(t => !t.IsInterface);
-
-            foreach (var dataAccessType in dataAccessTypes.Where(t => t.IsInterface))
-            {
-                var concreteType = c.Where(t => dataAccessType.IsAssignableFrom(t)).FirstOrDefault();
-
-                if (concreteType != null)
-                    this._container.Register(dataAccessType, concreteType);
-            }
-
-            this._container.Collection.Register(typeof(IComponent), currentAssembly);
-
-            this._container.Verify();
         }
     }
 }

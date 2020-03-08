@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-
+using Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword;
 using Lucilvio.Solo.Webills.Clients.Web.Login;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -44,6 +44,8 @@ namespace Lucilvio.Solo.Webills.Web
             {
                 return new SecurityService(service.GetService<IHttpContextAccessor>().HttpContext);
             });
+
+            services.AddSingleton<INotificationService, NotificationByEmailService>();
 
             services.AddModules(this._configuration);
         }
