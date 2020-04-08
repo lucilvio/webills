@@ -45,7 +45,15 @@ namespace Lucilvio.Solo.Webills.Web
                 return new SecurityService(service.GetService<IHttpContextAccessor>().HttpContext);
             });
 
-            services.AddSingleton<INotificationService, NotificationByEmailService>();
+            services.AddSingleton<INotificationService>(services =>
+            {
+                var host = this._configuration.GetSection("email").GetSection("host").Value;
+                var port = int.Parse(this._configuration.GetSection("email").GetSection("port").Value);
+                var user = this._configuration.GetSection("email").GetSection("user").Value;
+                var password = this._configuration.GetSection("email").GetSection("password").Value;
+
+                return new NotificationByEmailService(host, port, user, password);
+            });
 
             services.AddModules(this._configuration);
         }

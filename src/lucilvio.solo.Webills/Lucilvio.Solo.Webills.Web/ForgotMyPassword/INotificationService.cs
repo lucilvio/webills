@@ -49,16 +49,24 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
 
     internal class NotificationByEmailService : INotificationService
     {
+        private readonly string _host;
+        private readonly int _port;
+        private readonly string _user;
+        private readonly string _password;
+
+        public NotificationByEmailService(string host, int port, string user, string password)
+        {
+            this._host = host;
+            this._port = port;
+            this._user = user;
+            this._password = password;
+        }
+
         public async Task Send(Notification notification)
         {
-            var host = "smtp.sendgrid.net";
-            var port = 587;
-            var user = "apikey";
-            var password = "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";
-
-            var smtp = new SmtpClient(host, port)
+            var smtp = new SmtpClient(this._host, this._port)
             {
-                Credentials = new NetworkCredential(user, password)
+                Credentials = new NetworkCredential(this._user, this._password)
             };
 
             var email = new MailMessage("webills@mail.com", notification.To.Mail, "New Password", notification.Message)
