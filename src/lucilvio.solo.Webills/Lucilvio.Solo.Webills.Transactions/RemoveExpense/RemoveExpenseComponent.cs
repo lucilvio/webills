@@ -5,14 +5,14 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
 {
     internal class RemoveExpenseComponent
     {
-        private readonly IRemoveIncomeDataAccess _dataAccess;
+        private readonly IRemoveExpenseDataAccess _dataAccess;
 
-        public RemoveExpenseComponent(IRemoveIncomeDataAccess dataAccess)
+        public RemoveExpenseComponent(IRemoveExpenseDataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }
 
-        public async Task Execute(IRemoveExpenseInput input)
+        public async Task Execute(RemoveExpenseInput input)
         {
             var foundUser = await _dataAccess.GetUserById(input.UserId);
 

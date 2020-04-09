@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.Web.Home
+﻿namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.AddNew
 {
     public class AddNewExpenseRequest
     {

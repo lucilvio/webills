@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-
+using Lucilvio.Solo.Webills.Clients.Web.Expenses.Index;
 using Lucilvio.Solo.Webills.Clients.Web.Home.EditIncome;
 using Lucilvio.Solo.Webills.Clients.Web.Login;
 using Lucilvio.Solo.Webills.Dashboard;
@@ -42,14 +42,14 @@ namespace Lucilvio.Solo.Webills.Web.Home
             return this.RedirectToAction(nameof(Dashboard));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseRequest request)
-        {
-            await this._transactionsModule.AddNewExpense(
-                new AddNewExpenseInputAdapter(this._authentication.User(), request), this.OnNewExpenseAdded);
+        //[HttpPost]
+        //public async Task<IActionResult> AddNewExpense([FromForm]AddNewExpenseRequest request)
+        //{
+        //    await this._transactionsModule.AddNewExpense(
+        //        new AddNewExpenseInputAdapter(this._authentication.User(), request), this.OnNewExpenseAdded);
 
-            return this.RedirectToAction(nameof(Dashboard));
-        }
+        //    return this.RedirectToAction(nameof(Dashboard));
+        //}
 
         [HttpGet]
         public async Task<JsonResult> EditIncome([FromQuery]GetIncomeRequest request)
@@ -71,27 +71,11 @@ namespace Lucilvio.Solo.Webills.Web.Home
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditExpense([FromForm]EditExpenseRequest request)
-        {
-            await this._transactionsModule.EditExpense(new EditExpenseCommandAdapter(this._authentication.User(), request));
-
-            return this.RedirectToAction(nameof(Dashboard));
-        }
-
-        [HttpPost]
         public async Task<JsonResult> RemoveIncome(RemoveIncomeRequest request)
         {
             await this._transactionsModule.RemoveIncome(new RemoveIncomeInputAdapter(this._authentication.User(), request));
 
             return new JsonResult(new { message = "Income removed" });
-        }
-
-        [HttpPost]
-        public async Task<JsonResult> RemoveExpense(RemoveExpenseRequest request)
-        {
-            await this._transactionsModule.RemoveExpense(new RemoveExpenseInputAdapter(this._authentication.User(), request));
-
-            return new JsonResult(new { message = "Expense removed" });
         }
 
         private async Task OnNewExpenseAdded(NewAddedExpense addedExpense)

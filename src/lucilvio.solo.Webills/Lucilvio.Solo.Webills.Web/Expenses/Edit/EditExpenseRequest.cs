@@ -1,7 +1,6 @@
-﻿using Lucilvio.Solo.Webills.Web.Shared;
-using System;
+﻿using System;
 
-namespace Lucilvio.Solo.Webills.Web.Home
+namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Edit
 {
     public class EditExpenseRequest
     {

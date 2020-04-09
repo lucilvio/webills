@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+
 using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 

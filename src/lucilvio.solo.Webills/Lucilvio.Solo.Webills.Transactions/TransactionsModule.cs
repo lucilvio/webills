@@ -87,7 +87,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task EditExpense(IEditExpenseInput input)
+        public async Task EditExpense(EditExpenseInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -111,7 +111,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task AddNewExpense(IAddNewExpenseInput input, Func<NewAddedExpense, Task> onAddExpense)
+        public async Task AddNewExpense(AddNewExpenseInput input, Func<NewAddedExpense, Task> onAddExpense)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -135,7 +135,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task RemoveExpense(IRemoveExpenseInput input)
+        public async Task RemoveExpense(RemoveExpenseInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();

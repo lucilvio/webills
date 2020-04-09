@@ -11,10 +11,10 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 
         public AddNewExpenseComponent(IAddNewExpenseDataAccess dataAccess)
         {
-            this._dataAccess = dataAccess ?? throw new System.ArgumentNullException(nameof(dataAccess));
+            this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task Execute(IAddNewExpenseInput input, Func<NewAddedExpense, Task> onAddExpense)
+        public async Task Execute(AddNewExpenseInput input, Func<NewAddedExpense, Task> onAddExpense)
         {
             var foundUser = await this._dataAccess.GetUserById(input.UserId);
 
