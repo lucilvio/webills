@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.EditExpense
 {
-    internal class EditExpenseComponent : IComponent
+    internal class EditExpenseComponent
     {
         private readonly IEditExpenseDataAccess _dataStorage;
 

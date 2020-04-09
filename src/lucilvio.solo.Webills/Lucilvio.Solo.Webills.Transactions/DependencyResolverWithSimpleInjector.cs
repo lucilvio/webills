@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-
+using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
-namespace Lucilvio.Solo.Webills.UserAccount
+namespace Lucilvio.Solo.Webills.Transactions
 {
     internal class DependencyResolverWithSimpleInjector
     {
@@ -27,7 +25,9 @@ namespace Lucilvio.Solo.Webills.UserAccount
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             var currentAssembly = Assembly.GetExecutingAssembly();
 
-            container.Register<UserAccountContext>(Lifestyle.Scoped);
+            container.Register<TransactionsContext>(Lifestyle.Scoped);
+            container.Register<TransactionsReadContext>(Lifestyle.Scoped);
+
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("DataAccess"), Lifestyle.Scoped);
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("Service"), Lifestyle.Singleton);
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("Component"), Lifestyle.Scoped);

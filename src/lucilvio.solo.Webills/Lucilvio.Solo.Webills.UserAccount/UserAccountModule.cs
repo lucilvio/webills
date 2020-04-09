@@ -11,7 +11,7 @@ namespace Lucilvio.Solo.Webills.UserAccount
 {
     public class UserAccountModule
     {
-        DependencyResolverWithSimpleInjector _dependencyResolver;
+        readonly DependencyResolverWithSimpleInjector _dependencyResolver;
 
         public UserAccountModule()
         {
@@ -42,7 +42,7 @@ namespace Lucilvio.Solo.Webills.UserAccount
             }
         }
 
-        public async Task CreateNewUserAccount(ICreateUserAccountInput input, Func<UserAccountCreated, Task> onCreate)
+        public async Task CreateNewUserAccount(CreateUserAccountInput input, Func<UserAccountCreated, Task> onCreate)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();

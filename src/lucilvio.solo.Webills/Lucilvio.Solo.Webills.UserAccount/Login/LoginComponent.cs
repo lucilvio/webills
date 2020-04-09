@@ -7,7 +7,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
     internal class LoginComponent
     {
-
         private readonly ILoginDataAccess _dataAccess;
 
         public LoginComponent(ILoginDataAccess dataAccess)

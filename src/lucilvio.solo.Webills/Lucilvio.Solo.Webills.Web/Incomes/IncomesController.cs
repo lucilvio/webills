@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,20 +13,18 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
     public class IncomesController : Controller
     {
         private readonly IAuthentication _auth;
-        private readonly IGetUserIncomesByFilterQueryHandler _incomesQueryHandler;
 
-        public IncomesController(IAuthentication auth, IGetUserIncomesByFilterQueryHandler incomesQueryHandler)
+        public IncomesController(IAuthentication auth)
         {
             this._auth = auth;
-            this._incomesQueryHandler = incomesQueryHandler;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices]TransactionsModule transactionsModule)
         {
-            var result = await this._incomesQueryHandler.Execute(new GetUserIncomesByFilterQuery(this._auth.User().Id));
+            var result = await transactionsModule.GetIncomesByFilter(new GetIncomesByFilterInput(this._auth.User().Id));
 
-            return View(new IncomesResponse(result));
+            return this.View(new IncomesResponse(result));
         }
     }
 }

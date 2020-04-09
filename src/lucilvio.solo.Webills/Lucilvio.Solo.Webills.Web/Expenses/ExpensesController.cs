@@ -2,6 +2,8 @@
 
 using Lucilvio.Solo.Webills.Clients.Web.Expenses.Index;
 using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,19 +14,17 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
     public class ExpensesController : Controller
     {
         private readonly IAuthentication _auth;
-        private readonly IGetUserExpensesByFilterQueryHandler _getUserExpensesByFilterQueryHandler;
 
-        public ExpensesController(IAuthentication auth, IGetUserExpensesByFilterQueryHandler getUserExpensesByFilterQueryHandler)
+        public ExpensesController(IAuthentication auth)
         {
             this._auth = auth;
-            this._getUserExpensesByFilterQueryHandler = getUserExpensesByFilterQueryHandler;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices]TransactionsModule transactionsModule)
         {
-            var result = await this._getUserExpensesByFilterQueryHandler.Execute(null);
+            var foundExpenses = await transactionsModule.GetExpensesByFilter(new GetExpensesByFilterInput(this._auth.User().Id));
 
-            return View(new ExpensesResponse(result));
+            return this.View(new ExpensesResponse(foundExpenses));
         }
     }
 }

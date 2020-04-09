@@ -3,7 +3,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.CreateUser
 {
-    internal class CreateUserComponent : IComponent
+    internal class CreateUserComponent
     {
         private readonly ICreateUserDataAccess _dataAccess;
 

@@ -2,7 +2,7 @@
 {
     public class GeneratedPassword
     {
-        public GeneratedPassword(string userName, string userContact, string password)
+        internal GeneratedPassword(string userName, string userContact, string password)
         {
             this.UserName = userName;
             this.UserContact = userContact;

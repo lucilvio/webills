@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
 {
-    internal class RemoveExpenseDataAccess : IRemoveIncomeDataAccess
+    internal class RemoveExpenseDataAccess : IRemoveExpenseDataAccess
     {
         private readonly TransactionsContext _context;
 

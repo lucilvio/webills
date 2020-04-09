@@ -26,7 +26,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
         [HttpPost]
         public async Task<IActionResult> Login([FromServices]UserAccountModule userAccountModule, [FromForm]LoginRequest request)
         {
-            await userAccountModule.Login(new LoginInputAdapter(request), this.OnUserLogin);
+            await userAccountModule.Login(new LoginInput(request.Login, request.Password), this.OnUserLogin);
 
             return RedirectToAction(nameof(HomeController.Dashboard), "Home");
         }

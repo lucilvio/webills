@@ -7,7 +7,7 @@ using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
 
 namespace Lucilvio.Solo.Webills.Transactions.GetIncome
 {
-    internal class GetIncomeComponent : IComponent
+    internal class GetIncomeComponent
     {
         private readonly TransactionsReadContext _context;
 

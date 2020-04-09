@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
-    internal class AddNewExpenseComponent : IComponent
+    internal class AddNewExpenseComponent
     {
         private readonly IAddNewExpenseDataAccess _dataAccess;
 

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Clients.Web.Home.EditExpense;
 using Lucilvio.Solo.Webills.Clients.Web.Home.EditIncome;
 using Lucilvio.Solo.Webills.Clients.Web.Login;
 using Lucilvio.Solo.Webills.Dashboard;
@@ -32,7 +31,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             var loggedUser = this._authentication.User();
             //var result = await this._dashboardModule.ExecuteQuery<GetUserDashboardQueryResult>(new GetUserDashboardQuery(loggedUser.Id));
 
-            return View(new UserTransactionsInformationResponse(null));
+            return this.View(new UserTransactionsInformationResponse(null));
         }
 
         [HttpPost]
@@ -40,7 +39,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
         {
             await this._transactionsModule.AddNewIncome(new AddNewIncomeInputAdapter(this._authentication.User(), request));
 
-            return RedirectToAction(nameof(Dashboard));
+            return this.RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
@@ -49,7 +48,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
             await this._transactionsModule.AddNewExpense(
                 new AddNewExpenseInputAdapter(this._authentication.User(), request), this.OnNewExpenseAdded);
 
-            return RedirectToAction(nameof(Dashboard));
+            return this.RedirectToAction(nameof(Dashboard));
         }
 
         [HttpGet]
@@ -63,23 +62,12 @@ namespace Lucilvio.Solo.Webills.Web.Home
             return new JsonResult(new { income = foundIncome });
         }
 
-        [HttpGet]
-        public async Task<JsonResult> EditExpense([FromQuery]GetExpenseRequest request)
-        {
-            var foundExpense = await this._transactionsModule.GetExpense(new GetExpenseInputAdapter(this._authentication.User(), request));
-
-            if (foundExpense == null)
-                return new JsonResult(new { error = "Expense not found" });
-
-            return new JsonResult(new { expense = foundExpense });
-        }
-
         [HttpPost]
         public async Task<ActionResult> EditIncome([FromForm]EditIncomeRequest request)
         {
             await this._transactionsModule.EditIncome(new EditIncomeInputAdapter(this._authentication.User(), request));
 
-            return RedirectToAction(nameof(Dashboard));
+            return this.RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]
@@ -87,7 +75,7 @@ namespace Lucilvio.Solo.Webills.Web.Home
         {
             await this._transactionsModule.EditExpense(new EditExpenseCommandAdapter(this._authentication.User(), request));
 
-            return RedirectToAction(nameof(Dashboard));
+            return this.RedirectToAction(nameof(Dashboard));
         }
 
         [HttpPost]

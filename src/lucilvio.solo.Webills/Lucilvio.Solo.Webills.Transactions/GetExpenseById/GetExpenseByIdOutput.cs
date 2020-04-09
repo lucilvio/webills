@@ -2,9 +2,9 @@
 
 namespace Lucilvio.Solo.Webills.Transactions.GetExpense
 {
-    public class GetExpenseOutput
+    public class GetExpenseByIdOutput
     {
-        internal GetExpenseOutput() { }
+        internal GetExpenseByIdOutput() { }
 
         public Guid Id { get; internal set; }
         public string Name { get; internal set; }

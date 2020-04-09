@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
 {
-    internal class AddNewIncomeComponent : IComponent
+    internal class AddNewIncomeComponent
     {
         private readonly IAddNewIncomeDataAccess _dataStorage;
 

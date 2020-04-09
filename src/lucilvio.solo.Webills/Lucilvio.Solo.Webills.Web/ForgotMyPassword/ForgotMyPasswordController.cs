@@ -1,7 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
@@ -11,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -28,7 +29,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
                     @$"Hey <b>{generatedPassword.UserName}</b><br>Here is your new password: <b>{generatedPassword.Password}</b>"));
             });
 
-            return RedirectToAction("Index", "Login");
+            return this.RedirectToAction("Index", "Login");
         }
     }
 }

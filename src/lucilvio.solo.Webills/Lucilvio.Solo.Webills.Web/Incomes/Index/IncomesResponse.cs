@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter;
 using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Web.Home;
 using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
@@ -14,9 +14,9 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
             this.Incomes = new List<IncomeFromList>();
         }
 
-        public IncomesResponse(GetUserIncomesByFilterQueryResult result) : this()
+        public IncomesResponse(GetIncomesByFilterOutput result) : this()
         {
-            if (result.HasIncomes)
+            if (result != null)
                 this.Incomes = result.Incomes.Select(i => new IncomeFromList(i));
         }
 
@@ -24,15 +24,15 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 
         public class IncomeFromList
         {
-            public IncomeFromList(UserIncomeData income)
+            public IncomeFromList(GetIncomesByFilterOutput.Income income)
             {
                 if (income == null)
                     return;
 
-                //this.Id = income.Id.ToString();
-                //this.Name = income.Name;
-                //this.Date = income.Date.ToDateString();
-                //this.Value = income.Value.DecimalToMoney();
+                this.Id = income.Id.ToString();
+                this.Name = income.Name;
+                this.Date = income.Date.ToDateString();
+                this.Value = income.Value.DecimalToMoney();
             }
 
             public object Id { get; }

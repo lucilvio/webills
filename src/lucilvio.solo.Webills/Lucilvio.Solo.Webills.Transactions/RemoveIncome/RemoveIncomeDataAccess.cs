@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Lucilvio.Solo.Webills.Transactions.Domain;
 using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
