@@ -1,10 +1,8 @@
-﻿@inject Lucilvio.Solo.Webills.Clients.Web.Login.IAuthentication Authentication
-
-@model Lucilvio.Solo.Webills.Clients.Web.Expenses.Index.ExpensesResponse
+﻿@model Lucilvio.Solo.Webills.Clients.Web.Incomes.IncomesResponse
 @{
     Layout = "_Layout";
-    ViewData["title"] = "Expenses";
-    ViewData["icon"] = "icon-subtract";
+    ViewData["title"] = "Incomes";
+    ViewData["icon"] = "icon-add";
 }
 
 <div class="row">
@@ -12,8 +10,8 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">
-                    <span class="text-semibold"><i class="icon-subtract text-warning"></i> &nbsp;Expenses</span>
-                    <button type="submit" data-toggle="modal" data-target="#modal-new-expense" class="btn btn-primary btn-xs pull-right"> New Expense </button>
+                    <span class="text-semibold"><i class="icon-add text-success"></i> &nbsp; Incomes</span>
+                    <button type="submit" data-toggle="modal" data-target="#modal-new-income" class="btn btn-primary btn-xs pull-right"> New Income </button>
                 </h6>
             </div>
 
@@ -22,21 +20,21 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Category</th>
+                            <th>Date</th>
                             <th>Value</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var expense in Model.Expenses)
+                        @foreach (var income in Model.Incomes)
                         {
                             <tr>
-                                <td class="col-lg-4">@expense.Name</td>
-                                <td class="col-lg-4">@expense.Category</td>
-                                <td class="col-lg-1">@expense.Value </td>
-                                <td class="col-lg-1 text-right"><a href="#" class="edit-expense" data-id="@expense.Id"><i class="icon-pencil"></i></a></td>
-                                <td class="col-lg-1 text-right"><a href="#" class="remove-expense" data-id="@expense.Id"><i class="icon-cross"></i></a></td>
+                                <td class="col-lg-8">@income.Name</td>
+                                <td class="col-lg-1">@income.Date</td>
+                                <td class="col-lg-1">@income.Value </td>
+                                <td class="col-lg-1 text-right"><a href="#" class="edit-income" data-id="@income.Id"><i class="icon-pencil"></i></a></td>
+                                <td class="col-lg-1 text-right"><a href="#" class="remove-income" data-id="@income.Id"><i class="icon-cross"></i></a></td>
                             </tr>
                         }
                     </tbody>
@@ -62,32 +60,34 @@
     </div>
 </div>
 
-@Html.PartialAsync("../Edit/_EditExpense.cshtml").GetAwaiter().GetResult()
-@Html.PartialAsync("../AddNew/_AddNewExpense.cshtml").GetAwaiter().GetResult()
+@Html.PartialAsync("_AddNewIncome.cshtml").GetAwaiter().GetResult()
+@Html.PartialAsync("_EditIncome.cshtml").GetAwaiter().GetResult()
 
 @section Scripts {
     <script>
-        $(".edit-expense").click(function () {
+        $(".edit-income").click(function () {
             var id = $(this).data("id");
 
-            $.getJSON("/Expenses/" + id)
+            $.getJSON("/Incomes/" + id)
                 .done(function (data) {
-                    var expense = data.expense;
+                    var income = data.income;
 
-                    $.each(expense, function (name, value) {
-                        $("#form-edit-expense").find("[name = '" + name + "']").val(value);
+                    $("#income-title-name").val(income.name);
+
+                    $.each(income, function (name, value) {
+                        $("#form-edit-income input[name='" + name + "']").val(value);
                     });
 
-                    $("#modal-edit-expense").modal("show");
+                    $("#modal-edit-income").modal("show");
                 }).fail(function (error) {
                     alert(error.responseText);
                 });
         });
 
-        $(".remove-expense").click(function () {
+        $(".remove-income").click(function () {
             var id = $(this).data("id");
-
-            $.post("/Expenses/Remove", { Id: id })
+            
+            $.post("/Incomes/Remove", { id: id })
                 .done(function (data) {
                     alert(data.message);
                     location.reload();

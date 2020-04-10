@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetIncome
+namespace Lucilvio.Solo.Webills.Transactions.GetIncomeById
 {
-    public class GetIncomeOutput
+    public class GetIncomeByIdOutput
     {
-        internal GetIncomeOutput() { }
+        internal GetIncomeByIdOutput() { }
 
         public Guid Id { get; internal set; }
         public string Name { get; internal set; }
         public DateTime Date { get; internal set; }
-        public string Category { get; internal set; }
         public decimal Value { get; internal set; }
     }
 }

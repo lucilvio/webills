@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Clients.Web.Home.EditIncome
+namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 {
     public class GetIncomeRequest
     {

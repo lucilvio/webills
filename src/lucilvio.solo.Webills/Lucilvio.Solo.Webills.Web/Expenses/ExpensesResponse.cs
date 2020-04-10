@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter;
 using Lucilvio.Solo.Webills.Web;
 using Lucilvio.Solo.Webills.Web.Shared;
 
-namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Index
+namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
 {
     public class ExpensesResponse
     {
@@ -33,7 +33,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Index
                 this.Name = expense.Name;
                 this.Date = expense.Date.ToDateString();
                 this.Value = expense.Value.DecimalToMoney();
-                this.Category = expense.Category;
+                this.Category = expense.CategoryName;
             }
 
             public string Id { get; }

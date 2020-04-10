@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
             _dataStorage = dataStorage;
         }
 
-        public async Task Execute(IEditIncomeInput input)
+        public async Task Execute(EditIncomeInput input)
         {
             var foundUser = await _dataStorage.GetUserById(input.UserId);
 

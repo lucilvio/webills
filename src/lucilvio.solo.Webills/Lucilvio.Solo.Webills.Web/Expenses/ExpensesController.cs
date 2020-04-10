@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Clients.Web.Expenses.AddNew;
-using Lucilvio.Solo.Webills.Clients.Web.Expenses.Edit;
-using Lucilvio.Solo.Webills.Clients.Web.Expenses.Index;
-using Lucilvio.Solo.Webills.Clients.Web.Expenses.Remove;
 using Lucilvio.Solo.Webills.Clients.Web.Login;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
@@ -49,13 +45,13 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
             return new JsonResult(new { expense = new GetExpenseResponse(foundExpense) });
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> Post([FromForm]AddNewExpenseRequest request)
         {
-            await this._transactionsModule.AddNewExpense(new AddNewExpenseInput(this._auth.User().Id, 
+            await this._transactionsModule.AddNewExpense(new AddNewExpenseInput(this._auth.User().Id,
                 request.Name, request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal()), null);
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(Index));
         }
 
         [HttpPost]

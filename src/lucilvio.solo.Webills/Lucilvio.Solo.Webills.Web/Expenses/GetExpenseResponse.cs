@@ -4,7 +4,7 @@ using Lucilvio.Solo.Webills.Transactions.GetExpense;
 using Lucilvio.Solo.Webills.Web;
 using Lucilvio.Solo.Webills.Web.Shared;
 
-namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Index
+namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
 {
     public class GetExpenseResponse
     {

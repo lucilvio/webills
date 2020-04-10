@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter
         {
             using (var connection = this._context.Connection)
             {
-                var sql = "select Id, Name, Category, Date, Value from Transactions.Expenses where UserId = @userId";
+                var sql = "select Id, Name, Date, Value from Transactions.Incomes where UserId = @userId";
 
                 var result = await connection.QueryAsync<GetIncomesByFilterOutput.Income>(sql, new { input.UserId });
                 return new GetIncomesByFilterOutput(result);

@@ -23,9 +23,9 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
             return this._context.Users.Include(u => u.Incomes).FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task Persist(Guid incomeId)
+        public async Task Persist(Guid id)
         {
-            this._context.Entry(this._context.Set<Income>().FirstOrDefault(e => e.Id == incomeId)).State = EntityState.Deleted;
+            this._context.Entry(this._context.Set<Income>().FirstOrDefault(e => e.Id == id)).State = EntityState.Deleted;
 
             await this._context.SaveChangesAsync();
         }

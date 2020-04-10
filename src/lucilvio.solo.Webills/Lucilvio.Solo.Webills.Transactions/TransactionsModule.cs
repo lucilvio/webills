@@ -8,7 +8,7 @@ using Lucilvio.Solo.Webills.Transactions.EditExpense;
 using Lucilvio.Solo.Webills.Transactions.EditIncome;
 using Lucilvio.Solo.Webills.Transactions.GetExpense;
 using Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter;
-using Lucilvio.Solo.Webills.Transactions.GetIncome;
+using Lucilvio.Solo.Webills.Transactions.GetIncomeById;
 using Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter;
 using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
 using Lucilvio.Solo.Webills.Transactions.RemoveIncome;
@@ -38,6 +38,18 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
+        public async Task<GetIncomeByIdOutput> GetIncomeById(GetIncomeByIdInput input)
+        {
+            if (input == null)
+                throw new Error.ComponentInputNotInformed();
+
+            using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
+            {
+                var component = this._dependencyResolver.Container.GetInstance<GetIncomeByIdComponent>();
+                return await component.Execute(input);
+            }
+        }
+
         public async Task<GetExpensesByFilterOutput> GetExpensesByFilter(GetExpensesByFilterInput input)
         {
             if (input == null)
@@ -50,7 +62,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task AddNewIncome(IAddNewIncomeInput input)
+        public async Task AddNewIncome(AddNewIncomeInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -62,20 +74,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-
-        public async Task<GetIncomeOutput> GetIncome(IGetIncomeInput input)
-        {
-            if (input == null)
-                throw new Error.ComponentInputNotInformed();
-
-            using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
-            {
-                var component = this._dependencyResolver.Container.GetInstance<GetIncomeComponent>();
-                return await component.Execute(input);
-            }
-        }
-
-        public async Task EditIncome(IEditIncomeInput input)
+        public async Task EditIncome(EditIncomeInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -123,7 +122,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task RemoveIncome(IRemoveIncomeInput input)
+        public async Task RemoveIncome(RemoveIncomeInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -147,7 +146,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public Task<GetIncomesByFilterOutput> GetIncomesByFilter(GetIncomesByFilterInput input)
+        public async Task<GetIncomesByFilterOutput> GetIncomesByFilter(GetIncomesByFilterInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -155,7 +154,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<GetIncomesByFilterComponent>();
-                return component.Execute(input);
+                return await component.Execute(input);
             }
         }
 

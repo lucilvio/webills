@@ -140,12 +140,6 @@
     </div>
 </div>
 
-@Html.PartialAsync("../AddNewIncome/AddNewIncome.cshtml").GetAwaiter().GetResult()
-@*@Html.PartialAsync("../AddNewExpense/AddNewExpense.cshtml").GetAwaiter().GetResult()*@
-@Html.PartialAsync("../EditIncome/EditIncome.cshtml").GetAwaiter().GetResult()
-@*@Html.PartialAsync("../EditExpense/EditExpense.cshtml").GetAwaiter().GetResult()*@
-@Html.PartialAsync("../RemoveExpense/RemoveExpense.cshtml").GetAwaiter().GetResult()
-
 @section Scripts {
     <script>
         $(".edit-income").click(function () {

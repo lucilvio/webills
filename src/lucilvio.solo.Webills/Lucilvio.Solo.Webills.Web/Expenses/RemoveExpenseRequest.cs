@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Clients.Web.Expenses.Remove
+namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
 {
     public class RemoveExpenseRequest
     {

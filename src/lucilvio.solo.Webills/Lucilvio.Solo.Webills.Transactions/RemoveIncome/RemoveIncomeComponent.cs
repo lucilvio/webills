@@ -13,16 +13,16 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
             _dataAccess = dataAccess;
         }
 
-        public async Task Execute(IRemoveIncomeInput input)
+        public async Task Execute(RemoveIncomeInput input)
         {
             var foundUser = await _dataAccess.GetUserById(input.UserId);
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
 
-            foundUser.RemoveIncome(input.IncomeId);
+            foundUser.RemoveIncome(input.Id);
 
-            await _dataAccess.Persist(input.IncomeId);
+            await _dataAccess.Persist(input.Id);
         }
 
         internal class Error

@@ -28,7 +28,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
         {
             await userAccountModule.Login(new LoginInput(request.Login, request.Password), this.OnUserLogin);
 
-            return RedirectToAction(nameof(HomeController.Dashboard), "Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         private async Task OnUserLogin(LoggedUser loggedUser)

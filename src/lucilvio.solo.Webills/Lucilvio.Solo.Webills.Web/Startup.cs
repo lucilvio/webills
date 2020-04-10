@@ -30,6 +30,7 @@ namespace Lucilvio.Solo.Webills.Web
                 options.ViewLocationExpanders.Clear();
                 options.ViewLocationFormats.Add("/Shared/{0}" + RazorViewEngine.ViewExtension);
                 options.ViewLocationFormats.Add("/{1}/{0}/{0}" + RazorViewEngine.ViewExtension);
+                options.ViewLocationFormats.Add("/{1}/{0}" + RazorViewEngine.ViewExtension);
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -72,6 +73,7 @@ namespace Lucilvio.Solo.Webills.Web
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller}/{action}/{id?}", new
@@ -82,7 +84,7 @@ namespace Lucilvio.Solo.Webills.Web
                 endpoints.MapControllerRoute("home", "{controller}/{action}/{id?}", new
                 {
                     Controller = "Home",
-                    Action = "Dashboard"
+                    Action = "Index"
                 });
             });
         }

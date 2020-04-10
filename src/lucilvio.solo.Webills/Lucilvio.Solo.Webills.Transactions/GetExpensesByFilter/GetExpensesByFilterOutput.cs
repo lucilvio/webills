@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter
 {
@@ -20,7 +21,8 @@ namespace Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter
             public Guid Id { get; internal set; }
             public string Name { get; internal set; }
             public DateTime Date { get; internal set; }
-            public string Category { get; internal set; }
+            public int Category { get; internal set; }
+            public string CategoryName => ((Category)this.Category).ToString();
             public decimal Value { get; internal set; }
         }
     }
