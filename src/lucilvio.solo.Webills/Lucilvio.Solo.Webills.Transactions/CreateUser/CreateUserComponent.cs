@@ -13,7 +13,7 @@ namespace Lucilvio.Solo.Webills.Transactions.CreateUser
             this._dataAccess = dataAccess;
         }
 
-        public async Task Execute(ICreateUserInput command)
+        public async Task Execute(CreateUserInput command)
         {
             var newUser = new User(command.Id);
             await this._dataAccess.Persist(newUser);

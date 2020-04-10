@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Lucilvio.Solo.Webills.Web.Home
 {
     [Authorize]
-    [Route("Home")]
     public class HomeController : Controller
     {
         private readonly IAuthentication _authentication;
@@ -23,7 +22,6 @@ namespace Lucilvio.Solo.Webills.Web.Home
         }
 
         [HttpGet]
-        [Route("")]
         public async Task<IActionResult> Index()
         {
             var loggedUser = this._authentication.User();

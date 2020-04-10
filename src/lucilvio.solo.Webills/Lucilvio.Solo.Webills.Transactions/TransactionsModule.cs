@@ -26,7 +26,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             this._dependencyResolver = new DependencyResolverWithSimpleInjector();
         }
 
-        public async Task CreateUser(ICreateUserInput input)
+        public async Task CreateUser(CreateUserInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();

@@ -2,6 +2,7 @@
 
 using Lucilvio.Solo.Webills.Clients.Web.Login;
 using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Transactions.CreateUser;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
 
@@ -38,7 +39,7 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
 
         private async Task OnUserAccountCreated(UserAccountCreated userAccountCreated)
         {
-            await this._transactionsModule.CreateUser(new CreateUserInputAdapter(userAccountCreated));
+            await this._transactionsModule.CreateUser(new CreateUserInput(userAccountCreated.Id));
         }
     }
 }
