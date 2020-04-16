@@ -27,10 +27,9 @@ namespace Lucilvio.Solo.Webills.Dashboard.Infraestructure.DataAccess
                 if not exists ( select name from sys.schemas where name = N'dashboard' )
                     exec sp_executesql N'create schema dashboard' 
                 if not exists ( select * from [lucilvio.solo.webills].dbo.sysobjects where name = N'Transactions' and xType = 'U' )
-	                create table dashboard.Transactions(UserId uniqueidentifier not null, TransactionId uniqueidentifier not null, 
-                    Name varchar(256) not null, Date datetime2 not null, Value decimal(18, 2) not null, Category int not null, 
-                    CategoryName varchar(256) not null, Income bit not null, Expense bit not null) 
-            ";
+	                create table dashboard.Transactions(UserId uniqueidentifier not null, Id uniqueidentifier not null, 
+                    Name varchar(256) not null, Date datetime2 not null, Value decimal(18, 2) not null, Category int null, 
+                    IsIncome bit not null, IsExpense bit not null)";
 
             connection.Execute(sql);
         }

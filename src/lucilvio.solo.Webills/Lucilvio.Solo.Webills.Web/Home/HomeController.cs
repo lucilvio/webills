@@ -2,6 +2,7 @@
 
 using Lucilvio.Solo.Webills.Clients.Web.Login;
 using Lucilvio.Solo.Webills.Dashboard;
+using Lucilvio.Solo.Webills.Dashboard.GetUserDashboardInfo;
 using Lucilvio.Solo.Webills.Transactions;
 
 using Microsoft.AspNetCore.Authorization;
@@ -25,9 +26,9 @@ namespace Lucilvio.Solo.Webills.Web.Home
         public async Task<IActionResult> Index()
         {
             var loggedUser = this._authentication.User();
-            //var result = await this._dashboardModule.ExecuteQuery<GetUserDashboardQueryResult>(new GetUserDashboardQuery(loggedUser.Id));
+            var result = await this._dashboardModule.GetDashboardInfoByFilter(new GetDashboardInfoByFilterInput(loggedUser.Id));
 
-            return this.View(new UserTransactionsInformationResponse(null));
+            return this.View(new UserTransactionsInformationResponse(result));
         }
     }
 }

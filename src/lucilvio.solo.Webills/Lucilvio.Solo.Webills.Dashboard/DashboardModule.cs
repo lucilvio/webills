@@ -1,52 +1,62 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Dashboard.AddExpense;
-using Lucilvio.Solo.Webills.Dashboard.Infraestructure.DataAccess;
-
-using SimpleInjector;
-using SimpleInjector.Lifestyles;
+using Lucilvio.Solo.Webills.Dashboard.EditTransaction;
+using Lucilvio.Solo.Webills.Dashboard.GetUserDashboardInfo;
+using Lucilvio.Solo.Webills.Dashboard.RemoveTransaction;
 
 namespace Lucilvio.Solo.Webills.Dashboard
 {
     public class DashboardModule
     {
-        private readonly Container _container;
+        private readonly DependencyResolverWithSimpleInjector _dependencyResolver;
 
         public DashboardModule()
         {
-            this._container = new Container();
-            this.ResolveModuleDependencies();
+            this._dependencyResolver = new DependencyResolverWithSimpleInjector();
         }
 
-        public async Task AddExpense(IAddExpenseInput input)
+        public async Task AddTransaction(AddTransactionInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
-            using (AsyncScopedLifestyle.BeginScope(this._container))
-            {
-                var component = this._container.GetInstance<AddExpenseComponent>();
-                await component.Execute(input);
-            }
+            var component = this._dependencyResolver.Container.GetInstance<AddTransactionComponent>();
+            await component.Execute(input);
         }
 
-        private void ResolveModuleDependencies()
+        public async Task EditTransaction(EditTransactionInput input)
         {
-            this._container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+            if (input == null)
+                throw new Error.ComponentInputNotInformed();
 
-            this._container.Register<DashBoardContext>(Lifestyle.Scoped);
+            var component = this._dependencyResolver.Container.GetInstance<EditTransactionComponent>();
+            await component.Execute(input);
+        }
 
-            var currentAssembly = Assembly.GetExecutingAssembly();
-            this._container.Collection.Register(typeof(IComponent), currentAssembly);
+        public async Task RemoveTransaction(RemoveTransactionInput input)
+        {
+            if (input == null)
+                throw new Error.ComponentInputNotInformed();
 
-            _container.Verify();
+            var component = this._dependencyResolver.Container.GetInstance<RemoveTransactionComponent>();
+            await component.Execute(input);
+        }
+
+        public async Task<GetDashboardInfoByFilterOutput> GetDashboardInfoByFilter(GetDashboardInfoByFilterInput input)
+        {
+            if (input == null)
+                throw new Error.ComponentInputNotInformed();
+
+            var component = this._dependencyResolver.Container.GetInstance<GetDashboardInfoByFilterComponent>();
+            return await component.Execute(input);
         }
 
         internal class Error
         {
             public class ComponentInputNotInformed : Exception { }
         }
+
     }
 }

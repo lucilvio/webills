@@ -17,7 +17,7 @@ namespace Lucilvio.Solo.Webills.Web
                 return 0m;
 
             if (char.IsNumber(value[0]))
-                value = $"{new RegionInfo(GetThreadCulture().LCID).CurrencySymbol}{value}";
+                value = $"{new RegionInfo(GetThreadCulture().LCID).CurrencySymbol} {value}";
             
             return decimal.Parse(value, NumberStyles.Number | NumberStyles.Currency, GetNumberFormarter());
         }
@@ -29,7 +29,8 @@ namespace Lucilvio.Solo.Webills.Web
             numberFormater.CurrencyDecimalDigits = 2;
             numberFormater.CurrencyGroupSeparator = ".";
             numberFormater.CurrencyDecimalSeparator = ",";
-            numberFormater.CurrencySymbol = new RegionInfo(GetThreadCulture().LCID).CurrencySymbol;
+            numberFormater.CurrencyNegativePattern = 1; 
+            numberFormater.CurrencySymbol = $"{new RegionInfo(GetThreadCulture().LCID).CurrencySymbol} ";
 
             return numberFormater;
         }

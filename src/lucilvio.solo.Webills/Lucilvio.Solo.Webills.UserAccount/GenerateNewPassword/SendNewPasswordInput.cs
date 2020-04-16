@@ -7,6 +7,6 @@
             Email = email;
         }
 
-        public string Email { get; }
+        internal string Email { get; }
     }
 }

@@ -6,30 +6,32 @@ using Lucilvio.Solo.Webills.Dashboard.Infraestructure.DataAccess;
 
 namespace Lucilvio.Solo.Webills.Dashboard.AddExpense
 {
-    internal class AddExpenseComponent : IComponent
+    internal class AddTransactionComponent
     {
         private readonly DashBoardContext _context;
 
-        public AddExpenseComponent(DashBoardContext context)
+        public AddTransactionComponent(DashBoardContext context)
         {
             this._context = context;
         }
 
-        public async Task Execute(IAddExpenseInput input)
+        public async Task Execute(AddTransactionInput input)
         {
             using (var connection = this._context.Connection)
             {
-                var sql = "insert into dashboard.Transactions values(@userId, @transactionId, @name, @date, @value, @category, @categoryName, 0, 1)";
+                var sql = @"insert into dashboard.Transactions values(@userId, @id, @name, @date, @value, 
+                    @category, @isIncome, @isExpense)";
 
                 await connection.ExecuteAsync(sql, new
                 {
+                    id = input.Id,
                     userId = input.UserId,
-                    transactionId = input.TransactionId,
                     name = input.Name,
                     date = input.Date,
                     value = input.Value,
                     category = input.Category,
-                    categoryName = input.CategoryName
+                    isIncome = input.IsIncome,
+                    isExpense = input.IsExpense
                 });
             }
         }

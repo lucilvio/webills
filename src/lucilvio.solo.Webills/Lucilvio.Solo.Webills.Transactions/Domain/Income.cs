@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Transactions.Domain
 {
-    class Income
+    internal class Income
     {
         private Income()
         {
@@ -24,14 +24,22 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         }
 
         public Guid Id { get; }
-        public string Name { get; }
-        public DateTime Date { get; }
-        public TransactionValue Value { get; }
+        public string Name { get; private set; }
+        public DateTime Date { get; private set; }
+        public TransactionValue Value { get; private set; }
+
+        internal void Change(string name, DateTime date, TransactionValue value)
+        {
+            this.Name = name;
+            this.Date = date;
+            this.Value = value;
+        }
 
         class Error
         {
             internal class IncomeMustHaveName : Exception { }
             internal class IncomeTransactionValueCannotBeNull : Exception { }
         }
+
     }
 }

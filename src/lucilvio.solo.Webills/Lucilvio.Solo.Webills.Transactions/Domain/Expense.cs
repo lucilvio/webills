@@ -27,10 +27,18 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         }
 
         public Guid Id { get; }
-        public string Name { get; }
-        public DateTime Date { get; }
-        public Category Category { get; }
-        public TransactionValue Value { get; }
+        public string Name { get; private set; }
+        public DateTime Date { get; private set; }
+        public Category Category { get; private set; }
+        public TransactionValue Value { get; private set; }
+
+        internal void Change(string name, Category category, DateTime date, TransactionValue value)
+        {
+            this.Name = name;
+            this.Category = category;
+            this.Date = date;
+            this.Value = value;
+        }
 
         class Error
         {
@@ -38,5 +46,6 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             internal class ExpenseCannotBeOlderThanOneHundredYears : Exception { }
             internal class ExpenseTransactionValueCannotBeNull : Exception { }
         }
+
     }
 }

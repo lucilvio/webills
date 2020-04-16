@@ -8,7 +8,7 @@
             this.Password = password;
         }
 
-        public string Login { get; }
-        public string Password { get; }
+        internal string Login { get; }
+        internal string Password { get; }
     }
 }

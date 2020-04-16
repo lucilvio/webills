@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Transactions.Domain;
-
 namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
     internal class AddNewExpenseComponent
@@ -14,20 +12,19 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task Execute(AddNewExpenseInput input, Func<NewAddedExpense, Task> onAddExpense)
+        public async Task Execute(AddNewExpenseInput input, Func<CreatedExpense, Task> onExpenseCreate)
         {
             var foundUser = await this._dataAccess.GetUserById(input.UserId);
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
 
-            var newExpense = 
-                foundUser.AddExpense(input.Name, Enum.Parse<Category>(input.Category, true), input.Date, new TransactionValue(input.Value));
+            var newExpense = foundUser.AddExpense(input.Name, input.Category, input.Date, input.Value);
 
             await this._dataAccess.Persist();
 
-            if (onAddExpense != null)
-                await onAddExpense.Invoke(new NewAddedExpense(foundUser.Id, newExpense));
+            if (onExpenseCreate != null)
+                onExpenseCreate.Invoke(new CreatedExpense(foundUser, newExpense));
         }
 
         internal class Error

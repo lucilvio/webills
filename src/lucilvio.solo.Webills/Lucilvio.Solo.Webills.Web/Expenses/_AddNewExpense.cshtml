@@ -30,7 +30,7 @@
                             <select name="category" class="form-control" required>
                                 @foreach (var category in Enum.GetValues(typeof(Category)))
                                 {
-                                    <option value="@category">@category</option>
+                                    <option value="@((int)category)">@category</option>
                                 }
                             </select>
                         </div>

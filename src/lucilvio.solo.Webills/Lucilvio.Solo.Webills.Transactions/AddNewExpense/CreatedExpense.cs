@@ -3,17 +3,20 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
-    public class NewAddedExpense
+    public class CreatedExpense
     {
-        internal NewAddedExpense(Guid userId, Expense newExpense)
+        internal CreatedExpense(User user, Expense expense)
         {
-            this.UserId = userId;
-            this.Id = newExpense.Id;
-            this.Name = newExpense.Name;
-            this.Date = newExpense.Date;
-            this.Value = newExpense.Value.Value;
-            this.Category = (int)newExpense.Category;
-            this.CategoryName = newExpense.ToString();
+            if(user == null || expense == null)
+                return;
+
+            this.UserId = user.Id;
+            this.Id = expense.Id;
+            this.Name = expense.Name;
+            this.Date = expense.Date;
+            this.Value = expense.Value.Value;
+            this.Category = (int)expense.Category;
+            this.CategoryName = expense.ToString();
         }
 
         public Guid Id { get; internal set; }

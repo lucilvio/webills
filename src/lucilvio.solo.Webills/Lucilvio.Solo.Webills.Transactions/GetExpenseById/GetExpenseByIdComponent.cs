@@ -20,7 +20,8 @@ namespace Lucilvio.Solo.Webills.Transactions.GetExpense
         {
             using (var connection = this._context.Connection)
             {
-                var sql = "select Id, Name, Category, Date, Value from Transactions.Expenses where Id = @id";
+                var sql = @"select Id, Name, Category, Date, Value from Transactions.Expenses
+                    where Id = @id";
 
                 return await connection.QueryFirstOrDefaultAsync<GetExpenseByIdOutput>(sql, new { id = input.Id });
             }

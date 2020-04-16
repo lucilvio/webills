@@ -13,11 +13,11 @@
             this.TermsAccepted = termsAccepted;
         }
 
-        public string Login { get; }
-        public string Password { get; }
-        public string PasswordConfirmation { get; }
-        public string Name { get; }
-        public string Email { get; }
-        public bool TermsAccepted { get; }
+        internal string Login { get; }
+        internal string Password { get; }
+        internal string PasswordConfirmation { get; }
+        internal string Name { get; }
+        internal string Email { get; }
+        internal bool TermsAccepted { get; }
     }
 }

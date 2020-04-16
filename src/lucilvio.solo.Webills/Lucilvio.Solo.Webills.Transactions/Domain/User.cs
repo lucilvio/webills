@@ -23,12 +23,12 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 
         public decimal Balance => Incomes.Sum(i => i.Value.Value) - Expenses.Sum(e => e.Value.Value);
 
-        public Guid AddIncome(string name, DateTime date, TransactionValue value)
+        public Income AddIncome(string name, DateTime date, TransactionValue value)
         {
-            var income = new Income(name, date, value);
-            _incomes.Add(income);
+            var newIncome = new Income(name, date, value);
+            _incomes.Add(newIncome);
 
-            return income.Id;
+            return newIncome;
         }
 
         public Expense AddExpense(string name, Category category, DateTime date, TransactionValue value)
@@ -181,26 +181,28 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 
         }
 
-        public void EditIncome(Guid incomeNumber, string name, DateTime date, TransactionValue value)
+        public Income EditIncome(Guid id, string name, DateTime date, TransactionValue value)
         {
-            var foundIncome = _incomes.FirstOrDefault(i => i.Id == incomeNumber);
-            var foundIncomeIndex = _incomes.IndexOf(foundIncome);
-
-            if (foundIncomeIndex < 0)
+            var foundIncome = _incomes.FirstOrDefault(i => i.Id == id);
+            
+            if(foundIncome == null)
                 throw new Error.IncomeNotFound();
 
-            _incomes[foundIncomeIndex] = new Income(name, date, value);
+            foundIncome.Change(name, date, value);
+
+            return foundIncome;
         }
 
-        public void EditExpense(Guid expenseId, string name, Category category, DateTime date, TransactionValue value)
+        public Expense EditExpense(Guid id, string name, Category category, DateTime date, TransactionValue value)
         {
-            var foundExpense = _expenses.FirstOrDefault(e => e.Id == expenseId);
-            var foundExpenseIndex = _expenses.IndexOf(foundExpense);
-
-            if (foundExpenseIndex < 0)
+            var foundExpense = _expenses.FirstOrDefault(e => e.Id == id);
+            
+            if(foundExpense == null)
                 throw new Error.ExpenseNotFound();
 
-            _expenses[foundExpenseIndex] = new Expense(name, category, date, value);
+            foundExpense.Change(name, category, date, value);
+            
+            return foundExpense;
         }
 
         public void EditFixedExpense(Guid expenseId, string name, Category category, DateTime date, TransactionValue value, DateTime until)

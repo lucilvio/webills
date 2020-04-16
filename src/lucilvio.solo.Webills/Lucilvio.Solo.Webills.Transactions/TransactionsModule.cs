@@ -62,7 +62,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task AddNewIncome(AddNewIncomeInput input)
+        public async Task AddNewIncome(AddNewIncomeInput input, Func<CreatedIncome, Task> onIncomeCreate = null)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -70,11 +70,11 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<AddNewIncomeComponent>();
-                await component.Execute(input);
+                await component.Execute(input, onIncomeCreate);
             }
         }
 
-        public async Task EditIncome(EditIncomeInput input)
+        public async Task EditIncome(EditIncomeInput input, Func<EditedIncome, Task> onEditIncome = null)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -82,11 +82,11 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<EditIncomeComponent>();
-                await component.Execute(input);
+                await component.Execute(input, onEditIncome);
             }
         }
 
-        public async Task EditExpense(EditExpenseInput input)
+        public async Task EditExpense(EditExpenseInput input, Func<EditedExpense, Task> onEditExpense = null)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -94,7 +94,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<EditExpenseComponent>();
-                await component.Execute(input);
+                await component.Execute(input, onEditExpense);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task AddNewExpense(AddNewExpenseInput input, Func<NewAddedExpense, Task> onAddExpense)
+        public async Task AddNewExpense(AddNewExpenseInput input, Func<CreatedExpense, Task> onExpenseCreate = null)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -118,11 +118,11 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<AddNewExpenseComponent>();
-                await component.Execute(input, onAddExpense);
+                await component.Execute(input, onExpenseCreate);
             }
         }
 
-        public async Task RemoveIncome(RemoveIncomeInput input)
+        public async Task RemoveIncome(RemoveIncomeInput input, Func<RemovedIncome, Task> onRemoveIncome = null)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -130,11 +130,11 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<RemoveIncomeComponent>();
-                await component.Execute(input);
+                await component.Execute(input, onRemoveIncome);
             }
         }
 
-        public async Task RemoveExpense(RemoveExpenseInput input)
+        public async Task RemoveExpense(RemoveExpenseInput input, Func<RemovedExpense, Task> onRemoveExpense = null)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
@@ -142,7 +142,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<RemoveExpenseComponent>();
-                await component.Execute(input);
+                await component.Execute(input, onRemoveExpense);
             }
         }
 

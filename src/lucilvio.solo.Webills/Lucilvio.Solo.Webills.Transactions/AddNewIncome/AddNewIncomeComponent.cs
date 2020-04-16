@@ -14,16 +14,19 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
             _dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
         }
 
-        public async Task Execute(AddNewIncomeInput input)
+        public async Task Execute(AddNewIncomeInput input, Func<CreatedIncome, Task> onIncomeCreate)
         {
             var foundUser = await this._dataStorage.GetUserById(input.UserId);
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
 
-            foundUser.AddIncome(input.Name, input.Date, new TransactionValue(input.Value));
+            var createdIncome = foundUser.AddIncome(input.Name, input.Date, new TransactionValue(input.Value));
 
             await this._dataStorage.Persist();
+
+            if(onIncomeCreate != null)
+                onIncomeCreate.Invoke(new CreatedIncome(foundUser, createdIncome));
         }
 
         internal class Error

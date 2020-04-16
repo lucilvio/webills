@@ -9,6 +9,6 @@ namespace Lucilvio.Solo.Webills.Transactions.CreateUser
             this.Id = id;
         }
 
-        public Guid Id { get; }
+        internal Guid Id { get; }
     }
 }

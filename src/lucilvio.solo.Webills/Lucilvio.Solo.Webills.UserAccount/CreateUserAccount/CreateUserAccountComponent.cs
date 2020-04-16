@@ -27,7 +27,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
             await _dataAccess.Persist(newUser);
 
             if (onCreate != null)
-                await onCreate(new UserAccountCreated(newUser));
+                onCreate(new UserAccountCreated(newUser));
         }
     }
 }

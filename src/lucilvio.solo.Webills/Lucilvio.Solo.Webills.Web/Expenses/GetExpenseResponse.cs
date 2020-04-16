@@ -23,7 +23,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         public Guid Id { get; }
         public string Name { get; }
         public string Date { get; }
-        public string Category { get; }
+        public int Category { get; }
         public string Value { get; }
     }
 }

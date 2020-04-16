@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Transactions.Domain
 {
-    class TransactionValue
+    internal class TransactionValue
     {
         private readonly decimal _value;
 

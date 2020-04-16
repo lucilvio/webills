@@ -13,10 +13,10 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
             this.Value = value;
         }
 
-        public Guid UserId { get; }
-        public Guid Id { get; }
-        public string Name { get; }
-        public DateTime Date { get; }
-        public decimal Value { get; }
+        internal Guid UserId { get; }
+        internal Guid Id { get; }
+        internal string Name { get; }
+        internal DateTime Date { get; }
+        internal decimal Value { get; }
     }
 }

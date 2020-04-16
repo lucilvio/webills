@@ -9,6 +9,6 @@ namespace Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter
             this.UserId = userId;
         }
 
-        public Guid UserId { get; }
+        internal Guid UserId { get; }
     }
 }

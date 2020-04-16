@@ -10,7 +10,7 @@ namespace Lucilvio.Solo.Webills.Transactions.GetExpense
             this.Id = id;
         }
 
-        public Guid UserId { get; }
-        public Guid Id { get; }
+        internal Guid UserId { get; }
+        internal Guid Id { get; }
     }
 }
