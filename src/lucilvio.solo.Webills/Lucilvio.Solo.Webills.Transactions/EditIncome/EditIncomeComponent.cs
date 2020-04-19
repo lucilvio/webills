@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
             _dataStorage = dataStorage;
         }
 
-        public async Task Execute(EditIncomeInput input, Func<EditedIncome, Task> onEditIncome)
+        public async Task<EditedIncome> Execute(EditIncomeInput input)
         {
             var foundUser = await _dataStorage.GetUserById(input.UserId);
 
@@ -25,8 +25,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
 
             await _dataStorage.Persist();
 
-            if(onEditIncome != null)
-                onEditIncome.Invoke(new EditedIncome(foundUser, editedIncome));
+            return new EditedIncome(foundUser, editedIncome);
         }
 
         internal class Error

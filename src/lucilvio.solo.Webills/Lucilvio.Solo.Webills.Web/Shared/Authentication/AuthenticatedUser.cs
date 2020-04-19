@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Clients.Web.Login
+namespace Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication
 {
     public class AuthenticatedUser
     {

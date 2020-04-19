@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
             _dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
         }
 
-        public async Task Execute(AddNewIncomeInput input, Func<CreatedIncome, Task> onIncomeCreate)
+        public async Task<AddedIncome> Execute(AddNewIncomeInput input)
         {
             var foundUser = await this._dataStorage.GetUserById(input.UserId);
 
@@ -25,8 +25,7 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
 
             await this._dataStorage.Persist();
 
-            if(onIncomeCreate != null)
-                onIncomeCreate.Invoke(new CreatedIncome(foundUser, createdIncome));
+            return new AddedIncome(foundUser, createdIncome);
         }
 
         internal class Error

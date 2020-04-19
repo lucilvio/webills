@@ -4,9 +4,9 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    public class UserAccountCreated
+    public class CreatedAccount
     {
-        internal UserAccountCreated(User user)
+        internal CreatedAccount(User user)
         {
             this.Id = user.Id;
         }

@@ -11,23 +11,30 @@ namespace Lucilvio.Solo.Webills.UserAccount
 {
     public class UserAccountModule
     {
-        readonly DependencyResolverWithSimpleInjector _dependencyResolver;
+        public event Action<GeneratedPassword> PasswordGenerated;
+        public event Action<CreatedAccount> UserAccountCreated;
+
+        private readonly DependencyResolverWithSimpleInjector _dependencyResolver;
 
         public UserAccountModule()
         {
             this._dependencyResolver = new DependencyResolverWithSimpleInjector();
         }
 
-        public async Task GenerateNewPassword(SendNewPasswordInput input, Func<GeneratedPassword, Task> onPasswordGenerate)
+        public async Task GenerateNewPassword(SendNewPasswordInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
+            GeneratedPassword generatedPassword = null;
+
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<GenerateNewPasswordComponent>();
-                await component.Execute(input, onPasswordGenerate);
+                generatedPassword = await component.Execute(input);
             }
+
+            this.PasswordGenerated?.Invoke(generatedPassword);
         }
 
         public async Task Login(LoginInput input, Func<LoggedUser, Task> onLogin)
@@ -42,16 +49,20 @@ namespace Lucilvio.Solo.Webills.UserAccount
             }
         }
 
-        public async Task CreateNewUserAccount(CreateUserAccountInput input, Func<UserAccountCreated, Task> onCreate)
+        public async Task CreateNewUserAccount(CreateUserAccountInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
+            CreatedAccount createdAccount = null;
+
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<CreateUserAccountComponent>();
-                await component.Execute(input, onCreate);
+                createdAccount = await component.Execute(input);
             }
+
+            this.UserAccountCreated?.Invoke(createdAccount);
         }
 
         internal class Error

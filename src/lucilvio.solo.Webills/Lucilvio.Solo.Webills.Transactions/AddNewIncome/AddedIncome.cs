@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
 {
-    public class CreatedIncome
+    public class AddedIncome
     {
-        internal CreatedIncome(User user, Income income)
+        internal AddedIncome(User user, Income income)
         {
             if (user == null || income == null)
                 return;

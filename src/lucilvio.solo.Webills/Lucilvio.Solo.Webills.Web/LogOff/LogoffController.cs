@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Login;
-
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +11,9 @@ namespace Lucilvio.Solo.Webills.Web.SignOut
     [Route("Logoff")]
     public class LogoffController : Controller
     {
-        private readonly IAuthentication _securityService;
+        private readonly IAuthenticationService _securityService;
 
-        public LogoffController(IAuthentication securityService)
+        public LogoffController(IAuthenticationService securityService)
         {
             this._securityService = securityService;
         }

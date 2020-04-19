@@ -8,23 +8,15 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 
-namespace Lucilvio.Solo.Webills.Clients.Web.Login
+namespace Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication
 {
-    public interface IAuthentication
+    public class AuthenticationService : IAuthenticationService
     {
-        Task SignIn(UserAuthCredentials credentials);
-        Task SignOut();
+        private readonly IHttpContextAccessor _httpContextAcessor;
 
-        AuthenticatedUser User();
-    }
-
-    public class SecurityService : IAuthentication
-    {
-        private readonly HttpContext _httpContext;
-
-        public SecurityService(HttpContext httpContext)
+        public AuthenticationService(IHttpContextAccessor httpContextAcessor)
         {
-            this._httpContext = httpContext;
+            this._httpContextAcessor = httpContextAcessor;
         }
 
         public async Task SignIn(UserAuthCredentials credentials)
@@ -42,7 +34,12 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
 
             var claimsPrincipal = new ClaimsPrincipal(userIdentity);
 
-            await this._httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties
+            var context = this._httpContextAcessor.HttpContext;
+
+            if (context == null)
+                return;
+
+            await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties
             {
                 IsPersistent = true,
                 AllowRefresh = true,
@@ -52,17 +49,24 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
 
         public async Task SignOut()
         {
-            await this._httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var context = this._httpContextAcessor.HttpContext;
+
+            if (context == null)
+                return;
+
+            await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         public AuthenticatedUser User()
         {
-            if (!this._httpContext.User.Identity.IsAuthenticated)
+            var context = this._httpContextAcessor.HttpContext;
+
+            if (context == null || !context.User.Identity.IsAuthenticated)
                 throw new InvalidOperationException("User is not logged in");
 
-            var name = this._httpContext.User.Identity.Name;
-            var login = this._httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-            var id = this._httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var name = context.User.Identity.Name;
+            var login = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            var id = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
             return new AuthenticatedUser(new Guid(id), login, name);
         }

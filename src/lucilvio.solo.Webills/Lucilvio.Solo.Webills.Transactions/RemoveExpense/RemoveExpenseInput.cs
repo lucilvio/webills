@@ -4,13 +4,13 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
 {
     public class RemoveExpenseInput
     {
-        public RemoveExpenseInput(Guid userId, Guid expenseId)
+        public RemoveExpenseInput(Guid userId, Guid id)
         {
             this.UserId = userId;
-            this.ExpenseId = expenseId;
+            this.Id = id;
         }
 
         internal Guid UserId { get; }
-        internal Guid ExpenseId { get; }
+        internal Guid Id { get; }
     }
 }

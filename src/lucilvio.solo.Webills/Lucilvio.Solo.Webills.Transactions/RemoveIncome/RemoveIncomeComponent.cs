@@ -13,7 +13,7 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
             _dataAccess = dataAccess;
         }
 
-        public async Task Execute(RemoveIncomeInput input, Func<RemovedIncome, Task> onRemoveIncome = null)
+        public async Task<RemovedIncome> Execute(RemoveIncomeInput input)
         {
             var foundUser = await _dataAccess.GetUserById(input.UserId);
 
@@ -24,8 +24,7 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
 
             await _dataAccess.Persist(input.Id);
 
-            if(onRemoveIncome != null)
-                onRemoveIncome.Invoke(new RemovedIncome(foundUser.Id, input.Id));
+            return new RemovedIncome(foundUser.Id, input.Id);
         }
 
         internal class Error

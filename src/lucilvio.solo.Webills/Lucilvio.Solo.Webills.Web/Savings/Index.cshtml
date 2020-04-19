@@ -1,0 +1,23 @@
+﻿@model Lucilvio.Solo.Webills.Clients.Web.Savings.IndexResponse
+@{
+    Layout = "_Layout";
+    ViewData["title"] = "Savings";
+    ViewData["icon"] = "icon-subtract";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="col-lg-4">
+            <div class="panel panel-flat border-left-blue">
+                <div class="panel-body">
+                    <h2 class="panel-title"><span class="text-semibold">Value</span></h2>
+                    <div class="col-12">
+                        <p class="pull-right"><i class="icon-cash3 icon-2x d-inline-block text-blue"></i></p>
+                        <h3 class="font-weight-semibold mb-0 text-blue"> @Model.Value </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

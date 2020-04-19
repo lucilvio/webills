@@ -1,11 +1,10 @@
 ﻿using System.Globalization;
 
-using Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword;
-using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Notification;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -44,22 +43,21 @@ namespace Lucilvio.Solo.Webills.Web
 
             services.AddHttpContextAccessor();
 
-            services.AddScoped<IAuthentication>(service =>
+            services.AddSingleton<IAuthenticationService>(service =>
             {
-                return new SecurityService(service.GetService<IHttpContextAccessor>().HttpContext);
+                return new AuthenticationService(service.GetService<IHttpContextAccessor>());
             });
 
-            services.AddSingleton<INotificationService>(services =>
-            {
-                var host = this._configuration.GetSection("email").GetSection("host").Value;
-                var port = int.Parse(this._configuration.GetSection("email").GetSection("port").Value);
-                var user = this._configuration.GetSection("email").GetSection("user").Value;
-                var password = this._configuration.GetSection("email").GetSection("password").Value;
+            var host = this._configuration.GetSection("email").GetSection("host").Value;
+            var port = int.Parse(this._configuration.GetSection("email").GetSection("port").Value);
+            var user = this._configuration.GetSection("email").GetSection("user").Value;
+            var password = this._configuration.GetSection("email").GetSection("password").Value;
 
-                return new NotificationByEmailService(host, port, user, password);
-            });
+            var notificationService = new NotificationByEmailService(host, port, user, password);
 
-            services.AddModules(this._configuration);
+            services.AddSingleton(svc => notificationService);
+
+            services.AddModules(this._configuration, notificationService);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

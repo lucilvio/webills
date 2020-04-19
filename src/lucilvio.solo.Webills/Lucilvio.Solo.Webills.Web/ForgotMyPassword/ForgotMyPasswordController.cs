@@ -16,18 +16,10 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendMeANewPassword(
-            [FromServices]INotificationService notificationService,
-            [FromServices]UserAccountModule userAccountModule,
+        public async Task<IActionResult> SendMeANewPassword([FromServices]UserAccountModule userAccountModule,
             [FromForm]SendMeANewPasswordRequest request)
         {
-            await userAccountModule.GenerateNewPassword(new SendNewPasswordInput(request.Email), async generatedPassword =>
-            {
-                await notificationService.Send(new Notification(
-                    new Notification.Sender("Webillls", "webills@mail.com"),
-                    new Notification.Receiver(generatedPassword.UserName, generatedPassword.UserContact),
-                    @$"Hey <b>{generatedPassword.UserName}</b><br>Here is your new password: <b>{generatedPassword.Password}</b>"));
-            });
+            await userAccountModule.GenerateNewPassword(new SendNewPasswordInput(request.Email));
 
             return this.RedirectToAction("Index", "Login");
         }

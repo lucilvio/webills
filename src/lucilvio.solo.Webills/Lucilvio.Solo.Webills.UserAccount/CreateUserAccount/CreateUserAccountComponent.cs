@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task Execute(CreateUserAccountInput input, Func<UserAccountCreated, Task> onCreate)
+        public async Task<CreatedAccount> Execute(CreateUserAccountInput input)
         {
             var accountWithSameLogin = await _dataAccess.GetUserAccountByLogin(new Domain.Login(input.Login));
 
@@ -26,8 +26,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 
             await _dataAccess.Persist(newUser);
 
-            if (onCreate != null)
-                onCreate(new UserAccountCreated(newUser));
+            return new CreatedAccount(newUser);
         }
     }
 }

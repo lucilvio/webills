@@ -19,6 +19,14 @@ namespace Lucilvio.Solo.Webills.Transactions
 {
     public class TransactionsModule
     {
+        public event Action<AddedIncome> IncomeAdded;
+        public event Action<EditedIncome> IncomeEdited;
+        public event Action<RemovedIncome> IncomeRemoved;
+
+        public event Action<AddedExpense> ExpenseAdded;
+        public event Action<EditedExpense> ExpenseEdited;
+        public event Action<RemovedExpense> ExpenseRemoved;
+
         private readonly DependencyResolverWithSimpleInjector _dependencyResolver;
 
         public TransactionsModule()
@@ -62,40 +70,52 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task AddNewIncome(AddNewIncomeInput input, Func<CreatedIncome, Task> onIncomeCreate = null)
+        public async Task AddNewIncome(AddNewIncomeInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
+
+            AddedIncome addedIncome = null;
 
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<AddNewIncomeComponent>();
-                await component.Execute(input, onIncomeCreate);
+                addedIncome = await component.Execute(input);
             }
+
+            this.IncomeAdded?.Invoke(addedIncome);
         }
 
-        public async Task EditIncome(EditIncomeInput input, Func<EditedIncome, Task> onEditIncome = null)
+        public async Task EditIncome(EditIncomeInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
+
+            EditedIncome editedIncome = null;
 
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<EditIncomeComponent>();
-                await component.Execute(input, onEditIncome);
+                editedIncome = await component.Execute(input);
             }
+
+            this.IncomeEdited?.Invoke(editedIncome);
         }
 
-        public async Task EditExpense(EditExpenseInput input, Func<EditedExpense, Task> onEditExpense = null)
+        public async Task EditExpense(EditExpenseInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
+            EditedExpense editedExpense = null;
+
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<EditExpenseComponent>();
-                await component.Execute(input, onEditExpense);
+                editedExpense = await component.Execute(input);
             }
+
+            this.ExpenseEdited?.Invoke(editedExpense);
         }
 
         public async Task<GetExpenseByIdOutput> GetExpenseById(GetExpenseByIdInput input)
@@ -110,40 +130,52 @@ namespace Lucilvio.Solo.Webills.Transactions
             }
         }
 
-        public async Task AddNewExpense(AddNewExpenseInput input, Func<CreatedExpense, Task> onExpenseCreate = null)
+        public async Task AddNewExpense(AddNewExpenseInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
+
+            AddedExpense addedExpense = null;
 
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<AddNewExpenseComponent>();
-                await component.Execute(input, onExpenseCreate);
+                addedExpense = await component.Execute(input);
             }
+
+            this.ExpenseAdded?.Invoke(addedExpense);
         }
 
-        public async Task RemoveIncome(RemoveIncomeInput input, Func<RemovedIncome, Task> onRemoveIncome = null)
+        public async Task RemoveIncome(RemoveIncomeInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
+
+            RemovedIncome removedIncome = null;
 
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<RemoveIncomeComponent>();
-                await component.Execute(input, onRemoveIncome);
+                removedIncome = await component.Execute(input);
             }
+
+            this.IncomeRemoved?.Invoke(removedIncome);
         }
 
-        public async Task RemoveExpense(RemoveExpenseInput input, Func<RemovedExpense, Task> onRemoveExpense = null)
+        public async Task RemoveExpense(RemoveExpenseInput input)
         {
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
+            RemovedExpense removedExpense = null;
+
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {
                 var component = this._dependencyResolver.Container.GetInstance<RemoveExpenseComponent>();
-                await component.Execute(input, onRemoveExpense);
+                removedExpense = await component.Execute(input);
             }
+
+            this.ExpenseRemoved?.Invoke(removedExpense);
         }
 
         public async Task<GetIncomesByFilterOutput> GetIncomesByFilter(GetIncomesByFilterInput input)

@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
-    public class CreatedExpense
+    public class AddedExpense
     {
-        internal CreatedExpense(User user, Expense expense)
+        internal AddedExpense(User user, Expense expense)
         {
             if(user == null || expense == null)
                 return;

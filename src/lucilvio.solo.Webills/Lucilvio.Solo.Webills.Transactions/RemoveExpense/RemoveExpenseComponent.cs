@@ -12,19 +12,18 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
             this._dataAccess = dataAccess;
         }
 
-        public async Task Execute(RemoveExpenseInput input, Func<RemovedExpense, Task> onRemoveExpense = null)
+        public async Task<RemovedExpense> Execute(RemoveExpenseInput input)
         {
             var foundUser = await this._dataAccess.GetUserById(input.UserId);
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
 
-            foundUser.RemoveExpense(input.ExpenseId);
+            foundUser.RemoveExpense(input.Id);
 
-            await this._dataAccess.Persist(input.ExpenseId);
+            await this._dataAccess.Persist(input.Id);
 
-            if (onRemoveExpense != null)
-                onRemoveExpense.Invoke(new RemovedExpense(foundUser.Id, input.ExpenseId));
+            return new RemovedExpense(foundUser.Id, input.Id);
         }
 
         internal class Error

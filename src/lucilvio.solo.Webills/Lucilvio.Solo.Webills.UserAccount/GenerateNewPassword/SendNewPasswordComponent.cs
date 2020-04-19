@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
             _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task Execute(SendNewPasswordInput input, Func<GeneratedPassword, Task> onPasswordGenerate)
+        public async Task<GeneratedPassword> Execute(SendNewPasswordInput input)
         {
             var foundUser = await _dataAccess.GetUserByLogin(new Domain.Login(input.Email));
 
@@ -27,9 +27,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
             await _dataAccess.Persist();
 
-            if (onPasswordGenerate != null)
-                onPasswordGenerate.Invoke(new GeneratedPassword(foundUser.Name.Value, foundUser.Login.Value, 
-                    newPassword.Value));
+            return new GeneratedPassword(foundUser.Name.Value, foundUser.Login.Value, newPassword.Value);
         }
 
         class Error

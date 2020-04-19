@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task Execute(AddNewExpenseInput input, Func<CreatedExpense, Task> onExpenseCreate)
+        public async Task<AddedExpense> Execute(AddNewExpenseInput input)
         {
             var foundUser = await this._dataAccess.GetUserById(input.UserId);
 
@@ -23,8 +23,7 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 
             await this._dataAccess.Persist();
 
-            if (onExpenseCreate != null)
-                onExpenseCreate.Invoke(new CreatedExpense(foundUser, newExpense));
+            return new AddedExpense(foundUser, newExpense);
         }
 
         internal class Error

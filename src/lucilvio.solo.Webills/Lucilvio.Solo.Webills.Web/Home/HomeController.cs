@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-
-using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Lucilvio.Solo.Webills.Dashboard;
 using Lucilvio.Solo.Webills.Dashboard.GetUserDashboardInfo;
 using Lucilvio.Solo.Webills.Transactions;
@@ -13,10 +12,10 @@ namespace Lucilvio.Solo.Webills.Web.Home
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IAuthentication _authentication;
+        private readonly IAuthenticationService _authentication;
         private readonly DashboardModule _dashboardModule;
 
-        public HomeController(IAuthentication authentication, DashboardModule dashboardModule, TransactionsModule transactionsModule)
+        public HomeController(IAuthenticationService authentication, DashboardModule dashboardModule, TransactionsModule transactionsModule)
         {
             this._authentication = authentication;
             this._dashboardModule = dashboardModule;

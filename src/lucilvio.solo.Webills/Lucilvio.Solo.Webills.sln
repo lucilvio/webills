@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Dashboard", "Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj", "{31C41583-4754-4724-B876-0FAE36846BD8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Savings", "Savings", "{A9913FA0-7541-4D8B-98A8-E2A3CD72F2D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Savings", "Lucilvio.Solo.Webills.Savings\Lucilvio.Solo.Webills.Savings.csproj", "{7C231654-20DB-4B84-BD61-A840E06D12E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +61,7 @@ Global
 		{8B23395B-025E-4C99-993C-481D872B345C} = {6F54AF99-997A-4727-907A-EDF26826C889}
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7} = {B4923F73-B61C-4AA8-958C-3957E7DB10FF}
 		{31C41583-4754-4724-B876-0FAE36846BD8} = {3A71E468-E0EF-4F90-BA34-101B927878D9}
+		{7C231654-20DB-4B84-BD61-A840E06D12E0} = {A9913FA0-7541-4D8B-98A8-E2A3CD72F2D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

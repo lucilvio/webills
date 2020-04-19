@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.Login;
 using Lucilvio.Solo.Webills.Web.Home;
@@ -10,9 +10,9 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
 {
     public partial class LoginController : Controller
     {
-        private readonly IAuthentication _authService;
+        private readonly IAuthenticationService _authService;
 
-        public LoginController(IAuthentication authService)
+        public LoginController(IAuthenticationService authService)
         {
             _authService = authService;
         }

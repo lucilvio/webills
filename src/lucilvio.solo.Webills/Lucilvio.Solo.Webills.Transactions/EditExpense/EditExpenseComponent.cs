@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditExpense
             this._dataStorage = dataStorage;
         }
 
-        public async Task Execute(EditExpenseInput input, Func<EditedExpense, Task> onEditExpense)
+        public async Task<EditedExpense> Execute(EditExpenseInput input)
         {
             var foundUser = await this._dataStorage.GetUserById(input.UserId);
 
@@ -24,8 +24,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditExpense
 
             await this._dataStorage.Persist();
 
-            if (onEditExpense != null)
-                onEditExpense.Invoke(new EditedExpense(foundUser, editedExpense));
+            return new EditedExpense(foundUser, editedExpense);
         }
 
         internal class Error
