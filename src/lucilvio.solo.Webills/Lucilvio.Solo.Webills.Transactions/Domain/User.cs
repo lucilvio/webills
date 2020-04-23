@@ -6,8 +6,8 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 {
     internal class User
     {
-        private readonly List<Income> _incomes;
-        private readonly List<Expense> _expenses;
+        private readonly IList<Income> _incomes;
+        private readonly IList<Expense> _expenses;
 
         internal User(Guid id)
         {
@@ -18,15 +18,15 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         }
 
         internal Guid Id { get; }
-        internal IEnumerable<Income> Incomes => _incomes;
-        internal IEnumerable<Expense> Expenses => _expenses;
+        internal IEnumerable<Income> Incomes => this._incomes;
+        internal IEnumerable<Expense> Expenses => this._expenses;
 
-        public decimal Balance => Incomes.Sum(i => i.Value.Value) - Expenses.Sum(e => e.Value.Value);
+        public decimal Balance => this.Incomes.Sum(i => i.Value.Value) - this.Expenses.Sum(e => e.Value.Value);
 
         public Income AddIncome(string name, DateTime date, TransactionValue value)
         {
             var newIncome = new Income(name, date, value);
-            _incomes.Add(newIncome);
+            this._incomes.Add(newIncome);
 
             return newIncome;
         }
@@ -34,7 +34,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         public Expense AddExpense(string name, Category category, DateTime date, TransactionValue value)
         {
             var newExpense = new Expense(name, category, date, value);
-            _expenses.Add(newExpense);
+            this._expenses.Add(newExpense);
 
             return newExpense;
         }
@@ -42,14 +42,14 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         public void AddFixedExpense(string name, Category category, DateTime date, TransactionValue transactionValue,
             Recurrency recurrency, DateTime until)
         {
-            _expenses.Add(new FixedExpense(name, category, date, transactionValue, recurrency, until));
+            this._expenses.Add(new FixedExpense(name, category, date, transactionValue, recurrency, until));
 
             if (recurrency == Recurrency.Daily || recurrency == Recurrency.Weekly || recurrency == Recurrency.Biweekly)
             {
                 for (DateTime i = date.AddDays((double)recurrency); i <= until; i = i.AddDays((double)recurrency))
                 {
                     var newFixedExpense = new FixedExpense(name, category, i, transactionValue, recurrency, until);
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
             else if (recurrency == Recurrency.Monthly)
@@ -70,7 +70,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
                     var newFixedExpense = new FixedExpense(name, category, new DateTime(newDate.Year, newDate.Month, day), transactionValue,
                         recurrency, until);
 
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
             else if (recurrency == Recurrency.Bimonthly)
@@ -91,7 +91,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
                     var newFixedExpense = new FixedExpense(name, category, new DateTime(newDate.Year, newDate.Month, day), transactionValue,
                         recurrency, until);
 
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
             else if (recurrency == Recurrency.Trimonthly)
@@ -112,7 +112,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
                     var newFixedExpense = new FixedExpense(name, category, new DateTime(newDate.Year, newDate.Month, day), transactionValue,
                         recurrency, until);
 
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
             else if (recurrency == Recurrency.Quarterly)
@@ -133,7 +133,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
                     var newFixedExpense = new FixedExpense(name, category, new DateTime(newDate.Year, newDate.Month, day), transactionValue,
                         recurrency, until);
 
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
             else if (recurrency == Recurrency.Semiannualy)
@@ -154,7 +154,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
                     var newFixedExpense = new FixedExpense(name, category, new DateTime(newDate.Year, newDate.Month, day), transactionValue,
                         recurrency, until);
 
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
             else if (recurrency == Recurrency.Annual)
@@ -175,7 +175,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
                     var newFixedExpense = new FixedExpense(name, category, new DateTime(newDate.Year, date.Month, day), transactionValue,
                         recurrency, until);
 
-                    _expenses.Add(newFixedExpense);
+                    this._expenses.Add(newFixedExpense);
                 }
             }
 
@@ -183,9 +183,9 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 
         public Income EditIncome(Guid id, string name, DateTime date, TransactionValue value)
         {
-            var foundIncome = _incomes.FirstOrDefault(i => i.Id == id);
-            
-            if(foundIncome == null)
+            var foundIncome = this._incomes.FirstOrDefault(i => i.Id == id);
+
+            if (foundIncome == null)
                 throw new Error.IncomeNotFound();
 
             foundIncome.Change(name, date, value);
@@ -195,45 +195,45 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 
         public Expense EditExpense(Guid id, string name, Category category, DateTime date, TransactionValue value)
         {
-            var foundExpense = _expenses.FirstOrDefault(e => e.Id == id);
-            
-            if(foundExpense == null)
+            var foundExpense = this._expenses.FirstOrDefault(e => e.Id == id);
+
+            if (foundExpense == null)
                 throw new Error.ExpenseNotFound();
 
             foundExpense.Change(name, category, date, value);
-            
+
             return foundExpense;
         }
 
         public void EditFixedExpense(Guid expenseId, string name, Category category, DateTime date, TransactionValue value, DateTime until)
         {
-            var foundExpense = _expenses.FirstOrDefault(e => e.Id == expenseId);
-            var foundExpenseIndex = _expenses.IndexOf(foundExpense);
+            var foundExpense = this._expenses.FirstOrDefault(e => e.Id == expenseId);
+            var foundExpenseIndex = this._expenses.IndexOf(foundExpense);
 
             if (foundExpenseIndex < 0)
                 throw new Error.ExpenseNotFound();
 
-            _expenses[foundExpenseIndex] = new Expense(name, category, date, value);
+            this._expenses[foundExpenseIndex] = new Expense(name, category, date, value);
         }
 
         public void RemoveExpense(Guid expenseNumber)
         {
-            var foundExpense = _expenses.FirstOrDefault(e => e.Id == expenseNumber);
+            var foundExpense = this._expenses.FirstOrDefault(e => e.Id == expenseNumber);
 
             if (foundExpense == null)
                 throw new Error.ExpenseNotFound();
 
-            _expenses.Remove(foundExpense);
+            this._expenses.Remove(foundExpense);
         }
 
         public void RemoveIncome(Guid incomeNumber)
         {
-            var foundIncome = _incomes.FirstOrDefault(i => i.Id == incomeNumber);
+            var foundIncome = this._incomes.FirstOrDefault(i => i.Id == incomeNumber);
 
             if (foundIncome == null)
                 throw new Error.IncomeNotFound();
 
-            _incomes.Remove(foundIncome);
+            this._incomes.Remove(foundIncome);
         }
 
         class Error

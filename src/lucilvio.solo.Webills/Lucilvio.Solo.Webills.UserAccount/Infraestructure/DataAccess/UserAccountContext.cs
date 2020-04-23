@@ -29,7 +29,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
 
             MapUser(modelBuilder);
             Seed(modelBuilder);
-
         }
 
         private void Seed(ModelBuilder modelBuilder)

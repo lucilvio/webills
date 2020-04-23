@@ -2,6 +2,7 @@
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Lucilvio.Solo.Webills.Savings;
+using Lucilvio.Solo.Webills.Savings.GetSavingsByFilter;
 using Lucilvio.Solo.Webills.Savings.SaveMoney;
 using Lucilvio.Solo.Webills.Web;
 
@@ -19,6 +20,15 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Savings
         {
             this._auth = auth;
             this._savingsModule = savingsModule;
+        }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> Index()
+        {
+            var output = await this._savingsModule.GetSavingsByFilter(new GetSavingsByFilterInput(this._auth.User().Id));
+
+            return this.View(new IndexResponse(output));
         }
 
         [HttpPost]

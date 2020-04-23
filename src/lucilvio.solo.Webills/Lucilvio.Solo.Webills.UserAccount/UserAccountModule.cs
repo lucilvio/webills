@@ -54,7 +54,7 @@ namespace Lucilvio.Solo.Webills.UserAccount
             if (input == null)
                 throw new Error.ComponentInputNotInformed();
 
-            CreatedAccount createdAccount = null;
+            CreatedAccount createdAccount = default;
 
             using (AsyncScopedLifestyle.BeginScope(this._dependencyResolver.Container))
             {

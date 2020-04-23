@@ -21,10 +21,14 @@ namespace Lucilvio.Solo.Webills.Web
         public static void AddModules(this IServiceCollection services, IConfiguration configuration,
             INotificationService notificationService)
         {
+            var readConnectionString = configuration.GetConnectionString("readContext");
+            var transactionalConnectionString = configuration.GetConnectionString("transactionalContext");
+
             var dashboardModule = new DashboardModule();
             var transactionModule = new TransactionsModule();
             var userAccountModule = new UserAccountModule();
-            var savingsModule = new SavingsModule();
+            var savingsModule = new SavingsModule(new SavingsModuleConfiguration(transactionalConnectionString,
+                readConnectionString));
 
             BindTransactionModuleEvents(dashboardModule, transactionModule);
             BindSavingsModuleEvents(transactionModule, savingsModule);

@@ -1,14 +1,15 @@
-﻿using Lucilvio.Solo.Webills.Web;
+﻿using Lucilvio.Solo.Webills.Savings.GetSavingsByFilter;
+using Lucilvio.Solo.Webills.Web;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Savings
 {
     public class IndexResponse
     {
-        public IndexResponse(decimal value)
+        public IndexResponse(GetSavingsByFilterOutput output)
         {
-            this.Value = value.DecimalToMoney();
+            this.Value = output.Value.DecimalToMoney() ?? 0m.DecimalToMoney();
         }
 
-        public string Value { get; set; }
+        public string Value { get; }
     }
 }

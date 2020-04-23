@@ -2,9 +2,9 @@
 {
     public class GetSavingsByFilterOutput
     {
-        internal GetSavingsByFilterOutput()
+        internal GetSavingsByFilterOutput(decimal total)
         {
-
+            this.Value = total;
         }
 
         public decimal Value { get; internal set; }

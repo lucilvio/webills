@@ -4,11 +4,11 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    public class CreatedAccount
+    public struct CreatedAccount
     {
         internal CreatedAccount(User user)
         {
-            this.Id = user.Id;
+            this.Id = user != null ? user.Id : Guid.Empty;
         }
 
         public Guid Id { get; }
