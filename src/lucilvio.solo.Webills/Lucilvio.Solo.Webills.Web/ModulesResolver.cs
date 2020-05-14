@@ -8,7 +8,12 @@ using Lucilvio.Solo.Webills.Dashboard.RemoveTransaction;
 using Lucilvio.Solo.Webills.Savings;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
+using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
 using Lucilvio.Solo.Webills.Transactions.CreateUser;
+using Lucilvio.Solo.Webills.Transactions.EditExpense;
+using Lucilvio.Solo.Webills.Transactions.EditIncome;
+using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
+using Lucilvio.Solo.Webills.Transactions.RemoveIncome;
 using Lucilvio.Solo.Webills.UserAccount;
 
 using Microsoft.Extensions.Configuration;
@@ -30,7 +35,7 @@ namespace Lucilvio.Solo.Webills.Web
             var savingsModule = new SavingsModule(new SavingsModuleConfiguration(transactionalConnectionString,
                 readConnectionString));
 
-            BindTransactionModuleEvents(dashboardModule, transactionModule);
+            BindTransactionsModuleEvents(dashboardModule, transactionModule);
             BindSavingsModuleEvents(transactionModule, savingsModule);
             BindUserAccountModulesEvents(notificationService, transactionModule, userAccountModule);
 
@@ -45,7 +50,7 @@ namespace Lucilvio.Solo.Webills.Web
         {
             userAccountModule.UserAccountCreated += async (createdAccount) =>
             {
-                await transactionModule.CreateUser(new CreateUserInput(createdAccount.Id));
+                await transactionModule.SendMessage(new CreateUserInput(createdAccount.Id));
             };
 
             userAccountModule.PasswordGenerated += async (generatedPassword) =>
@@ -61,47 +66,47 @@ namespace Lucilvio.Solo.Webills.Web
         {
             savingsModule.MoneySaved += async (savedMoney) =>
             {
-                await transactionModule.AddNewExpense(new AddNewExpenseInput(savedMoney.UserId, "Saving", 0,
+                await transactionModule.SendMessage(new AddNewExpenseInput(savedMoney.UserId, "Saving", 0,
                     DateTime.Now, savedMoney.Value));
             };
         }
 
-        private static void BindTransactionModuleEvents(DashboardModule dashboardModule, TransactionsModule transactionModule)
+        private static void BindTransactionsModuleEvents(DashboardModule dashboardModule, TransactionsModule transactionModule)
         {
-            transactionModule.IncomeAdded += async (addedIncome) =>
+            transactionModule.SubscribeEvent<OnAddIncomeInput>(async (addedIncome) =>
             {
                 await dashboardModule.AddTransaction(AddTransactionInput.Income(addedIncome.UserId,
                     addedIncome.Id, addedIncome.Name, addedIncome.Date, addedIncome.Value));
-            };
+            });
 
-            transactionModule.IncomeEdited += async (editedIncome) =>
+            transactionModule.SubscribeEvent<OnEditIncomeInput>(async (editedIncome) =>
             {
                 await dashboardModule.EditTransaction(EditTransactionInput.Income(editedIncome.UserId,
                     editedIncome.Id, editedIncome.Name, editedIncome.Date, editedIncome.Value));
-            };
+            });
 
-            transactionModule.IncomeRemoved += async (removedIncome) =>
+            transactionModule.SubscribeEvent<OnRemoveIncomeInput>(async (removedIncome) =>
             {
                 await dashboardModule.RemoveTransaction(new RemoveTransactionInput(removedIncome.UserId, removedIncome.Id));
-            };
+            });
 
-            transactionModule.ExpenseAdded += async (addedExpense) =>
+            transactionModule.SubscribeEvent<OnAddExpenseInput>(async (addedExpense) =>
             {
                 await dashboardModule.AddTransaction(AddTransactionInput.Expense(addedExpense.UserId,
                     addedExpense.Id, addedExpense.Name, addedExpense.Date, addedExpense.Category,
                     addedExpense.CategoryName, addedExpense.Value));
-            };
+            });
 
-            transactionModule.ExpenseEdited += async (editedExpense) =>
+            transactionModule.SubscribeEvent<OnEditedExpenseInput>(async (editedExpense) =>
             {
                 await dashboardModule.EditTransaction(EditTransactionInput.Expense(editedExpense.UserId, editedExpense.Id,
                     editedExpense.Name, editedExpense.Category, editedExpense.Date, editedExpense.Value));
-            };
+            });
 
-            transactionModule.ExpenseRemoved += async (removedExpense) =>
+            transactionModule.SubscribeEvent<OnRemovedExpenseInput>(async (removedExpense) =>
             {
                 await dashboardModule.RemoveTransaction(new RemoveTransactionInput(removedExpense.UserId, removedExpense.Id));
-            };
+            });
         }
     }
 }

@@ -8,13 +8,15 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
     internal class EditIncomeComponent
     {
         private readonly IEditIncomeDataAccess _dataStorage;
+        private readonly IBusSender _bus;
 
-        public EditIncomeComponent(IEditIncomeDataAccess dataStorage)
+        public EditIncomeComponent(IEditIncomeDataAccess dataStorage, IBusSender bus)
         {
-            _dataStorage = dataStorage;
+            _dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
+            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task<EditedIncome> Execute(EditIncomeInput input)
+        public async Task Execute(EditIncomeInput input)
         {
             var foundUser = await _dataStorage.GetUserById(input.UserId);
 
@@ -25,7 +27,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
 
             await _dataStorage.Persist();
 
-            return new EditedIncome(foundUser, editedIncome);
+            this._bus.SendEvent(new OnEditIncomeInput(foundUser, editedIncome));
         }
 
         internal class Error

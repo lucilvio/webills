@@ -19,12 +19,12 @@ namespace Lucilvio.Solo.Webills.Dashboard
 
         public async Task AddTransaction(AddTransactionInput input)
         {
-            if (input == null)
-                throw new Error.ComponentInputNotInformed();
+            this.VerifyInput(input);
 
             var component = this._dependencyResolver.Container.GetInstance<AddTransactionComponent>();
             await component.Execute(input);
         }
+
 
         public async Task EditTransaction(EditTransactionInput input)
         {
@@ -53,6 +53,12 @@ namespace Lucilvio.Solo.Webills.Dashboard
             return await component.Execute(input);
         }
 
+        private void VerifyInput(object input)
+        {
+            if (input == null)
+                throw new Error.ComponentInputNotInformed();
+        }
+        
         internal class Error
         {
             public class ComponentInputNotInformed : Exception { }

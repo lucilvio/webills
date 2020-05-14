@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
 
 namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
 {
     internal class RemoveIncomeComponent
     {
         private readonly IRemoveIncomeDataAccess _dataAccess;
+        private readonly IBusSender _bus;
 
-        public RemoveIncomeComponent(IRemoveIncomeDataAccess dataAccess)
+        public RemoveIncomeComponent(IRemoveIncomeDataAccess dataAccess, IBusSender bus)
         {
-            _dataAccess = dataAccess;
+            _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task<RemovedIncome> Execute(RemoveIncomeInput input)
+        public async Task Execute(RemoveIncomeInput input)
         {
             var foundUser = await _dataAccess.GetUserById(input.UserId);
 
@@ -24,7 +25,7 @@ namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
 
             await _dataAccess.Persist(input.Id);
 
-            return new RemovedIncome(foundUser.Id, input.Id);
+            this._bus.SendEvent(new OnRemoveIncomeInput(foundUser.Id, input.Id));
         }
 
         internal class Error

@@ -5,14 +5,16 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 {
     internal class AddNewExpenseComponent
     {
+        private readonly IBusSender _bus;
         private readonly IAddNewExpenseDataAccess _dataAccess;
 
-        public AddNewExpenseComponent(IAddNewExpenseDataAccess dataAccess)
+        public AddNewExpenseComponent(IAddNewExpenseDataAccess dataAccess, IBusSender bus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task<AddedExpense> Execute(AddNewExpenseInput input)
+        public async Task Execute(AddNewExpenseInput input)
         {
             var foundUser = await this._dataAccess.GetUserById(input.UserId);
 
@@ -23,7 +25,7 @@ namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
 
             await this._dataAccess.Persist();
 
-            return new AddedExpense(foundUser, newExpense);
+            this._bus.SendEvent(new OnAddExpenseInput(foundUser, newExpense));
         }
 
         internal class Error

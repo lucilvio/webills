@@ -1,26 +1,26 @@
 ﻿using System;
 using Lucilvio.Solo.Webills.Transactions.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditIncome
+namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
 {
-    public class EditedIncome
+    public class OnAddIncomeInput
     {
-        internal EditedIncome(User user, Income income)
+        internal OnAddIncomeInput(User user, Income income)
         {
-            if(user == null || income == null)
+            if (user == null || income == null)
                 return;
 
             this.Id = income.Id;
             this.UserId = user.Id;
-            this.Date = income.Date;
             this.Name = income.Name;
+            this.Date = income.Date;
             this.Value = income.Value.Value;
         }
 
         public Guid Id { get; }
+        public Guid UserId { get; }
         public string Name { get; }
         public DateTime Date { get; }
         public decimal Value { get; }
-        public Guid UserId { get; }
     }
 }

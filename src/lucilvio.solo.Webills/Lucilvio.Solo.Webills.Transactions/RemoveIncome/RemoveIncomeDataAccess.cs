@@ -7,7 +7,7 @@ using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
+namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
 {
     internal class RemoveIncomeDataAccess : IRemoveIncomeDataAccess
     {

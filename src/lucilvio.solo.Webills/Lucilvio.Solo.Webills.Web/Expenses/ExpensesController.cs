@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
-using Lucilvio.Solo.Webills.Dashboard;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
 using Lucilvio.Solo.Webills.Transactions.EditExpense;
@@ -34,7 +33,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         [Route("")]
         public async Task<IActionResult> Index()
         {
-            var foundExpenses = await this._transactionsModule.GetExpensesByFilter(new GetExpensesByFilterInput(this._auth.User().Id));
+            var message = new GetExpensesByFilterInput(this._auth.User().Id);
+            var foundExpenses = await this._transactionsModule.SendMessage<GetExpensesByFilterInput, GetExpensesByFilterOutput>(message);
 
             return this.View(new ExpensesResponse(foundExpenses));
         }
@@ -42,7 +42,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         [HttpGet("{id:Guid}")]
         public async Task<JsonResult> Get(Guid id)
         {
-            var foundExpense = await this._transactionsModule.GetExpenseById(new GetExpenseByIdInput(this._auth.User().Id, id));
+            var message = new GetExpenseByIdInput(this._auth.User().Id, id);
+            var foundExpense = await this._transactionsModule.SendMessage<GetExpenseByIdInput, GetExpenseByIdOutput>(message);
 
             return new JsonResult(new { expense = new GetExpenseResponse(foundExpense) });
         }
@@ -50,8 +51,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         [HttpPost]
         public async Task<IActionResult> Post([FromForm]AddNewExpenseRequest request)
         {
-            await this._transactionsModule.AddNewExpense(new AddNewExpenseInput(this._auth.User().Id, request.Name,
-                request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal()));
+            var message = new AddNewExpenseInput(this._auth.User().Id, request.Name, request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal());
+            await this._transactionsModule.SendMessage(message);
 
             return this.RedirectToAction(nameof(Index));
         }
@@ -60,8 +61,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         [Route("Edit")]
         public async Task<IActionResult> Edit([FromForm]EditExpenseRequest request)
         {
-            await this._transactionsModule.EditExpense(new EditExpenseInput(this._auth.User().Id, request.Id,
-                request.Name, request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal()));
+            var message = new EditExpenseInput(this._auth.User().Id, request.Id, request.Name, request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal());
+            await this._transactionsModule.SendMessage(message);
 
             return this.RedirectToAction(nameof(Index));
         }
@@ -70,7 +71,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         [Route("Remove")]
         public async Task<JsonResult> Remove(RemoveExpenseRequest request)
         {
-            await this._transactionsModule.RemoveExpense(new RemoveExpenseInput(this._auth.User().Id, request.Id));
+            var message = new RemoveExpenseInput(this._auth.User().Id, request.Id);
+            await this._transactionsModule.SendMessage(message);
 
             return new JsonResult(new { message = "Expense removed" });
         }

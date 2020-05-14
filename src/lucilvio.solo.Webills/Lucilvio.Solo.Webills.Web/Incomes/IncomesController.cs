@@ -7,7 +7,7 @@ using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
 using Lucilvio.Solo.Webills.Transactions.EditIncome;
 using Lucilvio.Solo.Webills.Transactions.GetIncomeById;
 using Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter;
-using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
+using Lucilvio.Solo.Webills.Transactions.RemoveIncome;
 using Lucilvio.Solo.Webills.Web;
 using Lucilvio.Solo.Webills.Web.Shared;
 using Microsoft.AspNetCore.Authorization;
@@ -33,7 +33,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         [Route("")]
         public async Task<IActionResult> Index()
         {
-            var result = await this._transactionsModule.GetIncomesByFilter(new GetIncomesByFilterInput(this._auth.User().Id));
+            var message = new GetIncomesByFilterInput(this._auth.User().Id);
+            var result = await this._transactionsModule.SendMessage<GetIncomesByFilterInput, GetIncomesByFilterOutput>(message);
 
             return this.View(new IncomesResponse(result));
         }
@@ -42,10 +43,10 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         [HttpPost]
         public async Task<IActionResult> Post([FromForm]AddNewIncomeRequest request)
         {
-            var input = new AddNewIncomeInput(this._auth.User().Id, request.Name, request.Date.StringToDate(),
+            var message = new AddNewIncomeInput(this._auth.User().Id, request.Name, request.Date.StringToDate(),
                 request.Value.MoneyToDecimal());
 
-            await this._transactionsModule.AddNewIncome(input);
+            await this._transactionsModule.SendMessage(message);
 
             return this.RedirectToAction(nameof(Index));
         }
@@ -53,17 +54,20 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         [HttpGet("{id:Guid}")]
         public async Task<JsonResult> Get(Guid id)
         {
-            var foundIncome = await this._transactionsModule.GetIncomeById(new GetIncomeByIdInput(this._auth.User().Id, id));
+            var message = new GetIncomeByIdInput(this._auth.User().Id, id);
+            var output = await this._transactionsModule.SendMessage<GetIncomeByIdInput, GetIncomeByIdOutput>(message);
 
-            return new JsonResult(new { income = new GetIncomeResponse(foundIncome) });
+            return new JsonResult(new { income = new GetIncomeResponse(output) });
         }
 
         [HttpPost]
         [Route("Edit")]
         public async Task<IActionResult> Edit([FromForm]EditIncomeRequest request)
         {
-            await this._transactionsModule.EditIncome(new EditIncomeInput(this._auth.User().Id, request.Id, request.Name,
-                request.Date.StringToDate(), request.Value.MoneyToDecimal()));
+            var message = new EditIncomeInput(this._auth.User().Id, request.Id, request.Name, request.Date.StringToDate(), 
+                request.Value.MoneyToDecimal());
+
+            await this._transactionsModule.SendMessage(message);
 
             return this.RedirectToAction(nameof(Index));
         }
@@ -72,7 +76,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         [Route("Remove")]
         public async Task<JsonResult> Remove(RemoveIncomeRequest request)
         {
-            await this._transactionsModule.RemoveIncome(new RemoveIncomeInput(this._auth.User().Id, request.Id));
+            var message = new RemoveIncomeInput(this._auth.User().Id, request.Id);
+            await this._transactionsModule.SendMessage(message);
 
             return new JsonResult(new { message = "Expense removed" });
         }

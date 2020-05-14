@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.EditExpense
 {
-    public class EditedExpense
+    public class OnEditedExpenseInput
     {
-        internal EditedExpense(User user, Expense expense)
+        internal OnEditedExpenseInput(User user, Expense expense)
         {
             if(user == null || expense == null)
                 return;

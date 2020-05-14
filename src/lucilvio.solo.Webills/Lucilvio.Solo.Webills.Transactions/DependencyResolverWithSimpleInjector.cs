@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
 
@@ -17,21 +18,61 @@ namespace Lucilvio.Solo.Webills.Transactions
         {
             this._container = new Container();
 
-            this.ResolveModuleDependencies(this._container);
+            this.RegisterModuleDependencies(this._container);
         }
 
-        public Container Container => this._container;
+        internal IBusSubscriber ResolveBusSubscriber()
+        {
+            return this._container.GetInstance<IBusSubscriber>();
+        }
 
-        private void ResolveModuleDependencies(Container container)
+        internal async Task ExecuteComponent<TMessage>(TMessage message)
+        {
+            var componentType = this.GetComponentTypeByMessage(message);
+
+            if(componentType is null)
+                return;
+
+            using (AsyncScopedLifestyle.BeginScope(this._container))
+            {
+                dynamic component = this._container.GetInstance(componentType);
+                await component.Execute((TMessage)message);
+            }
+        }
+
+        internal async Task<TOutputMessage> ExecuteComponent<TMessage, TOutputMessage>(TMessage message)
+        {
+            Type componentType = this.GetComponentTypeByMessage(message);
+
+            if(componentType is null)
+                return default;
+
+            using (AsyncScopedLifestyle.BeginScope(this._container))
+            {
+                dynamic component = this._container.GetInstance(componentType);
+                return await component.Execute((TMessage)message);
+            }
+        }
+
+        private Type GetComponentTypeByMessage<TMessage>(TMessage message)
+        {
+            return Assembly.GetExecutingAssembly().GetType(message.GetType().FullName.Replace("Input", "Component"));
+        }
+
+        private void RegisterModuleDependencies(Container container)
         {
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             var currentAssembly = Assembly.GetExecutingAssembly();
+
+            var inMemoryEventBus = new InMemoryBus();
+
+            container.Register<IBusSender>(() => inMemoryEventBus, Lifestyle.Singleton);
+            container.Register<IBusSubscriber>(() => inMemoryEventBus, Lifestyle.Singleton);
 
             container.Register<TransactionsContext>(Lifestyle.Scoped);
             container.Register<TransactionsReadContext>(Lifestyle.Scoped);
 
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("DataAccess"), Lifestyle.Scoped);
-            this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("Service"), Lifestyle.Singleton);
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("Component"), Lifestyle.Scoped);
 
             container.Verify();
@@ -47,5 +88,6 @@ namespace Lucilvio.Solo.Webills.Transactions
                 .ToList()
                 .ForEach(s => container.Register(s.Interface ?? s.Concrete, s.Concrete, lifestyle));
         }
+
     }
 }

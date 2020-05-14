@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
+namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
 {
-    public class RemovedExpense
+    public class OnRemoveIncomeInput
     {
-        public RemovedExpense(Guid userId, Guid id)
+        public OnRemoveIncomeInput(Guid userId, Guid id)
         {
             this.Id = id;
             this.UserId = userId;
