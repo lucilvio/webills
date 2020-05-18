@@ -2,14 +2,13 @@
 using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
 using Lucilvio.Solo.Webills.Transactions.EditIncome;
 using Lucilvio.Solo.Webills.Transactions.GetIncomeById;
 using Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter;
 using Lucilvio.Solo.Webills.Transactions.RemoveIncome;
-using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Web.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

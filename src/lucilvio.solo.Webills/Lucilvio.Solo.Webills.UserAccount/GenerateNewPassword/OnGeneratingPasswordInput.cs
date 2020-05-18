@@ -1,8 +1,8 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    public class GeneratedPassword
+    public class OnGeneratingPasswordInput
     {
-        internal GeneratedPassword(string userName, string userContact, string password)
+        internal OnGeneratingPasswordInput(string userName, string userContact, string password)
         {
             this.UserName = userName;
             this.UserContact = userContact;

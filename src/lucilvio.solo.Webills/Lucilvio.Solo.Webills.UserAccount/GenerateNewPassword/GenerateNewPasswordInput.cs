@@ -1,8 +1,8 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    public class SendNewPasswordInput
+    public class GenerateNewPasswordInput
     {
-        public SendNewPasswordInput(string email)
+        public GenerateNewPasswordInput(string email)
         {
             Email = email;
         }

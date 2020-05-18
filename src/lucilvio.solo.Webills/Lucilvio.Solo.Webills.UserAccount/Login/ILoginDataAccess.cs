@@ -5,6 +5,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
     internal interface ILoginDataAccess
     {
-        Task<User> GetUserByLogin(string login);
+        Task<User> GetUserByLogin(Domain.Login login);
     }
 }

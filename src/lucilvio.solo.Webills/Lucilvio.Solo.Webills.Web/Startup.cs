@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Filters;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Notification;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -26,7 +27,11 @@ namespace Lucilvio.Solo.Webills.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new ErrorFilter());
+            }).AddRazorRuntimeCompilation();
+
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Clear();
@@ -43,21 +48,20 @@ namespace Lucilvio.Solo.Webills.Web
 
             services.AddHttpContextAccessor();
 
-            services.AddSingleton<IAuthenticationService>(service =>
-            {
-                return new AuthenticationService(service.GetService<IHttpContextAccessor>());
-            });
-
             var host = this._configuration.GetSection("email").GetSection("host").Value;
             var port = int.Parse(this._configuration.GetSection("email").GetSection("port").Value);
             var user = this._configuration.GetSection("email").GetSection("user").Value;
             var password = this._configuration.GetSection("email").GetSection("password").Value;
 
+            var svc = services.BuildServiceProvider();
+
             var notificationService = new NotificationByEmailService(host, port, user, password);
+            var authService = new AuthenticationService(svc.GetService<IHttpContextAccessor>());
 
-            services.AddSingleton(svc => notificationService);
+            services.AddSingleton<INotificationService>(svc => notificationService);
+            services.AddSingleton<IAuthenticationService>(svc => authService);
 
-            services.AddModules(this._configuration, notificationService);
+            services.AddModules(this._configuration, notificationService, authService);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

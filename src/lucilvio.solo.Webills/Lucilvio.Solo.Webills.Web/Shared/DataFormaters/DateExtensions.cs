@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Lucilvio.Solo.Webills.Web.Shared
+namespace Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters
 {
     public static class DateExtensions
     {

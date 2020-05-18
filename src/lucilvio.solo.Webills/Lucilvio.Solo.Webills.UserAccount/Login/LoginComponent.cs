@@ -8,15 +8,19 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
     internal class LoginComponent
     {
         private readonly ILoginDataAccess _dataAccess;
+        private readonly IBusSender _bus;
 
-        public LoginComponent(ILoginDataAccess dataAccess)
+        public LoginComponent(ILoginDataAccess dataAccess, IBusSender bus)
         {
-            this._dataAccess = dataAccess;
+            this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task Execute(LoginInput input, Func<LoggedUser, Task> onLogin)
+        public async Task Execute(LoginInput input)
         {
-            var foundUser = await this._dataAccess.GetUserByLogin(input.Login);
+            var login = new Domain.Login(input.Login);
+            
+            var foundUser = await this._dataAccess.GetUserByLogin(login);
 
             if (foundUser == null)
                 throw new Error.InvalidUserOrPassword();
@@ -24,8 +28,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
             if (foundUser.Password != new Sha1EncryptedPassword(new Password(input.Password)))
                 throw new Error.InvalidUserOrPassword();
 
-            if (onLogin != null)
-                await onLogin.Invoke(new LoggedUser(foundUser));
+            this._bus.SendEvent(new OnLoginInput(foundUser));
         }
 
         class Error

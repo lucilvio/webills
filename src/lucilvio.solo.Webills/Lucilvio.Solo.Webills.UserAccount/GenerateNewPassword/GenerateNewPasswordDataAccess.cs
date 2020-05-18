@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    internal class SendNewPasswordDataAccess : ISendNewPasswordDataAccess
+    internal class GenerateNewPasswordDataAccess : IGenerateNewPasswordDataAccess
     {
         private readonly UserAccountContext _context;
 
-        public SendNewPasswordDataAccess(UserAccountContext context)
+        public GenerateNewPasswordDataAccess(UserAccountContext context)
         {
             _context = context;
         }

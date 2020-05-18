@@ -1,5 +1,5 @@
-﻿using Lucilvio.Solo.Webills.Savings.GetSavingsByFilter;
-using Lucilvio.Solo.Webills.Web;
+﻿using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
+using Lucilvio.Solo.Webills.Savings.GetSavingsByFilter;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Savings
 {

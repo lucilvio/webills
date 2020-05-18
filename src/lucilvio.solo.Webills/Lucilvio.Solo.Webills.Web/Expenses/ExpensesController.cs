@@ -2,14 +2,13 @@
 using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
 using Lucilvio.Solo.Webills.Transactions.EditExpense;
 using Lucilvio.Solo.Webills.Transactions.GetExpense;
 using Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter;
 using Lucilvio.Solo.Webills.Transactions.RemoveExpense;
-using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Web.Shared;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

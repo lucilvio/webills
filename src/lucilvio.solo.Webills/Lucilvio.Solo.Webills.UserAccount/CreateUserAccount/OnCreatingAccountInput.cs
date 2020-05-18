@@ -4,9 +4,9 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    public struct CreatedAccount
+    public struct OnCreatingAccountInput
     {
-        internal CreatedAccount(User user)
+        internal OnCreatingAccountInput(User user)
         {
             this.Id = user != null ? user.Id : Guid.Empty;
         }

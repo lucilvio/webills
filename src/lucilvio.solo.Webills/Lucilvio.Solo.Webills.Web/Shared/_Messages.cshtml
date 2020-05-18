@@ -1,0 +1,12 @@
+﻿@{
+    var errorMessage = TempData["errorMessage"] != null ? TempData["errorMessage"].ToString() : "";
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <script>
+        (function (messageModule) {
+            messageModule.showErrorMessage('@errorMessage');
+        })(messageModule);
+    </script>
+}

@@ -19,7 +19,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
         public async Task<IActionResult> SendMeANewPassword([FromServices]UserAccountModule userAccountModule,
             [FromForm]SendMeANewPasswordRequest request)
         {
-            await userAccountModule.GenerateNewPassword(new SendNewPasswordInput(request.Email));
+            var message = new GenerateNewPasswordInput(request.Email);
+            await userAccountModule.SendMessage(message);
 
             return this.RedirectToAction("Index", "Login");
         }

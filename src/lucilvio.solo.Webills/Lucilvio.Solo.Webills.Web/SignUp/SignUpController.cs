@@ -20,12 +20,12 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
         [HttpPost]
         public async Task<IActionResult> Register([FromServices]UserAccountModule userAccountModule, [FromForm]SignUpRequest request)
         {
-            var input = new CreateUserAccountInput(request.Login, request.Password, request.PasswordConfirmation, request.Name,
+            var message = new CreateUserAccountInput(request.Login, request.Password, request.PasswordConfirmation, request.Name,
                 request.Login, request.TermsAccepted);
 
-            await userAccountModule.CreateNewUserAccount(input);
+            await userAccountModule.SendMessage(message);
 
-            return this.RedirectToAction(nameof(LoginController.Index), "Login");
+            return this.RedirectToAction(nameof(LoginController.Login), "Login");
         }
     }
 }

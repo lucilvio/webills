@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    public class LoggedUser
+    public class OnLoginInput
     {
-        internal LoggedUser(User user)
+        internal OnLoginInput(User user)
         {
             this.Id = user.Id;
             this.Name = user.Name.Value;

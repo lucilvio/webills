@@ -8,13 +8,15 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
     internal class CreateUserAccountComponent
     {
         private readonly ICreateUserAccountDataAccess _dataAccess;
+        private readonly IBusSender _bus;
 
-        public CreateUserAccountComponent(ICreateUserAccountDataAccess dataAccess)
+        public CreateUserAccountComponent(ICreateUserAccountDataAccess dataAccess, IBusSender bus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task<CreatedAccount> Execute(CreateUserAccountInput input)
+        public async Task Execute(CreateUserAccountInput input)
         {
             var accountWithSameLogin = await _dataAccess.GetUserAccountByLogin(new Domain.Login(input.Login));
 
@@ -26,7 +28,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 
             await _dataAccess.Persist(newUser);
 
-            return new CreatedAccount(newUser);
+            this._bus.SendEvent(new OnCreatingAccountInput(newUser));
         }
     }
 }

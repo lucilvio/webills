@@ -62,7 +62,6 @@ namespace Lucilvio.Solo.Webills.Transactions
         private void RegisterModuleDependencies(Container container)
         {
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
-            var currentAssembly = Assembly.GetExecutingAssembly();
 
             var inMemoryEventBus = new InMemoryBus();
 
@@ -72,6 +71,7 @@ namespace Lucilvio.Solo.Webills.Transactions
             container.Register<TransactionsContext>(Lifestyle.Scoped);
             container.Register<TransactionsReadContext>(Lifestyle.Scoped);
 
+            var currentAssembly = Assembly.GetExecutingAssembly();
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("DataAccess"), Lifestyle.Scoped);
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("Component"), Lifestyle.Scoped);
 
@@ -88,6 +88,5 @@ namespace Lucilvio.Solo.Webills.Transactions
                 .ToList()
                 .ForEach(s => container.Register(s.Interface ?? s.Concrete, s.Concrete, lifestyle));
         }
-
     }
 }

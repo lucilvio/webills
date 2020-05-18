@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
 using Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter;
-using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 {

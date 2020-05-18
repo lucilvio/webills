@@ -1,8 +1,6 @@
 ﻿using System;
-
+using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
 using Lucilvio.Solo.Webills.Transactions.GetIncomeById;
-using Lucilvio.Solo.Webills.Web;
-using Lucilvio.Solo.Webills.Web.Shared;
 
 namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 {
