@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.UserProfile.Domain
+﻿namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
     public interface IPassword
     {

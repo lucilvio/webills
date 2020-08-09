@@ -10,10 +10,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             if (string.IsNullOrEmpty(value))
                 throw new Error.LoginCannotBeEmpty();
 
-            if (!this.IsAValidEmail(value))
-                throw new Error.LoginIsNotAValidEmail();
-
-            this.Value = value;
+            this.Value = new Email(value).Value;
         }
 
         public string Value { get; }
@@ -47,22 +44,9 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             return !(login1 == login2);
         }
 
-        private bool IsAValidEmail(string value)
-        {
-            var emailPattern = @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
-              + "@"
-              + @"((([\w]+([-\w]*[\w]+)*\.)+[a-zA-Z]+)|"
-              + @"((([01]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]).){3}[01]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))\z";
-
-            var emailRegex = new Regex(emailPattern);
-
-            return emailRegex.IsMatch(value);
-        }
-
         internal class Error
         {
             internal class LoginCannotBeEmpty : Exception { }
-            internal class LoginIsNotAValidEmail : Exception { }
         }
     }
 }

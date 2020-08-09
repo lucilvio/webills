@@ -16,9 +16,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
             _context = context;
         }
 
-        public async Task<User> GetUserAccountByLogin(Domain.Login login)
+        public async Task<User> GetUserByLogin(Domain.Login login)
         {
-            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Login == login);
+            return await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Account.Login == login);
         }
 
         public async Task Persist(User user)

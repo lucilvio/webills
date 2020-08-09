@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Dashb
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Savings", "Savings", "{A9913FA0-7541-4D8B-98A8-E2A3CD72F2D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.Savings", "Lucilvio.Solo.Webills.Savings\Lucilvio.Solo.Webills.Savings.csproj", "{7C231654-20DB-4B84-BD61-A840E06D12E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Savings", "Lucilvio.Solo.Webills.Savings\Lucilvio.Solo.Webills.Savings.csproj", "{7C231654-20DB-4B84-BD61-A840E06D12E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Lucilvio.Solo.Webills.UserProfile.Domain;
-
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
     class ComplexPassword : IPassword

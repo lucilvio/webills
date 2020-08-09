@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Lucilvio.Solo.Webills.UserProfile.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {

@@ -16,9 +16,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
             _context = context;
         }
 
-        public async Task<User> GetUserByLogin(Domain.Login login)
+        public async Task<User> GetUserByEmail(string email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+            return await _context.Users
+                .Include(u => u.Account)
+                .FirstOrDefaultAsync(u => u.Email.Value == email);
         }
 
         public async Task Persist()

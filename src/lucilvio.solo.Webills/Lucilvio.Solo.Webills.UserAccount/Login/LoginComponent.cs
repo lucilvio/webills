@@ -25,8 +25,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
             if (foundUser == null)
                 throw new Error.InvalidUserOrPassword();
 
-            if (foundUser.Password != new Sha1EncryptedPassword(new Password(input.Password)))
-                throw new Error.InvalidUserOrPassword();
+            foundUser.Login(new Sha1EncryptedPassword(new Password(input.Password)));
 
             this._bus.SendEvent(new OnLoginInput(foundUser));
         }

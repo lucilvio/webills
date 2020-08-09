@@ -1,40 +1,58 @@
 ﻿using System;
 
-using Lucilvio.Solo.Webills.UserProfile.Domain;
-
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
     internal class User
     {
         private User()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
-        public User(Name name, Login login, IPassword password, bool termsAccepted) : this()
+        public User(Name name, Email email) : this()
         {
-            this.Name = name ?? throw new Error.CannotCreateUserWithoutName();
-            this.Login = login ?? throw new Error.CannotCreateUserWithoutLogin();
-            this.Password = password ?? throw new Error.CannotCreateUserWithoutPassword(); ;
-            this.TermAccepted = termsAccepted;
-        }
-
-        internal void ChangePassword(IPassword newPassword)
-        {
-            this.Password = newPassword;
+            this.Name = name ?? throw new Error.CantCreateUserWithoutName();
+            this.Email = email ?? throw new Error.CantCreateUserWithoutEmail();
         }
 
         public Guid Id { get; }
         public Name Name { get; }
-        public Login Login { get; }
-        public bool TermAccepted { get; }
-        public IPassword Password { get; private set; }
+        public Email Email { get; }
+        public Account Account { get; set; }
+
+        private bool HasAccount => this.Account != null;
+
+        public void CreateAccount(Login login, IPassword password, IPassword passwordConfirmation, bool termAccepted,
+            User accountWithSameLogin)
+        {
+            if (accountWithSameLogin != null && accountWithSameLogin.Account != null && accountWithSameLogin.Account.Login == login)
+                throw new Error.LoginNotAvailable();
+
+            this.Account = new Account(login, password, passwordConfirmation, termAccepted);
+        }
+
+        internal void Login(IPassword password)
+        {
+            if (!this.HasAccount)
+                throw new Error.UserDoesntHaveAnAccountAssociated();
+
+            this.Account.VerifyLoginPermission(password);
+        }
+
+        internal void ChangePassword(IPassword newPassword)
+        {
+            if (!this.HasAccount)
+                throw new Error.UserDoesntHaveAnAccountAssociated();
+
+            this.Account.ChangePassword(newPassword);
+        }
 
         internal class Error
         {
-            public class CannotCreateUserWithoutName : Exception { }
-            public class CannotCreateUserWithoutLogin : Exception { }
-            public class CannotCreateUserWithoutPassword : Exception { }
+            public class CantCreateUserWithoutName : Exception { }
+            public class CantCreateUserWithoutEmail : Exception { }
+            public class LoginNotAvailable : Exception { }
+            public class UserDoesntHaveAnAccountAssociated : Exception { }
         }
     }
 }

@@ -18,17 +18,20 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 
         public async Task Execute(CreateUserAccountInput input)
         {
-            var accountWithSameLogin = await _dataAccess.GetUserAccountByLogin(new Domain.Login(input.Login));
+            var user = new User(new Name(input.Name), new Email(input.Email));
+            
+            var userWithTheSameLogin = await _dataAccess.GetUserByLogin(new Domain.Login(input.Login));
 
-            var createUserAccountRule = new CreateUserAccountRule();
-            createUserAccountRule.Verify(new Password(input.Password), new Password(input.PasswordConfirmation), accountWithSameLogin);
+            user.CreateAccount(
+                new Domain.Login(input.Email),
+                new Sha1EncryptedPassword(new ComplexPassword(new Password(input.Password))),
+                new Sha1EncryptedPassword(new Password(input.PasswordConfirmation)),
+                input.TermsAccepted,
+                userWithTheSameLogin);
 
-            var newUser = new User(new Name(input.Name), new Domain.Login(input.Email),
-                new Sha1EncryptedPassword(new ComplexPassword(new Password(input.Password))), input.TermsAccepted);
+            await _dataAccess.Persist(user);
 
-            await _dataAccess.Persist(newUser);
-
-            this._bus.SendEvent(new OnCreatingAccountInput(newUser));
+            this._bus.SendEvent(new OnCreatingAccountInput(user));
         }
     }
 }

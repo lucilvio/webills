@@ -6,7 +6,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
     internal interface ICreateUserAccountDataAccess
     {
-        Task<User> GetUserAccountByLogin(Domain.Login login);
+        Task<User> GetUserByLogin(Domain.Login login);
         Task Persist(User user);
     }
 }

@@ -9,7 +9,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
         {
             this.Id = user.Id;
             this.Name = user.Name.Value;
-            this.Login = user.Login.Value;
+            this.Login = user.Email.Value;
         }
 
         public Guid Id { get; }

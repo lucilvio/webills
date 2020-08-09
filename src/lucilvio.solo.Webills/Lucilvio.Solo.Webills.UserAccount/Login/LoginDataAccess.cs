@@ -18,7 +18,10 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 
         public Task<User> GetUserByLogin(Domain.Login login)
         {
-            return this._context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Login == login);
+            return this._context.Users
+                .Include(u => u.Account)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Account.Login == login);
         }
     }
 }

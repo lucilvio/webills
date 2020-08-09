@@ -6,7 +6,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
     internal interface IGenerateNewPasswordDataAccess
     {
-        Task<User> GetUserByLogin(Domain.Login login);
+        Task<User> GetUserByEmail(string email);
         Task Persist();
     }
 }
