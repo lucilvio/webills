@@ -7,7 +7,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         public Password(string value)
         {
             if (string.IsNullOrEmpty(value))
-                throw new Error.PasswordCannotBeNullOrEmpty();
+                throw new Error.PasswordCantBeNullOrEmpty();
 
             Value = value;
         }
@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            return Value == ((Password)obj).Value;
+            return Value == ((IPassword)obj).Value;
         }
 
 
@@ -28,7 +28,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             return Value.GetHashCode();
         }
 
-        public static bool operator ==(Password password1, Password password2)
+        public static bool operator ==(Password password1, IPassword password2)
         {
             if (ReferenceEquals(password1, password2))
                 return true;
@@ -39,14 +39,14 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             return password1.Value == password2.Value;
         }
 
-        public static bool operator !=(Password password1, Password password2)
+        public static bool operator !=(Password password1, IPassword password2)
         {
             return !(password1 == password2);
         }
 
         internal class Error
         {
-            internal class PasswordCannotBeNullOrEmpty : Exception { }
+            internal class PasswordCantBeNullOrEmpty : Exception { }
         }
     }
 }

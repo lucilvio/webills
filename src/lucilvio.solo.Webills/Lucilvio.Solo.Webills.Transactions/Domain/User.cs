@@ -11,6 +11,9 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 
         internal User(Guid id)
         {
+            if(id == Guid.Empty)
+                throw new Error.CantCreateUserWithoutId();
+
             this.Id = id;
 
             this._incomes = new List<Income>();
@@ -20,8 +23,6 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         internal Guid Id { get; }
         internal IEnumerable<Income> Incomes => this._incomes;
         internal IEnumerable<Expense> Expenses => this._expenses;
-
-        public decimal Balance => this.Incomes.Sum(i => i.Value.Value) - this.Expenses.Sum(e => e.Value.Value);
 
         public Income AddIncome(string name, DateTime date, TransactionValue value)
         {
@@ -236,10 +237,11 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             this._incomes.Remove(foundIncome);
         }
 
-        class Error
+        internal class Error
         {
             internal class ExpenseNotFound : Exception { }
             internal class IncomeNotFound : Exception { }
+            internal class CantCreateUserWithoutId : Exception { }
         }
     }
 }

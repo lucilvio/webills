@@ -25,7 +25,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         public void CreateAccount(Login login, IPassword password, IPassword passwordConfirmation, bool termAccepted,
             User accountWithSameLogin)
         {
-            if (accountWithSameLogin != null && accountWithSameLogin.Account != null && accountWithSameLogin.Account.Login == login)
+            if (accountWithSameLogin != null && accountWithSameLogin.HasAccount && accountWithSameLogin.Account.Login == login)
                 throw new Error.LoginNotAvailable();
 
             this.Account = new Account(login, password, passwordConfirmation, termAccepted);

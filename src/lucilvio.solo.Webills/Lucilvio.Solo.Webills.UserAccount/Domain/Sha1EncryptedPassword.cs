@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
@@ -9,10 +10,13 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         public Sha1EncryptedPassword(IPassword password) : base()
         {
-            _password = password;
+            if (password == null)
+                throw new Error.PasswordCantBeEmpty();
+
+            this._password = password;
         }
 
-        public string Value { get => Encrypt(_password.Value); }
+        public string Value { get => this.Encrypt(this._password.Value); }
 
         private string Encrypt(string value)
         {
@@ -33,18 +37,18 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            return Value == ((IPassword)obj).Value;
+            return this.Value == ((IPassword)obj).Value;
         }
 
         public override int GetHashCode()
         {
-            return Value.GetHashCode();
+            return this.Value.GetHashCode();
         }
 
-        public static bool operator ==(IPassword password1, Sha1EncryptedPassword password2)
+        public static bool operator ==(Sha1EncryptedPassword password1, IPassword password2)
         {
             if (ReferenceEquals(password1, password2))
                 return true;
@@ -55,9 +59,14 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             return password1.Value == password2.Value;
         }
 
-        public static bool operator !=(IPassword password1, Sha1EncryptedPassword password2)
+        public static bool operator !=(Sha1EncryptedPassword password1, IPassword password2)
         {
             return !(password1 == password2);
+        }
+
+        internal class Error
+        {
+            public class PasswordCantBeEmpty : Exception { }
         }
     }
 }
