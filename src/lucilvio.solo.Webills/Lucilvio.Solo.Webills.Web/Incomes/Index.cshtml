@@ -89,7 +89,6 @@
             
             $.post("/Incomes/Remove", { id: id })
                 .done(function (data) {
-                    alert(data.message);
                     location.reload();
                 })
                 .fail(function (error) {

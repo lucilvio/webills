@@ -18,7 +18,7 @@ var messageModule = function ($) {
             "hideMethod": "fadeOut"
         }
 
-        toastr.error(msg)
+        toastr.error(msg, "Ups! Something goes wrong....")
     }
 
     function showSuccessMessage(msg) {
@@ -36,7 +36,7 @@ var messageModule = function ($) {
             "hideMethod": "fadeOut"
         }
 
-        toastr.success(msg);
+        toastr.success(msg, "Yey!");
     }
 
     return {

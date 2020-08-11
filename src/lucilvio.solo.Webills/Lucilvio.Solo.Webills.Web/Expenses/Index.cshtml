@@ -89,7 +89,6 @@
 
             $.post("/Expenses/Remove", { Id: id })
                 .done(function (data) {
-                    alert(data.message);
                     location.reload();
                 })
                 .fail(function (error) {

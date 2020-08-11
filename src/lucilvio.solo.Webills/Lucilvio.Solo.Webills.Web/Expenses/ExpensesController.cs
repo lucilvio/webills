@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Messages;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
 using Lucilvio.Solo.Webills.Transactions.EditExpense;
@@ -53,6 +54,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
             var message = new AddNewExpenseInput(this._auth.User().Id, request.Name, request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal());
             await this._transactionsModule.SendMessage(message);
 
+            this.SendSuccessMessage($"Expense '{request.Name}' successfully added");
+
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -63,6 +66,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
             var message = new EditExpenseInput(this._auth.User().Id, request.Id, request.Name, request.Category, request.Date.StringToDate(), request.Value.MoneyToDecimal());
             await this._transactionsModule.SendMessage(message);
 
+            this.SendSuccessMessage($"Expense successfully edited");
+
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -72,6 +77,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Expenses
         {
             var message = new RemoveExpenseInput(this._auth.User().Id, request.Id);
             await this._transactionsModule.SendMessage(message);
+
+            this.SendSuccessMessage($"Expense successfully removed");
 
             return new JsonResult(new { message = "Expense removed" });
         }

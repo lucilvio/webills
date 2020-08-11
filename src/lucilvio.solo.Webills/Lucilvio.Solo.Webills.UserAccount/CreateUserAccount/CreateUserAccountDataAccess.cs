@@ -20,6 +20,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
         {
             return await _context.Users
                 .AsNoTracking()
+                .Include(u => u.Account)
                 .FirstOrDefaultAsync(u => u.Account.Login == login);
         }
 

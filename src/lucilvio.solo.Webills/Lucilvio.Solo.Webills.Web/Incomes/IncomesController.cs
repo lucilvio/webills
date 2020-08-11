@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.DataFormaters;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Messages;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
 using Lucilvio.Solo.Webills.Transactions.EditIncome;
@@ -47,6 +48,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 
             await this._transactionsModule.SendMessage(message);
 
+            this.SendSuccessMessage($"Income '{request.Name}' successfully added");
+
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -68,6 +71,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
 
             await this._transactionsModule.SendMessage(message);
 
+            this.SendSuccessMessage("Income successfully edited");
+
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -77,6 +82,8 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Incomes
         {
             var message = new RemoveIncomeInput(this._auth.User().Id, request.Id);
             await this._transactionsModule.SendMessage(message);
+
+            this.SendSuccessMessage($"Income successfully deleted");
 
             return new JsonResult(new { message = "Expense removed" });
         }

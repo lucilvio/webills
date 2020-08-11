@@ -35,7 +35,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         internal void VerifyLoginPermission(IPassword password)
         {
             if(this.Password.Value != password.Value)
-                throw new Error.InvalidUserOrPassword();
+                throw new Error.LoginOrPasswordInvalid();
         }
 
         internal class Error
@@ -43,7 +43,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             internal class CantCreateAccountWithoutLogin : Exception { }
             internal class CantCreateAccountWithoutPassword : Exception { }
             internal class PasswordsDontMatch : Exception { }
-            internal class InvalidUserOrPassword : Exception { }
+            internal class LoginOrPasswordInvalid : Exception { }
             internal class CantChangePasswordToAnEmptyOne : Exception { }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 
+using Lucilvio.Solo.Webills.Clients.Web.Shared;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
-using Lucilvio.Solo.Webills.Clients.Web.Shared.Filters;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Notification;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -29,7 +29,7 @@ namespace Lucilvio.Solo.Webills.Web
         {
             services.AddControllersWithViews(options =>
             {
-                options.Filters.Add(new ErrorFilter());
+                options.Filters.Add<ExceptionFilter>();
             }).AddRazorRuntimeCompilation();
 
             services.Configure<RazorViewEngineOptions>(options =>

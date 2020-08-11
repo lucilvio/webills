@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 
+using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Messages;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
 
@@ -22,7 +24,9 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
             var message = new GenerateNewPasswordInput(request.Email);
             await userAccountModule.SendMessage(message);
 
-            return this.RedirectToAction("Index", "Login");
+            this.SendSuccessMessage($"Instructions to how you can get your password back were sent to the email {request.Email}");
+
+            return this.RedirectToAction(nameof(LoginController.Index), "Login");
         }
     }
 }

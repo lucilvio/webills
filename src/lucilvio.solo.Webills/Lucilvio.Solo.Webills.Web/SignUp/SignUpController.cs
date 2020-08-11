@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Lucilvio.Solo.Webills.Clients.Web.Login;
+using Lucilvio.Solo.Webills.Clients.Web.Shared.Messages;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
 
@@ -18,14 +19,16 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromServices]UserAccountModule userAccountModule, [FromForm]SignUpRequest request)
+        public async Task<IActionResult> Register([FromServices] UserAccountModule userAccountModule, [FromForm] SignUpRequest request)
         {
             var message = new CreateUserAccountInput(request.Login, request.Password, request.PasswordConfirmation, request.Name,
                 request.Login, request.TermsAccepted);
 
             await userAccountModule.SendMessage(message);
 
-            return this.RedirectToAction(nameof(LoginController.Login), "Login");
+            this.SendSuccessMessage($"Welcome {request.Name}! You can make your login now.");
+
+            return this.RedirectToAction(nameof(LoginController.Index), nameof(LoginController.Login));
         }
     }
 }

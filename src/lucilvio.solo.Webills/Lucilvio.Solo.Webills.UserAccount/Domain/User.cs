@@ -25,7 +25,10 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         public void CreateAccount(Login login, IPassword password, IPassword passwordConfirmation, bool termAccepted,
             User accountWithSameLogin)
         {
-            if (accountWithSameLogin != null && accountWithSameLogin.HasAccount && accountWithSameLogin.Account.Login == login)
+            if (accountWithSameLogin != null && !accountWithSameLogin.HasAccount)
+                throw new Error.UserWithSameLoginMustHaveAnAssociatedAccount();
+
+            if (accountWithSameLogin != null && accountWithSameLogin.Account.Login == login)
                 throw new Error.LoginNotAvailable();
 
             this.Account = new Account(login, password, passwordConfirmation, termAccepted);
@@ -53,6 +56,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             public class CantCreateUserWithoutEmail : Exception { }
             public class LoginNotAvailable : Exception { }
             public class UserDoesntHaveAnAccountAssociated : Exception { }
+            public class UserWithSameLoginMustHaveAnAssociatedAccount : Exception { }
         }
     }
 }

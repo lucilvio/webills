@@ -8,6 +8,14 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
     internal class UserTests
     {
         public User ValidUser => new User(new Name("Test User"), new Email("test@mail.com"));
+        
+        public User ValidUserWithAccount()
+        {
+            var user = new User(new Name("Test User"), new Email("test@mail.com"));
+            user.CreateAccount(new Login("test@mail.com"), new Password("123456"), new Password("123456"), true, null);
+
+            return user;
+        }
 
         [Test]
         public void CantCreateUserWithoutName()
@@ -43,16 +51,28 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         }
         
         [Test]
-        public void CantCreateNewUserAccountWithTheresAlreadyAnAccountWithTheSameLogin()
+        public void CantCreateNewUserAccountIfTheresAnAccountWithTheSameLogin()
         {
-            var userWithSameLogin = ValidUser;
-            userWithSameLogin.CreateAccount(new Login("test@mail.com"), new Password("123456"), new Password("123456"), true, null);
+            var userWithSameLogin = ValidUserWithAccount();
 
             var user = new User(new Name("Test user"), new Email("test@mail.com"));
             
             Assert.Throws<User.Error.LoginNotAvailable>(() =>
             {
                 user.CreateAccount(new Login("test@mail.com"), new Password("123456"), new Password("123456"), true, userWithSameLogin);
+            });
+        }
+
+        [Test]
+        public void CanCreateNewUserAccountIfUserWithSameLoginDoesntHaveAccountAssociated()
+        {
+            var userWithSameLogin = ValidUser;
+
+            var newUser = new User(new Name("Test user"), new Email("test@mail.com"));
+
+            Assert.Throws<User.Error.UserWithSameLoginMustHaveAnAssociatedAccount>(() =>
+            {
+                newUser.CreateAccount(new Login("test@mail.com"), new Password("123456"), new Password("123456"), true, userWithSameLogin);
             });
         }
 
@@ -73,14 +93,14 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             var user = this.ValidUser;
             user.CreateAccount(new Login("test@mail.com"), new Password("123456"), new Password("123456"), true, null);
 
-            Assert.Throws<Account.Error.InvalidUserOrPassword>(() =>
+            Assert.Throws<Account.Error.LoginOrPasswordInvalid>(() =>
             {
                 user.Login(new Password("654321"));
             });
         }
 
         [Test]
-        public void CantChangePasswordWithUserHasNoAccount()
+        public void CantChangePasswordIfUserHasNoAccountAssociated()
         {
             var user = this.ValidUser;
 
@@ -100,6 +120,15 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             {
                 user.ChangePassword(null);
             });
+        }
+
+        [Test]
+        public void ChangeUserPassword()
+        {
+            var user = this.ValidUserWithAccount();
+            user.ChangePassword(new Password("654321"));
+
+            user.Login(new Password("654321"));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
         public async Task Execute(GenerateNewPasswordInput input)
         {
-            var foundUser = await this._dataAccess.GetUserByEmail(input.Email);
+            var foundUser = await this._dataAccess.GetUserByEmail(new Email(input.Email));
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
