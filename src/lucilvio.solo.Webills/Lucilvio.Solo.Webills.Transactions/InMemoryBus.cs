@@ -26,12 +26,12 @@ namespace Lucilvio.Solo.Webills.Transactions
         public InMemoryBus()
         {
             this._eventsMap = new EventsMap(
-                new EventMap(typeof(OnAddIncomeInput), arg => this._onAddIncome.Invoke((OnAddIncomeInput)arg), act => this._onAddIncome += (Action<OnAddIncomeInput>)act),
-                new EventMap(typeof(OnEditIncomeInput), arg => this._onEditIncome.Invoke((OnEditIncomeInput)arg), act => this._onEditIncome += (Action<OnEditIncomeInput>)act),
-                new EventMap(typeof(OnRemoveIncomeInput), arg => this._onRemoveIncome.Invoke((OnRemoveIncomeInput)arg), act => this._onRemoveIncome += (Action<OnRemoveIncomeInput>)act),
-                new EventMap(typeof(OnAddExpenseInput), arg => this._onAddExpense.Invoke((OnAddExpenseInput)arg), act => this._onAddExpense += (Action<OnAddExpenseInput>)act),
-                new EventMap(typeof(OnEditedExpenseInput), arg => this._onEditExpense.Invoke((OnEditedExpenseInput)arg), act => this._onEditExpense += (Action<OnEditedExpenseInput>)act),
-                new EventMap(typeof(OnRemovedExpenseInput), arg => this._onRemoveExpense.Invoke((OnRemovedExpenseInput)arg), act => this._onRemoveExpense += (Action<OnRemovedExpenseInput>)act)
+                new EventMap(typeof(OnAddIncomeInput), arg => this._onAddIncome?.Invoke((OnAddIncomeInput)arg), act => this._onAddIncome += (Action<OnAddIncomeInput>)act),
+                new EventMap(typeof(OnEditIncomeInput), arg => this._onEditIncome?.Invoke((OnEditIncomeInput)arg), act => this._onEditIncome += (Action<OnEditIncomeInput>)act),
+                new EventMap(typeof(OnRemoveIncomeInput), arg => this._onRemoveIncome?.Invoke((OnRemoveIncomeInput)arg), act => this._onRemoveIncome += (Action<OnRemoveIncomeInput>)act),
+                new EventMap(typeof(OnAddExpenseInput), arg => this._onAddExpense?.Invoke((OnAddExpenseInput)arg), act => this._onAddExpense += (Action<OnAddExpenseInput>)act),
+                new EventMap(typeof(OnEditedExpenseInput), arg => this._onEditExpense?.Invoke((OnEditedExpenseInput)arg), act => this._onEditExpense += (Action<OnEditedExpenseInput>)act),
+                new EventMap(typeof(OnRemovedExpenseInput), arg => this._onRemoveExpense?.Invoke((OnRemovedExpenseInput)arg), act => this._onRemoveExpense += (Action<OnRemovedExpenseInput>)act)
             );
         }
 

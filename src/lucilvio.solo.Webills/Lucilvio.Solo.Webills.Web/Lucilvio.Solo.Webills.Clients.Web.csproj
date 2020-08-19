@@ -6,6 +6,7 @@
     <UserSecretsId>1f40fc16-30bc-4cca-ae76-06f42c4e84f5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Shared\Components\Table\" />
     <Folder Include="wwwroot\css\libs\" />
     <Folder Include="wwwroot\js\libs\" />
   </ItemGroup>
@@ -18,7 +19,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Savings\Lucilvio.Solo.Webills.Savings.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.Transactions.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.UserAccount\Lucilvio.Solo.Webills.UserAccount.csproj" />

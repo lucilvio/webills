@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
+
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
-using Lucilvio.Solo.Webills.Dashboard;
-using Lucilvio.Solo.Webills.Dashboard.GetUserDashboardInfo;
 using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Transactions.GetUserDashboardInfo;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,21 +13,30 @@ namespace Lucilvio.Solo.Webills.Web.Home
     public class HomeController : Controller
     {
         private readonly IAuthenticationService _authentication;
-        private readonly DashboardModule _dashboardModule;
+        private readonly TransactionsModule _transactionsModule;
 
-        public HomeController(IAuthenticationService authentication, DashboardModule dashboardModule, TransactionsModule transactionsModule)
+        public HomeController(IAuthenticationService authentication, TransactionsModule transactionsModule)
         {
             this._authentication = authentication;
-            this._dashboardModule = dashboardModule;
+            this._transactionsModule = transactionsModule;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var loggedUser = this._authentication.User();
-            var result = await this._dashboardModule.GetDashboardInfoByFilter(new GetDashboardInfoByFilterInput(loggedUser.Id));
+            try
+            {
+                var loggedUser = this._authentication.User();
+                
+                var result = await this._transactionsModule.SendMessage<GetDashboardInfoByFilterInput, GetDashboardInfoByFilterOutput>
+                    (new GetDashboardInfoByFilterInput(loggedUser.Id));
 
-            return this.View(new UserTransactionsInformationResponse(result));
+                return this.View(new UserTransactionsInformationResponse(result));
+            }
+            catch (System.Exception)
+            {
+                return this.View(new UserTransactionsInformationResponse(GetDashboardInfoByFilterOutput.Empty));
+            }
         }
     }
 }

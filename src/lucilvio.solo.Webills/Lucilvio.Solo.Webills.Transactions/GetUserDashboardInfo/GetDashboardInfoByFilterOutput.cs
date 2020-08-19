@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.Dashboard.GetUserDashboardInfo
+﻿namespace Lucilvio.Solo.Webills.Transactions.GetUserDashboardInfo
 {
     public class GetDashboardInfoByFilterOutput
     {
