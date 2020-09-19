@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infraestructure\DataAccess\Migrations\20200919102338_recurrentExpenses.cs" />
+    <Compile Remove="Infraestructure\DataAccess\Migrations\20200919102338_recurrentExpenses.Designer.cs" />
+    <Compile Remove="Infraestructure\DataAccess\Migrations\20200919103348_RecurrentExpenses.cs" />
+    <Compile Remove="Infraestructure\DataAccess\Migrations\20200919103348_RecurrentExpenses.Designer.cs" />
+    <Compile Remove="Infraestructure\DataAccess\Migrations\20200919103641_RecurrentExpenses.cs" />
+    <Compile Remove="Infraestructure\DataAccess\Migrations\20200919103641_RecurrentExpenses.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="dapper" Version="2.0.30" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">

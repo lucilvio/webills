@@ -25,9 +25,12 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+            var schema = "transactions";
+
+
             modelBuilder.Entity<Expense>(e =>
             {
-                e.ToTable("Expenses", "transactions");
+                e.ToTable("Expenses", schema);
 
                 e.HasKey("Id");
                 e.Property<Guid>("Id").ValueGeneratedNever();
@@ -39,11 +42,12 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
                 e.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
 
                 e.HasOne<User>().WithMany(u => u.Expenses).IsRequired();
+                e.HasOne<RecurrentExpense>().WithMany(r => r.Expenses);
             });
 
             modelBuilder.Entity<Income>(i =>
             {
-                i.ToTable("Incomes", "transactions");
+                i.ToTable("Incomes", schema);
 
                 i.HasKey("Id");
                 i.Property<Guid>("Id").ValueGeneratedNever();
@@ -58,10 +62,30 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
 
             modelBuilder.Entity<User>(u =>
             {
-                u.ToTable("Users", "transactions");
+                u.ToTable("Users", schema);
 
                 u.HasKey(u => u.Id);
                 u.Property(p => p.Id).ValueGeneratedNever();
+            });
+            
+            modelBuilder.Entity<RecurrentExpense>(e =>
+            {
+                e.ToTable("RecurrentExpenses", schema);
+
+                e.HasKey("Id");
+                e.Property<Guid>("Id").ValueGeneratedNever();
+                
+                e.OwnsOne(p => p.Recurrency).Property(p => p.RepetitionCount).IsRequired()
+                    .HasColumnName(nameof(Recurrency.RepetitionCount));
+                
+                e.OwnsOne(p => p.Recurrency).Property(p => p.Until).IsRequired()
+                    .HasColumnName(nameof(Recurrency.Until));
+                
+                e.OwnsOne(p => p.Recurrency).Property(p => p.Frequency).IsRequired()
+                    .HasConversion(p => p.Value, p => Frequency.FromValue(p))
+                    .HasColumnName(nameof(Recurrency.Frequency));
+
+                e.HasOne<User>().WithMany(u => u.RecurrentExpenses).IsRequired();
             });
         }
 

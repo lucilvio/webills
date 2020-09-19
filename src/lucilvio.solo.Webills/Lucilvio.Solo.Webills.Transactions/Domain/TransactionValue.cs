@@ -14,8 +14,6 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             _value = value;
         }
 
-        public static TransactionValue Zero => new TransactionValue(0);
-
         public decimal Value => _value;
 
         public override bool Equals(object obj)

@@ -1,15 +1,22 @@
-﻿namespace Lucilvio.Solo.Webills.Transactions.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace Lucilvio.Solo.Webills.Transactions.Domain
 {
-    enum Recurrency
+    public class Recurrency
     {
-        Daily = 1,
-        Weekly = 7,
-        Biweekly = 14,
-        Monthly = 30,
-        Bimonthly = 60,
-        Trimonthly = 90,
-        Quarterly = 120,
-        Semiannualy = 182,
-        Annual = 365
+        public Recurrency(int repetitionCount, Frequency frequency, DateTime until)
+        {
+            this.Until = until;
+            this.Frequency = frequency;
+            this.RepetitionCount = repetitionCount;
+        }
+
+        public DateTime Until { get; }
+        public Frequency Frequency { get; }
+        public int RepetitionCount { get; }
+
+        public IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from)
+            => this.Frequency.DatesUntilRecurrencyEndsByFrequency(this.RepetitionCount, from, this.Until);
     }
 }
