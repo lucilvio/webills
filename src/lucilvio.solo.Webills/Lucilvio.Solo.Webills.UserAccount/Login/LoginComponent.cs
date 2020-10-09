@@ -7,16 +7,16 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
     internal class LoginComponent
     {
+        private readonly IEventBus _eventBus;
         private readonly ILoginDataAccess _dataAccess;
-        private readonly IBusSender _bus;
 
-        public LoginComponent(ILoginDataAccess dataAccess, IBusSender bus)
+        public LoginComponent(ILoginDataAccess dataAccess, IEventBus eventBus)
         {
+            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task Execute(LoginInput input)
+        public async Task Execute(dynamic input)
         {
             var login = new Domain.Login(input.Login);
             
@@ -27,7 +27,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 
             foundUser.Login(new Sha1EncryptedPassword(new Password(input.Password)));
 
-            this._bus.SendEvent(new OnLoginInput(foundUser));
+            this._eventBus.Publish(Module.Events.OnLogin, new OnLoginInput(foundUser));
         }
 
         class Error

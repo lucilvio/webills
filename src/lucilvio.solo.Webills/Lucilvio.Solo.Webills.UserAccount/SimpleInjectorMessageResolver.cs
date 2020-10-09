@@ -1,57 +1,51 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-
+using Lucilvio.Solo.Webills.UserAccount.Login;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
-    internal class DependencyResolverWithSimpleInjector
+    internal class SimpleInjectorMessageResolver : IMessageResolver
     {
+        private readonly IEventBus _eventBus;
         private readonly Container _container;
 
-        public DependencyResolverWithSimpleInjector()
-        {
-            this._container = new Container();
+        private readonly IDictionary<Module.Messages, Func<object, Task>> _messagesMap;
 
-            this.ResolveModuleDependencies(this._container);
+        public SimpleInjectorMessageResolver(IEventBus eventBus)
+        {
+            this._container = ResolveDependencies(new Container());
+
+            this._messagesMap = new Dictionary<Module.Messages, Func<object, Task>>
+            {
+                { Module.Messages.Login, this.ExecuteLoginComponent }
+            };
+
+            this._eventBus = eventBus;
         }
 
-        internal IBusSubscriber ResolveBusSubscriber()
+        public async Task Resolve(Module.Messages message, object input)
         {
-            return this._container.GetInstance<IBusSubscriber>();
-        }
-
-        internal async Task ExecuteComponent<TMessage>(TMessage message)
-        {
-            var componentType = this.GetComponentTypeByMessage(message);
-
-            if (componentType is null)
+            if (!this._messagesMap.TryGetValue(message, out var action))
                 return;
 
-            using (AsyncScopedLifestyle.BeginScope(this._container))
-            {
-                dynamic component = this._container.GetInstance(componentType);
-                await component.Execute((TMessage)message);
-            }
+            await action.Invoke(input);
         }
 
-        private Type GetComponentTypeByMessage<TMessage>(TMessage message)
+        internal async Task ExecuteLoginComponent(object input)
         {
-            return Assembly.GetExecutingAssembly().GetType(message.GetType().FullName.Replace("Input", "Component"));
+            await this._container.GetInstance<LoginComponent>().Execute(input);
         }
 
-        private void ResolveModuleDependencies(Container container)
+        private Container ResolveDependencies(Container container)
         {
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
-
-            var inMemoryEventBus = new InMemoryBus();
-
-            container.Register<IBusSender>(() => inMemoryEventBus, Lifestyle.Singleton);
-            container.Register<IBusSubscriber>(() => inMemoryEventBus, Lifestyle.Singleton);
+            container.Register(() => this._eventBus, Lifestyle.Singleton);
 
             container.Register<UserAccountContext>(Lifestyle.Scoped);
 
@@ -60,6 +54,7 @@ namespace Lucilvio.Solo.Webills.UserAccount
             this.RegisterCollection(container, currentAssembly, t => t.Name.EndsWith("Component"), Lifestyle.Scoped);
 
             container.Verify();
+            return container;
         }
 
         private void RegisterCollection(Container container, Assembly currentAssembly,

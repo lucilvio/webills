@@ -1,6 +1,6 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    public class CreateUserAccountInput
+    class CreateUserAccountInput
     {
         public CreateUserAccountInput(string login, string password, string passwordConfirmation, string name, 
             string email, bool termsAccepted)

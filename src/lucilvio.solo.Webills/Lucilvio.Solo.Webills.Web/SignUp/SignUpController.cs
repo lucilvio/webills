@@ -19,12 +19,9 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromServices] UserAccountModule userAccountModule, [FromForm] SignUpRequest request)
+        public async Task<IActionResult> Register([FromServices] Module module, [FromForm] SignUpRequest request)
         {
-            var message = new CreateUserAccountInput(request.Login, request.Password, request.PasswordConfirmation, request.Name,
-                request.Login, request.TermsAccepted);
-
-            await userAccountModule.SendMessage(message);
+            await module.SendMessage(Module.Messages.CreateAccount, request);
 
             this.SendSuccessMessage($"Welcome {request.Name}! You can make your login now.");
 

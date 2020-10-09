@@ -1,6 +1,6 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
-    public interface IPassword
+    internal interface IPassword
     {
         string Value { get; }
     }

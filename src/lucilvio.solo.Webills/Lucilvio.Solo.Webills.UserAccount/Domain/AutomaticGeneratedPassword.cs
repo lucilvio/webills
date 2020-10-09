@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
-    public class AutomaticGeneratedPassword : IPassword
+    internal class AutomaticGeneratedPassword : IPassword
     {
         public string Value => "123456";
     }

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
     [TestFixture]
-    public class PasswordTests
+    internal class PasswordTests
     {
         [Test]
         public void CantCreateEmptyPassword()

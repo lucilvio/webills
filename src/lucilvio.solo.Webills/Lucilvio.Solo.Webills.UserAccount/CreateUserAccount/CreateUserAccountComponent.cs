@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
-
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
     internal class CreateUserAccountComponent
     {
+        private readonly IEventBus _eventBus;
         private readonly ICreateUserAccountDataAccess _dataAccess;
-        private readonly IBusSender _bus;
 
-        public CreateUserAccountComponent(ICreateUserAccountDataAccess dataAccess, IBusSender bus)
+        public CreateUserAccountComponent(ICreateUserAccountDataAccess dataAccess, IEventBus eventBus)
         {
+            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task Execute(CreateUserAccountInput input)
+        public async Task Execute(dynamic input)
         {
             var user = new User(new Name(input.Name), new Email(input.Email));
-            
-            var userWithTheSameLogin = await _dataAccess.GetUserByLogin(new Domain.Login(input.Login));
+
+            var userWithTheSameLogin = await this._dataAccess.GetUserByLogin(new Domain.Login(input.Login));
 
             user.CreateAccount(
                 new Domain.Login(input.Email),
@@ -29,9 +28,9 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
                 input.TermsAccepted,
                 userWithTheSameLogin);
 
-            await _dataAccess.Persist(user);
+            await this._dataAccess.Persist(user);
 
-            this._bus.SendEvent(new OnCreatingAccountInput(user));
+            this._eventBus.Publish(Module.Events.OnAccountCreated, new OnCreatingAccountInput(user));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=lucilvio.solo.webills; Trusted_Connection=True; MultipleActiveResultSets=true; Connection Timeout=300;", opt =>
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=lucilvio.solo.webills; Trusted_Connection=True; MultipleActiveResultSets=true; Connection Timeout=300;", opt =>
             {
                 opt.MigrationsHistoryTable($"__Transactions_MigrationsHistory", "transactions");
             });

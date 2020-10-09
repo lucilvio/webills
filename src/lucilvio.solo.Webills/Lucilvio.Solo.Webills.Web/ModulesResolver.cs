@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Lucilvio.Solo.Webills.Clients.Web.Login;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
 using Lucilvio.Solo.Webills.Clients.Web.Shared.Notification;
 using Lucilvio.Solo.Webills.Savings;
@@ -7,10 +7,6 @@ using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
 using Lucilvio.Solo.Webills.Transactions.CreateUser;
 using Lucilvio.Solo.Webills.UserAccount;
-using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
-using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
-using Lucilvio.Solo.Webills.UserAccount.Login;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +21,7 @@ namespace Lucilvio.Solo.Webills.Web
             var transactionalConnectionString = configuration.GetConnectionString("transactionalContext");
 
             var transactionModule = new TransactionsModule();
-            var userAccountModule = new UserAccountModule();
+            var userAccountModule = new Module();
             var savingsModule = new SavingsModule(new SavingsModuleConfiguration(transactionalConnectionString,
                 readConnectionString));
 
@@ -38,25 +34,28 @@ namespace Lucilvio.Solo.Webills.Web
         }
 
         private static void BindUserAccountModulesEvents(INotificationService notificationService, IAuthenticationService authService,
-            TransactionsModule transactionsModule, UserAccountModule userAccountModule)
+            TransactionsModule transactionsModule, Module userAccountModule)
         {
-            userAccountModule.SubscribeEvent<OnLoginInput>(async loggedUser =>
-            {
-                await authService.SignIn(new UserAuthCredentials(loggedUser.Id, loggedUser.Login, loggedUser.Name));
-            });
+            var onLoginReaction = new OnLoginReaction(authService);
+            userAccountModule.SubscribeEvent(Module.Events.OnLogin,  onLoginReaction.AuthenticateUser);
 
-            userAccountModule.SubscribeEvent<OnCreatingAccountInput>(async createdAccount =>
-            {
-                await transactionsModule.SendMessage(new CreateUserInput(createdAccount.Id));
-            });
+            //userAccountModule.Events.OnLogin.AddReaction(async loggedUser =>
+            //{
+            //    await authService.SignIn(new UserAuthCredentials(loggedUser.Id, loggedUser.Login, loggedUser.Name));
+            //});
 
-            userAccountModule.SubscribeEvent<OnGeneratingPasswordInput>(async generatedPassword =>
-            {
-                await notificationService.Send(new Notification(
-                    new Notification.Sender("Webillls", "webills@mail.com"),
-                    new Notification.Receiver(generatedPassword.UserName, generatedPassword.UserContact),
-                    @$"Hey <b>{generatedPassword.UserName}</b><br>Here is your new password: <b>{generatedPassword.Password}</b>"));
-            });
+            //userAccountModule.Events.OnAccountCreation.AddReaction(async createdAccount =>
+            //{
+            //    await transactionsModule.SendMessage(new CreateUserInput(createdAccount.Id));
+            //});
+
+            //userAccountModule.Events.OnPasswordGeneration.AddReaction(async generatedPassword =>
+            //{
+            //    await notificationService.Send(new Notification(
+            //        new Notification.Sender("Webillls", "webills@mail.com"),
+            //        new Notification.Receiver(generatedPassword.UserName, generatedPassword.UserContact),
+            //        @$"Hey <b>{generatedPassword.UserName}</b><br>Here is your new password: <b>{generatedPassword.Password}</b>"));
+            //});
         }
 
         private static void BindSavingsModuleEvents(TransactionsModule transactionModule, SavingsModule savingsModule)
