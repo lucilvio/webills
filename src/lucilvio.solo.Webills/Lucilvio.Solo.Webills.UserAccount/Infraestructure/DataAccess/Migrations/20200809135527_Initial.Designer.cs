@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess.Migrations
 {
-    [DbContext(typeof(UserAccountContext))]
+    [DbContext(typeof(DataContext))]
     [Migration("20200809135527_Initial")]
     partial class Initial
     {

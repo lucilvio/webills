@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Clients.Web.Shared.Authentication;
+﻿using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.Web.Home;
 
@@ -10,12 +8,10 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
 {
     public class LoginController : Controller
     {
-        private readonly IAuthenticationService _authenticationService;
         private readonly Module _module;
 
-        public LoginController(IAuthenticationService authenticationService, Module module)
+        public LoginController(Module module)
         {
-            this._authenticationService = authenticationService;
             this._module = module;
         }
 
@@ -29,10 +25,10 @@ namespace Lucilvio.Solo.Webills.Clients.Web.Login
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginRequest request)
         {
-            await this._module.SendMessage(Module.Messages.Login, request);
+            await this._module.SendMessage(request);
             return this.RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        
+
     }
 }

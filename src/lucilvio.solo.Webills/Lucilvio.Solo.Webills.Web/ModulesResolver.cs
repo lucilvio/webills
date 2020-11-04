@@ -21,7 +21,19 @@ namespace Lucilvio.Solo.Webills.Web
             var transactionalConnectionString = configuration.GetConnectionString("transactionalContext");
 
             var transactionModule = new TransactionsModule();
-            var userAccountModule = new Module();
+            
+            var userAccountModule = new UserAccount.Module(new Configurations
+            {
+                CreateDefaultUserAccount = true,
+                DefaultAccount = new Configurations.DefaultUserAccount
+                {
+                    Name = "Administrator",
+                    Email = "admin@mail.com",
+                    Password = "123456"
+                },
+                DataConnection = @"Server=.\SQLEXPRESS;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;"
+            });
+
             var savingsModule = new SavingsModule(new SavingsModuleConfiguration(transactionalConnectionString,
                 readConnectionString));
 

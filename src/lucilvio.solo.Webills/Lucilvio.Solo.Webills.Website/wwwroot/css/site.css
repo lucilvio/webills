@@ -1,0 +1,15 @@
+﻿:root {
+    --primary-color: #61d39f;
+}
+
+.btn.btn-primary {
+    --sample: #ff0000;
+
+    color: #fff;
+    background: var(--primary-color);
+}
+
+.accordion-menu li.active-page > a:only-child {
+    color: #fff;
+    background: var(--primary-color);
+}

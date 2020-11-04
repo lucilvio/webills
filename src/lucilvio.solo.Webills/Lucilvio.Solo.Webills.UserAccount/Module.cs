@@ -1,42 +1,33 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Login;
+using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
+using Lucilvio.Solo.Webills.UserAccount.ForgotYourPassword;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
-    public class Module
+    public partial class Module
     {
         private readonly IEventBus _eventBus;
-        private readonly IMessageResolver _messageResolver;
+        private readonly IMessageDispatcher _messageDispatcher;
 
-        public Module(Configurations configs = null)
+        public Module(Configurations config)
         {
             this._eventBus = new DefaultEventBus();
-            this._messageResolver = new DefaultMessageResolver(this._eventBus, configs);
+            _messageDispatcher = new DefaultMessageDispatcher(config, this._eventBus);
         }
 
-        public async Task SendMessage(Messages message, object input) =>
-            await this._messageResolver.Resolve(message, input);
+        public async Task<LoggedUser> Login(ILoginMessage message)
+        {
+            return await this._messageDispatcher.DispatchLoginMessage(message);
+        }
+
+        public async Task<GeneratedPassword> ForgotYourPassword(IForgotYourPasswordMessage message)
+        {
+            return await this._messageDispatcher.DispatchForgotYourPasswordMessage(message);
+        }
 
         public void SubscribeEvent(Events @event, Func<object, Task> reaction) =>
             this._eventBus.Subscibe(@event, reaction);
-
-        public enum Messages
-        {
-            Login,
-            NewPassword,
-            CreateAccount
-        }
-
-        public enum Events
-        {
-            OnLogin,
-            OnAccountCreated
-        }
-
-        public class Configurations
-        {
-            public string DataConnection { get; set; }
-        }
     }
 }

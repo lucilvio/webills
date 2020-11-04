@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess.Migrations
 {
-    [DbContext(typeof(UserAccountContext))]
+    [DbContext(typeof(DataContext))]
     internal class UserAccountContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
