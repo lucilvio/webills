@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.ForgotYourPassword
@@ -28,7 +29,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.ForgotYourPassword
 
             await this._dataAccess.Persist();
 
-            this._bus.Publish(Module.Events.OnNewPasswordGenerated, new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value));
+            this._bus.Publish(Module.Events.OnNewPasswordGenerated.ToString(), new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value));
 
             return new object();
         }

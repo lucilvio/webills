@@ -1,5 +1,8 @@
 using System;
 using System.Linq;
+using Lucilvio.Solo.Webills.EventBus;
+using Lucilvio.Solo.Webills.Transactions;
+using Lucilvio.Solo.Webills.Website.Shared;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,7 +49,9 @@ namespace Lucilvio.Solo.Webills.Website
             })
             .AddRazorRuntimeCompilation();
 
-            services.AddSingleton(new UserAccount.Module(new UserAccount.Configurations
+            IEventBus eventBus = new DefaultEventBus();
+            
+            var userAccountModule = new UserAccount.Module(eventBus, new UserAccount.Configurations
             {
                 DefaultAccount = new UserAccount.Configurations.DefaultUserAccount
                 {
@@ -56,7 +61,13 @@ namespace Lucilvio.Solo.Webills.Website
                 },
                 DataConnection = Configuration.GetConnectionString("dataConnection"),
                 CreateDefaultUserAccount = true,
-            }));
+            });
+
+            var transactionsModule = new TransactionsModule(eventBus);
+
+            services.AddSingleton<IEventBus>(eventBus);
+            services.AddSingleton<UserAccount.Module>(userAccountModule);
+            services.AddSingleton<TransactionsModule>(transactionsModule);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{93D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Website", "Lucilvio.Solo.Webills.Website\Lucilvio.Solo.Webills.Website.csproj", "{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.EventBus", "Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj", "{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
+using Lucilvio.Solo.Webills.EventBus;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
 {
@@ -32,7 +33,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
             await this._dataAccess.Persist(user);
 
             var createdAccount = new CreatedAccount(user);
-            this._eventBus.Publish(Module.Events.UserAccountCreated, createdAccount);
+            this._eventBus.Publish(Module.Events.UserAccountCreated.ToString(), createdAccount);
 
             return createdAccount;
         }

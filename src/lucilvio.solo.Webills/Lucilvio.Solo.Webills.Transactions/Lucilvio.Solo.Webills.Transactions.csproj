@@ -34,4 +34,8 @@
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj" />
+  </ItemGroup>
+
 </Project>

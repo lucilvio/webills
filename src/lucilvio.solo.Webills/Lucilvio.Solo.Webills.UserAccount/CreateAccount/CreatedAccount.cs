@@ -4,7 +4,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    struct CreatedAccount
+    public struct CreatedAccount
     {
         internal CreatedAccount(User user)
         {
