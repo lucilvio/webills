@@ -23,6 +23,8 @@
     <link href="~/css/connect.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
 
+    <link href="~/css/toastr/toastr.min.css" rel="stylesheet" />
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,7 +44,16 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="~/lib/jquery-mask/jquery.mask.min.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+    <script src="~/lib/loaders/blockui.min.js"></script>
+
     <script src="~/js/connect.js"></script>
+
+    <script src="~/js/modules/block-module.js"></script>
+    <script src="~/js/modules/message-modules.js"></script>
+
+    <script src="~/js/general.js"></script>
 
     @RenderSection("Scripts", required: false)
 
@@ -54,14 +65,14 @@
     @if (!string.IsNullOrEmpty(successMessage))
     {
         <script>
-            alert('@successMessage');
+            messageModule.showSuccessMessage('@successMessage');
         </script>
     }
 
     @if (!string.IsNullOrEmpty(errorMessage))
     {
         <script>
-            alert('@errorMessage');
+            messageModule.showErrorMessage('@errorMessage');
         </script>
     }
 </body>
