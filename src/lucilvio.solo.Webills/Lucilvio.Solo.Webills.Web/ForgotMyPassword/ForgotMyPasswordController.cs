@@ -20,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Clients.Web.ForgotMyPassword
         public async Task<IActionResult> SendMeANewPassword([FromServices] Module userAccountModule,
             [FromForm] SendMeANewPasswordRequest request)
         {
-            var generatedPassword = userAccountModule.GenerateNewPasswordForUser(request);
+            var generatedPassword = userAccountModule.GenerateNewPassword(request);
 
             this.SendSuccessMessage($"Instructions to how you can get your password back were sent to the email {request.Email}");
 

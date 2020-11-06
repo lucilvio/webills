@@ -3,6 +3,7 @@ using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Lucilvio.Solo.Webills.Website.Shared;
 
 namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
 {
@@ -17,10 +18,12 @@ namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
         {
             await module.CreateNewAccount(request);
 
+            this.SendSuccessMessage("Account successfully created!");
+
             return RedirectToPage("/Login/Login");
         }
 
-        public class CreateNewAccountRequest : ICreateAccountMessage
+        public class CreateNewAccountRequest : ICreateNewAccountMessage
         {
             public string Name { get; set; }
             public string Email { get; set; }

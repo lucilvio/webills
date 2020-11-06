@@ -1,10 +1,9 @@
 ﻿using System;
-
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
 {
-    public struct CreatedAccount
+    public class CreatedAccount
     {
         internal CreatedAccount(User user)
         {

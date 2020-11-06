@@ -3,12 +3,15 @@ using System.Linq;
 using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Website.Shared;
+using Lucilvio.Solo.Webills.Website.Shared.Filters;
+using Lucilvio.Solo.Webills.Website.Shared.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,12 +26,13 @@ namespace Lucilvio.Solo.Webills.Website
         }
 
         public IConfiguration Configuration { get; }
+        public ITempDataDictionaryFactory TempDataDictionaryFactory { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
@@ -46,11 +50,20 @@ namespace Lucilvio.Solo.Webills.Website
             {
                 options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
                 options.Conventions.ConfigureFilter(new AuthorizeFilter());
+                options.Conventions.ConfigureFilter(new ExceptionsFilter());
+
             })
             .AddRazorRuntimeCompilation();
 
+            services.AddSingleton<INotificationService>(new NotificationByEmailService(
+                Environment.GetEnvironmentVariable("email_host", EnvironmentVariableTarget.User),
+                int.Parse(Environment.GetEnvironmentVariable("email_port", EnvironmentVariableTarget.User)),
+                Environment.GetEnvironmentVariable("email_user", EnvironmentVariableTarget.User),
+                Environment.GetEnvironmentVariable("email_password", EnvironmentVariableTarget.User)
+            ));
+
             IEventBus eventBus = new DefaultEventBus();
-            
+
             var userAccountModule = new UserAccount.Module(eventBus, new UserAccount.Configurations
             {
                 DefaultAccount = new UserAccount.Configurations.DefaultUserAccount

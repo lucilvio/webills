@@ -6,18 +6,18 @@ using Lucilvio.Solo.Webills.EventBus;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
 {
-    internal class CreateAccountMessageHandler : IMessageHandler<ICreateAccountMessage>
+    internal class CreateNewAccountMessageHandler : IMessageHandler<ICreateNewAccountMessage>
     {
         private readonly IEventBus _eventBus;
-        private readonly ICreateAccountDataAccess _dataAccess;
+        private readonly ICreateNewAccountDataAccess _dataAccess;
 
-        public CreateAccountMessageHandler(ICreateAccountDataAccess dataAccess, IEventBus eventBus)
+        public CreateNewAccountMessageHandler(ICreateNewAccountDataAccess dataAccess, IEventBus eventBus)
         {
             this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
         
-        public async Task<dynamic> Execute(ICreateAccountMessage message)
+        public async Task<dynamic> Execute(ICreateNewAccountMessage message)
         {
             var user = new User(new Name(message.Name), new Email(message.Email));
 
@@ -33,7 +33,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
             await this._dataAccess.Persist(user);
 
             var createdAccount = new CreatedAccount(user);
-            this._eventBus.Publish(Module.Events.UserAccountCreated.ToString(), createdAccount);
+            this._eventBus.Publish(Events.UserAccountCreated.ToString(), createdAccount);
 
             return createdAccount;
         }

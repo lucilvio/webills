@@ -1,16 +1,17 @@
 ﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
+namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    internal class CreateAccountDataAccess : ICreateAccountDataAccess
+    internal class CreateNewAccountDataAccess : ICreateNewAccountDataAccess
     {
         private readonly DataContext _context;
 
-        public CreateAccountDataAccess(DataContext context)
+        public CreateNewAccountDataAccess(DataContext context)
         {
             _context = context;
         }

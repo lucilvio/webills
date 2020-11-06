@@ -30,7 +30,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 
         class Error
         {
-            internal class InvalidUserOrPassword : Exception { }
+            internal class InvalidUserOrPassword : BusinessError { }
         }
     }
 }

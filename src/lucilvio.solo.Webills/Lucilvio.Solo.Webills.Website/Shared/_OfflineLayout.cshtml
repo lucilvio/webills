@@ -45,5 +45,24 @@
     <script src="~/js/connect.js"></script>
 
     @RenderSection("Scripts", required: false)
+
+    @{
+        var successMessage = TempData["successMessage"] != null ? TempData["successMessage"].ToString() : "";
+        var errorMessage = TempData["errorMessage"] != null ? TempData["errorMessage"].ToString() : "";
+    }
+
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <script>
+            alert('@successMessage');
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <script>
+            alert('@errorMessage');
+        </script>
+    }
 </body>
 </html>

@@ -1,6 +1,6 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
 {
-    public interface ICreateAccountMessage : IMessage
+    public interface ICreateNewAccountMessage : IMessage
     {
         public string Name { get; }
         public string Email { get; }

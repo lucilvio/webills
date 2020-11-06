@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Web.SignUp
         [HttpPost]
         public async Task<IActionResult> Register([FromServices] Module module, [FromForm] SignUpRequest request)
         {
-            await module.SendMessage(request);
+            await module.CreateNewAccount(request);
             this.SendSuccessMessage($"Welcome {request.Name}! You can make your login now.");
 
             return this.RedirectToAction(nameof(LoginController.Index), nameof(LoginController.Login));

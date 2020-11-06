@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
-namespace Lucilvio.Solo.Webills.UserAccount.ForgotYourPassword
+namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    internal interface IForgotYourPasswordDataAccess
+    internal interface IGenerateNewPasswordDataAccess
     {
         Task<User> GetUserByEmail(Email email);
         Task Persist();

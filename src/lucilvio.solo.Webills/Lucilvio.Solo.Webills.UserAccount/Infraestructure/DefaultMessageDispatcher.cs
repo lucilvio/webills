@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Login;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-using Lucilvio.Solo.Webills.UserAccount.ForgotYourPassword;
 using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
 using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
+using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
+using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure
 {
@@ -19,24 +20,24 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure
             this._eventBus = eventBus;
         }
 
-        public async Task<CreatedAccount> DispatchCreateNewAccountMessage(ICreateAccountMessage message)
+        public async Task<CreatedAccount> DispatchCreateNewAccountMessage(ICreateNewAccountMessage message)
         {
             using var ctx = new DataContext(this._configuration);
 
-            ICreateAccountDataAccess dataAccess = new CreateAccountDataAccess(ctx);
-            var handler = new CreateAccountMessageHandler(dataAccess, this._eventBus);
+            ICreateNewAccountDataAccess dataAccess = new CreateNewAccountDataAccess(ctx);
+            var handler = new CreateNewAccountMessageHandler(dataAccess, this._eventBus);
 
             return await handler.Execute(message);
         }
 
-        public async Task<GeneratedPassword> DispatchForgotYourPasswordMessage(IForgotYourPasswordMessage message)
+        public async Task<GeneratedPassword> DispatchGenerateNewPasswordMessage(IGenerateNewPasswordMessage message)
         {
             using var ctx = new DataContext(this._configuration);
 
-            IForgotYourPasswordDataAccess dataAccess = new ForgotYourPasswordDataAccess(ctx);
-            var handler = new ForgotYourPasswordMessageHandler(dataAccess, this._eventBus);
+            IGenerateNewPasswordDataAccess dataAccess = new GenerateNewPassword.GenerateNewPasswordDataAccess(ctx);
+            var handler = new GenerateNewPasswordMessageHandler(dataAccess, this._eventBus);
 
-            return await await handler.Execute(message);
+            return await handler.Execute(message);
         }
 
         public async Task<LoggedUser> DispatchLoginMessage(ILoginMessage message)

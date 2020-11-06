@@ -25,6 +25,9 @@ namespace Lucilvio.Solo.Webills.Website.Login
 
         public IActionResult OnGet()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToPage("/Home/Dashboard");
+
             return this.Page();
         }
 

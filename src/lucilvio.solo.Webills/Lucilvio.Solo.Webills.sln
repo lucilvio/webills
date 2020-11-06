@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{93D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Website", "Lucilvio.Solo.Webills.Website\Lucilvio.Solo.Webills.Website.csproj", "{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Webills.EventBus", "Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj", "{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus", "Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj", "{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{09FB3098-3C1B-4144-B225-98719B361835}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,7 @@ Global
 		{7C231654-20DB-4B84-BD61-A840E06D12E0} = {A9913FA0-7541-4D8B-98A8-E2A3CD72F2D8}
 		{93D56556-3586-4A8F-80B2-E8F7B562E2F4} = {BC1980B6-3B22-42D7-937E-37FE2DF65BE6}
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E} = {93D56556-3586-4A8F-80B2-E8F7B562E2F4}
+		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD} = {09FB3098-3C1B-4144-B225-98719B361835}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

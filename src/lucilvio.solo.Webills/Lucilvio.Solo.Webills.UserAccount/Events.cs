@@ -1,13 +1,10 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount
 {
-    public partial class Module
+    internal enum Events
     {
-        public enum Events
-        {
-            OnLogin,
-            OnAccountCreated,
-            OnNewPasswordGenerated,
-            UserAccountCreated
-        }
+        OnLogin,
+        OnAccountCreated,
+        OnNewPasswordGenerated,
+        UserAccountCreated
     }
 }

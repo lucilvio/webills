@@ -1,12 +1,12 @@
-﻿namespace Lucilvio.Solo.Webills.UserAccount.ForgotYourPassword
+﻿namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
     public class GeneratedPassword
     {
         internal GeneratedPassword(string userName, string userContact, string password)
         {
-            this.UserName = userName;
-            this.UserContact = userContact;
-            this.Password = password;
+            UserName = userName;
+            UserContact = userContact;
+            Password = password;
         }
 
         public string UserName { get; }

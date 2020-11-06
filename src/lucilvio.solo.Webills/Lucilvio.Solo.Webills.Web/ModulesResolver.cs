@@ -20,9 +20,9 @@ namespace Lucilvio.Solo.Webills.Web
             var readConnectionString = configuration.GetConnectionString("readContext");
             var transactionalConnectionString = configuration.GetConnectionString("transactionalContext");
 
-            var transactionModule = new TransactionsModule();
+            var transactionModule = new TransactionsModule(null);
             
-            var userAccountModule = new UserAccount.Module(new Configurations
+            var userAccountModule = new UserAccount.Module(null, new Configurations
             {
                 CreateDefaultUserAccount = true,
                 DefaultAccount = new Configurations.DefaultUserAccount
@@ -49,7 +49,7 @@ namespace Lucilvio.Solo.Webills.Web
             TransactionsModule transactionsModule, Module userAccountModule)
         {
             var onLoginReaction = new OnLoginReaction(authService);
-            userAccountModule.SubscribeEvent(Module.Events.OnLogin,  onLoginReaction.AuthenticateUser);
+            //userAccountModule.SubscribeEvent(Module.Events.OnLogin,  onLoginReaction.AuthenticateUser);
 
             //userAccountModule.Events.OnLogin.AddReaction(async loggedUser =>
             //{
