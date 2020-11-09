@@ -28,15 +28,15 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         internal IEnumerable<Expense> Expenses => this._expenses;
         internal IEnumerable<RecurrentExpense> RecurrentExpenses => this._recurrentExpenses;
 
-        public Income AddIncome(string name, DateTime date, TransactionValue value)
+        public Income AddIncome(string name, DateTime date, Income.IncomeCategory category, TransactionValue value)
         {
-            var newIncome = new Income(name, date, value);
+            var newIncome = new Income(name, date, category, value);
             this._incomes.Add(newIncome);
 
             return newIncome;
         }
 
-        public Expense AddExpense(string name, Category category, DateTime date, TransactionValue value)
+        public Expense AddExpense(string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value)
         {
             var newExpense = Expense.New(name, category, date, value);
             this._expenses.Add(newExpense);
@@ -44,7 +44,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             return newExpense;
         }
 
-        public void AddRecurrentExpense(string name, Category category, DateTime date, TransactionValue value,
+        public void AddRecurrentExpense(string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value,
             Recurrency recurrency)
         {
             this._recurrentExpenses.Add(new RecurrentExpense(name, category, date, value, recurrency));
@@ -62,7 +62,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             return foundIncome;
         }
 
-        public Expense EditExpense(Guid id, string name, Category category, DateTime date, TransactionValue value)
+        public Expense EditExpense(Guid id, string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value)
         {
             var foundExpense = this._expenses.FirstOrDefault(e => e.Id == id);
 

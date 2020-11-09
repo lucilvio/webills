@@ -3,6 +3,7 @@ using System.Linq;
 using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.Transactions;
 using Lucilvio.Solo.Webills.Website.Shared;
+using Lucilvio.Solo.Webills.Website.Shared.Authorization;
 using Lucilvio.Solo.Webills.Website.Shared.Filters;
 using Lucilvio.Solo.Webills.Website.Shared.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -55,6 +56,8 @@ namespace Lucilvio.Solo.Webills.Website
             })
             .AddRazorRuntimeCompilation();
 
+            services.AddSingleton<IAuthService, AuthService>();
+
             services.AddSingleton<INotificationService>(new NotificationByEmailService(
                 Environment.GetEnvironmentVariable("email_host", EnvironmentVariableTarget.User),
                 int.Parse(Environment.GetEnvironmentVariable("email_port", EnvironmentVariableTarget.User)),
@@ -76,11 +79,14 @@ namespace Lucilvio.Solo.Webills.Website
                 CreateDefaultUserAccount = true,
             });
 
-            var transactionsModule = new TransactionsModule(eventBus);
+            var transactionsModule = new Solo.Webills.Transactions.Module(eventBus, new Lucilvio.Solo.Webills.Transactions.Configurations
+            {
+                DataConnection = Configuration.GetConnectionString("dataConnection")
+            });
 
             services.AddSingleton<IEventBus>(eventBus);
             services.AddSingleton<UserAccount.Module>(userAccountModule);
-            services.AddSingleton<TransactionsModule>(transactionsModule);
+            services.AddSingleton<Module>(transactionsModule);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

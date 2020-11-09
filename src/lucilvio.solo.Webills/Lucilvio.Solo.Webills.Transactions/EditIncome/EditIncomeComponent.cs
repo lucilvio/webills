@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-
+using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.EditIncome
@@ -8,9 +8,9 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
     internal class EditIncomeComponent
     {
         private readonly IEditIncomeDataAccess _dataStorage;
-        private readonly IBusSender _bus;
+        private readonly IEventBus _bus;
 
-        public EditIncomeComponent(IEditIncomeDataAccess dataStorage, IBusSender bus)
+        public EditIncomeComponent(IEditIncomeDataAccess dataStorage, IEventBus bus)
         {
             _dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
             this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
@@ -26,8 +26,6 @@ namespace Lucilvio.Solo.Webills.Transactions.EditIncome
             var editedIncome = foundUser.EditIncome(input.Id, input.Name, input.Date, new TransactionValue(input.Value));
 
             await _dataStorage.Persist();
-
-            this._bus.SendEvent(new OnEditIncomeInput(foundUser, editedIncome));
         }
 
         internal class Error

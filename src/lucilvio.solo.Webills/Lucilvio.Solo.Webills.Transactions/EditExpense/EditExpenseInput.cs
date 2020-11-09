@@ -10,7 +10,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditExpense
             this.UserId = userId;
             this.Id = id;
             this.Name = name;
-            this.Category = (Category)category;
+            this.Category = (Expense.ExpenseCategory)category;
             this.Date = date;
             this.Value = new TransactionValue(value);
         }
@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Transactions.EditExpense
         internal Guid UserId { get; }
         internal Guid Id { get; }
         internal string Name { get; }
-        internal Category Category { get; }
+        internal Expense.ExpenseCategory Category { get; }
         internal DateTime Date { get; }
         internal TransactionValue Value { get; }
     }

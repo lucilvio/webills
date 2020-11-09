@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.EventBus;
 
 namespace Lucilvio.Solo.Webills.Transactions.EditExpense
 {
     internal class EditExpenseComponent
     {
         private readonly IEditExpenseDataAccess _dataStorage;
-        private readonly IBusSender _bus;
+        private readonly IEventBus _bus;
 
-        public EditExpenseComponent(IEditExpenseDataAccess dataStorage, IBusSender bus)
+        public EditExpenseComponent(IEditExpenseDataAccess dataStorage, IEventBus bus)
         {
             this._dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
             this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
@@ -25,8 +26,6 @@ namespace Lucilvio.Solo.Webills.Transactions.EditExpense
                 input.Date, input.Value);
 
             await this._dataStorage.Persist();
-
-            this._bus.SendEvent(new OnEditedExpenseInput(foundUser, editedExpense));
         }
 
         internal class Error

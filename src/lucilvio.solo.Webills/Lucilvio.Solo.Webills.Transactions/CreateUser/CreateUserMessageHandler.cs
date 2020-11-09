@@ -4,18 +4,18 @@ using Lucilvio.Solo.Webills.Transactions.Domain;
 
 namespace Lucilvio.Solo.Webills.Transactions.CreateUser
 {
-    internal class CreateUserComponent
+    internal class CreateUserMessageHandler
     {
         private readonly ICreateUserDataAccess _dataAccess;
 
-        public CreateUserComponent(ICreateUserDataAccess dataAccess)
+        public CreateUserMessageHandler(ICreateUserDataAccess dataAccess)
         {
             this._dataAccess = dataAccess;
         }
 
-        public async Task Execute(CreateUserInput command)
+        public async Task Execute(CreateUserMessage message)
         {
-            var newUser = new User(command.Id);
+            var newUser = new User(message.UserId);
             await this._dataAccess.Persist(newUser);
         }
     }

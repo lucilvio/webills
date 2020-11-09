@@ -4,12 +4,12 @@
     $(function () {
         blockModule.unblockScreen();
 
-        $("a").on("click", function () {
+        $("a:not(.no-block)").on("click", function () {
             blockModule.blockScreen();
         });
     });
 
-    $("form").on("submit", function () {
+    $("form").not(".no-block").on("submit", function () {
         blockModule.blockScreen();
     });
 

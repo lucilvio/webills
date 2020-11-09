@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             this._expenses = new List<Expense>();
         }
 
-        internal RecurrentExpense(string name, Category category, DateTime date, TransactionValue value,
+        internal RecurrentExpense(string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value,
             Recurrency recurrency) : this()
         {
             this.Recurrency = recurrency;

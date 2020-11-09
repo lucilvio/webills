@@ -1,0 +1,118 @@
+﻿@page
+@model Lucilvio.Solo.Webills.Website.Transactions.TransactionsModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Transactions";
+    ViewData["Menu"] = "Transactions";
+}
+
+@{ Html.RenderPartialAsync("AddNewTransaction/_AddNewTransaction", new Lucilvio.Solo.Webills.Website.AddNewTransaction._AddNewTransactionModel()); }
+
+<div class="row stats-row">
+    <div class="col-lg-12 col-md-12">
+        @if (Model.UserTransactions.Transactions.Any())
+        {
+            <div class="card card-transactions">
+                <div class="card-body">
+                    <h5 class="card-title">Transactions<a href="/Transactions" class="card-title-helper blockui-transactions"><i class="material-icons">refresh</i></a></h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var transaction in Model.UserTransactions.Transactions)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @if (transaction.Type == "Expense")
+                                            {
+                                                <i class="material-icons expense-icon">money_off</i>
+                                            }
+                                            else if (transaction.Type == "Income")
+                                            {
+                                                <i class="material-icons income-icon">attach_money</i>
+                                            }
+                                        </td>
+                                        <td>@transaction.Name</td>
+                                        <td>@transaction.Date.ToString("dd/MM/yyy hh:mm:ss") </td>
+                                        <td>$ @transaction.Value</td>
+                                        <td><a class="no-block" hreaf="#"><i class="material-icons command-button">edit</i></a></td>
+                                        <td><a class="no-block" hreaf="#"><i class="material-icons command-button">delete</i></a></td>
+                                    </tr>
+
+
+
+                                    @*<div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                @if (transaction.Type == "Expense")
+                                                {
+                                                    <div class="col-lg-1 col-md-1 col-xs-1 expense-icon">
+                                                        <i class="material-icons">money_off</i>
+                                                    </div>
+                                                }
+                                                else if (transaction.Type == "Income")
+                                                {
+                                                    <div class="col-lg-1 col-md-1 col-xs-1 income-icon">
+                                                        <i class="material-icons">attach_money</i>
+                                                    </div>
+                                                }
+
+                                                <div class="col-lg-10 col-md-3 col-sm-1">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <h1 class="transaction-card-title"> @transaction.Name </h1>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <p>@transaction.Date.ToString("dd/MM/yyyy hh:mm:ss") </p>
+                                                        </div>
+
+                                                        <div class="col-lg-4">
+                                                            <p><b>$ @transaction.Value</b></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span> We didn't find any transaction </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#new-transaction" type="submit"> New Transaction </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+

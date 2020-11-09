@@ -1,15 +1,69 @@
 ﻿:root {
     --primary-color: #61d39f;
+    --primary-color-dark: #418e71;
 }
 
 .btn.btn-primary {
     --sample: #ff0000;
-
     color: #fff;
     background: var(--primary-color);
+}
+
+.dark-theme .btn.btn-primary {
+    background: var(--primary-color-dark);
+}
+
+.dark-theme .badge.badge-primary {
+    background: var(--primary-color-dark);
+}
+
+.dark-theme .btn.btn-primary:hover {
+    background: var(--primary-color-dark);
+}
+
+.dark-theme .table {
+    color: #9598ab !important;
+}
+
+.dark-theme .accordion-menu li.active-page > a:only-child {
+    color: #fff;
+    background: var(--primary-color-dark);
+}
+
+.dark-theme .badge.badge-success {
+    background: var(--primary-color-dark);
 }
 
 .accordion-menu li.active-page > a:only-child {
     color: #fff;
     background: var(--primary-color);
+}
+
+.card .transaction-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: Montserrat,sans-serif;
+    color: #5c6662;
+}
+
+.card .income-icon {
+    color: var(--primary-color);
+}
+
+.card .expense-icon {
+    color: red;
+}
+
+.custom-control.custom-radio {
+    cursor: pointer;
+}
+
+.custom-control.custom-radio > label {
+    cursor: pointer;
+}
+
+.command-button {
+    font-size: 20px;
+    cursor: pointer;
 }

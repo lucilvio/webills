@@ -7,9 +7,9 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
     {
         internal CreatedAccount(User user)
         {
-            this.Id = user != null ? user.Id : Guid.Empty;
+            this.UserId = user != null ? user.Id : Guid.Empty;
         }
 
-        public Guid Id { get; }
+        public Guid UserId { get; }
     }
 }

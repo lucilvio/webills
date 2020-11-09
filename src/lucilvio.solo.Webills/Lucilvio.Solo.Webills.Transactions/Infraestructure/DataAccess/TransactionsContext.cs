@@ -8,14 +8,17 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
 {
     internal class TransactionsContext : DbContext
     {
-        public TransactionsContext()
+        private readonly string _connectionString;
+
+        public TransactionsContext(string connectionString)
         {
+            this._connectionString = connectionString;
             base.Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=lucilvio.solo.webills; Trusted_Connection=True; MultipleActiveResultSets=true; Connection Timeout=300;", opt =>
+            optionsBuilder.UseSqlServer(this._connectionString, opt =>
             {
                 opt.MigrationsHistoryTable($"__Transactions_MigrationsHistory", "transactions");
             });
@@ -55,6 +58,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
                 i.Property(p => p.Id).IsRequired();
                 i.Property(p => p.Date).IsRequired();
                 i.Property(p => p.Name).IsRequired().HasMaxLength(256);
+                i.Property(p => p.Category).IsRequired();
                 i.Property(p => p.Value).IsRequired().HasConversion(v => v.Value, v => new TransactionValue(v));
 
                 i.HasOne<User>().WithMany(u => u.Incomes).IsRequired();

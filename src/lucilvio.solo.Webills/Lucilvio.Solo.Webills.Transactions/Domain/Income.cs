@@ -9,23 +9,26 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             Id = Guid.NewGuid();
         }
 
-        internal Income(string name, DateTime date, TransactionValue value) : this()
+        internal Income(string name, DateTime date, IncomeCategory category, TransactionValue value) : this()
         {
             if (string.IsNullOrEmpty(name))
                 throw new Error.IncomeMustHaveName();
 
-            Name = name;
-            Date = date;
+            this.Name = name;
+            this.Date = date;
 
             if (value == null)
                 throw new Error.IncomeTransactionValueCannotBeNull();
 
-            Value = value;
+            this.Value = value;
+
+            this.Category = category;
         }
 
         public Guid Id { get; }
         public string Name { get; private set; }
         public DateTime Date { get; private set; }
+        public IncomeCategory Category { get; set; }
         public TransactionValue Value { get; private set; }
 
         internal void Change(string name, DateTime date, TransactionValue value)
@@ -35,11 +38,17 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             this.Value = value;
         }
 
+        public enum IncomeCategory
+        {
+            Salary = 1,
+            Investments = 2,
+            Other = 3
+        }
+
         class Error
         {
             internal class IncomeMustHaveName : Exception { }
             internal class IncomeTransactionValueCannotBeNull : Exception { }
         }
-
     }
 }

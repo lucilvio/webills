@@ -1,7 +1,5 @@
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
+using Lucilvio.Solo.Webills.Website.Shared.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,9 +7,9 @@ namespace Lucilvio.Solo.Webills.Website.Exit
 {
     public class ExitModel : PageModel
     {
-        public async Task<IActionResult> OnPostAsync([FromServices] IHttpContextAccessor contextAcessor)
+        public async Task<IActionResult> OnPostAsync([FromServices] IAuthService authService)
         {
-            await contextAcessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await authService.SignOut();
 
             return this.RedirectToPage("/Login/Login");
         }

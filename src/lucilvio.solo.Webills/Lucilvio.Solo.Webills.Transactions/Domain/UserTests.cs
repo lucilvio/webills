@@ -20,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         public void CanAddExpense()
         {
             var user = this.ValidUser;
-            user.AddExpense("Test expense", Category.BarAndRestaurant, DateTime.Now, new TransactionValue(432));
+            user.AddExpense("Test expense", Expense.ExpenseCategory.BarAndRestaurant, DateTime.Now, new TransactionValue(432));
 
             Assert.AreEqual(1, user.Expenses.Count());
         }
@@ -29,7 +29,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         public void CanAddIncomes()
         {
             var user = this.ValidUser;
-            user.AddIncome("Test income", DateTime.Now, new TransactionValue(432));
+            user.AddIncome("Test income", DateTime.Now, Income.IncomeCategory.Salary, new TransactionValue(432));
 
             Assert.AreEqual(1, user.Incomes.Count());
         }
@@ -38,7 +38,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         public void CanAddRecurrentExpenses()
         {
             var user = this.ValidUser;
-            user.AddRecurrentExpense("Test expense", Category.Education, DateTime.Now, new TransactionValue(385),
+            user.AddRecurrentExpense("Test expense", Expense.ExpenseCategory.Education, DateTime.Now, new TransactionValue(385),
                 new Recurrency(1, Frequency.Days, DateTime.Now.AddYears(2)));
 
             Assert.AreEqual(1, user.RecurrentExpenses.Count());
@@ -51,7 +51,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             DateTime date = this.TestDateFrom;
 
             var user = this.ValidUser;
-            user.AddRecurrentExpense("Test expense", Category.Education, date, new TransactionValue(385),
+            user.AddRecurrentExpense("Test expense", Expense.ExpenseCategory.Education, date, new TransactionValue(385),
                 new Recurrency(1, Frequency.Days, date.AddDays(14)));
 
             Assert.AreEqual(15, user.RecurrentExpenses.First().ExpensesCount);
@@ -64,7 +64,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             var date = this.TestDateFrom;
 
             var user = this.ValidUser;
-            user.AddRecurrentExpense("Test expense", Category.Education, date, new TransactionValue(385),
+            user.AddRecurrentExpense("Test expense", Expense.ExpenseCategory.Education, date, new TransactionValue(385),
                 new Recurrency(1, Frequency.Months, date.AddMonths(7)));
 
             Assert.AreEqual(8, user.RecurrentExpenses.First().ExpensesCount);
@@ -76,7 +76,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             var date = this.TestDateFrom;
 
             var user = this.ValidUser;
-            user.AddRecurrentExpense("Test expense", Category.Education, date, new TransactionValue(385),
+            user.AddRecurrentExpense("Test expense", Expense.ExpenseCategory.Education, date, new TransactionValue(385),
                 new Recurrency(3, Frequency.Months, date.AddYears(1)));
 
             Assert.AreEqual(5, user.RecurrentExpenses.First().ExpensesCount);
@@ -88,7 +88,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             var date = new DateTime(2000, 1, 1);
 
             var user = this.ValidUser;
-            user.AddRecurrentExpense("Test expense", Category.Education, date, new TransactionValue(385),
+            user.AddRecurrentExpense("Test expense", Expense.ExpenseCategory.Education, date, new TransactionValue(385),
                 new Recurrency(1, Frequency.Years, date.AddYears(5)));
 
             Assert.AreEqual(6, user.RecurrentExpenses.First().ExpensesCount);

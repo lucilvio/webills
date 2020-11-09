@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
         {
             await module.CreateNewAccount(request);
 
-            this.SendSuccessMessage("Account successfully created!");
+            this.SendSuccessMessage($"Welcome to WEBills {request.Name}! Now you can login and enjoy.");
 
             return RedirectToPage("/Login/Login");
         }
