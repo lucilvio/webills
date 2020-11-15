@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
-    internal class Email
+    internal record Email
     {
         public Email(string value)
         {
@@ -17,35 +17,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         }
 
         public string Value { get; }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-
-            return Value == ((Email)obj).Value;
-        }
-
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode();
-        }
-
-        public static bool operator ==(Email email1, Email email2)
-        {
-            if (ReferenceEquals(email1, email2))
-                return true;
-
-            if (email1 is null || email2 is null)
-                return false;
-
-            return email1.Value == email2.Value;
-        }
-
-        public static bool operator !=(Email email1, Email email2)
-        {
-            return !(email1 == email2);
-        }
 
         private bool IsInValidFormat(string value)
         {

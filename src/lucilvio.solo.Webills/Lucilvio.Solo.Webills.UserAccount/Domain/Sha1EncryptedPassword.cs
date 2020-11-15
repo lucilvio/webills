@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Security.Cryptography;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
-    internal class Sha1EncryptedPassword : IPassword
+    internal record Sha1EncryptedPassword : IPassword
     {
         private readonly IPassword _password;
 
@@ -33,35 +33,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
                 return sb.ToString();
             }
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || this.GetType() != obj.GetType())
-                return false;
-
-            return this.Value == ((IPassword)obj).Value;
-        }
-
-        public override int GetHashCode()
-        {
-            return this.Value.GetHashCode();
-        }
-
-        public static bool operator ==(Sha1EncryptedPassword password1, IPassword password2)
-        {
-            if (ReferenceEquals(password1, password2))
-                return true;
-
-            if (password1 is null || password2 is null)
-                return false;
-
-            return password1.Value == password2.Value;
-        }
-
-        public static bool operator !=(Sha1EncryptedPassword password1, IPassword password2)
-        {
-            return !(password1 == password2);
         }
 
         internal class Error

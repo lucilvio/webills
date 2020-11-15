@@ -3,6 +3,10 @@
     --primary-color-dark: #418e71;
 }
 
+.form-control {
+    border-radius: 15px;
+}
+
 .btn.btn-primary {
     --sample: #ff0000;
     color: #fff;

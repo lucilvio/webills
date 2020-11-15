@@ -13,13 +13,13 @@
             <div class="modal-body">
                 <form method="post">
                     <div class="form-group custom-control-inline">
-                        <div class="custom-control custom-radio form-check-inline">
+                        <div id="income-radio" class="custom-control custom-radio form-check-inline">
                             <input class="custom-control-input" type="radio" id="income" name="type" value="income" checked>
                             <label class="custom-control-label" for="income">
                                 Income
                             </label>
                         </div>
-                        <div class="custom-control custom-radio form-check-inline">
+                        <div id="expense-radio" class="custom-control custom-radio form-check-inline">
                             <input class="custom-control-input" type="radio" id="expense" name="type" value="expense">
                             <label class="custom-control-label" for="expense">
                                 Expense
@@ -32,6 +32,13 @@
                     <div class="form-group">
                         <input type="date" class="form-control" name="Date" placeholder="Date" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" required>
                     </div>
+
+                    <div class="form-group">
+                        <select class="form-control custom-select" name="Category" placeholder="Category" required>
+                            <option value="">Select Transacetion Category</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <input type="text" class="form-control money" name="Value" placeholder="Value" required>
                     </div>
@@ -45,3 +52,11 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $("#income-radio").click(function () {
+            console.error("nifondsofnsdl");
+        });
+    </script>
+}

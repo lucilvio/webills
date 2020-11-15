@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.Transactions.Domain
 {
-    internal class TransactionValue
+    internal record TransactionValue
     {
         private readonly decimal _value;
 
@@ -15,21 +15,6 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         }
 
         public decimal Value => _value;
-
-        public override bool Equals(object obj)
-        {
-            var tv = obj as TransactionValue;
-
-            if (tv == null)
-                return false;
-
-            return Value.Equals(tv.Value);
-        }
-
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode();
-        }
 
         class Error
         {

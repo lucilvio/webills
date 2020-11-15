@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Lucilvio.Solo.Webills.UserAccount.Domain
+﻿namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
-    internal class AutomaticGeneratedPassword : IPassword
+    internal record AutomaticGeneratedPassword : IPassword
     {
         public string Value => "123456";
     }

@@ -1,7 +1,4 @@
-﻿
-using System;
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
@@ -90,12 +87,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         public void Sha1EncryptedPasswordAreDifferentWhenValuesAreDifferent()
         {
             Assert.True(new Sha1EncryptedPassword(new Password("123456")) != new Sha1EncryptedPassword(new Password("1234562")));
-        }
-
-        [Test]
-        public void PasswordIsEqualToSh1EncryptedPassword()
-        {
-            Assert.True(new Password("7C4A8D09CA3762AF61E59520943DC26494F8941B") == new Sha1EncryptedPassword(new Password("123456")));
         }
     }
 }

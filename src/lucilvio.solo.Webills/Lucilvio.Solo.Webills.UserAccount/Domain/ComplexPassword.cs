@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
-    class ComplexPassword : IPassword
+    internal record ComplexPassword : IPassword
     {
         private readonly IPassword _password;
 
@@ -18,35 +18,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         }
 
         public string Value => this._password.Value;
-
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-
-            return Value == ((IPassword)obj).Value;
-        }
-
-        public static bool operator ==(ComplexPassword password1, IPassword password2)
-        {
-            if (ReferenceEquals(password1, password2))
-                return true;
-
-            if (password1 is null || password2 is null)
-                return false;
-
-            return password1.Value == password2.Value;
-        }
-
-        public static bool operator !=(ComplexPassword password1, IPassword password2)
-        {
-            return !(password1 == password2);
-        }
 
         internal class Error
         {
