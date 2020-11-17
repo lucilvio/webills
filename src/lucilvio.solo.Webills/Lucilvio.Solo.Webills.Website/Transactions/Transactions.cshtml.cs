@@ -22,12 +22,7 @@ namespace Lucilvio.Solo.Webills.Website.Transactions
             this.UserTransactions = await module.GetUserTransactionsByFilter(filter);
         }
 
-        public class TransactionsListFilter : IGetUserTransactionsByFilterMessage
-        {
-            public Guid UserId { get; set; }
-        }
-
-        public async Task<IActionResult> OnPostAsync(NewTransactionRequest request,
+        public async Task<IActionResult> OnPostNewTransaction(NewTransactionRequest request,
             [FromServices] Webills.Transactions.Module module, [FromServices] IAuthService authService)
         {
             var user = authService.AuthenticatedUser();
@@ -42,6 +37,11 @@ namespace Lucilvio.Solo.Webills.Website.Transactions
             this.SendSuccessMessage("Transaction successfully added.");
 
             return this.RedirectToPage("/Transactions/Transactions");
+        }
+
+        public class TransactionsListFilter : IGetUserTransactionsByFilterMessage
+        {
+            public Guid UserId { get; set; }
         }
 
         public class NewTransactionRequest : IAddNewIncomeMessage, IAddNewExpenseMessage

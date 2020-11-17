@@ -6,10 +6,13 @@
     ViewData["Menu"] = "Transactions";
 }
 
-@{ Html.RenderPartialAsync("AddNewTransaction/_AddNewTransaction", new Lucilvio.Solo.Webills.Website.AddNewTransaction._AddNewTransactionModel()); }
+<partial name="_AddNewTransaction" />
 
 <div class="row stats-row">
     <div class="col-lg-12 col-md-12">
+        <form method="POST">
+            <button type="submit" asp-page-handler="NewTransaction"> NEW </button>
+        </form>
         @if (Model.UserTransactions.Transactions.Any())
         {
             <div class="card card-transactions">
@@ -53,40 +56,40 @@
 
 
                                     @*<div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                @if (transaction.Type == "Expense")
-                                                {
-                                                    <div class="col-lg-1 col-md-1 col-xs-1 expense-icon">
-                                                        <i class="material-icons">money_off</i>
-                                                    </div>
-                                                }
-                                                else if (transaction.Type == "Income")
-                                                {
-                                                    <div class="col-lg-1 col-md-1 col-xs-1 income-icon">
-                                                        <i class="material-icons">attach_money</i>
-                                                    </div>
-                                                }
-
-                                                <div class="col-lg-10 col-md-3 col-sm-1">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <h1 class="transaction-card-title"> @transaction.Name </h1>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    @if (transaction.Type == "Expense")
+                                                    {
+                                                        <div class="col-lg-1 col-md-1 col-xs-1 expense-icon">
+                                                            <i class="material-icons">money_off</i>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <p>@transaction.Date.ToString("dd/MM/yyyy hh:mm:ss") </p>
+                                                    }
+                                                    else if (transaction.Type == "Income")
+                                                    {
+                                                        <div class="col-lg-1 col-md-1 col-xs-1 income-icon">
+                                                            <i class="material-icons">attach_money</i>
                                                         </div>
+                                                    }
 
-                                                        <div class="col-lg-4">
-                                                            <p><b>$ @transaction.Value</b></p>
+                                                    <div class="col-lg-10 col-md-3 col-sm-1">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <h1 class="transaction-card-title"> @transaction.Name </h1>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <p>@transaction.Date.ToString("dd/MM/yyyy hh:mm:ss") </p>
+                                                            </div>
+
+                                                            <div class="col-lg-4">
+                                                                <p><b>$ @transaction.Value</b></p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                 }
                             </tbody>
                         </table>
