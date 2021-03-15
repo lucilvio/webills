@@ -1,8 +1,5 @@
 using System;
 using System.Linq;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.Transactions;
-using Lucilvio.Solo.Webills.Website.Shared;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
 using Lucilvio.Solo.Webills.Website.Shared.Filters;
 using Lucilvio.Solo.Webills.Website.Shared.Notification;
@@ -29,7 +26,6 @@ namespace Lucilvio.Solo.Webills.Website
         public IConfiguration Configuration { get; }
         public ITempDataDictionaryFactory TempDataDictionaryFactory { get; set; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
@@ -58,16 +54,15 @@ namespace Lucilvio.Solo.Webills.Website
 
             services.AddSingleton<IAuthService, AuthService>();
 
+            var emailHost = Environment.GetEnvironmentVariable("email_host", EnvironmentVariableTarget.User) ?? "";
+            var port = Environment.GetEnvironmentVariable("email_port", EnvironmentVariableTarget.User) ?? "0";
+            var user = Environment.GetEnvironmentVariable("email_user", EnvironmentVariableTarget.User) ?? "";
+            var password = Environment.GetEnvironmentVariable("email_password", EnvironmentVariableTarget.User) ?? "";
+
             services.AddSingleton<INotificationService>(new NotificationByEmailService(
-                Environment.GetEnvironmentVariable("email_host", EnvironmentVariableTarget.User),
-                int.Parse(Environment.GetEnvironmentVariable("email_port", EnvironmentVariableTarget.User)),
-                Environment.GetEnvironmentVariable("email_user", EnvironmentVariableTarget.User),
-                Environment.GetEnvironmentVariable("email_password", EnvironmentVariableTarget.User)
-            ));
+                emailHost, int.Parse(port), user, password));
 
-            IEventBus eventBus = new DefaultEventBus();
-
-            var userAccountModule = new UserAccount.Module(eventBus, new UserAccount.Configurations
+            var userAccountModule = new UserAccount.Module(new UserAccount.Configurations
             {
                 DefaultAccount = new UserAccount.Configurations.DefaultUserAccount
                 {
@@ -75,21 +70,18 @@ namespace Lucilvio.Solo.Webills.Website
                     Password = "123456",
                     Email = "admin@mail.com",
                 },
-                DataConnection = Configuration.GetConnectionString("dataConnection"),
-                CreateDefaultUserAccount = true,
+                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });
 
-            var transactionsModule = new Solo.Webills.Transactions.Module(eventBus, new Lucilvio.Solo.Webills.Transactions.Configurations
+            var financialControlModule = new FinancialControl.Module(new Webills.FinancialControl.Configurations
             {
-                DataConnection = Configuration.GetConnectionString("dataConnection")
+                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });
 
-            services.AddSingleton<IEventBus>(eventBus);
-            services.AddSingleton<UserAccount.Module>(userAccountModule);
-            services.AddSingleton<Module>(transactionsModule);
+            services.AddSingleton(userAccountModule);
+            services.AddSingleton(financialControlModule);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -99,7 +91,6 @@ namespace Lucilvio.Solo.Webills.Website
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -140,6 +131,4 @@ namespace Lucilvio.Solo.Webills.Website
             }
         }
     }
-
-
 }

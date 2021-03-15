@@ -9,7 +9,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
             if (string.IsNullOrEmpty(value))
                 throw new Error.PasswordCantBeNullOrEmpty();
 
-            Value = value;
+            this.Value = value;
         }
 
         public virtual string Value { get; }

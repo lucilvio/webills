@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
-using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
-using Lucilvio.Solo.Webills.EventBus;
 
-namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
+namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    internal class CreateNewAccountMessageHandler : IMessageHandler<ICreateNewAccountMessage>
+    public record CreateNewAccountMessage(string Name, string Email, string Password, string PasswordConfirmation, bool TermsAccepted);
+    
+    internal class CreateNewAccountMessageHandler : IMessageHandler<CreateNewAccountMessage>
     {
-        private readonly IEventBus _eventBus;
         private readonly ICreateNewAccountDataAccess _dataAccess;
 
-        public CreateNewAccountMessageHandler(ICreateNewAccountDataAccess dataAccess, IEventBus eventBus)
+        public CreateNewAccountMessageHandler(ICreateNewAccountDataAccess dataAccess)
         {
-            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
-        
-        public async Task<dynamic> Execute(ICreateNewAccountMessage message)
+
+        public async Task<dynamic> Execute(CreateNewAccountMessage message)
         {
             var user = new User(new Name(message.Name), new Email(message.Email));
 
@@ -32,10 +30,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
 
             await this._dataAccess.Persist(user);
 
-            var createdAccount = new CreatedAccount(user);
-            this._eventBus.Publish(Events.UserAccountCreated.ToString(), createdAccount);
-
-            return createdAccount;
+            return new CreatedAccount(user);
         }
     }
 }

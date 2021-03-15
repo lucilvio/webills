@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    internal class LoginMessageHandler : IMessageHandler<ILoginMessage>
+    public record LoginMessage(string Login, string Password);
+
+    internal class LoginMessageHandler : IMessageHandler<LoginMessage>
     {
-        private readonly IEventBus _eventBus;
         private readonly ILoginDataAccess _dataAccess;
 
-        public LoginMessageHandler(ILoginDataAccess dataAccess, IEventBus eventBus)
+        public LoginMessageHandler(ILoginDataAccess dataAccess)
         {
-            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task<dynamic> Execute(ILoginMessage message)
+        public async Task<dynamic> Execute(LoginMessage message)
         {
             var foundUser = await this._dataAccess.GetUserByLogin(new Domain.Login(message.Login));
 

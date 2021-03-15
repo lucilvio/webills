@@ -4,9 +4,9 @@
     {
         internal GeneratedPassword(string userName, string userContact, string password)
         {
-            UserName = userName;
-            UserContact = userContact;
-            Password = password;
+            this.UserName = userName;
+            this.UserContact = userContact;
+            this.Password = password;
         }
 
         public string UserName { get; }

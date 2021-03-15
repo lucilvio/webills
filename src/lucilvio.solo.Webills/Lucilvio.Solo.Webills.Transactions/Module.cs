@@ -1,49 +1,59 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
-using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
-using Lucilvio.Solo.Webills.Transactions.GetUserDashboardInfo;
-using Lucilvio.Solo.Webills.Transactions.GetUserTransactionsByFilter;
-using Lucilvio.Solo.Webills.UserAccount;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
+using Lucilvio.Solo.Webills.FinancialControl.AddNewExpense;
+using Lucilvio.Solo.Webills.FinancialControl.AddNewIncome;
+using Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense;
+using Lucilvio.Solo.Webills.FinancialControl.GetExpenseCategories;
+using Lucilvio.Solo.Webills.FinancialControl.GetIncomeCategories;
+using Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo;
+using Lucilvio.Solo.Webills.FinancialControl.GetUserFinancialInformation;
+using Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter;
 
-namespace Lucilvio.Solo.Webills.Transactions
+namespace Lucilvio.Solo.Webills.FinancialControl
 {
     public class Module
     {
-        private readonly IEventBus _eventBus;
-        private readonly IMessageDispatcher _messageDispatcher;
+        private readonly Configurations _configurations;
 
-        public Module(IEventBus eventBus, Configurations configurations)
+        public Module(Configurations configurations)
         {
-            this._eventBus = eventBus;
-            this._messageDispatcher = new DefaultMessageDispatcher(configurations, eventBus);
-
-            this._eventBus.Subscibe("UserAccountCreated", async userAccount =>
-            {
-                await this._messageDispatcher.DispatchCreateUserMessage(new CreateUser.CreateUserMessage(userAccount.UserId));
-            });
+            this._configurations = configurations ?? throw new System.ArgumentNullException(nameof(configurations));
         }
 
-        public async Task<UserFinancialInformation> GetUserFinancialInfo(IGetUserFinancialInformationMessage message)
+        public async Task<UserFinancialInformation> GetUserFinancialInfo(GetUserFinancialInformationMessage message)
         {
-            return await this._messageDispatcher.DispatchGetUserFinancialInformation(message);
+            return await new GetUserFinancialInformationMessageDispatcher().Dispatch(message, this._configurations);
         }
 
-        public async Task AddNewExpense(IAddNewExpenseMessage message)
+        public async Task AddNewExpense(AddNewExpenseMessage message)
         {
-            await this._messageDispatcher.DispatchAddNewExpenseMessage(message);
+            await new AddNewExpenseMessageDispatcher().Dispatch(message, this._configurations);
         }
 
-        public async Task AddNewIncome(IAddNewIncomeMessage message)
+        public async Task AddNewRecurrentExpense(AddNewRecurrentExpenseMessage message)
         {
-            await this._messageDispatcher.DispatchAddNewIncomeMessage(message);
+            await new AddNewRecurrentExpenseMessageDispatcher().Dispatch(message, this._configurations);
         }
 
-        public async Task<UserTransactions> GetUserTransactionsByFilter(IGetUserTransactionsByFilterMessage message)
+        public async Task AddNewIncome(AddNewIncomeMessage message)
         {
-            return await this._messageDispatcher.DispatchGetUserTransactionsByFilterMessage(message);
+            await new AddNewIncomeMessageDispatcher().Dispatch(message, this._configurations);
+        }
+
+        public async Task<UserTransactions> GetUserTransactionsByFilter(GetUserTransactionsByFilterMessage message)
+        {
+            return await new GetUserTransactionsByFilterMessageDispatcher().Dispatch(message, this._configurations);
+        }
+
+
+        public async Task<ExpenseCategories> GetExpenseCategories(GetExpenseCategoriesMessage message)
+        {
+            return await new GetExpenseCategoriesMessageDispatcher().Dispatch(message);
+        }
+
+        public async Task<IncomeCategories> GetIncomeCategories(GetIncomeCategoriesMessage message)
+        {
+            return await new GetIncomeCategoriesMessageDispatcher().Dispatch(message);
         }
     }
 }

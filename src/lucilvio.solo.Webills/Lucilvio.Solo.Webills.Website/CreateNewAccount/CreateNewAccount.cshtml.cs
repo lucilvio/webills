@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
+using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
+using Lucilvio.Solo.Webills.Website.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Lucilvio.Solo.Webills.Website.Shared;
 
 namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
 {
@@ -14,16 +14,17 @@ namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
         {
         }
 
-        public async Task<IActionResult> OnPostAsync(CreateNewAccountRequest request, [FromServices]UserAccount.Module module)
+        public async Task<IActionResult> OnPostAsync(CreateNewAccountRequest request, [FromServices] UserAccount.Module module)
         {
-            await module.CreateNewAccount(request);
+            await module.CreateNewAccount(new CreateNewAccountMessage(request.Name, request.Email, request.Password,
+                request.PasswordConfirmation, request.TermsAccepted));
 
             this.SendSuccessMessage($"Welcome to WEBills {request.Name}! Now you can login and enjoy.");
 
-            return RedirectToPage("/Login/Login");
+            return this.RedirectToPage("/Login/Login");
         }
 
-        public class CreateNewAccountRequest : ICreateNewAccountMessage
+        public class CreateNewAccountRequest
         {
             public string Name { get; set; }
             public string Email { get; set; }

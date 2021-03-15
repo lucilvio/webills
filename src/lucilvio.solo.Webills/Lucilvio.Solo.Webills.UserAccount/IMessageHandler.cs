@@ -2,7 +2,7 @@
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
-    internal interface IMessageHandler<TMessage> where TMessage : IMessage
+    internal interface IMessageHandler<in TMessage>
     {
         Task<dynamic> Execute(TMessage message);
     }

@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.EditIncome
 {
     internal class EditIncomeComponent
     {
         private readonly IEditIncomeDataAccess _dataStorage;
-        private readonly IEventBus _bus;
 
-        public EditIncomeComponent(IEditIncomeDataAccess dataStorage, IEventBus bus)
+        public EditIncomeComponent(IEditIncomeDataAccess dataStorage)
         {
-            _dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            this._dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
         }
 
         public async Task Execute(EditIncomeInput input)
         {
-            var foundUser = await _dataStorage.GetUserById(input.UserId);
+            var foundIncome = await this._dataStorage.GetIncome(input.UserId);
 
-            if (foundUser == null)
-                throw new Error.UserNotFound();
+            if (foundIncome == null)
+                throw new Error.IncomeNotFound();
 
-            var editedIncome = foundUser.EditIncome(input.Id, input.Name, input.Date, new TransactionValue(input.Value));
+            foundIncome.Update(input.Name, input.Date, new TransactionValue(input.Value));
 
-            await _dataStorage.Persist();
+            await this._dataStorage.UpdateIncome(foundIncome);
         }
 
         internal class Error
         {
-            internal class UserNotFound : Exception { }
+            internal class IncomeNotFound : Exception { }
         }
     }
 }

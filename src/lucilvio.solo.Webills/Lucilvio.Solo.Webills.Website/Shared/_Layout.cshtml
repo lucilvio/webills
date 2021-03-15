@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var today = DateTime.UtcNow;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -107,10 +111,10 @@
                             <li class="breadcrumb-item active" aria-current="page">@ViewData["Menu"]</li>
                         </ol>
                     </nav>
-                    <div class="page-options">
-                        <span class="badge badge-pill badge-primary">@DateTime.UtcNow.ToShortDateString()</span>
-                        <span class="badge badge-pill badge-primary">@DateTime.UtcNow.ToShortDateString()</span>
-                    </div>
+                    @*<div class="page-options">
+                        <span class="badge badge-pill badge-primary">From @( new DateTime(today.Year, today.Month, 1).ToShortDateString())</span>
+                        <span class="badge badge-pill badge-primary">To @( new DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month)).ToShortDateString())</span>
+                    </div>*@
                 </div>
                 <div class="main-wrapper">
                     @RenderBody()
@@ -119,7 +123,7 @@
             <div class="page-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <span class="footer-text">@DateTime.UtcNow.Year © Solo</span>
+                        <span class="footer-text">@today.Year © Solo</span>
                     </div>
                 </div>
             </div>
@@ -128,6 +132,7 @@
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/js/connect.js"></script>
 
     <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js"></script>

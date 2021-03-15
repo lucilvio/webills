@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         public ComplexPassword(IPassword password)
         {
-            if(password == null)
+            if (password == null)
                 throw new Error.PasswordCantBeEmpty();
 
             if (password.Value.Length < 6)

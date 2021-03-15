@@ -26,7 +26,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         internal void ChangePassword(IPassword newPassword)
         {
-            if(newPassword == null)
+            if (newPassword == null)
                 throw new Error.CantChangePasswordToAnEmptyOne();
 
             this.Password = newPassword;
@@ -34,7 +34,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         internal void VerifyLoginPermission(IPassword password)
         {
-            if(this.Password.Value != password.Value)
+            if (this.Password.Value != password.Value)
                 throw new Error.LoginOrPasswordInvalid();
         }
 

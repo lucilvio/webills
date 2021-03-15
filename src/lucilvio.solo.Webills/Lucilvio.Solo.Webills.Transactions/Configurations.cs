@@ -1,7 +1,7 @@
-﻿namespace Lucilvio.Solo.Webills.Transactions
+﻿namespace Lucilvio.Solo.Webills.FinancialControl
 {
     public class Configurations
     {
-        public string DataConnection { get; set; }
+        public string DataConnectionString { get; init; }
     }
 }

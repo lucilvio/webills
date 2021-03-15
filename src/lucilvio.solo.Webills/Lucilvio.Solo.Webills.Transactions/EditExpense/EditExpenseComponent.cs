@@ -1,36 +1,32 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.EditExpense
 {
     internal class EditExpenseComponent
     {
         private readonly IEditExpenseDataAccess _dataStorage;
-        private readonly IEventBus _bus;
 
-        public EditExpenseComponent(IEditExpenseDataAccess dataStorage, IEventBus bus)
+        public EditExpenseComponent(IEditExpenseDataAccess dataStorage)
         {
             this._dataStorage = dataStorage ?? throw new ArgumentNullException(nameof(dataStorage));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
         public async Task Execute(EditExpenseInput input)
         {
-            var foundUser = await this._dataStorage.GetUserById(input.UserId);
+            var foundExpense = await this._dataStorage.GetExpense(input.UserId);
 
-            if (foundUser == null)
-                throw new Error.UserNotFound();
+            if (foundExpense == null)
+                throw new Error.ExpenseNotFound();
 
-            var editedExpense = foundUser.EditExpense(input.Id, input.Name, input.Category,
-                input.Date, input.Value);
+            foundExpense.Update(input.UserId, input.Name, input.Category, input.Date, input.Value);                
 
-            await this._dataStorage.Persist();
+            await this._dataStorage.UpdateExpense(foundExpense);
         }
 
         internal class Error
         {
-            internal class UserNotFound : Exception { }
+            internal class ExpenseNotFound : Exception { }
         }
     }
 }

@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+﻿using Microsoft.EntityFrameworkCore.Design;
 
-namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
+namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
 {
-    internal class DbContextFactory : IDesignTimeDbContextFactory<TransactionsContext>
+    internal class DbContextFactory : IDesignTimeDbContextFactory<FinancialControlDataContext>
     {
-        public TransactionsContext CreateDbContext(string[] args)
+        public FinancialControlDataContext CreateDbContext(string[] args)
         {
-            return new TransactionsContext("Server=.\\SQLEXPRESS;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;");
+            return new FinancialControlDataContext("Server=localhost;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;");
         }
     }
 }

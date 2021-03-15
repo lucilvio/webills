@@ -9,9 +9,9 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
     internal class LoginDataAccess : ILoginDataAccess
     {
-        private readonly DataContext _context;
+        private readonly UserAccountDataContext _context;
 
-        public LoginDataAccess(DataContext context)
+        public LoginDataAccess(UserAccountDataContext context)
         {
             this._context = context;
         }

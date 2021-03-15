@@ -2,7 +2,7 @@
 
 using Microsoft.Data.SqlClient;
 
-namespace Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess
+namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
 {
     internal class TransactionsReadContext
     {

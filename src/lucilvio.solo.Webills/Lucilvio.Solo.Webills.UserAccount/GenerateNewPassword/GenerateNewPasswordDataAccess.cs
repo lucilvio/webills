@@ -1,29 +1,29 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
     internal class GenerateNewPasswordDataAccess : IGenerateNewPasswordDataAccess
     {
-        private readonly DataContext _context;
+        private readonly UserAccountDataContext _context;
 
-        public GenerateNewPasswordDataAccess(DataContext context)
+        public GenerateNewPasswordDataAccess(UserAccountDataContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task<User> GetUserByEmail(Email email)
         {
-            return await _context.Users
+            return await this._context.Users
                 .Include(u => u.Account)
                 .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task Persist()
         {
-            await _context.SaveChangesAsync();
+            await this._context.SaveChangesAsync();
         }
     }
 }

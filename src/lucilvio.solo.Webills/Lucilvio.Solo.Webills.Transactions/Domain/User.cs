@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Lucilvio.Solo.Webills.Transactions.Domain
+namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     internal class User
     {
@@ -28,26 +28,12 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         internal IEnumerable<Expense> Expenses => this._expenses;
         internal IEnumerable<RecurrentExpense> RecurrentExpenses => this._recurrentExpenses;
 
-        public Income AddIncome(string name, DateTime date, Income.IncomeCategory category, TransactionValue value)
+        public Income AddIncome(string name, string category, DateTime date, TransactionValue value)
         {
-            var newIncome = new Income(name, date, category, value);
+            var newIncome = new Income(this.Id, name, category, date, value);
             this._incomes.Add(newIncome);
 
             return newIncome;
-        }
-
-        public Expense AddExpense(string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value)
-        {
-            var newExpense = Expense.New(name, category, date, value);
-            this._expenses.Add(newExpense);
-
-            return newExpense;
-        }
-
-        public void AddRecurrentExpense(string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value,
-            Recurrency recurrency)
-        {
-            this._recurrentExpenses.Add(new RecurrentExpense(name, category, date, value, recurrency));
         }
 
         public Income EditIncome(Guid id, string name, DateTime date, TransactionValue value)
@@ -57,7 +43,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             if (foundIncome == null)
                 throw new Error.IncomeNotFound();
 
-            foundIncome.Change(name, date, value);
+            foundIncome.Update(name, date, value);
 
             return foundIncome;
         }
@@ -69,7 +55,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             if (foundExpense == null)
                 throw new Error.ExpenseNotFound();
 
-            foundExpense.Change(name, category, date, value);
+            foundExpense.Update(this.Id, name, category, date, value);
 
             return foundExpense;
         }

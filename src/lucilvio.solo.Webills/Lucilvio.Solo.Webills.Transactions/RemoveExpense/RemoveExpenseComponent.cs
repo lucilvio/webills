@@ -1,35 +1,30 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveExpense
 {
     internal class RemoveExpenseComponent
     {
         private readonly IRemoveExpenseDataAccess _dataAccess;
-        private readonly IEventBus _bus;
 
-        public RemoveExpenseComponent(IRemoveExpenseDataAccess dataAccess, IEventBus bus)
+        public RemoveExpenseComponent(IRemoveExpenseDataAccess dataAccess)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
         public async Task Execute(RemoveExpenseInput input)
         {
-            var foundUser = await this._dataAccess.GetUserById(input.UserId);
+            var foundExpense = await this._dataAccess.GetExpense(input.UserId);
 
-            if (foundUser == null)
-                throw new Error.UserNotFound();
+            if (foundExpense == null)
+                throw new Error.ExpenseNotFound();
 
-            foundUser.RemoveExpense(input.Id);
-
-            await this._dataAccess.Persist(input.Id);
+            await this._dataAccess.RemoveExpense(foundExpense);
         }
 
         internal class Error
         {
-            internal class UserNotFound : Exception { }
+            internal class ExpenseNotFound : Exception { }
         }
     }
 }

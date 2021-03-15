@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    internal class GenerateNewPasswordMessageHandler : IMessageHandler<IGenerateNewPasswordMessage>
+    public record GenerateNewPasswordMessage(string Email);
+
+    internal class GenerateNewPasswordMessageHandler : IMessageHandler<GenerateNewPasswordMessage>
     {
-        private readonly IEventBus _bus;
         private readonly IGenerateNewPasswordDataAccess _dataAccess;
 
-        public GenerateNewPasswordMessageHandler(IGenerateNewPasswordDataAccess dataAccess, IEventBus bus)
+        public GenerateNewPasswordMessageHandler(IGenerateNewPasswordDataAccess dataAccess)
         {
-            _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task<dynamic> Execute(IGenerateNewPasswordMessage input)
+        public async Task<dynamic> Execute(GenerateNewPasswordMessage input)
         {
-            var foundUser = await _dataAccess.GetUserByEmail(new Email(input.Email));
+            var foundUser = await this._dataAccess.GetUserByEmail(new Email(input.Email));
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
@@ -27,9 +26,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
             foundUser.ChangePassword(new Sha1EncryptedPassword(newPassword));
 
-            await _dataAccess.Persist();
-
-            _bus.Publish(Events.OnNewPasswordGenerated.ToString(), new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value));
+            await this._dataAccess.Persist();
 
             return new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value);
         }

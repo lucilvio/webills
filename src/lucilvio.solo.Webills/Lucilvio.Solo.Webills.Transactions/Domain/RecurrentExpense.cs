@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Lucilvio.Solo.Webills.Transactions.Domain
+namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     internal class RecurrentExpense
     {
@@ -14,16 +14,16 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             this._expenses = new List<Expense>();
         }
 
-        internal RecurrentExpense(string name, Expense.ExpenseCategory category, DateTime date, TransactionValue value,
-            Recurrency recurrency) : this()
+        public RecurrentExpense(Guid userId, string name, string category, DateTime date, TransactionValue value,
+            DateTime until, int frequency) : this()
         {
-            this.Recurrency = recurrency;
+            this.Recurrency = new Recurrency(Frequency.FromValue(frequency), until);
 
-            this._expenses.Add(Expense.NewWithRecurrency(name, category, date, value, this));
+            this._expenses.Add(new Expense(userId, name, category, date, value, this.Id));
 
-            foreach (var nextDate in recurrency.DatesUntilRecurrencyEndsByFrequency(date))
+            foreach (var nextDate in this.Recurrency.DatesUntilRecurrencyEndsByFrequency(date))
             {
-                this._expenses.Add(Expense.NewWithRecurrency(name, category, nextDate, value, this));
+                this._expenses.Add(new Expense(userId, name, category, nextDate, value, this.Id));
             }
         }
 

@@ -1,55 +1,58 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.Domain
+namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     internal class Expense
     {
         private Expense()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
-        private Expense(string name, ExpenseCategory category, DateTime date, TransactionValue value) : this()
+        public Expense(Guid userId, string name, string category, DateTime date, TransactionValue value) : this()
         {
-            this.Validate(name, date, value);
+            this.Validate(userId, name, date, value);
+            
+            this.Date = date;
+            this.Name = name;
+            this.Value = value;
+            this.UserId = userId;
 
-            Name = name;
-            Date = date;
-            Category = category;
-            Value = value;
+            if (!Enum.TryParse(typeof(ExpenseCategory), category, out var categoryEnum))
+                this.Category = ExpenseCategory.Others;
+
+            this.Category = (ExpenseCategory)categoryEnum;
         }
 
-        private Expense(string name, ExpenseCategory category, DateTime date, TransactionValue value, RecurrentExpense recurrentExpenses) 
-            : this(name, category, date, value)
+        internal Expense(Guid userId, string name, string category, DateTime date, TransactionValue value, Guid recurrentExpenseId)
+            : this(userId, name, category, date, value)
         {
-            this.RecurrentExpenses = recurrentExpenses;
+            this.RecurrentExpenseId = recurrentExpenseId;
         }
-
-        public static Expense New(string name, ExpenseCategory category, DateTime date, TransactionValue value)
-            => new Expense(name, category, date, value);
-
-        public static Expense NewWithRecurrency(string name, ExpenseCategory category, DateTime date, TransactionValue value,
-            RecurrentExpense recurrency) => new Expense(name, category, date, value, recurrency);
 
         public Guid Id { get; }
+        public Guid UserId { get; set; }
         public string Name { get; private set; }
         public DateTime Date { get; private set; }
         public ExpenseCategory Category { get; private set; }
         public TransactionValue Value { get; private set; }
-        public RecurrentExpense RecurrentExpenses { get; }
-         
-        internal void Change(string name, ExpenseCategory category, DateTime date, TransactionValue value)
+        public Guid? RecurrentExpenseId { get; }
+
+        internal void Update(Guid userId, string name, ExpenseCategory category, DateTime date, TransactionValue value)
         {
-            this.Validate(name, date, value);
+            this.Validate(userId, name, date, value);
 
             this.Name = name;
             this.Category = category;
             this.Date = date;
             this.Value = value;
         }
-        
-        private void Validate(string name, DateTime date, TransactionValue value)
+
+        private void Validate(Guid userId, string name, DateTime date, TransactionValue value)
         {
+            if (userId == Guid.Empty)
+                throw new Error.ExpenseMustHaveUserId();
+
             if (string.IsNullOrEmpty(name))
                 throw new Error.ExpenseMustHaveName();
 
@@ -80,6 +83,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
 
         class Error
         {
+            internal class ExpenseMustHaveUserId : Exception { }
             internal class ExpenseMustHaveName : Exception { }
             internal class ExpenseCannotBeOlderThanOneHundredYears : Exception { }
             internal class ExpenseTransactionValueCannotBeNull : Exception { }

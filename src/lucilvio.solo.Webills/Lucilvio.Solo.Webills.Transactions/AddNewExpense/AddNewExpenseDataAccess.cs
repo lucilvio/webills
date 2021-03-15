@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Transactions.Domain;
-using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
-using Microsoft.EntityFrameworkCore;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
 
-namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.AddNewExpense
 {
     internal class AddNewExpenseDataAccess : IAddNewExpenseDataAccess
     {
-        private readonly TransactionsContext _context;
+        private readonly FinancialControlDataContext _context;
 
-        public AddNewExpenseDataAccess(TransactionsContext context)
+        public AddNewExpenseDataAccess(FinancialControlDataContext context)
         {
             this._context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<User> GetUserById(Guid id)
+        public async Task AddNewExpense(Expense expense)
         {
-            return await this._context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        }
-
-        public async Task Persist()
-        {
+            await this._context.Expenses.AddAsync(expense);
             await this._context.SaveChangesAsync();
         }
     }

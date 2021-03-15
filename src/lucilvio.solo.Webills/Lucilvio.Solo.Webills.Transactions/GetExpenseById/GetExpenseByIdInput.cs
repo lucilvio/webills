@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.GetExpense
 {
     public class GetExpenseByIdInput
     {

@@ -1,11 +1,14 @@
-﻿using Dapper;
+﻿using System;
 using System.Data;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Transactions.GetUserDashboardInfo;
+using Dapper;
+using Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetUserFinancialInformation
+namespace Lucilvio.Solo.Webills.FinancialControl.GetUserFinancialInformation
 {
-    internal class GetUserFinancialInformationMessageHandler
+    public record GetUserFinancialInformationMessage(Guid UserId);
+
+    internal class GetUserFinancialInformationMessageHandler : IMessageHandler<GetUserFinancialInformationMessage>
     {
         private readonly IDbConnection _connection;
 
@@ -14,15 +17,14 @@ namespace Lucilvio.Solo.Webills.Transactions.GetUserFinancialInformation
             this._connection = connection;
         }
 
-        public async Task<UserFinancialInformation> Execute(IGetUserFinancialInformationMessage input)
+        public async Task<dynamic> Execute(GetUserFinancialInformationMessage input)
         {
             var query = @"
-                select	TotalSpent.qtd as Expenses,
-	            TotalEarns.qtd as Earns,
-	            (TotalEarns.qtd - TotalSpent.qtd) as Balance
+                select TotalSpent.qtd as Expenses,
+	            TotalEarns.qtd as Earns	            
                 from
-                (select case when sum(value) is NULL then 0 else sum(value) end qtd from transactions.Expenses where userId = @userId) TotalSpent,
-	            (select case when sum(value) is NULL then 0 else sum(value) end qtd from transactions.Incomes where userId = @userId) TotalEarns";
+                (select case when sum(value) is NULL then 0 else sum(value) end qtd from financialControl.Expenses where userId = @userId) TotalSpent,
+	            (select case when sum(value) is NULL then 0 else sum(value) end qtd from financialControl.Incomes where userId = @userId) TotalEarns";
 
             return await this._connection.QueryFirstOrDefaultAsync<UserFinancialInformation>(query, new { userId = input.UserId });
         }

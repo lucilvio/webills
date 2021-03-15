@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lucilvio.Solo.Webills.Transactions.Domain
+namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     public abstract class Frequency
     {
@@ -10,10 +10,11 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             this.Value = value;
         }
 
-        public static Frequency Days => new DailyFrequency();
-        public static Frequency Months => new MonthlyFrequency();
-        public static Frequency Years = new AnnualFrequency();
-        
+        public static Frequency Daily => new DailyFrequency();
+        public static Frequency Monthly => new MonthlyFrequency();
+        public static Frequency Trimonthly => new TrimonthlyFrequency();
+        public static Frequency Yearly = new YearlyFrequency();
+
         public int Value { get; }
 
         public static Frequency FromValue(int value)
@@ -21,25 +22,26 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             var types = new Dictionary<int, Frequency>
             {
                 { 1, new DailyFrequency() },
-                { 2, new MonthlyFrequency() },
-                { 3, new AnnualFrequency() },
+                { 30, new MonthlyFrequency() },
+                { 90, new TrimonthlyFrequency() },
+                { 365, new YearlyFrequency() },
             };
 
-            if(!types.TryGetValue(value, out var frequency))
+            if (!types.TryGetValue(value, out var frequency))
                 new NoFrequency();
 
             return frequency;
         }
 
-        public abstract IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(int repetitionCount, DateTime from, DateTime until);
+        public abstract IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from, DateTime until);
 
         private class DailyFrequency : Frequency
         {
             public DailyFrequency() : base(1) { }
-            
-            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(int count, DateTime from, DateTime until)
+
+            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from, DateTime until)
             {
-                for (DateTime date = from.AddDays(count); date <= until; date = date.AddDays(count))
+                for (DateTime date = from.AddDays(1); date <= until; date = date.AddDays(1))
                     yield return date;
             }
         }
@@ -48,11 +50,11 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         {
             public MonthlyFrequency() : base(2) { }
 
-            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(int count, DateTime from, DateTime until)
+            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from, DateTime until)
             {
                 var months = Math.Abs(12 * (until.Year - from.Year) + until.Month - from.Month);
 
-                for (int i = count; i <= months; i += count)
+                for (int i = 1; i <= months; i++)
                 {
                     var newDate = from.AddMonths(i);
                     var day = from.Day;
@@ -68,11 +70,35 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             }
         }
 
-        private class AnnualFrequency : Frequency
+        private class TrimonthlyFrequency : Frequency
         {
-            public AnnualFrequency() : base(3) { }
+            public TrimonthlyFrequency() : base(3) { }
 
-            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(int count, DateTime from, DateTime until)
+            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from, DateTime until)
+            {
+                var months = Math.Abs(12 * (until.Year - from.Year) + until.Month - from.Month);
+
+                for (int i = 3; i <= months; i += 3)
+                {
+                    var newDate = from.AddMonths(i);
+                    var day = from.Day;
+
+                    if (newDate > until)
+                        continue;
+
+                    if (DateTime.DaysInMonth(newDate.Year, newDate.Month) < from.Day)
+                        day = newDate.Day;
+
+                    yield return new DateTime(newDate.Year, newDate.Month, day);
+                }
+            }
+        }
+
+        private class YearlyFrequency : Frequency
+        {
+            public YearlyFrequency() : base(4) { }
+
+            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from, DateTime until)
             {
                 var years = until.Year - from.Year;
 
@@ -96,7 +122,7 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
         {
             public NoFrequency() : base(0) { }
 
-            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(int repetitionCount, DateTime from, DateTime until)
+            public override IEnumerable<DateTime> DatesUntilRecurrencyEndsByFrequency(DateTime from, DateTime until)
             {
                 return new List<DateTime>();
             }

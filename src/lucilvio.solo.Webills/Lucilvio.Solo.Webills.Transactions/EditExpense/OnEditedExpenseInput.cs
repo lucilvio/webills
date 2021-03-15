@@ -1,13 +1,13 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.EditExpense
 {
     public class OnEditedExpenseInput
     {
         internal OnEditedExpenseInput(User user, Expense expense)
         {
-            if(user == null || expense == null)
+            if (user == null || expense == null)
                 return;
 
             this.Id = expense.Id;

@@ -4,10 +4,10 @@
     {
         public Notification(Sender from, Receiver to, string subject, string message)
         {
-            From = from;
-            To = to;
-            Subject = subject;
-            Message = message;
+            this.From = from;
+            this.To = to;
+            this.Subject = subject;
+            this.Message = message;
         }
 
         public Sender From { get; }
@@ -19,8 +19,8 @@
         {
             public Receiver(string name, string mail)
             {
-                Name = name;
-                Mail = mail;
+                this.Name = name;
+                this.Mail = mail;
             }
 
             public string Name { get; }
@@ -31,8 +31,8 @@
         {
             public Sender(string name, string mail)
             {
-                Name = name;
-                Mail = mail;
+                this.Name = name;
+                this.Mail = mail;
             }
 
             public string Name { get; }

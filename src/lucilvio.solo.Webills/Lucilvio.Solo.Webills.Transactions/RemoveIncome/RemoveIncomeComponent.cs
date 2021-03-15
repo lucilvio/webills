@@ -1,35 +1,30 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveIncome
 {
     internal class RemoveIncomeComponent
     {
         private readonly IRemoveIncomeDataAccess _dataAccess;
-        private readonly IEventBus _bus;
 
-        public RemoveIncomeComponent(IRemoveIncomeDataAccess dataAccess, IEventBus bus)
+        public RemoveIncomeComponent(IRemoveIncomeDataAccess dataAccess)
         {
-            _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
+            this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
         public async Task Execute(RemoveIncomeInput input)
         {
-            var foundUser = await _dataAccess.GetUserById(input.UserId);
+            var foundIncome = await this._dataAccess.GetIncome(input.Id);
 
-            if (foundUser == null)
-                throw new Error.UserNotFound();
+            if (foundIncome == null)
+                throw new Error.IncomeNotFound();
 
-            foundUser.RemoveIncome(input.Id);
-
-            await _dataAccess.Persist(input.Id);
+            await this._dataAccess.RemoveIncome(foundIncome);
         }
 
         internal class Error
         {
-            internal class UserNotFound : Exception { }
+            internal class IncomeNotFound : Exception { }
         }
     }
 }

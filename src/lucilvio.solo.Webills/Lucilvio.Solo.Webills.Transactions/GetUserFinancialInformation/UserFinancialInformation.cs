@@ -1,20 +1,9 @@
-﻿namespace Lucilvio.Solo.Webills.Transactions.GetUserDashboardInfo
+﻿namespace Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo
 {
-    public class UserFinancialInformation
+    public record UserFinancialInformation(decimal Expenses, decimal Earns)
     {
-        internal UserFinancialInformation() { }
+        public static UserFinancialInformation Empty => new UserFinancialInformation(0, 0);
 
-        public UserFinancialInformation(decimal expenses, decimal earns, decimal balance)
-        {
-            this.Expenses = expenses;
-            this.Earns = earns;
-            this.Balance = balance;
-        }
-
-        public static UserFinancialInformation Empty => new UserFinancialInformation();
-
-        public decimal Expenses { get; }
-        public decimal Earns { get; }
-        public decimal Balance { get; }
+        public decimal Balance => this.Earns - this.Expenses;
     }
 }

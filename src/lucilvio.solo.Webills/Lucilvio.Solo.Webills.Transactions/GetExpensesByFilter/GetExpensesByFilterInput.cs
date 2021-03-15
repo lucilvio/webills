@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter
+namespace Lucilvio.Solo.Webills.FinancialControl.GetExpensesByFilter
 {
     public class GetExpensesByFilterInput
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.EditIncome
 {
     public class EditIncomeInput
     {

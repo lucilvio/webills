@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
 
@@ -9,16 +8,16 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
     internal class CreateNewAccountDataAccess : ICreateNewAccountDataAccess
     {
-        private readonly DataContext _context;
+        private readonly UserAccountDataContext _context;
 
-        public CreateNewAccountDataAccess(DataContext context)
+        public CreateNewAccountDataAccess(UserAccountDataContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task<User> GetUserByLogin(Domain.Login login)
         {
-            return await _context.Users
+            return await this._context.Users
                 .AsNoTracking()
                 .Include(u => u.Account)
                 .FirstOrDefaultAsync(u => u.Account.Login == login);
@@ -26,8 +25,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 
         public async Task Persist(User user)
         {
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            await this._context.Users.AddAsync(user);
+            await this._context.SaveChangesAsync();
         }
     }
 }

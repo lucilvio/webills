@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.Domain
+namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     internal record TransactionValue
     {
@@ -11,10 +11,10 @@ namespace Lucilvio.Solo.Webills.Transactions.Domain
             if (value < 0)
                 throw new Error.TransactionValueCannotBeNegative();
 
-            _value = value;
+            this._value = value;
         }
 
-        public decimal Value => _value;
+        public decimal Value => this._value;
 
         class Error
         {

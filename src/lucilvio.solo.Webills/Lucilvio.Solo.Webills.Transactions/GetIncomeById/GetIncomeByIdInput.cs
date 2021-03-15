@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetIncomeById
+namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomeById
 {
     public class GetIncomeByIdInput
     {

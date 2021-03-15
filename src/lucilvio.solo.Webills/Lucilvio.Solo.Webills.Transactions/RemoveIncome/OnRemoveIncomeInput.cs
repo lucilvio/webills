@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveIncome
 {
     public class OnRemoveIncomeInput
     {

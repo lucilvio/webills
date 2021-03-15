@@ -1,4 +1,4 @@
-﻿(function ($, blockModule) {
+﻿(($, blockModule) => {
     "strict";
 
     $(function () {
@@ -10,6 +10,9 @@
     });
 
     $("form").not(".no-block").on("submit", function () {
+        if (!$(this).valid())
+            return false;
+
         blockModule.blockScreen();
     });
 

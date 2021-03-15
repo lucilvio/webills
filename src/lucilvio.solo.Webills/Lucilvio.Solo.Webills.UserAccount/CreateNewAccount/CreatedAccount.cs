@@ -1,7 +1,7 @@
 ﻿using System;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
-namespace Lucilvio.Solo.Webills.UserAccount.CreateUserAccount
+namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
     public class CreatedAccount
     {

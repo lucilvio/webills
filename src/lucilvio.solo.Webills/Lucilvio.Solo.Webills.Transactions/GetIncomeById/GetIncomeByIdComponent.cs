@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 using Dapper;
 
-using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetIncomeById
+namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomeById
 {
     internal class GetIncomeByIdComponent
     {

@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Website.ForgotMyPassword
         public async Task<IActionResult> OnPostAsync(ForgotMyPasswordRequest request, [FromServices] UserAccount.Module module,
             [FromServices] INotificationService notificationService)
         {
-            var generatedPassword = await module.GenerateNewPassword(request);
+            var generatedPassword = await module.GenerateNewPassword(new GenerateNewPasswordMessage(request.Email));
 
             await notificationService.Send(new Notification(
                 new Notification.Sender("Admin", "admin@webills.com"),
@@ -28,10 +28,10 @@ namespace Lucilvio.Solo.Webills.Website.ForgotMyPassword
 
             this.SendSuccessMessage("You will receive an e-mail with instructions to get you password back");
 
-            return RedirectToPage("/Login/Login");
+            return this.RedirectToPage("/Login/Login");
         }
 
-        public class ForgotMyPasswordRequest : IGenerateNewPasswordMessage
+        public class ForgotMyPasswordRequest
         {
             public string Email { get; set; }
         }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveExpense
 {
     internal interface IRemoveExpenseDataAccess
     {
-        Task<User> GetUserById(Guid id);
-        Task Persist(Guid expenseId);
+        Task<Expense> GetExpense(Guid id);
+        Task RemoveExpense(Expense expense);
     }
 }

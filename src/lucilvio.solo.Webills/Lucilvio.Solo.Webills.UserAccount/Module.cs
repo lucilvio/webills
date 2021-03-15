@@ -1,8 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
-using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
 using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
 using Lucilvio.Solo.Webills.UserAccount.Login;
@@ -11,28 +8,28 @@ namespace Lucilvio.Solo.Webills.UserAccount
 {
     public class Module
     {
-        private readonly IEventBus _eventBus;
         private readonly IMessageDispatcher _messageDispatcher;
+        private readonly Configurations _configurations;
 
-        public Module(IEventBus eventBus, Configurations config)
+        public Module(Configurations configurations)
         {
-            this._eventBus = eventBus;
-            this._messageDispatcher = new DefaultMessageDispatcher(config, this._eventBus);
+            this._messageDispatcher = new DefaultMessageDispatcher();
+            this._configurations = configurations ?? throw new System.ArgumentNullException(nameof(configurations));
         }
 
-        public async Task<GeneratedPassword> GenerateNewPassword(IGenerateNewPasswordMessage message)
+        public async Task<GeneratedPassword> GenerateNewPassword(GenerateNewPasswordMessage message)
         {
-            return await this._messageDispatcher.DispatchGenerateNewPasswordMessage(message);
+            return await this._messageDispatcher.Dispatch(message, this._configurations);
         }
 
-        public async Task<CreatedAccount> CreateNewAccount(ICreateNewAccountMessage message)
+        public async Task<CreatedAccount> CreateNewAccount(CreateNewAccountMessage message)
         {
-            return await this._messageDispatcher.DispatchCreateNewAccountMessage(message);
+            return await this._messageDispatcher.Dispatch(message, this._configurations);
         }
 
-        public async Task<LoggedUser> Login(ILoginMessage message)
+        public async Task<LoggedUser> Login(LoginMessage message)
         {
-            return await this._messageDispatcher.DispatchLoginMessage(message);
+            return await this._messageDispatcher.Dispatch(message, this._configurations);
         }
     }
 }

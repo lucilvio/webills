@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Transactions.Domain;
-using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveExpense
 {
     internal class RemoveExpenseDataAccess : IRemoveExpenseDataAccess
     {
-        private readonly TransactionsContext _context;
+        private readonly FinancialControlDataContext _context;
 
-        public RemoveExpenseDataAccess(TransactionsContext context)
+        public RemoveExpenseDataAccess(FinancialControlDataContext context)
         {
             this._context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<User> GetUserById(Guid id)
+        public async Task<Expense> GetExpense(Guid id)
         {
-            return this._context.Users.Include(u => u.Expenses).FirstOrDefaultAsync(u => u.Id == id);
+            return await this._context.Expenses.FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task Persist(Guid expenseId)
+        public async Task RemoveExpense(Expense expense)
         {
-            this._context.Entry(this._context.Set<Expense>().FirstOrDefault(e => e.Id == expenseId)).State = EntityState.Deleted;
+            this._context.Entry(this._context.Set<Expense>().FirstOrDefault(e => e.Id == expense.Id)).State = EntityState.Deleted;
 
             await this._context.SaveChangesAsync();
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter
+namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomesByFilter
 {
     public class GetIncomesByFilterOutput
     {

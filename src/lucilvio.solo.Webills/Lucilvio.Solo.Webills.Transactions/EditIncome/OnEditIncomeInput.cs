@@ -1,13 +1,13 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.EditIncome
 {
     public class OnEditIncomeInput
     {
         internal OnEditIncomeInput(User user, Income income)
         {
-            if(user == null || income == null)
+            if (user == null || income == null)
                 return;
 
             this.Id = income.Id;

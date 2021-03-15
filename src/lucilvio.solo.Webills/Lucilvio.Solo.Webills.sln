@@ -13,25 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UserA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccount", "UserAccount", "{6F54AF99-997A-4727-907A-EDF26826C889}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transactions", "{B4923F73-B61C-4AA8-958C-3957E7DB10FF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinancialControl", "FinancialControl", "{B4923F73-B61C-4AA8-958C-3957E7DB10FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Transactions", "Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.Transactions.csproj", "{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{3A71E468-E0EF-4F90-BA34-101B927878D9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Dashboard", "Lucilvio.Solo.Webills.Dashboard\Lucilvio.Solo.Webills.Dashboard.csproj", "{31C41583-4754-4724-B876-0FAE36846BD8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Savings", "Savings", "{A9913FA0-7541-4D8B-98A8-E2A3CD72F2D8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Savings", "Lucilvio.Solo.Webills.Savings\Lucilvio.Solo.Webills.Savings.csproj", "{7C231654-20DB-4B84-BD61-A840E06D12E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.FinancialControl", "Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.FinancialControl.csproj", "{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{93D56556-3586-4A8F-80B2-E8F7B562E2F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Website", "Lucilvio.Solo.Webills.Website\Lucilvio.Solo.Webills.Website.csproj", "{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus", "Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj", "{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{09FB3098-3C1B-4144-B225-98719B361835}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,22 +39,10 @@ Global
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31C41583-4754-4724-B876-0FAE36846BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31C41583-4754-4724-B876-0FAE36846BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31C41583-4754-4724-B876-0FAE36846BD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C231654-20DB-4B84-BD61-A840E06D12E0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,11 +52,8 @@ Global
 		{95294BE7-92A0-4D1D-BE54-B7E3135542F7} = {BC1980B6-3B22-42D7-937E-37FE2DF65BE6}
 		{8B23395B-025E-4C99-993C-481D872B345C} = {6F54AF99-997A-4727-907A-EDF26826C889}
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7} = {B4923F73-B61C-4AA8-958C-3957E7DB10FF}
-		{31C41583-4754-4724-B876-0FAE36846BD8} = {3A71E468-E0EF-4F90-BA34-101B927878D9}
-		{7C231654-20DB-4B84-BD61-A840E06D12E0} = {A9913FA0-7541-4D8B-98A8-E2A3CD72F2D8}
 		{93D56556-3586-4A8F-80B2-E8F7B562E2F4} = {BC1980B6-3B22-42D7-937E-37FE2DF65BE6}
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E} = {93D56556-3586-4A8F-80B2-E8F7B562E2F4}
-		{862BF3BB-FEFF-4DEE-85B4-014D8A6AD4FD} = {09FB3098-3C1B-4144-B225-98719B361835}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

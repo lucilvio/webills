@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
     internal class UserTests
     {
         public User ValidUser => new User(new Name("Test User"), new Email("test@mail.com"));
-        
+
         public User ValidUserWithAccount()
         {
             var user = new User(new Name("Test User"), new Email("test@mail.com"));
@@ -38,8 +38,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         [Test]
         public void CreateUser()
         {
-            var user = ValidUser;
-            
+            var user = this.ValidUser;
+
             Assert.AreNotEqual(user.Id, Guid.Empty);
             Assert.AreEqual(new Name("Test User"), user.Name);
             Assert.AreEqual(new Email("test@mail.com"), user.Email);
@@ -47,16 +47,16 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         public void CantCreateNewUserAccountWithoutLogin()
         {
-            var user = this.ValidUser; 
+            var user = this.ValidUser;
         }
-        
+
         [Test]
         public void CantCreateNewUserAccountIfTheresAnAccountWithTheSameLogin()
         {
-            var userWithSameLogin = ValidUserWithAccount();
+            var userWithSameLogin = this.ValidUserWithAccount();
 
             var user = new User(new Name("Test user"), new Email("test@mail.com"));
-            
+
             Assert.Throws<User.Error.LoginNotAvailable>(() =>
             {
                 user.CreateAccount(new Login("test@mail.com"), new Password("123456"), new Password("123456"), true, userWithSameLogin);
@@ -66,7 +66,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
         [Test]
         public void CanCreateNewUserAccountIfUserWithSameLoginDoesntHaveAccountAssociated()
         {
-            var userWithSameLogin = ValidUser;
+            var userWithSameLogin = this.ValidUser;
 
             var newUser = new User(new Name("Test user"), new Email("test@mail.com"));
 

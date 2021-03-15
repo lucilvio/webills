@@ -1,18 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Transactions.AddNewExpense;
-using Lucilvio.Solo.Webills.Transactions.AddNewIncome;
-using Lucilvio.Solo.Webills.Transactions.CreateUser;
-using Lucilvio.Solo.Webills.Transactions.GetUserDashboardInfo;
-using Lucilvio.Solo.Webills.Transactions.GetUserTransactionsByFilter;
 
-namespace Lucilvio.Solo.Webills.UserAccount
+namespace Lucilvio.Solo.Webills.FinancialControl
 {
-    internal interface IMessageDispatcher
+    internal interface IMessageDispatcher<in TMessage>
     {
-        Task<UserTransactions> DispatchGetUserTransactionsByFilterMessage(IGetUserTransactionsByFilterMessage message);
-        Task DispatchAddNewIncomeMessage(IAddNewIncomeMessage message);
-        Task DispatchCreateUserMessage(CreateUserMessage message);
-        Task DispatchAddNewExpenseMessage(IAddNewExpenseMessage message);
-        Task<UserFinancialInformation> DispatchGetUserFinancialInformation(IGetUserFinancialInformationMessage message);
+        Task<dynamic> Dispatch(TMessage message, Configurations configurations = null);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetUserTransactionsByFilter
+namespace Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter
 {
     public class UserTransactions
     {

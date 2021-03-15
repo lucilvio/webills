@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Dapper;
-using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter
+namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomesByFilter
 {
     internal class GetIncomesByFilterComponent
     {
@@ -18,7 +18,7 @@ namespace Lucilvio.Solo.Webills.Transactions.GetIncomesByFilter
         {
             using (var connection = this._context.Connection)
             {
-                var sql = "select Id, Name, Date, Value from Transactions.Incomes where UserId = @userId";
+                var sql = "select Id, Name, Date, Value from financialControl.Incomes where UserId = @userId";
 
                 var result = await connection.QueryAsync<GetIncomesByFilterOutput.Income>(sql, new { input.UserId });
                 return new GetIncomesByFilterOutput(result);

@@ -7,7 +7,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
     {
         internal LoggedUser(User user)
         {
-            if(user is null)
+            if (user is null)
                 return;
 
             this.Id = user.Id;

@@ -1,51 +1,61 @@
-﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UserAccount.Login;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.UserAccount.CreateUserAccount;
-using Lucilvio.Solo.Webills.UserAccount.CreateAccount;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
 using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
+using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.UserAccount.Login;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure
 {
     internal class DefaultMessageDispatcher : IMessageDispatcher
     {
-        private readonly IEventBus _eventBus;
-        private readonly Configurations _configuration;
+        private static readonly IDictionary<Type, Func<object, Configurations, Task<dynamic>>> _messageHandlersMap;
 
-        public DefaultMessageDispatcher(Configurations configuration, IEventBus eventBus)
+        static DefaultMessageDispatcher()
         {
-            this._configuration = configuration;
-            this._eventBus = eventBus;
+            _messageHandlersMap = new Dictionary<Type, Func<object, Configurations, Task<dynamic>>>
+            {
+                { typeof(LoginMessage), (message, config) => HandleLoginMessage((LoginMessage)message, config) },
+                { typeof(CreateNewAccountMessage), (message, config) => HandleCreateNewAccountMessage((CreateNewAccountMessage)message, config) },
+                { typeof(GenerateNewPasswordMessage), (message, config) => HandleGenerateNewPasswordMessage((GenerateNewPasswordMessage)message, config) },
+            };
         }
 
-        public async Task<CreatedAccount> DispatchCreateNewAccountMessage(ICreateNewAccountMessage message)
+        public Task<dynamic> Dispatch(object message, Configurations configurations)
         {
-            using var ctx = new DataContext(this._configuration);
+            if (DefaultMessageDispatcher._messageHandlersMap.TryGetValue(message.GetType(), out var handler))
+                return handler.Invoke(message, configurations);
+
+            return null;
+        }
+
+        private static async Task<dynamic> HandleCreateNewAccountMessage(CreateNewAccountMessage message, Configurations configurations)
+        {
+            using var ctx = new UserAccountDataContext(configurations);
 
             ICreateNewAccountDataAccess dataAccess = new CreateNewAccountDataAccess(ctx);
-            var handler = new CreateNewAccountMessageHandler(dataAccess, this._eventBus);
+            var handler = new CreateNewAccountMessageHandler(dataAccess);
 
             return await handler.Execute(message);
         }
 
-        public async Task<GeneratedPassword> DispatchGenerateNewPasswordMessage(IGenerateNewPasswordMessage message)
+        private static async Task<dynamic> HandleGenerateNewPasswordMessage(GenerateNewPasswordMessage message, Configurations configurations)
         {
-            using var ctx = new DataContext(this._configuration);
+            using var ctx = new UserAccountDataContext(configurations);
 
-            IGenerateNewPasswordDataAccess dataAccess = new GenerateNewPassword.GenerateNewPasswordDataAccess(ctx);
-            var handler = new GenerateNewPasswordMessageHandler(dataAccess, this._eventBus);
+            IGenerateNewPasswordDataAccess dataAccess = new GenerateNewPasswordDataAccess(ctx);
+            var handler = new GenerateNewPasswordMessageHandler(dataAccess);
 
             return await handler.Execute(message);
         }
 
-        public async Task<LoggedUser> DispatchLoginMessage(ILoginMessage message)
+        private static async Task<dynamic> HandleLoginMessage(LoginMessage message, Configurations configurations)
         {
-            using var ctx = new DataContext(this._configuration);
-            
+            using var ctx = new UserAccountDataContext(configurations);
+
             ILoginDataAccess dataAccess = new LoginDataAccess(ctx);
-            var handler = new LoginMessageHandler(dataAccess, this._eventBus);
+            var handler = new LoginMessageHandler(dataAccess);
 
             return await handler.Execute(message);
         }

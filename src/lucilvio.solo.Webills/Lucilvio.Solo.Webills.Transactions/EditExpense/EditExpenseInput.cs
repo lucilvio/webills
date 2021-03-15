@@ -1,7 +1,7 @@
 ﻿using System;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.EditExpense
 {
     public class EditExpenseInput
     {

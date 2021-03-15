@@ -1,23 +1,30 @@
 ﻿@page
+@using System.Globalization
 @model Lucilvio.Solo.Webills.Website.Transactions.TransactionsModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Transactions";
     ViewData["Menu"] = "Transactions";
+
+    var today = DateTime.UtcNow;
 }
 
 <partial name="_AddNewTransaction" />
 
-<div class="row stats-row">
-    <div class="col-lg-12 col-md-12">
-        <form method="POST">
-            <button type="submit" asp-page-handler="NewTransaction"> NEW </button>
-        </form>
+<div class="row stats-row"> 
+    <div class="col-lg-12 col-md-12">        
         @if (Model.UserTransactions.Transactions.Any())
         {
             <div class="card card-transactions">
                 <div class="card-body">
                     <h5 class="card-title">Transactions<a href="/Transactions" class="card-title-helper blockui-transactions"><i class="material-icons">refresh</i></a></h5>
+                    <div class="card-subtitle">
+                        <form method="GET">
+                            <h4> <span class="badge badge-pill badge-secondary"> @( CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(today.Month) ), @( today.Year.ToString() ) </span> </h4>
+                            <input type="hidden" name="month" value="@(today.Month)" />
+                            <input type="hidden" name="year" value="@(today.Year)" />
+                        </form>
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -119,3 +126,9 @@
     </div>
 </div>
 
+@section scripts
+{
+    $("")
+
+    <script src="~/js/transactions/transactions.js"></script>    
+}

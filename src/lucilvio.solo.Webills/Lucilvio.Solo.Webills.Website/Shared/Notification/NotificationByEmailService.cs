@@ -13,24 +13,24 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Notification
 
         public NotificationByEmailService(string host, int port, string user, string password)
         {
-            _host = host;
-            _port = port;
-            _user = user;
-            _password = password;
+            this._host = host;
+            this._port = port;
+            this._user = user;
+            this._password = password;
         }
 
         public async Task Send(Notification notification)
         {
-            var smtp = new SmtpClient(_host, _port)
+            var smtp = new SmtpClient(this._host, this._port)
             {
-                Credentials = new NetworkCredential(_user, _password),
-                DeliveryMethod = SmtpDeliveryMethod.Network,                
+                Credentials = new NetworkCredential(this._user, this._password),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
                 EnableSsl = true
             };
 
             var email = new MailMessage(notification.From.Mail, notification.To.Mail, notification.Subject, notification.Message)
             {
-                IsBodyHtml = true                
+                IsBodyHtml = true
             };
 
             await smtp.SendMailAsync(email);

@@ -1,36 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.AddNewExpense
 {
-    internal class AddNewExpenseMessageHandler
+    public record AddNewExpenseMessage(Guid UserId, string Name, string Category, DateTime Date, decimal Value);
+    
+    internal class AddNewExpenseMessageHandler : IMessageHandler<AddNewExpenseMessage>
     {
-        private readonly IEventBus _bus;
         private readonly IAddNewExpenseDataAccess _dataAccess;
 
-        public AddNewExpenseMessageHandler(IAddNewExpenseDataAccess dataAccess, IEventBus bus)
+        public AddNewExpenseMessageHandler(IAddNewExpenseDataAccess dataAccess)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            this._bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
-        public async Task Execute(IAddNewExpenseMessage message)
+        public async Task<dynamic> Execute(AddNewExpenseMessage message)
         {
-            var foundUser = await this._dataAccess.GetUserById(message.UserId);
+            var newExpense = new Expense(message.UserId, message.Name, message.Category, message.Date, new TransactionValue(message.Value));
+            await this._dataAccess.AddNewExpense(newExpense);
 
-            if (foundUser == null)
-                throw new Error.UserNotFound();
-
-            if (!Enum.TryParse(typeof(Expense.ExpenseCategory), message.Category, out var category))
-                category = Expense.ExpenseCategory.Others;
-
-            var newExpense = foundUser.AddExpense(message.Name, (Expense.ExpenseCategory)category, message.Date, new TransactionValue(message.Value));
-
-            await this._dataAccess.Persist();
-
-            this._bus.Publish("NewExpenseAdded", new OnAddExpenseInput(foundUser, newExpense));
+            return newExpense;
         }
 
         internal class Error

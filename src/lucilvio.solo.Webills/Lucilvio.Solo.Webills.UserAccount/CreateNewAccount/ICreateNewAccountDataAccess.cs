@@ -2,7 +2,7 @@
 
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
-namespace Lucilvio.Solo.Webills.UserAccount.CreateAccount
+namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
     internal interface ICreateNewAccountDataAccess
     {

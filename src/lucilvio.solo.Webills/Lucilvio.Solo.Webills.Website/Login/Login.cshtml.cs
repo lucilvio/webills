@@ -28,14 +28,14 @@ namespace Lucilvio.Solo.Webills.Website.Login
 
         public async Task<IActionResult> OnPostAsync(LoginRequest request, [FromServices] IAuthService authServie)
         {
-            var loggedUser = await this._module.Login(request);
+            var loggedUser = await this._module.Login(new LoginMessage(request.Login, request.Password));
 
             await authServie.SignIn(new UserAuthCredentials(loggedUser.Id, loggedUser.Name, loggedUser.Email));
 
             return this.RedirectToPage("/Home/Dashboard");
         }
 
-        public class LoginRequest : ILoginMessage
+        public class LoginRequest
         {
             public string Login { get; set; }
             public string Password { get; set; }

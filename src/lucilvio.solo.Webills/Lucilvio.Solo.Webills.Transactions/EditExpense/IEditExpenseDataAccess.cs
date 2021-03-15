@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.EditExpense
 {
     internal interface IEditExpenseDataAccess
     {
-        Task<User> GetUserById(Guid id);
-        Task Persist();
+        Task<Expense> GetExpense(Guid id);
+        Task UpdateExpense(Expense expense);
     }
 }

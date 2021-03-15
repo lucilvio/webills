@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Transactions.Domain;
-using Lucilvio.Solo.Webills.Transactions.Infraestructure.DataAccess;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
 
-using Microsoft.EntityFrameworkCore;
-
-namespace Lucilvio.Solo.Webills.Transactions.AddNewIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.AddNewIncome
 {
     internal class AddNewIncomeDataAccess : IAddNewIncomeDataAccess
     {
-        private readonly TransactionsContext _context;
+        private readonly FinancialControlDataContext _context;
 
-        public AddNewIncomeDataAccess(TransactionsContext context)
+        public AddNewIncomeDataAccess(FinancialControlDataContext context)
         {
             this._context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        Task<User> IAddNewIncomeDataAccess.GetUserById(Guid id)
+        async Task IAddNewIncomeDataAccess.AddNewIncome(Income income)
         {
-            return this._context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        }
-
-        async Task IAddNewIncomeDataAccess.Persist()
-        {
+            await this._context.Incomes.AddAsync(income);
             await this._context.SaveChangesAsync();
         }
     }

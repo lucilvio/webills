@@ -1,37 +1,42 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.Domain
+namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     internal class Income
     {
         private Income()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
-        internal Income(string name, DateTime date, IncomeCategory category, TransactionValue value) : this()
+        public Income(Guid userId, string name, string category, DateTime date, TransactionValue value) : this()
         {
             if (string.IsNullOrEmpty(name))
                 throw new Error.IncomeMustHaveName();
 
             this.Name = name;
             this.Date = date;
+            this.UserId = userId;
 
             if (value == null)
                 throw new Error.IncomeTransactionValueCannotBeNull();
 
             this.Value = value;
 
-            this.Category = category;
+            if (!Enum.TryParse(typeof(IncomeCategory), category, out var categoryEnum))
+                categoryEnum = IncomeCategory.Other;
+
+            this.Category = (IncomeCategory)categoryEnum;
         }
 
         public Guid Id { get; }
+        public Guid UserId { get; }
         public string Name { get; private set; }
         public DateTime Date { get; private set; }
         public IncomeCategory Category { get; set; }
         public TransactionValue Value { get; private set; }
 
-        internal void Change(string name, DateTime date, TransactionValue value)
+        public void Update(string name, DateTime date, TransactionValue value)
         {
             this.Name = name;
             this.Date = date;

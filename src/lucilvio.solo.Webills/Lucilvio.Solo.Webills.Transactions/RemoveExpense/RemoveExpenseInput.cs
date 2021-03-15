@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveExpense
 {
     public class RemoveExpenseInput
     {

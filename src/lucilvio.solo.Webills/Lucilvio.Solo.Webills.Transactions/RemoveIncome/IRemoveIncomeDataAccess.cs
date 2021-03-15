@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.RemoveIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.RemoveIncome
 {
     internal interface IRemoveIncomeDataAccess
     {
-        Task<User> GetUserById(Guid id);
-        Task Persist(Guid expenseId);
+        Task<Income> GetIncome(Guid id);
+        Task RemoveIncome(Income income);
     }
 }

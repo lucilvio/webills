@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Lucilvio.Solo.Webills.Transactions.Domain;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.EditIncome
+namespace Lucilvio.Solo.Webills.FinancialControl.EditIncome
 {
     internal interface IEditIncomeDataAccess
     {
-        Task<User> GetUserById(Guid id);
-        Task Persist();
+        Task<Income> GetIncome(Guid id);
+        Task UpdateIncome(Income income);
     }
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Transactions.Domain;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
-namespace Lucilvio.Solo.Webills.Transactions.AddNewExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.AddNewExpense
 {
     interface IAddNewExpenseDataAccess
     {
-        Task<User> GetUserById(Guid userId);
-        Task Persist();
+        Task AddNewExpense(Expense expense);
     }
 }

@@ -1,22 +1,18 @@
 ﻿namespace Lucilvio.Solo.Webills.UserAccount
 {
-    public class Configurations
+    public record Configurations
     {
-        public Configurations()
+        public string DataConnectionString { get; init; }
+        public DefaultUserAccount DefaultAccount { get; init; }
+
+        public bool IsDefaultUserAccountConfigured => this.DefaultAccount != null;
+
+        public record DefaultUserAccount 
         {
-            this.DefaultAccount = new DefaultUserAccount();
+            public string Name { get; init; }
+            public string Email { get; init; }
+            public string Password { get; init; }
         }
 
-        public string DataConnection { get; set; }
-        public bool CreateDefaultUserAccount { get; set; }
-        public DefaultUserAccount DefaultAccount { get; set; }
-
-
-        public class DefaultUserAccount
-        {
-            public string Name { get; set; }
-            public string Email { get; set; }
-            public string Password { get; set; }
-        }
     }
 }

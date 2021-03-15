@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lucilvio.Solo.Webills.Transactions.GetExpensesByFilter
+namespace Lucilvio.Solo.Webills.FinancialControl.GetExpensesByFilter
 {
     public class GetExpensesByFilterOutput
     {
