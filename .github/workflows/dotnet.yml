@@ -19,6 +19,8 @@ jobs:
         dotnet-version: 5.0.x    
     - name: Where am I
       run: pwd
+    - name: files
+      run: ls -a
     - name: Build
       run: dotnet build --configuration Release 
     - name: Test
