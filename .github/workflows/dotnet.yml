@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x    
+    - name: Where am I
+      run: pwd
     - name: Build
       run: dotnet build --configuration Release 
     - name: Test
