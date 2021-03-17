@@ -34,5 +34,5 @@ jobs:
       with:
         app-name: 'hml-webills'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3da43a188c954240ab2f6547f36e1b94 }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
         package: ${{env.DOTNET_ROOT}}/myapp
