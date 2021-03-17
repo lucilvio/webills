@@ -24,7 +24,7 @@ jobs:
     - name: Azure Login
       uses: Azure/login@v1
       env:
-        CREDS: ${{ secrets.AZURE_CREDENTIALS }} 
+        CREDS: ${{ secrets.AZURE_CREDENTIALS }}
       with:        
         creds: ${{ env.CREDS }}
     - name: Azure WebApp
