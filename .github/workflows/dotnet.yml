@@ -21,3 +21,8 @@ jobs:
       run: dotnet build --configuration Release ./src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.sln
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal "./src/lucilvio.solo.Webills"
+    - name: Azure WebApp
+      uses: Azure/webapps-deploy@v2
+      with:
+        # Name of the Azure Web App
+        app-name: hml-webills       
