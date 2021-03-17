@@ -20,4 +20,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release ./src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./src/lucilvio.solo.Webills
+      run: dotnet test --configuration Release --no-build --verbosity normal "./src/lucilvio.solo.Webills"
