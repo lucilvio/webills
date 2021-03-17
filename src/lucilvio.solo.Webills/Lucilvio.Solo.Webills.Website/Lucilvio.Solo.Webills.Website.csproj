@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.FinancialControl.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.FinancialControl\Lucilvio.Solo.Webills.FinancialControl.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.UserAccount\Lucilvio.Solo.Webills.UserAccount.csproj" />
   </ItemGroup>
 

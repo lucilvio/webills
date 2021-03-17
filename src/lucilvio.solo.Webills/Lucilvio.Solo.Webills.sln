@@ -3,19 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Clients.Web", "Lucilvio.Solo.Webills.Web\Lucilvio.Solo.Webills.Clients.Web.csproj", "{6A0051AA-4850-40B4-84D0-8EEA67E98C70}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{BC1980B6-3B22-42D7-937E-37FE2DF65BE6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{95294BE7-92A0-4D1D-BE54-B7E3135542F7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.UserAccount", "Lucilvio.Solo.Webills.UserAccount\Lucilvio.Solo.Webills.UserAccount.csproj", "{8B23395B-025E-4C99-993C-481D872B345C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccount", "UserAccount", "{6F54AF99-997A-4727-907A-EDF26826C889}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinancialControl", "FinancialControl", "{B4923F73-B61C-4AA8-958C-3957E7DB10FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.FinancialControl", "Lucilvio.Solo.Webills.Transactions\Lucilvio.Solo.Webills.FinancialControl.csproj", "{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.FinancialControl", "Lucilvio.Solo.Webills.FinancialControl\Lucilvio.Solo.Webills.FinancialControl.csproj", "{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{93D56556-3586-4A8F-80B2-E8F7B562E2F4}"
 EndProject
