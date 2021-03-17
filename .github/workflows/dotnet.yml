@@ -21,14 +21,18 @@ jobs:
       run: dotnet build --configuration Release ./src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.sln
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal "./src/lucilvio.solo.Webills"  
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
     - name: Azure Login
       uses: Azure/login@v1
       env:
         CREDS: ${{ secrets.AZURE_CREDENTIALS }}
       with:        
         creds: ${{ env.CREDS }}
-    - name: Azure WebApp
-      uses: Azure/webapps-deploy@v2
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
       with:
-        # Name of the Azure Web App
-        app-name: hml-webills       
+        app-name: 'hml-webills'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3da43a188c954240ab2f6547f36e1b94 }}
+        package: ${{env.DOTNET_ROOT}}/myapp
