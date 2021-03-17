@@ -34,7 +34,7 @@ jobs:
       env:
         CREDS: ${{ secrets.AZURE_CREDENTIALS }}
       with:        
-        creds: ${{ env.CREDS }}
+        creds: ${{ env.CREDS }} 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
