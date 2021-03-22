@@ -76,10 +76,27 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
                 
                 e.HasMany(p => p.Expenses).WithOne().HasForeignKey(e => e.RecurrentExpenseId);
             });
+
+            modelBuilder.Entity<RecurrentIncome>(e =>
+            {
+                e.ToTable("RecurrentIncomes", this._schema);
+
+                e.HasKey("Id");
+                e.Property<Guid>("Id").ValueGeneratedNever();
+
+                e.OwnsOne(p => p.Recurrency, r =>
+                {
+                    r.Property(p => p.Until).IsRequired().HasColumnName("Until");
+                    r.Property(p => p.Frequency).IsRequired().HasColumnName("Frequency").HasConversion(p => p.Value, p => Frequency.FromValue(p));
+                });
+
+                e.Navigation(p => p.Recurrency).IsRequired();
+
+                e.HasMany(p => p.Incomes).WithOne().HasForeignKey(e => e.RecurrentIncomeId);
+            });
         }
 
         public DbSet<Income> Incomes { get; internal set; }
         public DbSet<Expense> Expenses { get; internal set; }
-        public DbSet<RecurrentExpense> RecurrentExpenses { get; internal set; }
     }
 }

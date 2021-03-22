@@ -29,12 +29,22 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Domain
             this.Category = (IncomeCategory)categoryEnum;
         }
 
+        internal static Income WithRecurrency(Guid userId, string name, string category, DateTime date,
+            TransactionValue value, Guid recurrentIncomeId)
+        {
+            var newIncome = new Income(userId, name, category, date, value);
+            newIncome.RecurrentIncomeId = recurrentIncomeId;
+
+            return newIncome;
+        }
+
         public Guid Id { get; }
         public Guid UserId { get; }
         public string Name { get; private set; }
         public DateTime Date { get; private set; }
         public IncomeCategory Category { get; set; }
         public TransactionValue Value { get; private set; }
+        public Guid? RecurrentIncomeId { get; private set; }
 
         public void Update(string name, DateTime date, TransactionValue value)
         {

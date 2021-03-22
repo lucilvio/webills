@@ -33,7 +33,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
         class Error
         {
-            public class UserNotFound : BusinessError { }
+            public class UserNotFound : BusinessException { }
         }
     }
 }

@@ -30,7 +30,5 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Domain
         public Guid Id { get; }
         public Recurrency Recurrency { get; }
         public IEnumerable<Expense> Expenses => this._expenses;
-
-        public int ExpensesCount => this.Expenses.Count();
     }
 }

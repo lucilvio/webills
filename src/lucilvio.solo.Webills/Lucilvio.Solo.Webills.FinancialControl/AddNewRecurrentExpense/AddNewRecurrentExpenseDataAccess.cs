@@ -6,12 +6,7 @@ using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense
 {
-    internal interface IAddNewRecurrentExpenseDataAccess
-    {
-        Task AddNewRecurrentExpense(RecurrentExpense recurrentExpense);
-    }
-
-    internal class AddNewRecurrentExpenseDataAccess : IAddNewRecurrentExpenseDataAccess
+    internal class AddNewRecurrentExpenseDataAccess
     {
         private readonly IDbConnection _dbConnection;
 

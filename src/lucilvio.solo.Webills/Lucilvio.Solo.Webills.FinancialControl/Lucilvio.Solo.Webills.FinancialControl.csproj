@@ -27,4 +27,8 @@
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infraestructure\DataAccess\Migrations\" />
+  </ItemGroup>
+
 </Project>

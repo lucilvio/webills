@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Lucilvio.Solo.Webills.FinancialControl.infraestructure.dataAccess.Migrations
+namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess.Migrations
 {
     [DbContext(typeof(FinancialControlDataContext))]
-    partial class FinancialControlContextModelSnapshot : ModelSnapshot
+    partial class FinancialControlDataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -67,6 +67,9 @@ namespace Lucilvio.Solo.Webills.FinancialControl.infraestructure.dataAccess.Migr
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<Guid?>("RecurrentIncomeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -74,6 +77,8 @@ namespace Lucilvio.Solo.Webills.FinancialControl.infraestructure.dataAccess.Migr
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecurrentIncomeId");
 
                     b.ToTable("Incomes", "FinancialControl");
                 });
@@ -88,11 +93,28 @@ namespace Lucilvio.Solo.Webills.FinancialControl.infraestructure.dataAccess.Migr
                     b.ToTable("RecurrentExpenses", "FinancialControl");
                 });
 
+            modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentIncome", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecurrentIncomes", "FinancialControl");
+                });
+
             modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.Expense", b =>
                 {
                     b.HasOne("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentExpense", null)
                         .WithMany("Expenses")
                         .HasForeignKey("RecurrentExpenseId");
+                });
+
+            modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.Income", b =>
+                {
+                    b.HasOne("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentIncome", null)
+                        .WithMany("Incomes")
+                        .HasForeignKey("RecurrentIncomeId");
                 });
 
             modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentExpense", b =>
@@ -122,9 +144,41 @@ namespace Lucilvio.Solo.Webills.FinancialControl.infraestructure.dataAccess.Migr
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentIncome", b =>
+                {
+                    b.OwnsOne("Lucilvio.Solo.Webills.FinancialControl.Domain.Recurrency", "Recurrency", b1 =>
+                        {
+                            b1.Property<Guid>("RecurrentIncomeId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Frequency")
+                                .HasColumnType("int")
+                                .HasColumnName("Frequency");
+
+                            b1.Property<DateTime>("Until")
+                                .HasColumnType("datetime2")
+                                .HasColumnName("Until");
+
+                            b1.HasKey("RecurrentIncomeId");
+
+                            b1.ToTable("RecurrentIncomes");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RecurrentIncomeId");
+                        });
+
+                    b.Navigation("Recurrency")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentExpense", b =>
                 {
                     b.Navigation("Expenses");
+                });
+
+            modelBuilder.Entity("Lucilvio.Solo.Webills.FinancialControl.Domain.RecurrentIncome", b =>
+                {
+                    b.Navigation("Incomes");
                 });
 #pragma warning restore 612, 618
         }

@@ -47,8 +47,11 @@ namespace Lucilvio.Solo.Webills.Website
             {
                 options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
                 options.Conventions.ConfigureFilter(new AuthorizeFilter());
-                options.Conventions.ConfigureFilter(new ExceptionsFilter());
 
+            })
+            .AddMvcOptions(options =>
+            {
+                options.Filters.Add<ExceptionsFilter>();
             })
             .AddRazorRuntimeCompilation();
 

@@ -4,6 +4,7 @@ using Lucilvio.Solo.Webills.FinancialControl;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewExpense;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewIncome;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense;
+using Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentIncome;
 using Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter;
 using Lucilvio.Solo.Webills.Website.Shared;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
@@ -24,7 +25,7 @@ namespace Lucilvio.Solo.Webills.Website.Transactions
         }
 
         public async Task<IActionResult> OnPostNewTransaction(NewTransactionRequest request,
-            [FromServices] Webills.FinancialControl.Module module, [FromServices] IAuthService authService)
+            [FromServices] Module module, [FromServices] IAuthService authService)
         {
             var user = authService.AuthenticatedUser();
 
@@ -32,7 +33,10 @@ namespace Lucilvio.Solo.Webills.Website.Transactions
             
             if (request.Type == "income")
             {
-                await module.AddNewIncome(new AddNewIncomeMessage(request.UserId, request.Name, request.Category, request.Date, request.Value));
+                if (request.Recurrent)
+                    await module.AddNewRecurrentIncome(new AddNewRecurrentIncomeMessage(request.UserId, request.Name, request.Category, request.Date, request.Value, request.Until, request.Frequency));
+                else
+                    await module.AddNewIncome(new AddNewIncomeMessage(request.UserId, request.Name, request.Category, request.Date, request.Value));
             }
             else if (request.Type == "expense")
             {
