@@ -1,3 +1,4 @@
 # Webills
 
-A simple personal finance management app using Domain Driven Design bounded contexts and a Modular Monolith architecture approach
+A simple personal finances management app using .NET 5  
+Domain Driven Design bounded contexts applied with modular monolith approach
