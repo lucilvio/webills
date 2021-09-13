@@ -1,8 +1,5 @@
-﻿(function ($) {
+﻿(function ($, transactionsService, messageModule) {
     const categories = {};
-
-    const getIncomeCategories = () => $.getJSON("transactions/incomecategories");    
-    const getExpenseCategories = () => $.getJSON("transactions/expensecategories");    
 
     const fillCategoriesSelect = (options) => {
         let categorySelect = $("select[id='category']");
@@ -23,7 +20,7 @@
                     if (categories.incomes)
                         return fillCategoriesSelect(categories.incomes);
 
-                    getIncomeCategories().done(function (result) {
+                    transactionsService.getIncomeCategories().done(function (result) {
                         categories.incomes = result.categories;
                         fillCategoriesSelect(categories.incomes);
                     });
@@ -32,7 +29,7 @@
                     if (categories.expenses)
                         return fillCategoriesSelect(categories.expenses);
 
-                    getExpenseCategories().done(function (result) {
+                    transactionsService.getExpenseCategories().done(function (result) {
                         categories.expenses = result.categories;
                         fillCategoriesSelect(categories.expenses);
                     });
@@ -41,7 +38,7 @@
         });
     }
 
-    $(document).ready(() => {
+    $(function() {
         bindTransactionTypeRadioChangeEvent();
         triggerCheckedRadioChangeEvent();
 
@@ -53,5 +50,40 @@
                 $("#recurrencyOptionsPanel").hide();
         });
         $("#recurrentCheck").change();
+
+        $(".delete-transaction").on("click", function () {
+            let transactionLine = $(this).parent().parent();
+            let transactionId = transactionLine.find("#id")[0].value;
+            let recurrencyId = transactionLine.find("#recurrency-id")[0].value;
+            let transactionType = transactionLine.find("#type")[0].value;
+
+            if (recurrencyId) {
+                var yesButton = $("#delete-recurrent-transaction-modal").find(".delete-transaction-button");
+                yesButton.data("transaction-id", transactionId);
+                yesButton.data("transaction-type", transactionType);
+
+                $("#delete-recurrent-transaction-modal").modal("show");
+            }
+            else {
+                var yesButton = $("#delete-transaction-modal").find(".delete-transaction-button");
+                yesButton.data("transaction-id", transactionId);
+                yesButton.data("transaction-type", transactionType);
+
+                $("#delete-transaction-modal").modal("show");
+            }
+        });
+
+        $(".delete-transaction-button").on("click", function () {
+            let transactionModal = $(this).parent().parent();
+            let transactionId = $(this).data("transaction-id");
+            let transactionType = $(this).data("transaction-type");
+
+            transactionsService.deleteTransaction(transactionId, transactionType).done(function (result) {
+                transactionModal.modal("hide");
+                window.location.reload();
+
+                messageModule.showSuccessMessage(result.message);
+            });
+        });
     });
-}(jQuery));
+}(jQuery, transactionsService(jQuery), messageModule())); 

@@ -26,7 +26,7 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Filters
 
             var message = "";
 
-            if (context.Exception.GetType() == typeof(BusinessException))
+            if (context.Exception is Module.Error)
             {
                 message = context.Exception.GetType().Name;
             }

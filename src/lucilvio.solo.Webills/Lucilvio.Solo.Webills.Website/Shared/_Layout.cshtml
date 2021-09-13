@@ -112,9 +112,9 @@
                         </ol>
                     </nav>
                     @*<div class="page-options">
-                        <span class="badge badge-pill badge-primary">From @( new DateTime(today.Year, today.Month, 1).ToShortDateString())</span>
-                        <span class="badge badge-pill badge-primary">To @( new DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month)).ToShortDateString())</span>
-                    </div>*@
+                            <span class="badge badge-pill badge-primary">From @( new DateTime(today.Year, today.Month, 1).ToShortDateString())</span>
+                            <span class="badge badge-pill badge-primary">To @( new DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month)).ToShortDateString())</span>
+                        </div>*@
                 </div>
                 <div class="main-wrapper">
                     @RenderBody()
@@ -138,6 +138,7 @@
     <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="~/lib/toastr/toastr.min.js"></script>
     <script src="~/lib/loaders/blockui.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
     @*<script src="../../assets/plugins/bootstrap/popper.min.js"></script>
         <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="../../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>

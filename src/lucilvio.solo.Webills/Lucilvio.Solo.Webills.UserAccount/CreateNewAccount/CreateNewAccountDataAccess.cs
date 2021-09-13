@@ -6,6 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
+    internal interface ICreateNewAccountDataAccess
+    {
+        Task<User> GetUserByLogin(Domain.Login login);
+        Task Persist(User user);
+    }
+
     internal class CreateNewAccountDataAccess : ICreateNewAccountDataAccess
     {
         private readonly UserAccountDataContext _context;
@@ -25,8 +31,13 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 
         public async Task Persist(User user)
         {
-            await this._context.Users.AddAsync(user);
-            await this._context.SaveChangesAsync();
+            using (var d = this._context.Database.BeginTransaction())
+            {
+                await this._context.Users.AddAsync(user);
+                await this._context.SaveChangesAsync();
+
+                await d.CommitAsync();
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewExpense;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewIncome;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense;
 using Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentIncome;
+using Lucilvio.Solo.Webills.FinancialControl.DeleteIncome;
 using Lucilvio.Solo.Webills.FinancialControl.GetExpenseCategories;
 using Lucilvio.Solo.Webills.FinancialControl.GetIncomeCategories;
 using Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo;
@@ -59,6 +61,11 @@ namespace Lucilvio.Solo.Webills.FinancialControl
         public async Task<IncomeCategories> GetIncomeCategories(GetIncomeCategoriesMessage message)
         {
             return await new GetIncomeCategoriesMessageDispatcher().Dispatch(message);
+        }
+
+        public async Task DeleteIncome(DeleteIncomeMessage message)
+        {
+            await new DeleteIncomeMessageDispatcher().Dispatch(message, this._configurations);
         }
     }
 }

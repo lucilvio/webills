@@ -5,6 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
+    internal interface IGenerateNewPasswordDataAccess
+    {
+        Task<User> GetUserByEmail(Email email);
+        Task Persist();
+    }
+
     internal class GenerateNewPasswordDataAccess : IGenerateNewPasswordDataAccess
     {
         private readonly UserAccountDataContext _context;

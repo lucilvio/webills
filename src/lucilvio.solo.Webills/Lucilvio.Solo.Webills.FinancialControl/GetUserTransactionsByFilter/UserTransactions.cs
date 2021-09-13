@@ -23,24 +23,6 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter
 
         public IEnumerable<Transaction> Transactions => this._transactions;
 
-        public class Transaction
-        {
-            public Transaction(Guid id, string name, DateTime date, Guid userId, decimal value, string type)
-            {
-                this.Id = id;
-                this.Name = name;
-                this.Date = date;
-                this.UserId = userId;
-                this.Value = value;
-                this.Type = type;
-            }
-
-            public Guid Id { get; }
-            public string Name { get; }
-            public DateTime Date { get; }
-            public Guid UserId { get; }
-            public decimal Value { get; }
-            public string Type { get; }
-        }
+        public record Transaction(Guid Id, Guid? RecurrencyId, string Name, DateTime Date, Guid UserId, decimal Value, string Type);
     }
 }

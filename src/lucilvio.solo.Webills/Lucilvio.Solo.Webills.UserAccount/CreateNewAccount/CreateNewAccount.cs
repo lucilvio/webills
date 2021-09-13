@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
+using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    public record CreateNewAccountMessage(string Name, string Email, string Password, string PasswordConfirmation, bool TermsAccepted);
-    
-    internal class CreateNewAccountMessageHandler : IMessageHandler<CreateNewAccountMessage>
+    public record CreateNewAccountMessage(string Name, string Email, string Password,
+        string PasswordConfirmation, bool TermsAccepted) : Message;
+
+    internal class CreateNewAccount : IHandler<CreateNewAccountMessage>
     {
         private readonly ICreateNewAccountDataAccess _dataAccess;
 
-        public CreateNewAccountMessageHandler(ICreateNewAccountDataAccess dataAccess)
+        public CreateNewAccount(ICreateNewAccountDataAccess dataAccess)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task<dynamic> Execute(CreateNewAccountMessage message)
+        public async Task Execute(CreateNewAccountMessage message)
         {
             var user = new User(new Name(message.Name), new Email(message.Email));
 
@@ -29,8 +31,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
                 userWithTheSameLogin);
 
             await this._dataAccess.Persist(user);
-
-            return new CreatedAccount(user);
         }
-    }
+    }    
 }

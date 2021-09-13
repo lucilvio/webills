@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Lucilvio.Solo.Webills.UserAccount.Infrastructure.AutofacModule;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
 using Lucilvio.Solo.Webills.Website.Shared.Filters;
 using Lucilvio.Solo.Webills.Website.Shared.Notification;
@@ -37,12 +38,17 @@ namespace Lucilvio.Solo.Webills.Website
                     options.ClaimsIssuer = "webills.com";
                 });
 
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter());
+            });
+
             services.AddRazorPages(config =>
             {
                 config.RootDirectory = "/";
                 config.Conventions.AddPageRoute("/Home/Dashboard", "");
                 config.Conventions.Add(new CustomPageRouteModelConvention());
-            })
+            })                
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
@@ -52,7 +58,7 @@ namespace Lucilvio.Solo.Webills.Website
             .AddMvcOptions(options =>
             {
                 options.Filters.Add<ExceptionsFilter>();
-            })
+            })            
             .AddRazorRuntimeCompilation();
 
             services.AddSingleton<IAuthService, AuthService>();
@@ -65,24 +71,27 @@ namespace Lucilvio.Solo.Webills.Website
             services.AddSingleton<INotificationService>(new NotificationByEmailService(
                 emailHost, int.Parse(port), user, password));
 
-            var userAccountModule = new UserAccount.Module(new UserAccount.Configurations
+            services.AddSingleton<UserAccount.Module>(provider =>
             {
-                DefaultAccount = new UserAccount.Configurations.DefaultUserAccount
+                return new UserAccountModule(new UserAccount.Module.Configurations
                 {
-                    Name = "Admin",
-                    Password = "123456",
-                    Email = "admin@mail.com",
-                },
-                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
+                    DefaultAccount = new UserAccount.Module.Configurations.DefaultUserAccount
+                    {
+                        Name = "Admin",
+                        Password = "123456",
+                        Email = "admin@mail.com",
+                    },
+                    DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
+                });
             });
 
-            var financialControlModule = new FinancialControl.Module(new Webills.FinancialControl.Configurations
+            services.AddSingleton(provider =>
             {
-                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
+                return new FinancialControl.Module(new Webills.FinancialControl.Configurations
+                {
+                    DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
+                });
             });
-
-            services.AddSingleton(userAccountModule);
-            services.AddSingleton(financialControlModule);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -107,6 +116,7 @@ namespace Lucilvio.Solo.Webills.Website
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
 

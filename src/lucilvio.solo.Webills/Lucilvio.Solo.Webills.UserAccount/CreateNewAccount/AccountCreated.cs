@@ -3,9 +3,9 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    public class CreatedAccount
+    public class AccountCreated
     {
-        internal CreatedAccount(User user)
+        internal AccountCreated(User user)
         {
             this.UserId = user != null ? user.Id : Guid.Empty;
         }
