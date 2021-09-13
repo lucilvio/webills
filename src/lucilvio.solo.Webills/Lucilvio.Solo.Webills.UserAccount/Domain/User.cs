@@ -52,11 +52,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         internal class Error
         {
-            public class CantCreateUserWithoutName : BusinessException { }
-            public class CantCreateUserWithoutEmail : BusinessException { }
-            public class LoginNotAvailable : BusinessException { }
-            public class UserDoesntHaveAnAccountAssociated : BusinessException { }
-            public class UserWithSameLoginMustHaveAnAssociatedAccount : BusinessException { }
+            public class CantCreateUserWithoutName : Module.Error { }
+            public class CantCreateUserWithoutEmail : Module.Error { }
+            public class LoginNotAvailable : Module.Error { }
+            public class UserDoesntHaveAnAccountAssociated : Module.Error { }
+            public class UserWithSameLoginMustHaveAnAssociatedAccount : Module.Error { }
         }
     }
 }

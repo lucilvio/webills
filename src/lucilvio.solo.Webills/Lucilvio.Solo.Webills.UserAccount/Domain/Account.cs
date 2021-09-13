@@ -40,11 +40,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         internal class Error
         {
-            internal class CantCreateAccountWithoutLogin : Exception { }
-            internal class CantCreateAccountWithoutPassword : Exception { }
-            internal class PasswordsDontMatch : Exception { }
-            internal class LoginOrPasswordInvalid : Exception { }
-            internal class CantChangePasswordToAnEmptyOne : Exception { }
+            internal class CantCreateAccountWithoutLogin : Module.Error { }
+            internal class CantCreateAccountWithoutPassword : Module.Error { }
+            internal class PasswordsDontMatch : Module.Error { }
+            internal class LoginOrPasswordInvalid : Module.Error { }
+            internal class CantChangePasswordToAnEmptyOne : Module.Error { }
         }
 
     }

@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
+using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    public record GenerateNewPasswordMessage(string Email);
+    public record GenerateNewPasswordMessage(string Email) : Message<GeneratedPassword>;
 
-    internal class GenerateNewPasswordMessageHandler : IMessageHandler<GenerateNewPasswordMessage>
+    internal class GenerateNewPassword : IHandler<GenerateNewPasswordMessage>
     {
         private readonly IGenerateNewPasswordDataAccess _dataAccess;
 
-        public GenerateNewPasswordMessageHandler(IGenerateNewPasswordDataAccess dataAccess)
+        public GenerateNewPassword(IGenerateNewPasswordDataAccess dataAccess)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task<dynamic> Execute(GenerateNewPasswordMessage input)
+        public async Task Execute(GenerateNewPasswordMessage message)
         {
-            var foundUser = await this._dataAccess.GetUserByEmail(new Email(input.Email));
+            var foundUser = await this._dataAccess.GetUserByEmail(new Email(message.Email));
 
             if (foundUser == null)
                 throw new Error.UserNotFound();
@@ -28,12 +29,12 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
             await this._dataAccess.Persist();
 
-            return new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value);
+            message.SetResponse(new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value));
         }
 
         class Error
         {
-            public class UserNotFound : BusinessException { }
+            public class UserNotFound : Module.Error { }
         }
     }
 }

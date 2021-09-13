@@ -1,35 +1,37 @@
-﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
-using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
-using Lucilvio.Solo.Webills.UserAccount.Login;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
-    public class Module
+    public abstract class Module
     {
-        private readonly IMessageDispatcher _messageDispatcher;
-        private readonly Configurations _configurations;
+        protected readonly Configurations _configurations;
 
         public Module(Configurations configurations)
         {
-            this._messageDispatcher = new DefaultMessageDispatcher();
-            this._configurations = configurations ?? throw new System.ArgumentNullException(nameof(configurations));
+            this._configurations = configurations ?? throw new ArgumentNullException(nameof(configurations));
         }
 
-        public async Task<GeneratedPassword> GenerateNewPassword(GenerateNewPasswordMessage message)
+        public abstract Task SendMessage(Message message);
+
+        public record Configurations
         {
-            return await this._messageDispatcher.Dispatch(message, this._configurations);
+            public string DataConnectionString { get; init; }
+            public DefaultUserAccount DefaultAccount { get; init; }
+            public bool IsDefaultUserAccountConfigured => this.DefaultAccount != null;
+
+            public record DefaultUserAccount
+            {
+                public string Name { get; init; }
+                public string Email { get; init; }
+                public string Password { get; init; }
+            }
         }
 
-        public async Task<CreatedAccount> CreateNewAccount(CreateNewAccountMessage message)
+        public class Error : Exception
         {
-            return await this._messageDispatcher.Dispatch(message, this._configurations);
-        }
-
-        public async Task<LoggedUser> Login(LoginMessage message)
-        {
-            return await this._messageDispatcher.Dispatch(message, this._configurations);
+            public Error() { }
+            public Error(string message) : base(message) { }
         }
     }
 }

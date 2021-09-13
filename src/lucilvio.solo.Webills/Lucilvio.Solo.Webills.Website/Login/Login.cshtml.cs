@@ -11,13 +11,6 @@ namespace Lucilvio.Solo.Webills.Website.Login
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly Module _module;
-
-        public LoginModel(Module module)
-        {
-            this._module = module;
-        }
-
         public IActionResult OnGet()
         {
             if (this.User.Identity.IsAuthenticated)
@@ -26,9 +19,13 @@ namespace Lucilvio.Solo.Webills.Website.Login
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(LoginRequest request, [FromServices] IAuthService authServie)
+        public async Task<IActionResult> OnPostAsync(LoginRequest request, [FromServices] IAuthService authServie,
+            [FromServices] Module module)
         {
-            var loggedUser = await this._module.Login(new LoginMessage(request.Login, request.Password));
+            var message = new LoginMessage(request.Login, request.Password);
+            await module.SendMessage(message);
+
+            var loggedUser = message.Response;
 
             await authServie.SignIn(new UserAuthCredentials(loggedUser.Id, loggedUser.Name, loggedUser.Email));
 

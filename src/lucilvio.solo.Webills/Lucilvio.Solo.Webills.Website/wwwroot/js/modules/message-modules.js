@@ -1,7 +1,7 @@
-﻿var messageModule = function ($) {
+﻿const messageModule = (() => {
     "strict";
 
-    function showErrorMessage(msg) {
+    const showErrorMessage = (msg) => {
         toastr.options = {
             "closeButton": false,
             "progressBar": true,
@@ -19,7 +19,7 @@
         toastr.error(msg, "Sorry, something goes wrong....<br />")
     }
 
-    function showSuccessMessage(msg) {
+    const showSuccessMessage = (msg) => {
         toastr.options = {
             "closeButton": true,
             "progressBar": true,
@@ -42,4 +42,4 @@
         showSuccessMessage: showSuccessMessage
     }
 
-}(jQuery);
+})();

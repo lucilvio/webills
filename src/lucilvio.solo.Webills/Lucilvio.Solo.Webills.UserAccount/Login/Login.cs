@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
+using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    public record LoginMessage(string Login, string Password);
+    public record LoginMessage(string Login, string Password) : Message<LoggedUser>;
 
-    internal class LoginMessageHandler : IMessageHandler<LoginMessage>
+    internal class Login : IHandler<LoginMessage>
     {
         private readonly ILoginDataAccess _dataAccess;
 
-        public LoginMessageHandler(ILoginDataAccess dataAccess)
+        public Login(ILoginDataAccess dataAccess)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public async Task<dynamic> Execute(LoginMessage message)
+        public async Task Execute(LoginMessage message)
         {
             var foundUser = await this._dataAccess.GetUserByLogin(new Domain.Login(message.Login));
 
@@ -24,12 +25,12 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 
             foundUser.Login(new Sha1EncryptedPassword(new Password(message.Password)));
 
-            return new LoggedUser(foundUser);
+            message.SetResponse(new LoggedUser(foundUser));
         }
 
         class Error
         {
-            internal class InvalidUserOrPassword : BusinessException { }
+            internal class InvalidUserOrPassword : Module.Error { }
         }
     }
 }

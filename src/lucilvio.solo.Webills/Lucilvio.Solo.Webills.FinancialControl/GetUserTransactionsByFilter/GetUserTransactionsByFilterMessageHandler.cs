@@ -18,13 +18,14 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter
 
         public async Task<dynamic> Execute(GetUserTransactionsByFilterMessage message)
         {
-            var sql = @"select Id, Name, Date, UserId, Value, 'Expense' Type from financialControl.Expenses
+            var sql = @"select Id, RecurrentExpenseId as RecurrencyId, Name, Date, UserId, Value, 'Expense' Type from financialControl.Expenses
                 where userId = @userId
-                UNION select Id, Name, Date, UserId, Value, 'Income' Type from financialControl.Incomes
+                UNION select Id, RecurrentIncomeId as RecurrencyId, Name, Date, UserId, Value, 'Income' Type from financialControl.Incomes
                 where userId = @userId
                 order by Date asc";
 
             var transactions = await this._dbConnection.QueryAsync<UserTransactions.Transaction>(sql, new { message.UserId });
+            this._dbConnection.Dispose();
 
             return new UserTransactions(transactions);
         }

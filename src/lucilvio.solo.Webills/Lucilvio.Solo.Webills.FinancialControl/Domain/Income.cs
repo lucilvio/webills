@@ -46,6 +46,8 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Domain
         public TransactionValue Value { get; private set; }
         public Guid? RecurrentIncomeId { get; private set; }
 
+        public bool IsRecurrent => this.RecurrentIncomeId.HasValue;
+
         public void Update(string name, DateTime date, TransactionValue value)
         {
             this.Name = name;

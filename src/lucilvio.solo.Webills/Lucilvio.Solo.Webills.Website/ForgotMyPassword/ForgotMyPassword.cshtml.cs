@@ -18,7 +18,10 @@ namespace Lucilvio.Solo.Webills.Website.ForgotMyPassword
         public async Task<IActionResult> OnPostAsync(ForgotMyPasswordRequest request, [FromServices] UserAccount.Module module,
             [FromServices] INotificationService notificationService)
         {
-            var generatedPassword = await module.GenerateNewPassword(new GenerateNewPasswordMessage(request.Email));
+            var message = new GenerateNewPasswordMessage(request.Email);
+            await module.SendMessage(message);
+ 
+            var generatedPassword = message.Response;
 
             await notificationService.Send(new Notification(
                 new Notification.Sender("Admin", "admin@webills.com"),
