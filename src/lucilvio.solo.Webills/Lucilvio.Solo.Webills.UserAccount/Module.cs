@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.EventBus;
+using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
     public abstract class Module
     {
         protected readonly Configurations _configurations;
+        protected readonly IEventBus _eventBus;
 
-        public Module(Configurations configurations)
+        public Module(Configurations configurations, IEventBus eventBus)
         {
             this._configurations = configurations ?? throw new ArgumentNullException(nameof(configurations));
+            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         }
 
         public abstract Task SendMessage(Message message);

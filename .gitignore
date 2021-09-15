@@ -96,3 +96,7 @@
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Website/bin/Debug/net5.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.FinancialControl/bin/Debug/net5.0
 /src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.FinancialControl/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.EventBus.InMemory/bin/Debug/net5.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.EventBus.InMemory/obj
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Notification/bin/Debug/net5.0
+/src/lucilvio.solo.Webills/Lucilvio.Solo.Webills.Notification/obj

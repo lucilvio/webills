@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
 using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 using Lucilvio.Solo.Webills.UserAccount.Login;
@@ -9,7 +10,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
     {
         private readonly Module.Configurations _configurations;
 
-        public LoginAutofacModule(Module.Configurations configurations)
+        public LoginAutofacModule(Module.Configurations configurations, IEventBus eventBus = null)
         {
             this._configurations = configurations;
         }
@@ -20,7 +21,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<LoginDataAccess>().As<ILoginDataAccess>().InstancePerLifetimeScope();
-            builder.RegisterDecorator<OutboxHandler<LoginMessage>, IHandler<LoginMessage>>();
+            builder.RegisterDecorator<TransactionScopedHandler<LoginMessage>, IHandler<LoginMessage>>();
             builder.RegisterType<Login.Login>().As<IHandler<LoginMessage>>().InstancePerLifetimeScope();
 
             base.Load(builder);

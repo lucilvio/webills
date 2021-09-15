@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migrations
+namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(UserAccountDataContext))]
-    partial class UserAccountDataContextModelSnapshot : ModelSnapshot
+    class UserAccountDataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -50,11 +50,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migration
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8b98ad31-334d-4aa3-b86e-73e1ff3fbf95"),
+                            Id = new Guid("7a136a24-9ddc-4b8c-9405-3017cfa80fda"),
                             Login = "admin@mail.com",
                             Password = "7C4A8D09CA3762AF61E59520943DC26494F8941B",
                             TermAccepted = true,
-                            UserId = new Guid("bbfdc67b-c844-4a9d-a1d6-64967a5a98f9")
+                            UserId = new Guid("02ce532e-888b-48ab-96c3-6d630b6157da")
                         });
                 });
 
@@ -80,10 +80,38 @@ namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migration
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bbfdc67b-c844-4a9d-a1d6-64967a5a98f9"),
+                            Id = new Guid("02ce532e-888b-48ab-96c3-6d630b6157da"),
                             Email = "admin@mail.com",
                             Name = "Admin"
                         });
+                });
+
+            modelBuilder.Entity("Lucilvio.Solo.Webills.UserAccount.Infrastructure.OutgoingEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("Sender")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OutgoingEvents", "UserAccount");
                 });
 
             modelBuilder.Entity("Lucilvio.Solo.Webills.UserAccount.Domain.Account", b =>

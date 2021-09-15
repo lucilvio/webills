@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migrations
+namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
 {
     partial class Initial : Migration
     {
@@ -9,6 +9,22 @@ namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migration
         {
             migrationBuilder.EnsureSchema(
                 name: "UserAccount");
+
+            migrationBuilder.CreateTable(
+                name: "OutgoingEvents",
+                schema: "UserAccount",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Sender = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Payload = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OutgoingEvents", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Users",
@@ -51,13 +67,13 @@ namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migration
                 schema: "UserAccount",
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name" },
-                values: new object[] { new Guid("bbfdc67b-c844-4a9d-a1d6-64967a5a98f9"), "admin@mail.com", "Admin" });
+                values: new object[] { new Guid("02ce532e-888b-48ab-96c3-6d630b6157da"), "admin@mail.com", "Admin" });
 
             migrationBuilder.InsertData(
                 schema: "UserAccount",
                 table: "Accounts",
                 columns: new[] { "Id", "Login", "Password", "TermAccepted", "UserId" },
-                values: new object[] { new Guid("8b98ad31-334d-4aa3-b86e-73e1ff3fbf95"), "admin@mail.com", "7C4A8D09CA3762AF61E59520943DC26494F8941B", true, new Guid("bbfdc67b-c844-4a9d-a1d6-64967a5a98f9") });
+                values: new object[] { new Guid("7a136a24-9ddc-4b8c-9405-3017cfa80fda"), "admin@mail.com", "7C4A8D09CA3762AF61E59520943DC26494F8941B", true, new Guid("02ce532e-888b-48ab-96c3-6d630b6157da") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",
@@ -71,6 +87,10 @@ namespace Lucilvio.Solo.Webills.UserAccount.infraestructure.dataAccess.Migration
         {
             migrationBuilder.DropTable(
                 name: "Accounts",
+                schema: "UserAccount");
+
+            migrationBuilder.DropTable(
+                name: "OutgoingEvents",
                 schema: "UserAccount");
 
             migrationBuilder.DropTable(

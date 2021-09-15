@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure.AutofacModule;
+using Lucilvio.Solo.Webills.EventBus;
+using Lucilvio.Solo.Webills.EventBus.InMemory;
+using Lucilvio.Solo.Webills.Notification;
+using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
 using Lucilvio.Solo.Webills.Website.Shared.Filters;
-using Lucilvio.Solo.Webills.Website.Shared.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,7 +50,7 @@ namespace Lucilvio.Solo.Webills.Website
                 config.RootDirectory = "/";
                 config.Conventions.AddPageRoute("/Home/Dashboard", "");
                 config.Conventions.Add(new CustomPageRouteModelConvention());
-            })                
+            })
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
@@ -58,7 +60,7 @@ namespace Lucilvio.Solo.Webills.Website
             .AddMvcOptions(options =>
             {
                 options.Filters.Add<ExceptionsFilter>();
-            })            
+            })
             .AddRazorRuntimeCompilation();
 
             services.AddSingleton<IAuthService, AuthService>();
@@ -68,22 +70,24 @@ namespace Lucilvio.Solo.Webills.Website
             var user = Environment.GetEnvironmentVariable("email_user", EnvironmentVariableTarget.User) ?? "";
             var password = Environment.GetEnvironmentVariable("email_password", EnvironmentVariableTarget.User) ?? "";
 
-            services.AddSingleton<INotificationService>(new NotificationByEmailService(
-                emailHost, int.Parse(port), user, password));
+            var eventBus = new InMemoryEventBus();
+            services.AddSingleton<IEventBus>(eventBus);
 
-            services.AddSingleton<UserAccount.Module>(provider =>
+            services.AddNotificationsModule(new Notification.Module.Configurations
             {
-                return new UserAccountModule(new UserAccount.Module.Configurations
+                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
+            }, new Notification.Module.EventsToSubscribe(nameof(UserAccount.CreateNewAccount.AccountCreated)), eventBus);
+
+            services.AddUserAccountModule(new UserAccount.Module.Configurations
+            {
+                DefaultAccount = new UserAccount.Module.Configurations.DefaultUserAccount
                 {
-                    DefaultAccount = new UserAccount.Module.Configurations.DefaultUserAccount
-                    {
-                        Name = "Admin",
-                        Password = "123456",
-                        Email = "admin@mail.com",
-                    },
-                    DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
-                });
-            });
+                    Name = "Admin",
+                    Password = "123456",
+                    Email = "admin@mail.com",
+                },
+                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
+            }, eventBus);
 
             services.AddSingleton(provider =>
             {
