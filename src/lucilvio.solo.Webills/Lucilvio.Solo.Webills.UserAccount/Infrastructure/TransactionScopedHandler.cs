@@ -4,11 +4,11 @@ using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure
 {
-    internal class OutboxHandler<TMessage> : IHandler<TMessage> where TMessage : Message
+    internal class TransactionScopedHandler<TMessage> : IHandler<TMessage> where TMessage : Message
     {
         private readonly IHandler<TMessage> _innerHandler;
 
-        public OutboxHandler(IHandler<TMessage> innerHandler)
+        public TransactionScopedHandler(IHandler<TMessage> innerHandler)
         {
             this._innerHandler = innerHandler;
         }

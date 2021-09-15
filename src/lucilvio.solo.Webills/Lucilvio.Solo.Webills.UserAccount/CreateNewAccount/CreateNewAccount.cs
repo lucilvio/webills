@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
+using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
     public record CreateNewAccountMessage(string Name, string Email, string Password,
         string PasswordConfirmation, bool TermsAccepted) : Message;
 
+    public record AccountCreated(object payload) : Event(nameof(AccountCreated), nameof(CreateNewAccount), payload);
+
     internal class CreateNewAccount : IHandler<CreateNewAccountMessage>
     {
         private readonly ICreateNewAccountDataAccess _dataAccess;
+        private readonly IEventBus _eventBus;
 
-        public CreateNewAccount(ICreateNewAccountDataAccess dataAccess)
+        public CreateNewAccount(ICreateNewAccountDataAccess dataAccess, IEventBus eventBus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         }
 
         public async Task Execute(CreateNewAccountMessage message)
@@ -31,6 +37,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
                 userWithTheSameLogin);
 
             await this._dataAccess.Persist(user);
+
+            await this._eventBus.Publish(new AccountCreated(new CreatedAccount(user)));
         }
-    }    
+    }
 }

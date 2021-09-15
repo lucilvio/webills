@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
+using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    public record GenerateNewPasswordMessage(string Email) : Message<GeneratedPassword>;
+    public record GenerateNewPasswordMessage(string Email) : Message;
 
     internal class GenerateNewPassword : IHandler<GenerateNewPasswordMessage>
     {
         private readonly IGenerateNewPasswordDataAccess _dataAccess;
+        private readonly IEventBus _eventBus;
 
-        public GenerateNewPassword(IGenerateNewPasswordDataAccess dataAccess)
+        public GenerateNewPassword(IGenerateNewPasswordDataAccess dataAccess, IEventBus eventBus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         }
 
         public async Task Execute(GenerateNewPasswordMessage message)
@@ -29,7 +33,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
             await this._dataAccess.Persist();
 
-            message.SetResponse(new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value));
+            var generatedPassword = new GeneratedPassword(foundUser.Name.Value, foundUser.Email.Value, newPassword.Value);
+            await this._eventBus.Publish(new Event("NewPasswordGenerated", nameof(GenerateNewPassword), generatedPassword));
         }
 
         class Error

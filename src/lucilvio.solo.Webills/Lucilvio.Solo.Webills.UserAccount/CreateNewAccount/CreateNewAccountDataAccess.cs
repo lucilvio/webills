@@ -31,13 +31,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 
         public async Task Persist(User user)
         {
-            using (var d = this._context.Database.BeginTransaction())
-            {
-                await this._context.Users.AddAsync(user);
-                await this._context.SaveChangesAsync();
-
-                await d.CommitAsync();
-            }
+            await this._context.Users.AddAsync(user);
+            await this._context.SaveChangesAsync();
         }
     }
 }

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj" />
+  </ItemGroup>
+
+</Project>

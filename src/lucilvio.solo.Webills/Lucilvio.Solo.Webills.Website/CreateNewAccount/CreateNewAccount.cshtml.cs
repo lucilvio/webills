@@ -16,11 +16,10 @@ namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
 
         public async Task<IActionResult> OnPostAsync(CreateNewAccountRequest request, [FromServices] UserAccount.Module module)
         {
-            var message = new CreateNewAccountMessage(request.Name, request.Email, 
+            var message = new CreateNewAccountMessage(request.Name, request.Email,
                 request.Password, request.PasswordConfirmation, request.TermsAccepted);
 
             await module.SendMessage(message);
-            //var createdAccout = message.Response;
 
             this.SendSuccessMessage($"Welcome to WEBills {request.Name}! Now you can login and enjoy.");
 

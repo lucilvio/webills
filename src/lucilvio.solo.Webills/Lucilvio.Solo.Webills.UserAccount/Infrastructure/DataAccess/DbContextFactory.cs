@@ -14,7 +14,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
                     Password = "123456",
                     Email = "admin@mail.com",
                 },
-                DataConnectionString = "Server=localhost;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;"
+                DataConnectionString = args[0]
             };
 
             return new UserAccountDataContext(configurations);

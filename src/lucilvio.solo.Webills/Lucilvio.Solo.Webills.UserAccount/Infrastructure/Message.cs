@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.UserAccount
+﻿namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure
 {
     public abstract record Message { }
 

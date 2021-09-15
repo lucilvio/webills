@@ -1,6 +1,6 @@
 ﻿namespace Lucilvio.Solo.Webills.Website.Shared.Notification
 {
-    public class Notification
+    internal class Notification
     {
         public Notification(Sender from, Receiver to, string subject, string message)
         {

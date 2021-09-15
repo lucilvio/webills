@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
-namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure
+namespace Lucilvio.Solo.Webills.Notification.Infrastructure
 {
     internal interface IHandler<TMessage> where TMessage : Message
     {
