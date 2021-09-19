@@ -25,6 +25,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Event
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus.InMemory", "Lucilvio.Solo.Webills.EventBus.InMemory\Lucilvio.Solo.Webills.EventBus.InMemory.csproj", "{04C1546B-2A78-4E95-9AA8-38B856B3B06C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus.RabbitMq", "Lucilvio.Solo.Webills.EventBus.RabbitMq\Lucilvio.Solo.Webills.EventBus.RabbitMq.csproj", "{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMq", "RabbitMq", "{15ED0F22-7AFA-48B0-AD52-186B5827A607}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus.RabbitMq.Host", "Lucilvio.Solo.Webills.EventBus.Host\Lucilvio.Solo.Webills.EventBus.RabbitMq.Host.csproj", "{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{43CDA600-568F-41D3-A714-0996D6BF3EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Architecture", "Lucilvio.Solo.Architecture\Lucilvio.Solo.Architecture.csproj", "{8733FB0F-8201-4BC0-88D6-56DC126681C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +65,18 @@ Global
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8733FB0F-8201-4BC0-88D6-56DC126681C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8733FB0F-8201-4BC0-88D6-56DC126681C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8733FB0F-8201-4BC0-88D6-56DC126681C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8733FB0F-8201-4BC0-88D6-56DC126681C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +88,10 @@ Global
 		{349C5FFD-2D18-4E2B-AF25-DA22F1818660} = {CE01F8D7-1DE4-4E5D-9DEB-2F91AA9B84C5}
 		{2D6429A1-59FE-455E-AE8D-450AF1707C6E} = {63131DDC-7993-44C1-865C-2333D9FAEC2E}
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C} = {63131DDC-7993-44C1-865C-2333D9FAEC2E}
+		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F} = {15ED0F22-7AFA-48B0-AD52-186B5827A607}
+		{15ED0F22-7AFA-48B0-AD52-186B5827A607} = {63131DDC-7993-44C1-865C-2333D9FAEC2E}
+		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A} = {15ED0F22-7AFA-48B0-AD52-186B5827A607}
+		{8733FB0F-8201-4BC0-88D6-56DC126681C6} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

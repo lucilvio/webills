@@ -10,14 +10,12 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
     public record CreateNewAccountMessage(string Name, string Email, string Password,
         string PasswordConfirmation, bool TermsAccepted) : Message;
 
-    public record AccountCreated(object payload) : Event(nameof(AccountCreated), nameof(CreateNewAccount), payload);
-
-    internal class CreateNewAccount : IHandler<CreateNewAccountMessage>
+    internal class CreateNewAccount : IUseCase<CreateNewAccountMessage>
     {
         private readonly ICreateNewAccountDataAccess _dataAccess;
-        private readonly IEventBus _eventBus;
+        private readonly IEventPublisher _eventBus;
 
-        public CreateNewAccount(ICreateNewAccountDataAccess dataAccess, IEventBus eventBus)
+        public CreateNewAccount(ICreateNewAccountDataAccess dataAccess, IEventPublisher eventBus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));

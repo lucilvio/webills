@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Autofac;
 using Lucilvio.Solo.Webills.EventBus;
 using Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess;
 using Lucilvio.Solo.Webills.Notification.Infrastructure.Inbox;
-using Lucilvio.Solo.Webills.Notification.NotifyAccountCreation;
+using Newtonsoft.Json;
 
 namespace Lucilvio.Solo.Webills.Notification.Infrastructure.AutofacModule
 {
@@ -15,29 +13,17 @@ namespace Lucilvio.Solo.Webills.Notification.Infrastructure.AutofacModule
     {
         private readonly IContainer _container;
 
-        public NotificationModule(Configurations configurations, EventsToSubscribe eventsToSubscribe, IEventBus eventBus)
-            : base(configurations, eventsToSubscribe, eventBus)
+        public NotificationModule(Configurations configurations, IEventPublisher eventBus) : base(configurations, eventBus)
         {
             this._container = this.BuildContainer(configurations, eventBus);
         }
 
-        protected override async Task SubscribeEvents(EventsToSubscribe eventsToSubscribe)
-        {
-            if (eventsToSubscribe is null || !eventsToSubscribe.HasEvents)
-                return;
-
-            foreach (var @event in eventsToSubscribe.Events)
-            {
-                await this._eventBus.Subscribe(@event, this.HandleEvent);
-            }
-        }
-
-        private async Task HandleEvent(Event @event)
+        public override async Task HandleEvent(Event @event)
         {
             try
             {
                 var assembly = this.GetType().Assembly;
-                var messageType = assembly.GetTypes().FirstOrDefault(t => t.Name.Equals($"{@event.Name}Message", 
+                var messageType = assembly.GetTypes().FirstOrDefault(t => t.Name.Equals($"{@event.Name}Message",
                     StringComparison.InvariantCultureIgnoreCase));
 
                 if (messageType is null)
@@ -48,16 +34,20 @@ namespace Lucilvio.Solo.Webills.Notification.Infrastructure.AutofacModule
                 if (messageType is null || handlerType is null)
                     return;
 
-                using var scope = this._container.BeginLifetimeScope();
+                using var scope = this._container.BeginLifetimeScope(builder =>
+                {
+                    var inboxType = typeof(Inbox<>).MakeGenericType(messageType);
+                    builder.Register(ctx => @event).InstancePerLifetimeScope();
+                    builder.RegisterDecorator(inboxType, handlerType);
+                });
+
                 dynamic handler = scope.Resolve(handlerType);
 
                 if (handler is null)
                     return;
 
-                var message = JsonSerializer.Deserialize(@event.Payload, messageType);
-                 
-                var inbox = new Inbox<AccountCreatedMessage>(@event, handler, scope.Resolve<IInboxDataAccess>());
-                await inbox.Execute((dynamic)message);
+                var message = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(@event.Payload), messageType);
+                await handler.Execute((dynamic)message);
             }
             catch (Exception)
             {
@@ -65,7 +55,7 @@ namespace Lucilvio.Solo.Webills.Notification.Infrastructure.AutofacModule
             }
         }
 
-        private IContainer BuildContainer(Configurations configurations, IEventBus eventBus)
+        private IContainer BuildContainer(Configurations configurations, IEventPublisher eventBus)
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance(eventBus).SingleInstance();

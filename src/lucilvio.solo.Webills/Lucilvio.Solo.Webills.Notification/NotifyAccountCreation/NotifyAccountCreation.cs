@@ -9,6 +9,7 @@ namespace Lucilvio.Solo.Webills.Notification.NotifyAccountCreation
     {
         public async Task Execute(AccountCreatedMessage message)
         {
+            var f = message.UserName;
             return;
         }
     }

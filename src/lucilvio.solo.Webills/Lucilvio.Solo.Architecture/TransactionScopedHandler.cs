@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using System.Transactions;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
 
-namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure
+namespace Lucilvio.Solo.Architecture
 {
-    internal class TransactionScopedHandler<TMessage> : IUseCase<TMessage> where TMessage : Message
+    internal class TransactionScopedHandler<TMessage> : IHandler<TMessage> where TMessage : Message
     {
-        private readonly IUseCase<TMessage> _innerHandler;
+        private readonly IHandler<TMessage> _innerHandler;
 
-        public TransactionScopedHandler(IUseCase<TMessage> innerHandler)
+        public TransactionScopedHandler(IHandler<TMessage> innerHandler)
         {
             this._innerHandler = innerHandler;
         }

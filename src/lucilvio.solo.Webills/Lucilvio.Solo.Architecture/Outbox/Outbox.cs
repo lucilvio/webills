@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
 
-namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure
+namespace Lucilvio.Solo.Architecture.Outbox
 {
     internal class Outbox : IEventPublisher
     {
@@ -28,19 +26,19 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure
         Task PersistEvent(OutgoingEvent outgoingEvent);
     }
 
-    internal class OutboxDataAccess : IOutboxDataAccess
-    {
-        private readonly UserAccountDataContext _context;
+    //internal class OutboxDataAccess : IOutboxDataAccess
+    //{
+    //    private readonly UserAccountDataContext _context;
 
-        public OutboxDataAccess(UserAccountDataContext context)
-        {
-            this._context = context ?? throw new ArgumentNullException(nameof(context));
-        }
+    //    public OutboxDataAccess(UserAccountDataContext context)
+    //    {
+    //        this._context = context ?? throw new ArgumentNullException(nameof(context));
+    //    }
 
-        public async Task PersistEvent(OutgoingEvent outgoingEvent)
-        {
-            await this._context.OutgoingEvents.AddAsync(outgoingEvent);
-            await this._context.SaveChangesAsync();
-        }
-    }
+    //    public async Task PersistEvent(OutgoingEvent outgoingEvent)
+    //    {
+    //        await this._context.OutgoingEvents.AddAsync(outgoingEvent);
+    //        await this._context.SaveChangesAsync();
+    //    }
+    //}
 }

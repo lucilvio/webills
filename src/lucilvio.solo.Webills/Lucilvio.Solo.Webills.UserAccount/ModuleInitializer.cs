@@ -1,6 +1,4 @@
-﻿using Autofac;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure.AutofacModule;
+﻿using Lucilvio.Solo.Webills.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lucilvio.Solo.Webills.UserAccount
@@ -8,19 +6,19 @@ namespace Lucilvio.Solo.Webills.UserAccount
     public static class ModuleInitializer
     {
         public static IServiceCollection AddUserAccountModule(this IServiceCollection services, Module.Configurations configurations,
-            IEventBus eventBus)
+            IEventPublisher eventBus)
         {
             services.AddSingleton<Module>(provider => new UserAccountModule(configurations, eventBus));
 
             return services;
         }
 
-        public static ContainerBuilder AddModule(this ContainerBuilder builder, Module.Configurations configurations,
-            IEventBus eventBus)
+        public static IServiceCollection AddUserAccountModule(this IServiceCollection services,
+            IEventPublisher eventBus, Module.Configurations configurations)
         {
-            builder.Register<Module>(ctx => new UserAccountModule(configurations, eventBus)).SingleInstance();
+            services.AddSingleton<Module>(provider => new UserAccountModule(configurations, eventBus));
 
-            return builder;
+            return services;
         }
     }
 }

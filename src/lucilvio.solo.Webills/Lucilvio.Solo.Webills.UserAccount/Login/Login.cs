@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
     public record LoginMessage(string Login, string Password) : Message<LoggedUser>;
 
-    internal class Login : IHandler<LoginMessage>
+    internal class Login : IUseCase<LoginMessage>
     {
         private readonly ILoginDataAccess _dataAccess;
 

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus.InMemory\Lucilvio.Solo.Webills.EventBus.InMemory.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus.RabbitMq\Lucilvio.Solo.Webills.EventBus.RabbitMq.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.FinancialControl\Lucilvio.Solo.Webills.FinancialControl.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Notification\Lucilvio.Solo.Webills.Notification.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.UserAccount\Lucilvio.Solo.Webills.UserAccount.csproj" />

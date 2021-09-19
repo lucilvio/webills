@@ -8,9 +8,9 @@ namespace Lucilvio.Solo.Webills.UserAccount
     public abstract class Module
     {
         protected readonly Configurations _configurations;
-        protected readonly IEventBus _eventBus;
+        protected readonly IEventPublisher _eventBus;
 
-        public Module(Configurations configurations, IEventBus eventBus)
+        public Module(Configurations configurations, IEventPublisher eventBus)
         {
             this._configurations = configurations ?? throw new ArgumentNullException(nameof(configurations));
             this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
@@ -24,8 +24,7 @@ namespace Lucilvio.Solo.Webills.UserAccount
             public DefaultUserAccount DefaultAccount { get; init; }
             public bool IsDefaultUserAccountConfigured => this.DefaultAccount != null;
 
-            public record DefaultUserAccount
-            {
+            public record DefaultUserAccount {
                 public string Name { get; init; }
                 public string Email { get; init; }
                 public string Password { get; init; }

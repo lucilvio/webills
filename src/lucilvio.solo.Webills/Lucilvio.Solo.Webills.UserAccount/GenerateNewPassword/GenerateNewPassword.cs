@@ -9,12 +9,12 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
     public record GenerateNewPasswordMessage(string Email) : Message;
 
-    internal class GenerateNewPassword : IHandler<GenerateNewPasswordMessage>
+    internal class GenerateNewPassword : IUseCase<GenerateNewPasswordMessage>
     {
         private readonly IGenerateNewPasswordDataAccess _dataAccess;
-        private readonly IEventBus _eventBus;
+        private readonly IEventPublisher _eventBus;
 
-        public GenerateNewPassword(IGenerateNewPasswordDataAccess dataAccess, IEventBus eventBus)
+        public GenerateNewPassword(IGenerateNewPasswordDataAccess dataAccess, IEventPublisher eventBus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
