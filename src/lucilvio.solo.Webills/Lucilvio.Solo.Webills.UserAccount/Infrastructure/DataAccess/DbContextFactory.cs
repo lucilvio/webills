@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
+﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
 {
@@ -6,6 +7,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
     {
         public UserAccountDataContext CreateDbContext(string[] args)
         {
+            Debugger.Launch();
             var configurations = new Module.Configurations
             {
                 DefaultAccount = new Module.Configurations.DefaultUserAccount

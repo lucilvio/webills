@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Webills.Notification.Infrastructure.Inbox
+namespace Lucilvio.Solo.Architecture.Inbox
 {
     public class IncomingEvent
     {

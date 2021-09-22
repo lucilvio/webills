@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus.RabbitMq\Lucilvio.Solo.Webills.EventBus.RabbitMq.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Webills.Notification\Lucilvio.Solo.Webills.Notification.csproj" />
   </ItemGroup>
 </Project>

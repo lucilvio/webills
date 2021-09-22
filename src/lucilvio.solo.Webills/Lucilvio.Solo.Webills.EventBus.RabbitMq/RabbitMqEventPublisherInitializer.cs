@@ -1,29 +1,24 @@
-﻿using System;
+﻿using Autofac;
+using Lucilvio.Solo.Architecture;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lucilvio.Solo.Webills.EventBus.RabbitMq
 {
     public static class RabbitMqEventPublisherInitializer
     {
-        public static IEventPublisher AddRabbitMqEventPublisher(this IServiceCollection services,
+        public static IServiceCollection AddRabbitMqEventPublisher(this IServiceCollection services,
             Configurations configurations)
         {
-            var eventPublisher = new RabbitMqEventPublisher(configurations);
-
-            services.AddSingleton(eventPublisher);
-            return eventPublisher;
+            services.AddSingleton(provider => new RabbitMqEventPublisher(configurations));
+            return services;
         }
 
-        public static IEventPublisher AddRabbitMqEventPublisher(this IServiceCollection services,
-            Action<Configurations> configs)
+        public static ContainerBuilder AddRabbitMqEventPublisher(this ContainerBuilder builder,
+            Configurations configurations)
         {
-            var configurations = new Configurations();
-            configs(configurations);
+            builder.Register<IEventPublisher>(context => new RabbitMqEventPublisher(configurations));
 
-            var eventPublisher = new RabbitMqEventPublisher(configurations);
-
-            services.AddSingleton(eventPublisher);
-            return eventPublisher;
+            return builder;
         }
     }
 }

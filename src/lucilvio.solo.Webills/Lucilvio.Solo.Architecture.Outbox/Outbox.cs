@@ -20,25 +20,4 @@ namespace Lucilvio.Solo.Architecture.Outbox
             await this._innerEventBus.Publish(@event);
         }
     }
-
-    internal interface IOutboxDataAccess
-    {
-        Task PersistEvent(OutgoingEvent outgoingEvent);
-    }
-
-    //internal class OutboxDataAccess : IOutboxDataAccess
-    //{
-    //    private readonly UserAccountDataContext _context;
-
-    //    public OutboxDataAccess(UserAccountDataContext context)
-    //    {
-    //        this._context = context ?? throw new ArgumentNullException(nameof(context));
-    //    }
-
-    //    public async Task PersistEvent(OutgoingEvent outgoingEvent)
-    //    {
-    //        await this._context.OutgoingEvents.AddAsync(outgoingEvent);
-    //        await this._context.SaveChangesAsync();
-    //    }
-    //}
 }

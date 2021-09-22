@@ -1,4 +1,4 @@
-﻿using Lucilvio.Solo.Webills.EventBus;
+﻿using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.UserAccount;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -26,14 +25,14 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Filters
 
             var message = "";
 
-            if (context.Exception is Module.Error)
+            if (context.Exception is Error)
             {
                 message = context.Exception.GetType().Name;
             }
             else
             {
                 if (this._logger != null)
-                    _logger.LogError(context.Exception, "Action {action}", context.ActionDescriptor.DisplayName);
+                    this._logger.LogError(context.Exception, "Action {action}", context.ActionDescriptor.DisplayName);
 
                 message = "There was a internal error. Please, try again later.";
             }

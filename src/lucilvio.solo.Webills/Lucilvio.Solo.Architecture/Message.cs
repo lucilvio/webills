@@ -7,6 +7,6 @@
         private TResponse _response;
 
         public TResponse Response => this._response;
-        internal void SetResponse(TResponse response) => this._response = response;
+        public void SetResponse(TResponse response) => this._response = response;
     }
 }

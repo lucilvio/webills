@@ -1,15 +1,13 @@
-﻿using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.Notification.Infrastructure.AutofacModule;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Lucilvio.Solo.Webills.Notification
 {
     public static class ModuleInitializer
     {
-        public static IServiceCollection AddNotificationsModule(this IServiceCollection services, Module.Configurations configurations,
-            IEventPublisher eventBus)
+        public static IServiceCollection AddNotificationsModule(this IServiceCollection services,
+            Module.Configurations configurations)
         {
-            services.AddSingleton<Module>(provider => new NotificationModule(configurations, eventBus));
+            services.AddSingleton<Module>(provider => new NotificationModule(configurations));
 
             return services;
         }

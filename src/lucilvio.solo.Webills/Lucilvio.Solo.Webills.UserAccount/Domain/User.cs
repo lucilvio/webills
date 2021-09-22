@@ -1,4 +1,5 @@
 ﻿using System;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
@@ -52,11 +53,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         internal class Error
         {
-            public class CantCreateUserWithoutName : Module.Error { }
-            public class CantCreateUserWithoutEmail : Module.Error { }
-            public class LoginNotAvailable : Module.Error { }
-            public class UserDoesntHaveAnAccountAssociated : Module.Error { }
-            public class UserWithSameLoginMustHaveAnAssociatedAccount : Module.Error { }
+            public class CantCreateUserWithoutName : Architecture.Error { }
+            public class CantCreateUserWithoutEmail : Architecture.Error { }
+            public class LoginNotAvailable : Architecture.Error { }
+            public class UserDoesntHaveAnAccountAssociated : Architecture.Error { }
+            public class UserWithSameLoginMustHaveAnAssociatedAccount : Architecture.Error { }
         }
     }
 }

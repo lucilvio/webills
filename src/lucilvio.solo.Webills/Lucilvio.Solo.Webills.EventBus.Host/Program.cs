@@ -15,15 +15,10 @@ namespace Lucilvio.Solo.Webills.EventBus.RabbitMq.Host
             Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    var eventPublisher = services.AddRabbitMqEventPublisher(new Configurations
-                    {
-                        Host = "localhost"
-                    });
-
                     services.AddNotificationsModule(new Module.Configurations
                     {
                         DataConnectionString = "Server=localhost;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;"
-                    }, eventPublisher);
+                    });
 
                     services.AddHostedService<Worker>();
                 });

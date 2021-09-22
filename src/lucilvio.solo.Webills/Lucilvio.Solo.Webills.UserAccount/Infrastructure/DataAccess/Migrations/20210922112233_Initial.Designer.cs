@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(UserAccountDataContext))]
-    [Migration("20210913214251_Initial")]
+    [Migration("20210922112233_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,8 +18,36 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Lucilvio.Solo.Architecture.Outbox.OutgoingEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("Sender")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OutgoingEvents", "UserAccount");
+                });
 
             modelBuilder.Entity("Lucilvio.Solo.Webills.UserAccount.Domain.Account", b =>
                 {
@@ -52,11 +80,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7a136a24-9ddc-4b8c-9405-3017cfa80fda"),
+                            Id = new Guid("8f427511-ccdc-4fa3-aabf-822e4e93a693"),
                             Login = "admin@mail.com",
                             Password = "7C4A8D09CA3762AF61E59520943DC26494F8941B",
                             TermAccepted = true,
-                            UserId = new Guid("02ce532e-888b-48ab-96c3-6d630b6157da")
+                            UserId = new Guid("6aabfb95-7694-411a-9f27-a6cbc4296a6a")
                         });
                 });
 
@@ -82,38 +110,10 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02ce532e-888b-48ab-96c3-6d630b6157da"),
+                            Id = new Guid("6aabfb95-7694-411a-9f27-a6cbc4296a6a"),
                             Email = "admin@mail.com",
                             Name = "Admin"
                         });
-                });
-
-            modelBuilder.Entity("Lucilvio.Solo.Webills.UserAccount.Infrastructure.OutgoingEvent", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Payload")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
-
-                    b.Property<string>("Sender")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OutgoingEvents", "UserAccount");
                 });
 
             modelBuilder.Entity("Lucilvio.Solo.Webills.UserAccount.Domain.Account", b =>

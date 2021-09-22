@@ -1,4 +1,4 @@
-﻿using Lucilvio.Solo.Webills.Notification.Infrastructure.Inbox;
+﻿using Lucilvio.Solo.Architecture.Inbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess
@@ -14,10 +14,8 @@ namespace Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess
             this._schema = "Notifications";
             this._connectionString = connectionString;
 
-            //base.Database.Migrate();
+            base.Database.Migrate();
         }
-
-        internal DbSet<IncomingEvent> IncomingEvents { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,24 +27,9 @@ namespace Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            this.MapIncomingEvent(modelBuilder);
+            modelBuilder.MapInboxModel(this._schema);
 
             base.OnModelCreating(modelBuilder);
-        }
-        private void MapIncomingEvent(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<IncomingEvent>(o =>
-            {
-                o.ToTable("IncomingEvents", this._schema);
-
-                o.HasKey(p => p.Id);
-                o.Property(p => p.Id).ValueGeneratedNever();
-
-                o.Property(p => p.Name).IsRequired().HasMaxLength(256);
-                o.Property(p => p.Sender).IsRequired().HasMaxLength(256);
-                o.Property(p => p.Date).IsRequired();
-                o.Property(p => p.Status).IsRequired();
-            });
         }
     }
 }

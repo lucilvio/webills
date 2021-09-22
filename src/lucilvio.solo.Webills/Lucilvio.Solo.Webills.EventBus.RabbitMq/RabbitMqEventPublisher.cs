@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 using RabbitMQ.Client;
 
 namespace Lucilvio.Solo.Webills.EventBus.RabbitMq
@@ -23,7 +24,6 @@ namespace Lucilvio.Solo.Webills.EventBus.RabbitMq
 
             channel.BasicPublish("", "bus", body: Encoding.UTF8.GetBytes(@event.Serialize()));
         }
-
     }
 
     public record Configurations

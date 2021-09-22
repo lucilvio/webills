@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.Notification;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

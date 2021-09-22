@@ -1,6 +1,6 @@
 ﻿using System;
+using Lucilvio.Solo.Architecture.Outbox.Infrastructure;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
@@ -24,7 +24,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
 
         internal DbSet<User> Users { get; private set; }
         internal DbSet<Account> Accounts { get; private set; }
-        internal DbSet<OutgoingEvent> OutgoingEvents { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,11 +38,10 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
             base.OnModelCreating(modelBuilder);
 
             this.MapUser(modelBuilder);
-            this.MapOutgoingEvent(modelBuilder);
+            modelBuilder.MapOutboxModel(this._schema);
 
             this.Seed(modelBuilder);
         }
-
 
         private void Seed(ModelBuilder modelBuilder)
         {
@@ -94,22 +92,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
                 a.Property(p => p.TermAccepted).IsRequired();
 
                 a.HasOne<User>().WithOne(u => u.Account).HasForeignKey<Account>("UserId").IsRequired();
-            });
-        }
-
-        private void MapOutgoingEvent(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OutgoingEvent>(o =>
-            {
-                o.ToTable("OutgoingEvents", this._schema);
-
-                o.HasKey(p => p.Id);
-                o.Property(p => p.Id).ValueGeneratedNever();
-
-                o.Property(p => p.Name).IsRequired().HasMaxLength(256);
-                o.Property(p => p.Sender).IsRequired().HasMaxLength(256);
-                o.Property(p => p.Payload).IsRequired().HasMaxLength(2048);
-                o.Property(p => p.Date).IsRequired();
             });
         }
     }

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
     public record CreateNewAccountMessage(string Name, string Email, string Password,
         string PasswordConfirmation, bool TermsAccepted) : Message;
 
-    internal class CreateNewAccount : IUseCase<CreateNewAccountMessage>
+    internal class CreateNewAccount : IHandler<CreateNewAccountMessage>
     {
         private readonly ICreateNewAccountDataAccess _dataAccess;
         private readonly IEventPublisher _eventBus;

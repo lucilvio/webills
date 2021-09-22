@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
     public record LoginMessage(string Login, string Password) : Message<LoggedUser>;
 
-    internal class Login : IUseCase<LoginMessage>
+    internal class Login : IHandler<LoginMessage>
     {
         private readonly ILoginDataAccess _dataAccess;
 
@@ -31,7 +30,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
 
         class Error
         {
-            internal class InvalidUserOrPassword : Module.Error { }
+            internal class InvalidUserOrPassword : Architecture.Error { }
         }
     }
 }

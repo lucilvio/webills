@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
 {
-    partial class Initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,13 +67,13 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.DataAccess.Migrations
                 schema: "UserAccount",
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name" },
-                values: new object[] { new Guid("02ce532e-888b-48ab-96c3-6d630b6157da"), "admin@mail.com", "Admin" });
+                values: new object[] { new Guid("6aabfb95-7694-411a-9f27-a6cbc4296a6a"), "admin@mail.com", "Admin" });
 
             migrationBuilder.InsertData(
                 schema: "UserAccount",
                 table: "Accounts",
                 columns: new[] { "Id", "Login", "Password", "TermAccepted", "UserId" },
-                values: new object[] { new Guid("7a136a24-9ddc-4b8c-9405-3017cfa80fda"), "admin@mail.com", "7C4A8D09CA3762AF61E59520943DC26494F8941B", true, new Guid("02ce532e-888b-48ab-96c3-6d630b6157da") });
+                values: new object[] { new Guid("8f427511-ccdc-4fa3-aabf-822e4e93a693"), "admin@mail.com", "7C4A8D09CA3762AF61E59520943DC26494F8941B", true, new Guid("6aabfb95-7694-411a-9f27-a6cbc4296a6a") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Lucilvio.Solo.Architecture;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Lucilvio.Solo.Webills.EventBus.InMemory
 {

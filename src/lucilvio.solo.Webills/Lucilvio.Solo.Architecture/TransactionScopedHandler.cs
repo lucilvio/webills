@@ -3,7 +3,7 @@ using System.Transactions;
 
 namespace Lucilvio.Solo.Architecture
 {
-    internal class TransactionScopedHandler<TMessage> : IHandler<TMessage> where TMessage : Message
+    public class TransactionScopedHandler<TMessage> : IHandler<TMessage> where TMessage : Message
     {
         private readonly IHandler<TMessage> _innerHandler;
 

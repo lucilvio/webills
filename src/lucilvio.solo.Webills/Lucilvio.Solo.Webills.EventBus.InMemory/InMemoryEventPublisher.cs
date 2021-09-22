@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.Notification;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,7 +18,7 @@ namespace Lucilvio.Solo.Webills.EventBus.InMemory
 
         public async Task Publish(Event @event)
         {
-            if (_provider is null)
+            if (this._provider is null)
                 this._services.BuildServiceProvider();
 
             this._provider = this._services.BuildServiceProvider();

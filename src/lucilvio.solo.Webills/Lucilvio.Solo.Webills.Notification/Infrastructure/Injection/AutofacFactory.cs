@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.UserAccount.Infrastructure.Injection
+﻿namespace Lucilvio.Solo.Webills.Notification.Infrastructure.Injection
 {
     internal abstract class AutofacFactory : Autofac.Module
     {

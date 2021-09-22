@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.Notification.Infrastructure;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.Notification.NotifyAccountCreation
 {

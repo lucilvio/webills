@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.EventBus.InMemory;
 using Lucilvio.Solo.Webills.EventBus.RabbitMq;
 using Lucilvio.Solo.Webills.Notification;
 using Lucilvio.Solo.Webills.UserAccount;
@@ -71,17 +69,12 @@ namespace Lucilvio.Solo.Webills.Website
             var user = Environment.GetEnvironmentVariable("email_user", EnvironmentVariableTarget.User) ?? "";
             var password = Environment.GetEnvironmentVariable("email_password", EnvironmentVariableTarget.User) ?? "";
 
-            var eventPublisher = services.AddRabbitMqEventPublisher(configs =>
-            {
-                configs.Host = "localhost";
-            });
-
             services.AddNotificationsModule(new Notification.Module.Configurations
             {
                 DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
-            }, eventPublisher);
+            });
 
-            services.AddUserAccountModule(eventPublisher, new UserAccount.Module.Configurations
+            services.AddUserAccountModule(new UserAccount.Module.Configurations
             {
                 DefaultAccount = new UserAccount.Module.Configurations.DefaultUserAccount
                 {

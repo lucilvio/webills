@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
     public record GenerateNewPasswordMessage(string Email) : Message;
 
-    internal class GenerateNewPassword : IUseCase<GenerateNewPasswordMessage>
+    internal class GenerateNewPassword : IHandler<GenerateNewPasswordMessage>
     {
         private readonly IGenerateNewPasswordDataAccess _dataAccess;
         private readonly IEventPublisher _eventBus;
@@ -39,7 +37,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 
         class Error
         {
-            public class UserNotFound : Module.Error { }
+            public class UserNotFound : Architecture.Error { }
         }
     }
 }

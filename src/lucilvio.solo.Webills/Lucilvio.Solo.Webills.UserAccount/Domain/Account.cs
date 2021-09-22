@@ -1,4 +1,5 @@
 ﻿using System;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Domain
 {
@@ -40,11 +41,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.Domain
 
         internal class Error
         {
-            internal class CantCreateAccountWithoutLogin : Module.Error { }
-            internal class CantCreateAccountWithoutPassword : Module.Error { }
-            internal class PasswordsDontMatch : Module.Error { }
-            internal class LoginOrPasswordInvalid : Module.Error { }
-            internal class CantChangePasswordToAnEmptyOne : Module.Error { }
+            internal class CantCreateAccountWithoutLogin : Architecture.Error { }
+            internal class CantCreateAccountWithoutPassword : Architecture.Error { }
+            internal class PasswordsDontMatch : Architecture.Error { }
+            internal class LoginOrPasswordInvalid : Architecture.Error { }
+            internal class CantChangePasswordToAnEmptyOne : Architecture.Error { }
         }
 
     }

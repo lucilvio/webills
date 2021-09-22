@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Webills.EventBus;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.Notification
 {
     public abstract class Module
     {
-        protected readonly IEventPublisher _eventBus;
         protected readonly Configurations _configurations;
 
-        public Module(Configurations configurations, IEventPublisher eventBus)
+        public Module(Configurations configurations)
         {
-            this._configurations = configurations ?? throw new ArgumentNullException(nameof(configurations));
-            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+            this._configurations = configurations ?? throw new ArgumentNullException(nameof(configurations));            
         }
 
         public abstract Task HandleEvent(Event @event);

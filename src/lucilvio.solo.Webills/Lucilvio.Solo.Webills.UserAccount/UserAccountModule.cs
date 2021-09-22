@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
-using Lucilvio.Solo.Webills.EventBus;
-using Lucilvio.Solo.Webills.UserAccount.Infraestructure;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount.Infrastructure.Injection;
 
 namespace Lucilvio.Solo.Webills.UserAccount
@@ -13,46 +11,41 @@ namespace Lucilvio.Solo.Webills.UserAccount
     {
         private readonly IContainer _container;
 
-        public UserAccountModule(Configurations configurations, IEventPublisher eventBus) : base(configurations, eventBus)
+        public UserAccountModule(Configurations configurations) : base(configurations)
         {
-            this._container = this.BuildContainer(configurations, eventBus);
+            this._container = this.BuildContainer(configurations);
         }
 
         public override async Task SendMessage(Message message)
         {
-            using var scope = this._container.BeginLifetimeScope(builder =>
-            {
-                builder.RegisterDecorator<Outbox, IEventPublisher>();
-            });
+            using var scope = this._container.BeginLifetimeScope();
 
             try
             {
-                Type handlerType = typeof(IUseCase<>).MakeGenericType(message.GetType());
+                Type handlerType = typeof(IHandler<>).MakeGenericType(message.GetType());
                 dynamic handler = scope.Resolve(handlerType);
 
                 await handler.Execute((dynamic)message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
 
-        private IContainer BuildContainer(Configurations configurations, IEventPublisher eventBus)
+        private IContainer BuildContainer(Configurations configurations)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterInstance(eventBus).SingleInstance();
-            builder.RegisterType<OutboxDataAccess>().As<IOutboxDataAccess>();
-            builder = this.BuildAutofacFactories(builder, configurations, eventBus);
+            builder = this.BuildHandlerFactories(builder, configurations);
 
             return builder.Build();
         }
 
-        private ContainerBuilder BuildAutofacFactories(ContainerBuilder builder, Configurations configurations, IEventPublisher eventBus)
+        private ContainerBuilder BuildHandlerFactories(ContainerBuilder builder, Configurations configurations)
         {
             this.GetType().Assembly.GetTypes()
                 .Where(t => t.IsAssignableTo(typeof(AutofacFactory)) && !t.IsInterface && !t.IsAbstract)
-                .Select(m => (Autofac.Module)Activator.CreateInstance(m, configurations, eventBus))
+                .Select(m => (Autofac.Module)Activator.CreateInstance(m, configurations))
                 .ToList().ToList().ForEach(m => builder.RegisterModule(m));
 
             return builder;

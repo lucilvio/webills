@@ -6,12 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
     <PackageReference Include="microsoft.net.Test.Sdk" Version="16.9.1" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit.ConsoleRunner" Version="3.12.0" />
@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.Outbox\Lucilvio.Solo.Architecture.Outbox.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture\Lucilvio.Solo.Architecture.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus.RabbitMq\Lucilvio.Solo.Webills.EventBus.RabbitMq.csproj" />
   </ItemGroup>
 
   <ItemGroup>
