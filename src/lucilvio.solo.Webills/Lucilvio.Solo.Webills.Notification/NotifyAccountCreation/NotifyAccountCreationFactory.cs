@@ -1,28 +1,25 @@
 ﻿using Autofac;
 using Lucilvio.Solo.Architecture;
-using Lucilvio.Solo.Architecture.Inbox;
-using Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess;
-using Lucilvio.Solo.Webills.Notification.Infrastructure.Injection;
-using Lucilvio.Solo.Webills.Notification.NotifyAccountCreation;
+using Lucilvio.Solo.Architecture.Handler.Inbox;
+using Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Webills.Notification.Infrastructure.AutofacModule
+namespace Lucilvio.Solo.Webills.Notifications.NotifyAccountCreation
 {
-    internal class NotifyAccountCreationFactory : AutofacFactory
+    internal class NotifyAccountCreationFactory : IHandlerFactory<ContainerBuilder>
     {
-        public NotifyAccountCreationFactory(Module.Configurations configurations) : base(configurations) { }
-
-        protected override void Load(ContainerBuilder builder)
+        public void Create(ContainerBuilder container, object parameters)
         {
-            builder.Register<DbContext>(ctx => new NotificationDataContext(base._configurations.DataConnectionString)).AsSelf().InstancePerLifetimeScope();
+            var configurations = parameters as Configurations;
 
-            builder.RegisterType<NotifyAccountCreation.NotifyAccountCreation>().As<IHandler<AccountCreatedMessage>>()
+            container.Register<DbContext>(ctx => new NotificationDataContext(configurations.DataConnectionString))
+                .AsSelf().InstancePerLifetimeScope();
+
+            container.RegisterType<NotifyAccountCreation>().As<IHandler<AccountCreatedMessage>>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterInbox<AccountCreatedMessage>();
-            builder.RegisterLogHandler<AccountCreatedMessage>();
-
-            base.Load(builder);
+            container.RegisterInbox<AccountCreatedMessage>();
+            container.RegisterLogHandler<AccountCreatedMessage>();
         }
     }
 }

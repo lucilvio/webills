@@ -17,12 +17,10 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense
 
         public async Task AddNewRecurrentExpense(RecurrentExpense recurrentExpense)
         {
-            var command = "begin transaction; insert into FinancialControl.RecurrentExpenses values(@id, @until, @frequency);";
+            var command = "insert into FinancialControl.RecurrentExpenses values(@id, @until, @frequency);";
 
             recurrentExpense.Expenses.ToList()
                 .ForEach(e => command += $"insert into FinancialControl.Expenses values('{e.Id}', '{e.UserId}', '{e.Name}', '{e.Date}', {(int)e.Category}, {e.Value.Value}, @id);");
-
-            command += "commit;";
 
             await this._dbConnection.ExecuteAsync(command, new 
             { 

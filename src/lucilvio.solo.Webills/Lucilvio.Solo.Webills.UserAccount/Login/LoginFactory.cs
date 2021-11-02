@@ -1,25 +1,19 @@
 ﻿using Autofac;
 using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure.Injection;
 using Lucilvio.Solo.Webills.UserAccount.Login;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
 {
-    internal class LoginFactory : AutofacFactory
+    internal class LoginFactory : IHandlerFactory<ContainerBuilder>
     {
-        public LoginFactory(Module.Configurations configurations) : base(configurations) { }
-
-        protected override void Load(ContainerBuilder builder)
+        public void Create(ContainerBuilder container, object parameters)
         {
-            builder.Register(c => new UserAccountDataContext(this._configurations)).AsSelf()
+            container.Register(c => new UserAccountDataContext((Configurations)parameters)).AsSelf()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<LoginDataAccess>().As<ILoginDataAccess>().InstancePerLifetimeScope();
-            builder.RegisterDecorator<TransactionScopedHandler<LoginMessage>, IHandler<LoginMessage>>();
-            builder.RegisterType<Login.Login>().As<IHandler<LoginMessage>>().InstancePerLifetimeScope();
-
-            base.Load(builder);
+            container.RegisterType<LoginDataAccess>().AsSelf().InstancePerLifetimeScope();
+            container.RegisterType<Login.Login>().As<IHandler<LoginMessage>>().InstancePerLifetimeScope();
         }
     }
 }

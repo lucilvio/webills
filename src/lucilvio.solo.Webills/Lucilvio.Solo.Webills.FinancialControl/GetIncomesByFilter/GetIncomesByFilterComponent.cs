@@ -1,28 +1,28 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using Dapper;
-using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomesByFilter
 {
+    public record GetIncomesByFilterInput(Guid UserId) : Message<FoundIncomesByFilter>;
+
     internal class GetIncomesByFilterComponent
     {
-        private readonly TransactionsReadContext _context;
+        private readonly IDbConnection _connection;
 
-        public GetIncomesByFilterComponent(TransactionsReadContext context)
+        public GetIncomesByFilterComponent(IDbConnection connection)
         {
-            this._context = context ?? throw new ArgumentNullException(nameof(context));
+            this._connection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
 
-        public async Task<GetIncomesByFilterOutput> Execute(GetIncomesByFilterInput input)
+        public async Task Execute(GetIncomesByFilterInput message)
         {
-            using (var connection = this._context.Connection)
-            {
-                var sql = "select Id, Name, Date, Value from financialControl.Incomes where UserId = @userId";
+            var query = "select Id, Name, Date, Value from financialControl.Incomes where UserId = @userId";
 
-                var result = await connection.QueryAsync<GetIncomesByFilterOutput.Income>(sql, new { input.UserId });
-                return new GetIncomesByFilterOutput(result);
-            }
+            var foundIncomes = await this._connection.QueryAsync<FoundIncomesByFilter.FilteredIncome>(query, new { message.UserId });
+            message.SetResponse(new FoundIncomesByFilter(foundIncomes));
         }
     }
 }

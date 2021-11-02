@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 
-namespace Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess
+namespace Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess
 {
     internal class DbContextFactory : IDesignTimeDbContextFactory<NotificationDataContext>
     {

@@ -1,7 +1,9 @@
 ﻿namespace Lucilvio.Solo.Webills.FinancialControl
 {
-    public class Configurations
+    public record Configurations
     {
+        internal string ModuleName { get; } = "FinancialControl";
+
         public string DataConnectionString { get; init; }
     }
 }

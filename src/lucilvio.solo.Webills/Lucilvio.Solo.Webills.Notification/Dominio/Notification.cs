@@ -1,4 +1,4 @@
-﻿namespace Lucilvio.Solo.Webills.Website.Shared.Notification
+﻿namespace Lucilvio.Solo.Webills.Notifications.Dominio
 {
     internal class Notification
     {

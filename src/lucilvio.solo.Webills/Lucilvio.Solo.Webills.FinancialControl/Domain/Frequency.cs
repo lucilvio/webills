@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
-    public abstract class Frequency
+    internal abstract class Frequency
     {
         public Frequency(int value)
         {

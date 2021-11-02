@@ -5,12 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    internal interface ILoginDataAccess
-    {
-        Task<User> GetUserByLogin(Domain.Login login);
-    }
-
-    internal class LoginDataAccess : ILoginDataAccess
+    internal class LoginDataAccess
     {
         private readonly UserAccountDataContext _context;
 

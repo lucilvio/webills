@@ -6,7 +6,7 @@ using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.AddNewExpense
 {
-    internal class AddNewExpenseDataAccess : IAddNewExpenseDataAccess
+    internal class AddNewExpenseDataAccess
     {
         private readonly FinancialControlDataContext _context;
 

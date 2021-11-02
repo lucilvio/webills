@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Lucilvio.Solo.Webills.EventBus.RabbitMq;
-using Lucilvio.Solo.Webills.Notification;
+using Lucilvio.Solo.Webills.FinancialControl;
+using Lucilvio.Solo.Webills.Notifications;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
 using Lucilvio.Solo.Webills.Website.Shared.Filters;
@@ -69,14 +69,14 @@ namespace Lucilvio.Solo.Webills.Website
             var user = Environment.GetEnvironmentVariable("email_user", EnvironmentVariableTarget.User) ?? "";
             var password = Environment.GetEnvironmentVariable("email_password", EnvironmentVariableTarget.User) ?? "";
 
-            services.AddNotificationsModule(new Notification.Module.Configurations
+            services.AddNotificationsModule(new Notifications.Configurations
             {
                 DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });
 
-            services.AddUserAccountModule(new UserAccount.Module.Configurations
+            services.AddUserAccountModule(new UserAccount.Configurations
             {
-                DefaultAccount = new UserAccount.Module.Configurations.DefaultUserAccount
+                DefaultAccount = new UserAccount.Configurations.DefaultUserAccount
                 {
                     Name = "Admin",
                     Password = "123456",
@@ -85,12 +85,9 @@ namespace Lucilvio.Solo.Webills.Website
                 DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });
 
-            services.AddSingleton(provider =>
+            services.AddFinancialControleModule(new FinancialControl.Configurations
             {
-                return new FinancialControl.Module(new Webills.FinancialControl.Configurations
-                {
-                    DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
-                });
+                DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });
         }
 

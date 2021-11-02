@@ -8,9 +8,9 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
         public UserAccountDataContext CreateDbContext(string[] args)
         {
             Debugger.Launch();
-            var configurations = new Module.Configurations
+            var configurations = new Configurations
             {
-                DefaultAccount = new Module.Configurations.DefaultUserAccount
+                DefaultAccount = new Configurations.DefaultUserAccount
                 {
                     Name = "Admin",
                     Password = "123456",

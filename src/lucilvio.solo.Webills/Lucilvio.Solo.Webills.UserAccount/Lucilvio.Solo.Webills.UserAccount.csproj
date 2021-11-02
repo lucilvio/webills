@@ -19,9 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lucilvio.Solo.Architecture.Outbox\Lucilvio.Solo.Architecture.Outbox.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.EventPublisher.Outbox\Lucilvio.Solo.Architecture.EventPublisher.Outbox.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.EventPublisher.RabbitMq\Lucilvio.Solo.Architecture.EventPublisher.RabbitMq.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.Modules.Autofac\Lucilvio.Solo.Architecture.Modules.Autofac.csproj" />
     <ProjectReference Include="..\Lucilvio.Solo.Architecture\Lucilvio.Solo.Architecture.csproj" />
-    <ProjectReference Include="..\Lucilvio.Solo.Webills.EventBus.RabbitMq\Lucilvio.Solo.Webills.EventBus.RabbitMq.csproj" />
   </ItemGroup>
 
   <ItemGroup>

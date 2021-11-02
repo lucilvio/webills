@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess.Migrations
+namespace Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

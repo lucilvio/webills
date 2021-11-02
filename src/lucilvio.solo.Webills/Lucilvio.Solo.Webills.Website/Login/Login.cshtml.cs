@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.Login;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
@@ -20,7 +21,7 @@ namespace Lucilvio.Solo.Webills.Website.Login
         }
 
         public async Task<IActionResult> OnPostAsync(LoginRequest request, [FromServices] IAuthService authServie,
-            [FromServices] Module module)
+            [FromServices] IUserAccountModule module)
         {
             var message = new LoginMessage(request.Login, request.Password);
             await module.SendMessage(message);

@@ -1,7 +1,7 @@
 ﻿using Lucilvio.Solo.Architecture.Inbox;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Webills.Notification.Infrastructure.DataAccess
+namespace Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess
 {
     internal class NotificationDataContext : DbContext
     {

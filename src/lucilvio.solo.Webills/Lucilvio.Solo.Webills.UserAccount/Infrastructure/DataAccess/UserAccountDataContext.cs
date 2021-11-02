@@ -10,11 +10,11 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
         private readonly string _schema;
 
         private readonly string _connectionString;
-        private readonly Module.Configurations _configuration;
+        private readonly Configurations _configuration;
 
-        public UserAccountDataContext(Module.Configurations configuration)
+        public UserAccountDataContext(Configurations configuration)
         {
-            this._schema = "UserAccount";
+            this._schema = configuration.ModuleName;
 
             this._configuration = configuration;
             this._connectionString = configuration.DataConnectionString;

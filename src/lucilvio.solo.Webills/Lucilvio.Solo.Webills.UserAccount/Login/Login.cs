@@ -5,13 +5,11 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    public record LoginMessage(string Login, string Password) : Message<LoggedUser>;
-
     internal class Login : IHandler<LoginMessage>
     {
-        private readonly ILoginDataAccess _dataAccess;
+        private readonly LoginDataAccess _dataAccess;
 
-        public Login(ILoginDataAccess dataAccess)
+        public Login(LoginDataAccess dataAccess)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
@@ -32,5 +30,24 @@ namespace Lucilvio.Solo.Webills.UserAccount.Login
         {
             internal class InvalidUserOrPassword : Architecture.Error { }
         }
+    }
+
+    public record LoginMessage(string Login, string Password) : Message<LoggedUser>;
+
+    public class LoggedUser
+    {
+        internal LoggedUser(User user)
+        {
+            if (user is null)
+                return;
+
+            this.Id = user.Id;
+            this.Name = user.Name.Value;
+            this.Email = user.Email.Value;
+        }
+
+        public Guid Id { get; }
+        public string Name { get; }
+        public string Email { get; }
     }
 }

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.Handler.Inbox\Lucilvio.Solo.Architecture.Handler.Inbox.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.Modules.Autofac\Lucilvio.Solo.Architecture.Modules.Autofac.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture\Lucilvio.Solo.Architecture.csproj" />
+  </ItemGroup>
+
+</Project>

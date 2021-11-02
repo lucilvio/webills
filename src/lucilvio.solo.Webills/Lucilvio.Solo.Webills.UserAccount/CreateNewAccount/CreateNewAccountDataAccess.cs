@@ -6,13 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    internal interface ICreateNewAccountDataAccess
-    {
-        Task<User> GetUserByLogin(Domain.Login login);
-        Task Persist(User user);
-    }
-
-    internal class CreateNewAccountDataAccess : ICreateNewAccountDataAccess
+    internal class CreateNewAccountDataAccess
     {
         private readonly UserAccountDataContext _context;
 

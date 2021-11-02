@@ -15,34 +15,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{93D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Website", "Lucilvio.Solo.Webills.Website\Lucilvio.Solo.Webills.Website.csproj", "{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{CE01F8D7-1DE4-4E5D-9DEB-2F91AA9B84C5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{CE01F8D7-1DE4-4E5D-9DEB-2F91AA9B84C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Notification", "Lucilvio.Solo.Webills.Notification\Lucilvio.Solo.Webills.Notification.csproj", "{349C5FFD-2D18-4E2B-AF25-DA22F1818660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.Notifications", "Lucilvio.Solo.Webills.Notification\Lucilvio.Solo.Webills.Notifications.csproj", "{349C5FFD-2D18-4E2B-AF25-DA22F1818660}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{63131DDC-7993-44C1-865C-2333D9FAEC2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Architecture.EventPublisher.InMemory", "Lucilvio.Solo.Architecture.EventPublisher.InMemory\Lucilvio.Solo.Architecture.EventPublisher.InMemory.csproj", "{04C1546B-2A78-4E95-9AA8-38B856B3B06C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus", "Lucilvio.Solo.Webills.EventBus\Lucilvio.Solo.Webills.EventBus.csproj", "{2D6429A1-59FE-455E-AE8D-450AF1707C6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Architecture.EventPublisher.RabbitMq", "Lucilvio.Solo.Architecture.EventPublisher.RabbitMq\Lucilvio.Solo.Architecture.EventPublisher.RabbitMq.csproj", "{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus.InMemory", "Lucilvio.Solo.Webills.EventBus.InMemory\Lucilvio.Solo.Webills.EventBus.InMemory.csproj", "{04C1546B-2A78-4E95-9AA8-38B856B3B06C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus.RabbitMq", "Lucilvio.Solo.Webills.EventBus.RabbitMq\Lucilvio.Solo.Webills.EventBus.RabbitMq.csproj", "{49DFF547-5AD2-4963-8C24-6BF837DC8D3F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMq", "RabbitMq", "{15ED0F22-7AFA-48B0-AD52-186B5827A607}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.EventBus.RabbitMq.Host", "Lucilvio.Solo.Webills.EventBus.Host\Lucilvio.Solo.Webills.EventBus.RabbitMq.Host.csproj", "{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Webills.BackgroundService.RabbitMqHost", "Lucilvio.Solo.Webills.BackgroundService.RabbitMqHost\Lucilvio.Solo.Webills.BackgroundService.RabbitMqHost.csproj", "{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{43CDA600-568F-41D3-A714-0996D6BF3EF2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Architecture", "Lucilvio.Solo.Architecture\Lucilvio.Solo.Architecture.csproj", "{8733FB0F-8201-4BC0-88D6-56DC126681C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Architecture.Outbox", "Lucilvio.Solo.Architecture.Outbox\Lucilvio.Solo.Architecture.Outbox.csproj", "{D7C4873D-CF0B-448D-ADDA-A714E60FE0F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Architecture.EventPublisher.Outbox", "Lucilvio.Solo.Architecture.EventPublisher.Outbox\Lucilvio.Solo.Architecture.EventPublisher.Outbox.csproj", "{D7C4873D-CF0B-448D-ADDA-A714E60FE0F9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9757F26-F63A-44A8-8CFC-213D93335ED3}"
-	ProjectSection(SolutionItems) = preProject
-		efnotes.txt = efnotes.txt
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Architecture.Handler.Inbox", "Lucilvio.Solo.Architecture.Handler.Inbox\Lucilvio.Solo.Architecture.Handler.Inbox.csproj", "{25429146-050E-4FB1-9486-B11E3E5A041C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucilvio.Solo.Architecture.Inbox", "Lucilvio.Solo.Architecture.Inbox\Lucilvio.Solo.Architecture.Inbox.csproj", "{25429146-050E-4FB1-9486-B11E3E5A041C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucilvio.Solo.Architecture.Modules.Autofac", "Lucilvio.Solo.Architecture.Modules.Autofac\Lucilvio.Solo.Architecture.Modules.Autofac.csproj", "{3E32028A-9988-47E7-BA5E-CB68DA7ABE57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundServices", "BackgroundServices", "{7FB2471F-C664-43E9-B708-BD9AD568E37A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +59,6 @@ Global
 		{349C5FFD-2D18-4E2B-AF25-DA22F1818660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{349C5FFD-2D18-4E2B-AF25-DA22F1818660}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{349C5FFD-2D18-4E2B-AF25-DA22F1818660}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D6429A1-59FE-455E-AE8D-450AF1707C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D6429A1-59FE-455E-AE8D-450AF1707C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D6429A1-59FE-455E-AE8D-450AF1707C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D6429A1-59FE-455E-AE8D-450AF1707C6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04C1546B-2A78-4E95-9AA8-38B856B3B06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,6 +83,10 @@ Global
 		{25429146-050E-4FB1-9486-B11E3E5A041C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25429146-050E-4FB1-9486-B11E3E5A041C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25429146-050E-4FB1-9486-B11E3E5A041C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E32028A-9988-47E7-BA5E-CB68DA7ABE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E32028A-9988-47E7-BA5E-CB68DA7ABE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E32028A-9988-47E7-BA5E-CB68DA7ABE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E32028A-9988-47E7-BA5E-CB68DA7ABE57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,14 +96,13 @@ Global
 		{782C0157-BF30-4DD3-93A4-5F3EEEBE2CD7} = {B4923F73-B61C-4AA8-958C-3957E7DB10FF}
 		{4B6D5D1E-EBCC-43A5-98EA-79894D242C7E} = {93D56556-3586-4A8F-80B2-E8F7B562E2F4}
 		{349C5FFD-2D18-4E2B-AF25-DA22F1818660} = {CE01F8D7-1DE4-4E5D-9DEB-2F91AA9B84C5}
-		{2D6429A1-59FE-455E-AE8D-450AF1707C6E} = {63131DDC-7993-44C1-865C-2333D9FAEC2E}
-		{04C1546B-2A78-4E95-9AA8-38B856B3B06C} = {63131DDC-7993-44C1-865C-2333D9FAEC2E}
-		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F} = {15ED0F22-7AFA-48B0-AD52-186B5827A607}
-		{15ED0F22-7AFA-48B0-AD52-186B5827A607} = {63131DDC-7993-44C1-865C-2333D9FAEC2E}
-		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A} = {15ED0F22-7AFA-48B0-AD52-186B5827A607}
+		{04C1546B-2A78-4E95-9AA8-38B856B3B06C} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
+		{49DFF547-5AD2-4963-8C24-6BF837DC8D3F} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
+		{18DC2158-E7AB-4128-8BD6-C3CC3C2C713A} = {7FB2471F-C664-43E9-B708-BD9AD568E37A}
 		{8733FB0F-8201-4BC0-88D6-56DC126681C6} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
 		{D7C4873D-CF0B-448D-ADDA-A714E60FE0F9} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
 		{25429146-050E-4FB1-9486-B11E3E5A041C} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
+		{3E32028A-9988-47E7-BA5E-CB68DA7ABE57} = {43CDA600-568F-41D3-A714-0996D6BF3EF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5F6051-9818-4C80-9A54-21B81DAD79B4}

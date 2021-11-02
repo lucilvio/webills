@@ -1,30 +1,28 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
-
 using Dapper;
+using Lucilvio.Solo.Architecture;
 
-using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
-
-namespace Lucilvio.Solo.Webills.FinancialControl.GetExpense
+namespace Lucilvio.Solo.Webills.FinancialControl.GetExpenseById
 {
+    public record GetExpenseByIdMessage(Guid UserId, Guid Id) : Message<FoundExpenseById>;
+
     internal class GetExpenseByIdComponent
     {
-        private readonly TransactionsReadContext _context;
+        private readonly IDbConnection _connection;
 
-        public GetExpenseByIdComponent(TransactionsReadContext context)
+        public GetExpenseByIdComponent(IDbConnection connection)
         {
-            this._context = context ?? throw new ArgumentNullException(nameof(context));
+            this._connection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
 
-        public async Task<GetExpenseByIdOutput> Execute(GetExpenseByIdInput input)
+        public async Task Execute(GetExpenseByIdMessage message)
         {
-            using (var connection = this._context.Connection)
-            {
-                var sql = @"select Id, Name, Category, Date, Value from Transactions.Expenses
-                    where Id = @id";
+            var query = @"select Id, Name, Category, Date, Value from Transactions.Expenses
+                where Id = @id";
 
-                return await connection.QueryFirstOrDefaultAsync<GetExpenseByIdOutput>(sql, new { id = input.Id });
-            }
+            message.SetResponse(await this._connection.QueryFirstOrDefaultAsync<FoundExpenseById>(query, new { id = message.Id }));
         }
     }
 }

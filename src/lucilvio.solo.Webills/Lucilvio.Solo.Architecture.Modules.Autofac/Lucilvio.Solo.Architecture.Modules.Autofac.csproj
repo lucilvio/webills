@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>Lucilvio.Solo.Architecture.Modules.AutofacModule</AssemblyName>
+    <RootNamespace>Lucilvio.Solo.Architecture.Modules.AutofacModule</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture.Handler.Inbox\Lucilvio.Solo.Architecture.Handler.Inbox.csproj" />
+    <ProjectReference Include="..\Lucilvio.Solo.Architecture\Lucilvio.Solo.Architecture.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
 using Lucilvio.Solo.Webills.Website.Shared;
-using Lucilvio.Solo.Webills.Website.Shared.Notification;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,11 +16,11 @@ namespace Lucilvio.Solo.Webills.Website.ForgotMyPassword
         {
         }
 
-        public async Task<IActionResult> OnPostAsync(ForgotMyPasswordRequest request, [FromServices] UserAccount.Module module)
+        public async Task<IActionResult> OnPostAsync(ForgotMyPasswordRequest request, [FromServices] IUserAccountModule module)
         {
             var message = new GenerateNewPasswordMessage(request.Email);
             await module.SendMessage(message);
-             
+
             //await notificationService.Send(new Notification(
             //    new Notification.Sender("Admin", "admin@webills.com"),
             //    new Notification.Receiver(generatedPassword.UserName, generatedPassword.UserContact),

@@ -1,33 +1,27 @@
 ﻿using Autofac;
 using Lucilvio.Solo.Architecture;
-using Lucilvio.Solo.Architecture.Outbox;
-using Lucilvio.Solo.Webills.EventBus.RabbitMq;
+using Lucilvio.Solo.Architecture.EventPublisher.RabbitMq;
 using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-using Lucilvio.Solo.Webills.UserAccount.Infrastructure.Injection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
 {
-    internal class CreateNewAccountFactory : AutofacFactory
+    internal class CreateNewAccountFactory : IHandlerFactory<ContainerBuilder>
     {
-        public CreateNewAccountFactory(Module.Configurations configurations) : base(configurations) { }
-
-        protected override void Load(ContainerBuilder builder)
-        {            
-            builder.Register<DbContext>(c => new UserAccountDataContext(base._configurations)).AsSelf()
+        public void Create(ContainerBuilder container, object configurations)
+        {
+            container.Register<DbContext>(c => new UserAccountDataContext((Configurations)configurations)).AsSelf()
                 .InstancePerLifetimeScope();
 
-            builder.AddRabbitMqEventPublisher(new Configurations
+            container.AddRabbitMqEventPublisherWithOutbox(new EventPublisherConfigurations
             {
                 Host = "localhost"
-            }).RegisterOutbox();
+            });
 
-            builder.RegisterType<CreateNewAccountDataAccess>().As<ICreateNewAccountDataAccess>().InstancePerLifetimeScope();
-            builder.RegisterDecorator<TransactionScopedHandler<CreateNewAccountMessage>, IHandler<CreateNewAccountMessage>>();
-            builder.RegisterType<CreateNewAccount.CreateNewAccount>().As<IHandler<CreateNewAccountMessage>>().InstancePerLifetimeScope();
-
-            base.Load(builder);
+            container.RegisterType<CreateNewAccountDataAccess>().AsSelf().InstancePerLifetimeScope();
+            container.RegisterDecorator<TransactionScopedHandler<CreateNewAccountMessage>, IHandler<CreateNewAccountMessage>>();
+            container.RegisterType<CreateNewAccount.CreateNewAccount>().As<IHandler<CreateNewAccountMessage>>().InstancePerLifetimeScope();
         }
     }
 }

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
     [TestFixture]
-    public class UserTests
+    internal class UserTests
     {
         [Test]
         public void CantCreateUserWithoutId()

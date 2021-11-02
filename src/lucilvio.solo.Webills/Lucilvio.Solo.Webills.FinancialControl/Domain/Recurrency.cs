@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.Domain
 {
-    public class Recurrency
+    internal class Recurrency
     {
         public Recurrency(Frequency frequency, DateTime until)
         {

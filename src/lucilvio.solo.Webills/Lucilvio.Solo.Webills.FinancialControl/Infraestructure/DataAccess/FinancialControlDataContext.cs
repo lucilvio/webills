@@ -9,10 +9,10 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
         private readonly string _schema;
         private readonly string _connectionString;
 
-        public FinancialControlDataContext(string connectionString)
+        public FinancialControlDataContext(Configurations configurations)
         {
-            this._schema = "FinancialControl";
-            this._connectionString = connectionString;
+            this._schema = configurations.ModuleName;
+            this._connectionString = configurations.DataConnectionString;
 
             base.Database.Migrate();
         }
@@ -21,7 +21,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
         {
             optionsBuilder.UseSqlServer(this._connectionString, opt =>
             {
-                opt.MigrationsHistoryTable($"__FinancialControl_MigrationsHistory", this._schema);
+                opt.MigrationsHistoryTable($"__MigrationsHistory", this._schema);
             });
         }
 

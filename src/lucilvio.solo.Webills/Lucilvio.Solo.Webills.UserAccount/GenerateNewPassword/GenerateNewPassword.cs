@@ -5,14 +5,12 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    public record GenerateNewPasswordMessage(string Email) : Message;
-
     internal class GenerateNewPassword : IHandler<GenerateNewPasswordMessage>
     {
-        private readonly IGenerateNewPasswordDataAccess _dataAccess;
+        private readonly GenerateNewPasswordDataAccess _dataAccess;
         private readonly IEventPublisher _eventBus;
 
-        public GenerateNewPassword(IGenerateNewPasswordDataAccess dataAccess, IEventPublisher eventBus)
+        public GenerateNewPassword(GenerateNewPasswordDataAccess dataAccess, IEventPublisher eventBus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
@@ -40,4 +38,20 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
             public class UserNotFound : Architecture.Error { }
         }
     }
+
+    internal class GeneratedPassword
+    {
+        internal GeneratedPassword(string userName, string userContact, string password)
+        {
+            this.UserName = userName;
+            this.UserContact = userContact;
+            this.Password = password;
+        }
+
+        public string UserName { get; }
+        public string UserContact { get; }
+        public string Password { get; }
+    }
+
+    public record GenerateNewPasswordMessage(string Email) : Message;
 }

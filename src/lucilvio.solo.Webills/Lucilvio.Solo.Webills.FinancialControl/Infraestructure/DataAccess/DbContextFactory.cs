@@ -6,7 +6,10 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
     {
         public FinancialControlDataContext CreateDbContext(string[] args)
         {
-            return new FinancialControlDataContext("Server=localhost;Database=lucilvio.solo.webills;Trusted_Connection=True;MultipleActiveResultSets=true;Connection Timeout=300;");
+            return new FinancialControlDataContext(new Configurations
+            {
+                DataConnectionString = args[0]
+            });
         }
     }
 }

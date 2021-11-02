@@ -5,15 +5,12 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    public record CreateNewAccountMessage(string Name, string Email, string Password,
-        string PasswordConfirmation, bool TermsAccepted) : Message;
-
     internal class CreateNewAccount : IHandler<CreateNewAccountMessage>
     {
-        private readonly ICreateNewAccountDataAccess _dataAccess;
+        private readonly CreateNewAccountDataAccess _dataAccess;
         private readonly IEventPublisher _eventBus;
 
-        public CreateNewAccount(ICreateNewAccountDataAccess dataAccess, IEventPublisher eventBus)
+        public CreateNewAccount(CreateNewAccountDataAccess dataAccess, IEventPublisher eventBus)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
@@ -36,5 +33,26 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 
             await this._eventBus.Publish(new AccountCreated(new CreatedAccount(user)));
         }
+    }
+
+    internal class CreatedAccount
+    {
+        public CreatedAccount(User user)
+        {
+            if (user is null)
+                return;
+
+            this.UserName = user.Name.Value;
+        }
+
+        public string UserName { get; }
+    }
+
+    public record CreateNewAccountMessage(string Name, string Email, string Password,
+        string PasswordConfirmation, bool TermsAccepted) : Message;
+
+    public class AccountCreated : Event
+    {
+        public AccountCreated(object payload) : base(nameof(AccountCreated), nameof(CreateNewAccount), payload) { }
     }
 }
