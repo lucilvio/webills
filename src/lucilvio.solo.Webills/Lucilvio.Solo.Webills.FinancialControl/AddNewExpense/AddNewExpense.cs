@@ -5,10 +5,10 @@ using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.AddNewExpense
 {
-    public record AddNewExpenseMessage(Guid UserId, string Name, string Category, 
+    public record AddNewExpenseMessage(Guid UserId, string Name, string Category,
         DateTime Date, decimal Value) : Message;
-    
-    internal class AddNewExpense : IHandler<AddNewExpenseMessage>
+
+    internal class AddNewExpense : IMessageHandler<AddNewExpenseMessage>
     {
         private readonly AddNewExpenseDataAccess _dataAccess;
 

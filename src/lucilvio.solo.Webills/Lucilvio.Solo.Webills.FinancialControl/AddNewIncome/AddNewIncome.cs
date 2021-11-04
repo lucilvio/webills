@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.FinancialControl.Domain;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.AddNewIncome
 {
-    internal class AddNewIncome : IHandler<AddNewIncomeMessage>
+    internal class AddNewIncome : IMessageHandler<AddNewIncomeMessage>
     {
         private readonly AddNewIncomeDataAccess _dataAccess;
 
@@ -25,7 +25,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewIncome
             }
             else
             {
-                var newIncome = new Income(message.UserId, message.Name, message.Category, message.Date, 
+                var newIncome = new Income(message.UserId, message.Name, message.Category, message.Date,
                     new TransactionValue(message.Value));
 
                 await this._dataAccess.AddNewIncome(newIncome);

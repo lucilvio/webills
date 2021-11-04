@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Architecture.Outbox;
 using Microsoft.Extensions.DependencyInjection;
 

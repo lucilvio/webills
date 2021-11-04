@@ -6,7 +6,7 @@ namespace Lucilvio.Solo.Webills.Notifications.NotifyAccountCreation
 {
     public record AccountCreatedMessage(string UserName) : Message;
 
-    internal class NotifyAccountCreation : IHandler<AccountCreatedMessage>
+    internal class NotifyAccountCreation : IMessageHandler<AccountCreatedMessage>
     {
         private readonly INotificationService _notificationService;
 
@@ -15,10 +15,10 @@ namespace Lucilvio.Solo.Webills.Notifications.NotifyAccountCreation
             this._notificationService = notificationService ?? throw new System.ArgumentNullException(nameof(notificationService));
         }
 
-        public async Task Execute(AccountCreatedMessage message)
+        public Task Execute(AccountCreatedMessage message)
         {
             var f = message.UserName;
-            return;
+            return Task.CompletedTask;
         }
     }
 }

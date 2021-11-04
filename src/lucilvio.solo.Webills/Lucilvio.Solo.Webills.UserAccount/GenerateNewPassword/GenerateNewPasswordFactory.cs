@@ -12,9 +12,9 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
             container.Register(c => new UserAccountDataContext((Configurations)parameters)).AsSelf()
                 .InstancePerLifetimeScope();
 
-            container.RegisterDecorator<TransactionScopedHandler<GenerateNewPasswordMessage>, IHandler<GenerateNewPasswordMessage>>();
+            container.RegisterDecorator<TransactionScopedHandler<GenerateNewPasswordMessage>, IMessageHandler<GenerateNewPasswordMessage>>();
             container.RegisterType<GenerateNewPasswordDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterType<GenerateNewPassword.GenerateNewPassword>().As<IHandler<GenerateNewPasswordMessage>>().InstancePerLifetimeScope();
+            container.RegisterType<GenerateNewPassword.GenerateNewPassword>().As<IMessageHandler<GenerateNewPasswordMessage>>().InstancePerLifetimeScope();
         }
     }
 }

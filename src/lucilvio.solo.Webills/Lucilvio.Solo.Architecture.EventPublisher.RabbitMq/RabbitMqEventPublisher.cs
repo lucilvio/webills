@@ -16,12 +16,14 @@ namespace Lucilvio.Solo.Architecture.EventPublisher.RabbitMq
             };
         }
 
-        public async Task Publish(Event @event)
+        public Task Publish(Event @event)
         {
             using var connection = this._connectionFactory.CreateConnection();
             using var channel = connection.CreateModel();
 
             channel.BasicPublish("", "bus", body: Encoding.UTF8.GetBytes(@event.Serialize()));
+
+            return Task.CompletedTask;
         }
     }
 

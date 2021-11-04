@@ -15,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Notifications.NotifyAccountCreation
             container.Register<DbContext>(ctx => new NotificationDataContext(configurations.DataConnectionString))
                 .AsSelf().InstancePerLifetimeScope();
 
-            container.RegisterType<NotifyAccountCreation>().As<IHandler<AccountCreatedMessage>>()
+            container.RegisterType<NotifyAccountCreation>().As<IMessageHandler<AccountCreatedMessage>>()
                 .InstancePerLifetimeScope();
 
             container.RegisterInbox<AccountCreatedMessage>();

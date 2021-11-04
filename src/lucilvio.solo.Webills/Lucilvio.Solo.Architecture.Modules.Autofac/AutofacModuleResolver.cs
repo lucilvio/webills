@@ -1,96 +1,114 @@
-﻿using Autofac;
-using Lucilvio.Solo.Architecture.Handler.Inbox;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Lucilvio.Solo.Architecture.Handler.Inbox;
+using Newtonsoft.Json;
 
 namespace Lucilvio.Solo.Architecture.Modules.AutofacModule
 {
-    public class AutofacModuleResolver<TModule> : IModuleResolver<TModule> where TModule : IModule
+    public class AutofacModuleResolver<TModule> : IModuleResolver<TModule> where TModule : class
     {
         private readonly IContainer _container;
+        private readonly Type[] _interceptors;
 
-        public AutofacModuleResolver(object configurations)
+        public AutofacModuleResolver(object parameters, params Type[] interceptors)
         {
-            if (configurations is null)
-                throw new ArgumentNullException(nameof(configurations));
-
-            this._container = this.BuildContainer(configurations);
+            this._container = this.BuildContainer(parameters);
+            this._interceptors = interceptors;
         }
 
-        public async Task ResolveEvent(Event @event)
+        public async Task Resolve(object objectToResolve)
         {
-            try
+            if (objectToResolve is null)
+                return;
+
+            if (objectToResolve is Message)
             {
-                var messageType = this.GetType().Assembly.GetTypes()
-                    .FirstOrDefault(t => t.Name.Equals($"{@event.Name}Message", StringComparison.InvariantCultureIgnoreCase));
-
-                if (messageType is null)
-                    return;
-
-                var handlerType = typeof(IHandler<>).MakeGenericType(messageType);
-                var inboxType = typeof(Inbox<>).MakeGenericType(messageType);
-
-                if (messageType is null || handlerType is null)
-                    return;
-
-                using var scope = this._container.BeginLifetimeScope();
-
-                var message = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(@event.Payload), messageType);
-
-                if (scope.TryResolve(inboxType, out dynamic inbox))
-                {
-                    await inbox.Execute((dynamic)message, @event);
-                    return;
-                }
-
-                if (scope.TryResolve(handlerType, out dynamic handler))
-                {
-                    await handler.Execute((dynamic)message);
-                    return;
-                }
+                await this.ResolveMessage(objectToResolve as Message);
+                return;
             }
-            catch (Exception)
+            else if (objectToResolve is Event)
             {
-                throw;
+                await this.ResolveEvent(objectToResolve as Event);
+                return;
             }
+            else
+                return;
         }
 
-        public async Task ResolveMessage(Message message)
+        private async Task ResolveEvent(Event @event)
         {
+            var messageType = this.GetType().Assembly.GetTypes()
+                .FirstOrDefault(t => t.Name.Equals($"{@event.Name}Message", StringComparison.InvariantCultureIgnoreCase));
+
+            if (messageType is null)
+                return;
+
+            var handlerType = typeof(IMessageHandler<>).MakeGenericType(messageType);
+            var inboxType = typeof(Inbox<>).MakeGenericType(messageType);
+
+            if (messageType is null || handlerType is null)
+                return;
+
             using var scope = this._container.BeginLifetimeScope();
 
-            try
+            if (scope.TryResolve(inboxType, out dynamic inbox))
             {
-                dynamic handler = scope.Resolve(typeof(IHandler<>).MakeGenericType(message.GetType()));
-                dynamic dynamicProxy = scope.Resolve(typeof(HandlerDynamicProxy<>).MakeGenericType(message.GetType()));
-
-                await dynamicProxy.Execute(handler, message);
+                var message = DesserializeMessage(@event.Payload, messageType);
+                await inbox.Execute((dynamic)message, @event);
+                return;
             }
-            catch (Exception)
+
+            if (scope.TryResolve(handlerType, out dynamic handler))
             {
-                throw;
+                var message = DesserializeMessage(@event.Payload, messageType);
+                await handler.Execute((dynamic)message);
+                return;
             }
         }
 
-        private IContainer BuildContainer(object configurations)
+        private async Task ResolveMessage(Message message)
+        {
+            var messageType = message.GetType();
+            var handlerType = typeof(IMessageHandler<>).MakeGenericType(messageType);
+
+            using var scope = this._container.BeginLifetimeScope(cfg =>
+            {
+                foreach (var interceptor in this._interceptors)
+                {
+                    var interceptorType = interceptor.MakeGenericType(messageType);
+                    cfg.RegisterDecorator(interceptorType, handlerType);
+                }
+            });
+
+            if (!scope.TryResolve(handlerType, out dynamic handler))
+                throw new Error($"No handler found for the message {messageType}");
+
+            dynamic dynamicProxy = scope.Resolve(typeof(HandlerDynamicProxy<>).MakeGenericType(messageType));
+            await dynamicProxy.Execute(handler, message);
+        }
+
+        private IContainer BuildContainer(object parameters)
         {
             var builder = new ContainerBuilder();
             builder.RegisterGeneric(typeof(HandlerDynamicProxy<>));
-            builder = this.BuildHandlerFactories(builder, configurations);
+            builder = this.BuildHandlerFactories(builder, parameters);
 
             return builder.Build();
         }
 
-        private ContainerBuilder BuildHandlerFactories(ContainerBuilder builder, object configurations)
+        private ContainerBuilder BuildHandlerFactories(ContainerBuilder builder, object parameters)
         {
-            configurations.GetType().Assembly.GetTypes()
+            typeof(TModule).Assembly.GetTypes()
                 .Where(t => t.IsAssignableTo(typeof(IHandlerFactory<ContainerBuilder>)) && !t.IsInterface && !t.IsAbstract)
                 .Select(m => (IHandlerFactory<ContainerBuilder>)Activator.CreateInstance(m))
-                .ToList().ForEach(m => m.Create(builder, configurations));
+                .ToList().ForEach(m => m.Create(builder, parameters));
 
             return builder;
         }
+
+        private static object DesserializeMessage(object payload, Type messageType) =>
+            JsonConvert.DeserializeObject(JsonConvert.SerializeObject(payload), messageType);
     }
 }

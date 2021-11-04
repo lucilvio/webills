@@ -9,13 +9,15 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomeCategories
 {
     public record GetIncomeCategoriesMessage() : Message<FoundIncomeCategories>;
     public record FoundIncomeCategories(IEnumerable<string> Categories);
-    
-    internal class GetIncomeCategories : IHandler<GetIncomeCategoriesMessage>
+
+    internal class GetIncomeCategories : IMessageHandler<GetIncomeCategoriesMessage>
     {
-        public async Task Execute(GetIncomeCategoriesMessage message)
+        public Task Execute(GetIncomeCategoriesMessage message)
         {
             var foundCategories = new FoundIncomeCategories(Enum.GetValues<Income.IncomeCategory>().Select(c => c.ToString()));
             message.SetResponse(foundCategories);
+
+            return Task.CompletedTask;
         }
     }
 }

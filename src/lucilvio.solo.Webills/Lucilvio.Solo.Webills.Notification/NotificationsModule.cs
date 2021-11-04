@@ -1,13 +1,19 @@
-﻿using Lucilvio.Solo.Architecture;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.Notifications
 {
-    public interface INotificationModule : IModule { }
+    public interface INotificationModule : IMessageSender { }
 
-    internal class NotificationsModule : Module, INotificationModule
+    internal class NotificationsModule : INotificationModule
     {
-        public NotificationsModule(IModuleResolver<INotificationModule> resolver) : base(resolver) 
-        { 
+        public NotificationsModule(IModuleResolver<INotificationModule> resolver)
+        {
+        }
+
+        public Task SendMessage(Message message)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

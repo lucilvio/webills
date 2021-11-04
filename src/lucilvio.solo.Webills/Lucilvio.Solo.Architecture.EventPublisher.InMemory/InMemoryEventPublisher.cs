@@ -14,21 +14,23 @@ namespace Lucilvio.Solo.Architecture.EventPublisher.InMemory
             this._services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
-        public async Task Publish(Event @event)
+        public Task Publish(Event @event)
         {
             if (this._provider is null)
                 this._services.BuildServiceProvider();
 
             this._provider = this._services.BuildServiceProvider();
-            var modules = this._provider.GetServices<IModule>();
+            var eventLusteners = this._provider.GetServices<IEventListener>();
 
             Task.Run(() =>
             {
-                foreach (var module in modules)
+                foreach (var module in eventLusteners)
                 {
-                    module.HandleEvent(@event);
+                    module.ListenEvent(@event);
                 }
             });
+
+            return Task.CompletedTask;
         }
     }
 }

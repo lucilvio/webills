@@ -1,12 +1,22 @@
-﻿using Lucilvio.Solo.Architecture;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.FinancialControl
 {
-    public interface IFinancialControlModule : IModule { }
+    public interface IFinancialControlModule : IMessageSender { }
 
-    internal class FinancialControlModule : Module, IFinancialControlModule
+    internal class FinancialControlModule : IFinancialControlModule
     {
-        public FinancialControlModule(IModuleResolver<IFinancialControlModule> resolver)
-            : base(resolver) { }
+        private readonly IModuleResolver<IFinancialControlModule> _moduleResolver;
+
+        public FinancialControlModule(IModuleResolver<IFinancialControlModule> moduleResolver)
+        {
+            this._moduleResolver = moduleResolver;
+        }
+
+        public async Task SendMessage(Message message)
+        {
+            await this._moduleResolver.Resolve(message);
+        }
     }
 }

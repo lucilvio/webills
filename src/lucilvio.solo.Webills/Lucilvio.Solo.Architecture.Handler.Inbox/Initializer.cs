@@ -16,14 +16,14 @@ namespace Lucilvio.Solo.Architecture.Handler.Inbox
 
         public static ContainerBuilder RegisterLogHandler(this ContainerBuilder builder)
         {
-            builder.RegisterGenericDecorator(typeof(LogHandler<>), typeof(IHandler<>));
+            builder.RegisterGenericDecorator(typeof(LogHandler<>), typeof(IMessageHandler<>));
             return builder;
         }
 
         public static ContainerBuilder RegisterLogHandler<TMessage>(this ContainerBuilder builder)
             where TMessage : Message
         {
-            builder.RegisterDecorator<LogHandler<TMessage>, IHandler<TMessage>>();
+            builder.RegisterDecorator<LogHandler<TMessage>, IMessageHandler<TMessage>>();
             return builder;
         }
     }

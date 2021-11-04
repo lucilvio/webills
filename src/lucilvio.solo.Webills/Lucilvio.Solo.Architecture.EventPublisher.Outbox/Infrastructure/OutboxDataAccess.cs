@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Architecture.Outbox.Infrastructure
             await dbSet.AddAsync(outgoingEvent);
 
             await this._dbContext.SaveChangesAsync();
-        }        
+        }
     }
 
     public static class OutboxModelBuilder

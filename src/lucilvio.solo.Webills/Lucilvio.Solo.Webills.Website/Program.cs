@@ -15,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Website
             Host.CreateDefaultBuilder(args)
                 .ConfigureLogging(logging =>
                 {
-                    logging.ClearProviders().AddConsole();  
+                    logging.ClearProviders().AddConsole();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

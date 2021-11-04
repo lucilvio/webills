@@ -1,12 +1,20 @@
-﻿using Lucilvio.Solo.Architecture;
+﻿using System.Threading.Tasks;
+using Lucilvio.Solo.Architecture;
 
 namespace Lucilvio.Solo.Webills.UserAccount
 {
-    internal class UserAccountModule : Module, IUserAccountModule
+    internal class UserAccountModule : IUserAccountModule
     {
-        public UserAccountModule(IModuleResolver<IUserAccountModule> resolver) 
-            : base(resolver)
+        private readonly IModuleResolver<IUserAccountModule> _moduleResolver;
+
+        public UserAccountModule(IModuleResolver<IUserAccountModule> moduleResolver)
         {
+            this._moduleResolver = moduleResolver;
+        }
+
+        public async Task SendMessage(Message message)
+        {
+            await this._moduleResolver.Resolve(message);
         }
     }
 }

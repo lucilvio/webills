@@ -9,7 +9,7 @@
         }
 
         public static UserFinancialInformation Empty => new UserFinancialInformation(0, 0);
-        
+
         public decimal Expenses { get; internal set; }
         public decimal Earns { get; internal set; }
 

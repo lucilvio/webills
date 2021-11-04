@@ -3,11 +3,11 @@ using System.Transactions;
 
 namespace Lucilvio.Solo.Architecture
 {
-    public class TransactionScopedHandler<TMessage> : IHandler<TMessage> where TMessage : Message
+    public class TransactionScopedHandler<TMessage> : IMessageHandler<TMessage> where TMessage : Message
     {
-        private readonly IHandler<TMessage> _innerHandler;
+        private readonly IMessageHandler<TMessage> _innerHandler;
 
-        public TransactionScopedHandler(IHandler<TMessage> innerHandler)
+        public TransactionScopedHandler(IMessageHandler<TMessage> innerHandler)
         {
             this._innerHandler = innerHandler;
         }

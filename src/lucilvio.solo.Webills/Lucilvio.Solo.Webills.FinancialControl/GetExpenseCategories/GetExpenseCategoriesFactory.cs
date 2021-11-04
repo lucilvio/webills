@@ -7,7 +7,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetExpenseCategories
     {
         public void Create(ContainerBuilder container, object parameters)
         {
-            container.RegisterType<GetExpenseCategories>().As<IHandler<GetExpenseCategoriesMessage>>().SingleInstance();
+            container.RegisterType<GetExpenseCategories>().As<IMessageHandler<GetExpenseCategoriesMessage>>().SingleInstance();
         }
     }
 }

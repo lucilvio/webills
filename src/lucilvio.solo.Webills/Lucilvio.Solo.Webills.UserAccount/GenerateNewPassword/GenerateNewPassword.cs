@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
 {
-    internal class GenerateNewPassword : IHandler<GenerateNewPasswordMessage>
+    internal class GenerateNewPassword : IMessageHandler<GenerateNewPasswordMessage>
     {
         private readonly GenerateNewPasswordDataAccess _dataAccess;
         private readonly IEventPublisher _eventBus;

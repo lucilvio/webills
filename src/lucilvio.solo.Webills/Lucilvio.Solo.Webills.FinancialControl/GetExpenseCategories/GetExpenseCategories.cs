@@ -10,11 +10,13 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetExpenseCategories
     public record GetExpenseCategoriesMessage : Message<FoundExpenseCategories>;
     public record FoundExpenseCategories(IEnumerable<string> Categories);
 
-    internal class GetExpenseCategories : IHandler<GetExpenseCategoriesMessage>
+    internal class GetExpenseCategories : IMessageHandler<GetExpenseCategoriesMessage>
     {
-        public async Task Execute(GetExpenseCategoriesMessage message)
+        public Task Execute(GetExpenseCategoriesMessage message)
         {
             message.SetResponse(new FoundExpenseCategories(Enum.GetValues<Expense.ExpenseCategory>().Select(c => c.ToString())));
+
+            return Task.CompletedTask;
         }
     }
 }

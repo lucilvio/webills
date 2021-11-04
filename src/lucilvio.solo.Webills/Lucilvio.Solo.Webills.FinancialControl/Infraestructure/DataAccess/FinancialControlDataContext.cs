@@ -73,7 +73,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess
                 });
 
                 e.Navigation(p => p.Recurrency).IsRequired();
-                
+
                 e.HasMany(p => p.Expenses).WithOne().HasForeignKey(e => e.RecurrentExpenseId);
             });
 

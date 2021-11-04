@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.CreateNewAccount;
 using Lucilvio.Solo.Webills.Website.Shared;
@@ -16,7 +15,7 @@ namespace Lucilvio.Solo.Webills.Website.CreateNewAccount
         {
         }
 
-        public async Task<IActionResult> OnPostAsync(CreateNewAccountRequest request, [FromServices]IUserAccountModule module)
+        public async Task<IActionResult> OnPostAsync(CreateNewAccountRequest request, [FromServices] IUserAccountModule module)
         {
             var message = new CreateNewAccountMessage(request.Name, request.Email,
                 request.Password, request.PasswordConfirmation, request.TermsAccepted);

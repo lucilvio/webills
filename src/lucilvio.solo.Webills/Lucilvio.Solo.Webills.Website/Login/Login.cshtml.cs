@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.Login;
 using Lucilvio.Solo.Webills.Website.Shared.Authorization;
@@ -14,9 +13,6 @@ namespace Lucilvio.Solo.Webills.Website.Login
     {
         public IActionResult OnGet()
         {
-            if (this.User.Identity.IsAuthenticated)
-                return this.RedirectToPage("/Home/Dashboard");
-
             return this.Page();
         }
 

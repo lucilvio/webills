@@ -20,8 +20,8 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
             });
 
             container.RegisterType<CreateNewAccountDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterDecorator<TransactionScopedHandler<CreateNewAccountMessage>, IHandler<CreateNewAccountMessage>>();
-            container.RegisterType<CreateNewAccount.CreateNewAccount>().As<IHandler<CreateNewAccountMessage>>().InstancePerLifetimeScope();
+            container.RegisterDecorator<TransactionScopedHandler<CreateNewAccountMessage>, IMessageHandler<CreateNewAccountMessage>>();
+            container.RegisterType<CreateNewAccount.CreateNewAccount>().As<IMessageHandler<CreateNewAccountMessage>>().InstancePerLifetimeScope();
         }
     }
 }

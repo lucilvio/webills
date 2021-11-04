@@ -1,7 +1,7 @@
-﻿using Autofac;
+﻿using System.Data;
+using Autofac;
 using Lucilvio.Solo.Architecture;
 using Microsoft.Data.SqlClient;
-using System.Data;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter
 {
@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter
             var configurations = parameters as Configurations;
 
             container.Register<IDbConnection>(ctx => new SqlConnection(configurations.DataConnectionString)).InstancePerDependency();
-            container.RegisterType<GetUserTransactionsByFilter>().As<IHandler<GetUserTransactionsByFilterMessage>>().InstancePerDependency();
+            container.RegisterType<GetUserTransactionsByFilter>().As<IMessageHandler<GetUserTransactionsByFilterMessage>>().InstancePerDependency();
         }
     }
 }

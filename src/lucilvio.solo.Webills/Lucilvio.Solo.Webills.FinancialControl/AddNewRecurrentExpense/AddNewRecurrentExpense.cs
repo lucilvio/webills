@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense
     public record AddNewRecurrentExpenseMessage(Guid UserId, string Name, string Category,
         DateTime Date, decimal Value, DateTime Until, int Frequency) : Message;
 
-    internal class AddNewRecurrentExpense : IHandler<AddNewRecurrentExpenseMessage>
+    internal class AddNewRecurrentExpense : IMessageHandler<AddNewRecurrentExpenseMessage>
     {
         private readonly AddNewRecurrentExpenseDataAccess _dataAccess;
 

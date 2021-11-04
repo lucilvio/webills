@@ -19,7 +19,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.EditExpense
             if (foundExpense == null)
                 throw new Error.ExpenseNotFound();
 
-            foundExpense.Update(input.UserId, input.Name, input.Category, input.Date, input.Value);                
+            foundExpense.Update(input.UserId, input.Name, input.Category, input.Date, input.Value);
 
             await this._dataStorage.UpdateExpense(foundExpense);
         }

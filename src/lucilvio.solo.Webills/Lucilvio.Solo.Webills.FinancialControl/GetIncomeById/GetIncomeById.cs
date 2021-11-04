@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomeById
 {
     public record GetIncomeByIdMessage(Guid UserId, Guid Id) : Message<FoundIncomeById>;
 
-    internal class GetIncomeById : IHandler<GetIncomeByIdMessage>
+    internal class GetIncomeById : IMessageHandler<GetIncomeByIdMessage>
     {
         private readonly IDbConnection _connection;
 

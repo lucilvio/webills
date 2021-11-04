@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.Notifications
             services.AddSingleton<IModuleResolver<INotificationModule>>(provider
                   => new AutofacModuleResolver<INotificationModule>(configurations));
 
-            services.AddSingleton<INotificationModule>(provider 
+            services.AddSingleton<INotificationModule>(provider
                 => new NotificationsModule(provider.GetService<IModuleResolver<INotificationModule>>()));
 
             return services;

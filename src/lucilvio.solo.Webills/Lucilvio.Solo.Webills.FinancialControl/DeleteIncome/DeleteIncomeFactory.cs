@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.DeleteIncome
 
             container.Register(ctx => new FinancialControlDataContext(configurations)).InstancePerLifetimeScope();
             container.RegisterType<DeleteIncomeDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterType<DeleteIncome>().As<IHandler<DeleteIncomeMessage>>().InstancePerLifetimeScope();
+            container.RegisterType<DeleteIncome>().As<IMessageHandler<DeleteIncomeMessage>>().InstancePerLifetimeScope();
         }
     }
 }

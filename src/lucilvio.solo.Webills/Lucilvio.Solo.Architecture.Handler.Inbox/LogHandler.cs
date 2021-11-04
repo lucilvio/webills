@@ -2,11 +2,11 @@
 
 namespace Lucilvio.Solo.Architecture.Handler.Inbox
 {
-    internal class LogHandler<TMessage> : IHandler<TMessage> where TMessage : Message
-    {   
-        private readonly IHandler<TMessage> _innerHandler;
+    internal class LogHandler<TMessage> : IMessageHandler<TMessage> where TMessage : Message
+    {
+        private readonly IMessageHandler<TMessage> _innerHandler;
 
-        public LogHandler(IHandler<TMessage> innerHandler)
+        public LogHandler(IMessageHandler<TMessage> innerHandler)
         {
             this._innerHandler = innerHandler;
         }

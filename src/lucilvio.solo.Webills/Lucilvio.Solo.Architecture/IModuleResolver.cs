@@ -2,12 +2,8 @@
 
 namespace Lucilvio.Solo.Architecture
 {
-
-    public interface IModuleResolver
+    public interface IModuleResolver<TModule> where TModule : class
     {
-        Task ResolveMessage(Message message);
-        Task ResolveEvent(Event @event);
+        Task Resolve(object objectToResolve);
     }
-
-    public interface IModuleResolver<TModule> : IModuleResolver where TModule : IModule { }
 }

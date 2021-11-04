@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount

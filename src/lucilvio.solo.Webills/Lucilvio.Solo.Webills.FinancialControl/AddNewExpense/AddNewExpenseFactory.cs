@@ -13,8 +13,8 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewExpense
             container.Register(ctx => new FinancialControlDataContext(configurations)).InstancePerLifetimeScope();
 
             container.RegisterType<AddNewExpenseDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterDecorator<TransactionScopedHandler<AddNewExpenseMessage>, IHandler<AddNewExpenseMessage>>();
-            container.RegisterType<AddNewExpense>().As<IHandler<AddNewExpenseMessage>>().InstancePerLifetimeScope();
+            container.RegisterDecorator<TransactionScopedHandler<AddNewExpenseMessage>, IMessageHandler<AddNewExpenseMessage>>();
+            container.RegisterType<AddNewExpense>().As<IMessageHandler<AddNewExpenseMessage>>().InstancePerLifetimeScope();
         }
     }
 }

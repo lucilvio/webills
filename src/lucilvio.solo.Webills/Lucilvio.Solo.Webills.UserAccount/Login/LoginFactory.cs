@@ -13,7 +13,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.Injection
                 .InstancePerLifetimeScope();
 
             container.RegisterType<LoginDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterType<Login.Login>().As<IHandler<LoginMessage>>().InstancePerLifetimeScope();
+            container.RegisterType<Login.Login>().As<IMessageHandler<LoginMessage>>().InstancePerLifetimeScope();
         }
     }
 }

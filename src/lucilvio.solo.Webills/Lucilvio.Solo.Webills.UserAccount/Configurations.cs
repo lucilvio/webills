@@ -4,7 +4,7 @@
     {
         public string DataConnectionString { get; init; }
         public DefaultUserAccount DefaultAccount { get; init; }
-        
+
         internal string ModuleName { get; } = "UserAccount";
         internal bool IsDefaultUserAccountConfigured => this.DefaultAccount != null;
 

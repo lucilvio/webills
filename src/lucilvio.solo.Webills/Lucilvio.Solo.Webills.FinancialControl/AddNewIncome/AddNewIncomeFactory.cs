@@ -10,7 +10,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewIncome
         {
             container.RegisterType<FinancialControlDataContext>().AsSelf().InstancePerLifetimeScope();
             container.RegisterType<AddNewIncomeDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterType<AddNewIncome>().As<IHandler<AddNewIncomeMessage>>();
+            container.RegisterType<AddNewIncome>().As<IMessageHandler<AddNewIncomeMessage>>();
         }
     }
 }

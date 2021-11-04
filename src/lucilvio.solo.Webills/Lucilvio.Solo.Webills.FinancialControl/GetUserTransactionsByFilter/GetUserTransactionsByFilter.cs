@@ -8,7 +8,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetUserTransactionsByFilter
 {
     public record GetUserTransactionsByFilterMessage(Guid UserId) : Message<FoundTransactionsByFilter>;
 
-    internal class GetUserTransactionsByFilter : IHandler<GetUserTransactionsByFilterMessage>
+    internal class GetUserTransactionsByFilter : IMessageHandler<GetUserTransactionsByFilterMessage>
     {
         private readonly IDbConnection _dbConnection;
 

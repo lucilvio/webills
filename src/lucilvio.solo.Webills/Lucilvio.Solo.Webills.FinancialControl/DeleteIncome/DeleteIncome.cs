@@ -6,7 +6,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.DeleteIncome
 {
     public record DeleteIncomeMessage(Guid id) : Message;
 
-    internal class DeleteIncome : IHandler<DeleteIncomeMessage>
+    internal class DeleteIncome : IMessageHandler<DeleteIncomeMessage>
     {
         private readonly DeleteIncomeDataAccess _dataAccess;
 

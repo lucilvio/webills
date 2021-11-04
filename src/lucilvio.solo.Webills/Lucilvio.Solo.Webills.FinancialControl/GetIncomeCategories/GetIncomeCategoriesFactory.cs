@@ -7,7 +7,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetIncomeCategories
     {
         public void Create(ContainerBuilder container, object parameters)
         {
-            container.RegisterType<GetIncomeCategories>().As<IHandler<GetIncomeCategoriesMessage>>().SingleInstance();
+            container.RegisterType<GetIncomeCategories>().As<IMessageHandler<GetIncomeCategoriesMessage>>().SingleInstance();
         }
     }
 }

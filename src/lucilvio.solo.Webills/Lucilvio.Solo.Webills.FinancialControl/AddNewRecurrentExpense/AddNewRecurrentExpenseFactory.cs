@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using Autofac;
 using Lucilvio.Solo.Architecture;
-using Lucilvio.Solo.Architecture.Modules.AutofacModule;
 using Microsoft.Data.SqlClient;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense
@@ -14,8 +13,8 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense
 
             container.Register<IDbConnection>(ctx => new SqlConnection(configurations.DataConnectionString)).InstancePerDependency();
             container.RegisterType<AddNewRecurrentExpenseDataAccess>().AsSelf().InstancePerLifetimeScope();
-            container.RegisterDecorator<TransactionScopedHandler<AddNewRecurrentExpenseMessage>, IHandler<AddNewRecurrentExpenseMessage>>();
-            container.RegisterType<AddNewRecurrentExpense>().As<IHandler<AddNewRecurrentExpenseMessage>>().InstancePerLifetimeScope();
+            container.RegisterDecorator<TransactionScopedHandler<AddNewRecurrentExpenseMessage>, IMessageHandler<AddNewRecurrentExpenseMessage>>();
+            container.RegisterType<AddNewRecurrentExpense>().As<IMessageHandler<AddNewRecurrentExpenseMessage>>().InstancePerLifetimeScope();
         }
     }
 }

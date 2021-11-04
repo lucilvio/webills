@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.Login
 {
-    internal class Login : IHandler<LoginMessage>
+    internal class Login : IMessageHandler<LoginMessage>
     {
         private readonly LoginDataAccess _dataAccess;
 

@@ -6,7 +6,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetExpensesByFilter
 {
     public record GetExpensesByFilterMessage(Guid UserId) : Message<FoundExpenses> { }
 
-    internal class GetExpensesByFilter : IHandler<GetExpensesByFilterMessage>
+    internal class GetExpensesByFilter : IMessageHandler<GetExpensesByFilterMessage>
     {
         private readonly GetExpensesByFilterDataAccess _dataAccess;
 

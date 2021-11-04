@@ -14,20 +14,20 @@ namespace Lucilvio.Solo.Webills.EventBus.RabbitMq.Host
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly IEnumerable<IModule> _modules;
+        private readonly IEnumerable<IEventListener> _listeners;
         private readonly IConnectionFactory _connectionFactory;
 
-        public Worker(ILogger<Worker> logger, IEnumerable<IModule> modules)
+        public Worker(ILogger<Worker> logger, IEnumerable<IEventListener> listeners)
         {
             this._logger = logger;
-            this._modules = modules;
+            this._listeners = listeners;
             this._connectionFactory = new ConnectionFactory()
             {
                 HostName = "localhost"
             };
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             using var connection = this._connectionFactory.CreateConnection();
             using var channel = connection.CreateModel();
@@ -43,9 +43,9 @@ namespace Lucilvio.Solo.Webills.EventBus.RabbitMq.Host
 
                 var @event = JsonConvert.DeserializeObject<Event>(message);
 
-                foreach (var module in this._modules)
+                foreach (var listener in this._listeners)
                 {
-                    await module.HandleEvent(@event);
+                    await listener.ListenEvent(@event);
                 }
 
                 channel.BasicAck(ea.DeliveryTag, false);
@@ -55,6 +55,8 @@ namespace Lucilvio.Solo.Webills.EventBus.RabbitMq.Host
 
 
             while (!stoppingToken.IsCancellationRequested) { }
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -22,9 +22,9 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewRecurrentExpense
             recurrentExpense.Expenses.ToList()
                 .ForEach(e => command += $"insert into FinancialControl.Expenses values('{e.Id}', '{e.UserId}', '{e.Name}', '{e.Date}', {(int)e.Category}, {e.Value.Value}, @id);");
 
-            await this._dbConnection.ExecuteAsync(command, new 
-            { 
-                id = recurrentExpense.Id, 
+            await this._dbConnection.ExecuteAsync(command, new
+            {
+                id = recurrentExpense.Id,
                 until = recurrentExpense.Recurrency.Until,
                 frequency = recurrentExpense.Recurrency.Frequency.Value
             });

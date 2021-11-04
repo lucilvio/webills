@@ -7,9 +7,9 @@ namespace Lucilvio.Solo.Architecture.Handler.Inbox
     public class Inbox<TMessage> where TMessage : Message
     {
         private readonly IInboxDataAccess _dataAccess;
-        private readonly IHandler<TMessage> _eventHandler;
+        private readonly IMessageHandler<TMessage> _eventHandler;
 
-        public Inbox(IInboxDataAccess dataAccess, IHandler<TMessage> eventHandler)
+        public Inbox(IInboxDataAccess dataAccess, IMessageHandler<TMessage> eventHandler)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this._eventHandler = eventHandler ?? throw new ArgumentNullException(nameof(eventHandler));

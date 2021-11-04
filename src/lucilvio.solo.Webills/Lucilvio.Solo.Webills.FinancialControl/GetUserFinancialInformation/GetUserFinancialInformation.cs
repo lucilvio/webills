@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Webills.FinancialControl.Domain;
 using Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.GetUserFinancialInformation
 {
-    public record GetUserFinancialInformationMessage(Guid UserId) : Message<UserFinancialInformation>;
+    [AllowedRoles(Roles.GetFinancialInformation)]
+    public record GetUserFinancialInformationMessage(Guid UserId, IEnumerable<string> UserRoles) : Message<UserFinancialInformation>;
 
-    internal class GetUserFinancialInformation : IHandler<GetUserFinancialInformationMessage>
+    internal class GetUserFinancialInformation : IMessageHandler<GetUserFinancialInformationMessage>
     {
         private readonly IDbConnection _connection;
 

@@ -5,7 +5,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.AddNewIncome
 {
     public record AddNewIncomeMessage : Message
     {
-        public AddNewIncomeMessage(Guid userId, string name, string category, DateTime date, 
+        public AddNewIncomeMessage(Guid userId, string name, string category, DateTime date,
             decimal value, IncomeRecurrency recurrency = null)
         {
             this.UserId = userId;

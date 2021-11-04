@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.FinancialControl.Domain;
 using Lucilvio.Solo.Webills.FinancialControl.Infraestructure.DataAccess;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.EditIncome

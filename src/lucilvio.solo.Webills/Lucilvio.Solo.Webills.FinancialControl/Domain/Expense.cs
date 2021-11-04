@@ -12,7 +12,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.Domain
         public Expense(Guid userId, string name, string category, DateTime date, TransactionValue value) : this()
         {
             this.Validate(userId, name, date, value);
-            
+
             this.Date = date;
             this.Name = name;
             this.Value = value;

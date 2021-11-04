@@ -5,7 +5,7 @@ using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 {
-    internal class CreateNewAccount : IHandler<CreateNewAccountMessage>
+    internal class CreateNewAccount : IMessageHandler<CreateNewAccountMessage>
     {
         private readonly CreateNewAccountDataAccess _dataAccess;
         private readonly IEventPublisher _eventBus;

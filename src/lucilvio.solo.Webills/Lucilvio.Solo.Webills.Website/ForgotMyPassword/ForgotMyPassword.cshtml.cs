@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Lucilvio.Solo.Architecture;
 using Lucilvio.Solo.Webills.UserAccount;
 using Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword;
 using Lucilvio.Solo.Webills.Website.Shared;

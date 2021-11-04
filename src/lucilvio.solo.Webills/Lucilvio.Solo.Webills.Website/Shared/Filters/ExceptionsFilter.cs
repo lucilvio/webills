@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Lucilvio.Solo.Architecture;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -16,7 +17,7 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Filters
             this._logger = loggerFactory.CreateLogger("ExceptionFilter");
         }
 
-        public override async Task OnExceptionAsync(ExceptionContext context)
+        public override Task OnExceptionAsync(ExceptionContext context)
         {
             var tempDataFactory = (ITempDataDictionaryFactory)context.HttpContext?.RequestServices.GetService(typeof(ITempDataDictionaryFactory));
             var tempData = tempDataFactory.GetTempData(context.HttpContext);
@@ -25,6 +26,20 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Filters
 
             var message = "";
 
+            if (context.Exception is UnauthorizedError)
+            {
+                var loginPage = "/Login/Login";
+
+                message = "Sorry, but you don't have permission to do this";
+
+                var referer = context.HttpContext.Request.Headers["Referer"];
+                var page = string.IsNullOrEmpty(referer) ? loginPage : new Uri(referer).LocalPath;
+
+                tempData["errorMessage"] = message;
+                context.Result = new RedirectToPageResult(page.ToLower() == "/login" ? loginPage : page);
+
+                return Task.CompletedTask;
+            }
             if (context.Exception is Error)
             {
                 message = context.Exception.GetType().Name;
@@ -39,6 +54,8 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Filters
 
             tempData["errorMessage"] = message;
             context.Result = new RedirectToPageResult(((Microsoft.AspNetCore.Mvc.RazorPages.PageActionDescriptor)context.ActionDescriptor).ViewEnginePath);
+
+            return Task.CompletedTask;
         }
     }
 }
