@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lucilvio.Solo.Webills.Website.Shared.Authorization
 {
@@ -9,10 +10,13 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Authorization
             this.Id = id;
             this.Name = name;
             this.Email = email;
+
+            this.Roles = Array.AsReadOnly(new string[] { "GetFinancialInformation" });
         }
 
         public Guid Id { get; }
         public string Name { get; }
         public string Email { get; }
+        public IReadOnlyCollection<string> Roles { get; }
     }
 }

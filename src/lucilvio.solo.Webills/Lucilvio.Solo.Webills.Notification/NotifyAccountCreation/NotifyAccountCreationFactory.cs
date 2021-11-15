@@ -19,7 +19,6 @@ namespace Lucilvio.Solo.Webills.Notifications.NotifyAccountCreation
                 .InstancePerLifetimeScope();
 
             container.RegisterInbox<AccountCreatedMessage>();
-            container.RegisterLogHandler<AccountCreatedMessage>();
         }
     }
 }

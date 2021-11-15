@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using Lucilvio.Solo.Architecture;
-using Lucilvio.Solo.Webills.FinancialControl.Domain;
 using Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo;
 
 namespace Lucilvio.Solo.Webills.FinancialControl.GetUserFinancialInformation
 {
-    [AllowedRoles(Roles.GetFinancialInformation)]
-    public record GetUserFinancialInformationMessage(Guid UserId, IEnumerable<string> UserRoles) : Message<UserFinancialInformation>;
-
     internal class GetUserFinancialInformation : IMessageHandler<GetUserFinancialInformationMessage>
     {
         private readonly IDbConnection _connection;
@@ -23,7 +18,7 @@ namespace Lucilvio.Solo.Webills.FinancialControl.GetUserFinancialInformation
 
         public async Task Execute(GetUserFinancialInformationMessage message)
         {
-            var query = @"
+            const string query = @"
                 select TotalSpent.qtd as Expenses,
 	            TotalEarns.qtd as Earns	            
                 from

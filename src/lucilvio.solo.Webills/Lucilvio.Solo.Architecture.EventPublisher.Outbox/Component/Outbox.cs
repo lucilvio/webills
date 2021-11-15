@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Lucilvio.Solo.Architecture.Outbox
+namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component
 {
     internal class Outbox : IEventPublisher
     {
@@ -16,8 +16,16 @@ namespace Lucilvio.Solo.Architecture.Outbox
 
         public async Task Publish(Event @event)
         {
-            await this._dataAccess.PersistEvent(new OutgoingEvent(@event.Id, @event.Name, @event.Sender, @event.Serialize()));
-            await this._innerEventBus.Publish(@event);
+            try
+            {
+                await this._dataAccess.PersistEvent(new OutgoingEvent(@event.Id, @event.Name, @event.Sender, @event.Serialize()));
+                await this._innerEventBus.Publish(@event);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

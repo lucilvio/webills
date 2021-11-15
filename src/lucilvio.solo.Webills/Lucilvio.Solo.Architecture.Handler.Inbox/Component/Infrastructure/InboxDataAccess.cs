@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lucilvio.Solo.Architecture.Handler.Inbox;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Architecture.Inbox
+namespace Lucilvio.Solo.Architecture.Handler.Inbox.Component.Infrastructure
 {
     internal class InboxDataAccess : IInboxDataAccess
     {
@@ -21,8 +20,15 @@ namespace Lucilvio.Solo.Architecture.Inbox
 
         public async Task PersistIncomingEvent(IncomingEvent incomingEvent)
         {
-            await this._context.Set<IncomingEvent>().AddAsync(incomingEvent);
-            await this._context.SaveChangesAsync();
+            try
+            {
+                this._context.Set<IncomingEvent>().Add(incomingEvent);
+                await this._context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new UniqueEventConstraintException();
+            }
         }
 
         public async Task UpdateEventStatus(IncomingEvent newIncomingEvent)

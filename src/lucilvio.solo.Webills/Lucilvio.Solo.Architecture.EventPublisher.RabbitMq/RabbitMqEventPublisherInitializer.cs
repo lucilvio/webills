@@ -1,18 +1,10 @@
 ﻿using Autofac;
-using Lucilvio.Solo.Architecture.Outbox;
-using Microsoft.Extensions.DependencyInjection;
+using Lucilvio.Solo.Architecture.EventPublisher.Outbox;
 
 namespace Lucilvio.Solo.Architecture.EventPublisher.RabbitMq
 {
     public static class RabbitMqEventPublisherInitializer
     {
-        public static IServiceCollection AddRabbitMqEventPublisher(this IServiceCollection services,
-            EventPublisherConfigurations configurations)
-        {
-            services.AddSingleton(provider => new RabbitMqEventPublisher(configurations));
-            return services;
-        }
-
         public static ContainerBuilder AddRabbitMqEventPublisher(this ContainerBuilder builder,
             EventPublisherConfigurations configurations)
         {

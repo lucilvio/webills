@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Lucilvio.Solo.Architecture.Outbox
+namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component
 {
     internal interface IOutboxDataAccess
     {

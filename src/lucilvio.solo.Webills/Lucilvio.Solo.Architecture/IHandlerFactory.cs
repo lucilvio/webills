@@ -1,6 +1,6 @@
 ﻿namespace Lucilvio.Solo.Architecture
 {
-    public interface IHandlerFactory<TContainer>
+    public interface IHandlerFactory<in TContainer>
     {
         void Create(TContainer container, object parameters);
     }

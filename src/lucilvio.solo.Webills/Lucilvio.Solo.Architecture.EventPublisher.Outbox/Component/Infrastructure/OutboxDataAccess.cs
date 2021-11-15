@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lucilvio.Solo.Architecture.Outbox.Infrastructure
+namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component.Infrastructure
 {
     internal class OutboxDataAccess : IOutboxDataAccess
     {
@@ -16,7 +16,7 @@ namespace Lucilvio.Solo.Architecture.Outbox.Infrastructure
         public async Task PersistEvent(OutgoingEvent outgoingEvent)
         {
             var dbSet = this._dbContext.Set<OutgoingEvent>();
-            await dbSet.AddAsync(outgoingEvent);
+            dbSet.Add(outgoingEvent);
 
             await this._dbContext.SaveChangesAsync();
         }

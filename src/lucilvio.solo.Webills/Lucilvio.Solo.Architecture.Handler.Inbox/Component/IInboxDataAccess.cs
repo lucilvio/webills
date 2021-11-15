@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Lucilvio.Solo.Architecture.Handler.Inbox
+namespace Lucilvio.Solo.Architecture.Handler.Inbox.Component
 {
-    public interface IInboxDataAccess
+    internal interface IInboxDataAccess
     {
         Task<bool> EventHasBeenReceived(Guid id);
         Task PersistIncomingEvent(IncomingEvent incomingEvent);

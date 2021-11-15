@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Webills.FinancialControl;
 using Lucilvio.Solo.Webills.FinancialControl.GetUserDashboardInfo;
@@ -15,9 +16,8 @@ namespace Lucilvio.Solo.Webills.Website.Home
             [FromServices] IAuthService authService)
         {
             var user = authService.AuthenticatedUser();
-            request.UserId = user.Id;
 
-            var message = new GetUserFinancialInformationMessage(request.UserId, new string[] { "GetinancialInformation" });
+            var message = new GetUserFinancialInformationMessage(user.Id, user.Roles.ToArray());
             await module.SendMessage(message);
 
             this.DashboardInfo = message.Response;

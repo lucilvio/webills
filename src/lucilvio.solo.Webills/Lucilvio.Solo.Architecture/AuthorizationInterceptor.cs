@@ -16,57 +16,51 @@ namespace Lucilvio.Solo.Architecture
 
         public async Task Execute(TMessage message)
         {
-            if (this.MessageHasAllowedRoles(message))
-                if (!this.IsUserAuthorized(message))
-                    throw new UnauthorizedError();
+            if (MessageHasAllowedRoles(message) && !IsUserAuthorized(message))
+                throw new UnauthorizedError();
 
             await this._innerMessageHandler.Execute(message);
         }
 
-        private bool MessageHasAllowedRoles(TMessage message)
+        private static bool MessageHasAllowedRoles(TMessage message)
         {
             var allowedRolesAttribute = message.GetType()
-                .GetCustomAttributes(typeof(AllowedRoles), false);
+                .GetCustomAttributes(typeof(AllowedRolesAttribute), false);
 
             return allowedRolesAttribute.Length > 0;
         }
 
-        private bool IsUserAuthorized(TMessage message)
+        private static bool IsUserAuthorized(TMessage message)
         {
-            var allowedRoles = this.GetAllowedRoles(message);
-            var userRoles = this.GetUserRoles(message);
+            var allowedRoles = GetAllowedRoles(message);
+            var userRoles = GetUserRoles(message);
 
-            if (this.UserHasTheAllowedRoles(allowedRoles, userRoles))
-                return true;
-
-            return false;
+            return UserHasTheAllowedRoles(allowedRoles, userRoles);
         }
 
-        private string[] GetAllowedRoles(TMessage message)
+        private static IReadOnlyCollection<string> GetAllowedRoles(TMessage message)
         {
             var allowedRoles = message.GetType()
-                .GetCustomAttributes(typeof(AllowedRoles), false)
-                .FirstOrDefault() as AllowedRoles;
+                .GetCustomAttributes(typeof(AllowedRolesAttribute), false)
+                .FirstOrDefault() as AllowedRolesAttribute;
 
-            return allowedRoles != null ? allowedRoles.Roles.ToArray() : Array.Empty<string>();
+            return allowedRoles != null ? allowedRoles.Roles : Array.Empty<string>();
         }
 
-        private string[] GetUserRoles(TMessage message)
+        private static IReadOnlyCollection<string> GetUserRoles(TMessage message)
         {
-            var userRolesProperty = message.GetType().GetProperty("UserRoles");
+            var userRolesProperty = message.GetType().GetProperty(nameof(MessageWithAuthorization<object>.UserRoles));
 
             if (userRolesProperty is null)
                 return Array.Empty<string>();
 
-            return (string[])userRolesProperty.GetValue(message);
+            return userRolesProperty.GetValue(message) as IReadOnlyCollection<string>;
         }
 
-        private bool UserHasTheAllowedRoles(IReadOnlyCollection<string> allowedRoles, string[] userRoles)
+        private static bool UserHasTheAllowedRoles(IReadOnlyCollection<string> allowedRoles,
+            IReadOnlyCollection<string> userRoles)
         {
-            if (userRoles.All(v => allowedRoles.Contains(v)))
-                return true;
-
-            return false;
+            return userRoles.All(v => allowedRoles.Contains(v));
         }
     }
 }

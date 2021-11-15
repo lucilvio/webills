@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Lucilvio.Solo.Architecture.Handler.Inbox
+namespace Lucilvio.Solo.Architecture.Handler.Inbox.Component
 {
-    public class Inbox<TMessage> where TMessage : Message
+    internal class Inbox<TMessage> : IInbox<TMessage> where TMessage : Message
     {
         private readonly IInboxDataAccess _dataAccess;
         private readonly IMessageHandler<TMessage> _eventHandler;
 
-        public Inbox(IInboxDataAccess dataAccess, IMessageHandler<TMessage> eventHandler)
+        internal Inbox(IInboxDataAccess dataAccess, IMessageHandler<TMessage> eventHandler)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this._eventHandler = eventHandler ?? throw new ArgumentNullException(nameof(eventHandler));
@@ -35,9 +35,8 @@ namespace Lucilvio.Solo.Architecture.Handler.Inbox
 
                 transaction.Complete();
             }
-            catch (Exception)
+            catch (UniqueEventConstraintException)
             {
-                return;
             }
         }
     }

@@ -14,11 +14,11 @@ namespace Lucilvio.Solo.Architecture
 
         public async Task Execute(TMessage message)
         {
-            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                await this._innerHandler.Execute(message);
-                transaction.Complete();
-            }
+            using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+            await this._innerHandler.Execute(message);
+
+            transaction.Complete();
         }
     }
 }

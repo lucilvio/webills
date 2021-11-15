@@ -1,4 +1,4 @@
-﻿using Lucilvio.Solo.Architecture.Inbox;
+﻿using Lucilvio.Solo.Architecture.Handler.Inbox.Component.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess

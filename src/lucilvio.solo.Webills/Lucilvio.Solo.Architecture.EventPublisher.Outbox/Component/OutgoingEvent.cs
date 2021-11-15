@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Architecture.Outbox
+namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component
 {
     internal record OutgoingEvent
     {

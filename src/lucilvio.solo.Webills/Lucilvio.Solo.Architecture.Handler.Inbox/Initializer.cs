@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using Lucilvio.Solo.Architecture.Inbox;
+using Lucilvio.Solo.Architecture.Handler.Inbox.Component;
+using Lucilvio.Solo.Architecture.Handler.Inbox.Component.Infrastructure;
 
 namespace Lucilvio.Solo.Architecture.Handler.Inbox
 {
@@ -9,21 +10,8 @@ namespace Lucilvio.Solo.Architecture.Handler.Inbox
             where TMessage : Message
         {
             builder.RegisterType<InboxDataAccess>().As<IInboxDataAccess>().InstancePerLifetimeScope();
-            builder.RegisterType<Inbox<TMessage>>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<Inbox<TMessage>>().As<IInbox<TMessage>>().InstancePerLifetimeScope();
 
-            return builder;
-        }
-
-        public static ContainerBuilder RegisterLogHandler(this ContainerBuilder builder)
-        {
-            builder.RegisterGenericDecorator(typeof(LogHandler<>), typeof(IMessageHandler<>));
-            return builder;
-        }
-
-        public static ContainerBuilder RegisterLogHandler<TMessage>(this ContainerBuilder builder)
-            where TMessage : Message
-        {
-            builder.RegisterDecorator<LogHandler<TMessage>, IMessageHandler<TMessage>>();
             return builder;
         }
     }

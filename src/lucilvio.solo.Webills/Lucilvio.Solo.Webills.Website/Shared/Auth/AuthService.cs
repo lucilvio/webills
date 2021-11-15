@@ -20,7 +20,7 @@ namespace Lucilvio.Solo.Webills.Website.Shared.Authorization
 
         public async Task SignIn(UserAuthCredentials credentials)
         {
-            var issuer = "webills.com";
+            const string issuer = "webills.com";
 
             var claims = new List<Claim>
             {

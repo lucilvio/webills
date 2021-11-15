@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Lucilvio.Solo.Architecture.Handler.Inbox
+namespace Lucilvio.Solo.Architecture.Handler.Inbox.Component
 {
-    public class IncomingEvent
+    internal class IncomingEvent
     {
         public IncomingEvent(Guid id, string name, string sender)
         {

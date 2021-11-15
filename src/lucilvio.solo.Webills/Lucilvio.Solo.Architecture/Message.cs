@@ -22,4 +22,14 @@ namespace Lucilvio.Solo.Architecture
             this._response = response;
         }
     }
+
+    public abstract record MessageWithAuthorization<TResponse> : Message<TResponse>
+    {
+        protected MessageWithAuthorization(string[] userRoles)
+        {
+            this.UserRoles = userRoles;
+        }
+
+        public string[] UserRoles { get; }
+    }
 }
