@@ -1,5 +1,4 @@
-﻿using Lucilvio.Solo.Architecture.Handler.Inbox.Component.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess
 {
@@ -23,13 +22,6 @@ namespace Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess
             {
                 opt.MigrationsHistoryTable($"__MigrationsHistory", this._schema);
             });
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.MapInboxModel(this._schema);
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

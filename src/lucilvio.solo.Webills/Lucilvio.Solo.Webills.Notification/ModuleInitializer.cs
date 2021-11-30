@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Architecture.Handler.Inbox;
 using Lucilvio.Solo.Architecture.Modules.AutofacModule;
 using Lucilvio.Solo.Webills.Notifications.Infrastructure;
 using Lucilvio.Solo.Webills.Notifications.Infrastructure.DataAccess;
@@ -17,6 +18,8 @@ namespace Lucilvio.Solo.Webills.Notifications
             {
                 c.Register(_ => new NotificationDataContext(configurations.DataConnectionString))
                     .As<DbContext>().InstancePerLifetimeScope();
+
+                c.RegisterInbox(configurations.DataConnectionString, configurations.ModuleName);
 
                 c.RegisterType<NotificationService>().As<INotificationService>().SingleInstance();
             });

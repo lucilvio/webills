@@ -1,5 +1,4 @@
 ﻿using System;
-using Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component.Infrastructure;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +37,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.Infraestructure.DataAccess
             base.OnModelCreating(modelBuilder);
 
             this.MapUser(modelBuilder);
-            modelBuilder.MapOutboxModel(this._schema);
 
             this.Seed(modelBuilder);
         }

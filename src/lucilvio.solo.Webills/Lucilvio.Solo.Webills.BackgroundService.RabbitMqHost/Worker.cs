@@ -3,7 +3,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Architecture;
-using Lucilvio.Solo.Webills.Notifications;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

@@ -2,6 +2,8 @@
 {
     public record Configurations
     {
+        public string ModuleName { get; } = "Notifications";
+
         public string DataConnectionString { get; init; }
         public NotificationServiceConfiguration NotificationService { get; init; }
 

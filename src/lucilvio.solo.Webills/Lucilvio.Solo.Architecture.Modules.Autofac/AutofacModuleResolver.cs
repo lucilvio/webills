@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
-using Lucilvio.Solo.Architecture.EventPublisher.Outbox;
 using Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component;
 using Lucilvio.Solo.Architecture.Handler.Authorization.Component;
 using Lucilvio.Solo.Architecture.Handler.Inbox;
@@ -94,8 +93,6 @@ namespace Lucilvio.Solo.Architecture.Modules.AutofacModule
 
                     if (messageType.GetCustomAttribute<TransactionAttribute>(false) is null)
                         cfg.RegisterDecorator(g, messageHandler);
-
-                    cfg.RegisterOutbox();
                 }
 
                 if (messageType.GetCustomAttribute<AllowedRolesAttribute>(false) is not null)
