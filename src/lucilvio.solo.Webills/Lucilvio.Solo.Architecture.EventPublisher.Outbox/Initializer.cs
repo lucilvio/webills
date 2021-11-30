@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component;
 using Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component.Infrastructure;
 
 namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox
@@ -8,7 +7,7 @@ namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox
     {
         public static ContainerBuilder RegisterOutbox(this ContainerBuilder builder)
         {
-            builder.RegisterType<OutboxDataAccess>().As<IOutboxDataAccess>().InstancePerLifetimeScope();
+            builder.RegisterType<OutboxDataAccess>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterDecorator<Component.Outbox, IEventPublisher>();
 
             return builder;

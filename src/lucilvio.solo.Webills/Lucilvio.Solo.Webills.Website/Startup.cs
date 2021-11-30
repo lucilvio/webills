@@ -85,7 +85,7 @@ namespace Lucilvio.Solo.Webills.Website
                 DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });
 
-            services.AddFinancialControleModule(new FinancialControl.Configurations
+            services.AddFinancialControlModule(new FinancialControl.Configurations
             {
                 DataConnectionString = this.Configuration.GetConnectionString("dataConnection")
             });

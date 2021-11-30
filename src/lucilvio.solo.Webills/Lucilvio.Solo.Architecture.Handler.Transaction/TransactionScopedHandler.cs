@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using System.Transactions;
+﻿using System.Transactions;
 
-namespace Lucilvio.Solo.Architecture
+namespace Lucilvio.Solo.Architecture.Handler.Transaction
 {
     public class TransactionScopedHandler<TMessage> : IMessageHandler<TMessage> where TMessage : Message
     {

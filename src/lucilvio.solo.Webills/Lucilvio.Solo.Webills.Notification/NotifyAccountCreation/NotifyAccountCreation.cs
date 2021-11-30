@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Architecture.Handler.Inbox.Component;
 using Lucilvio.Solo.Webills.Notifications.Infrastructure;
 
 namespace Lucilvio.Solo.Webills.Notifications.NotifyAccountCreation
 {
+    [Inbox]
     public record AccountCreatedMessage(string UserName) : Message;
 
     internal class NotifyAccountCreation : IMessageHandler<AccountCreatedMessage>

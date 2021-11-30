@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
@@ -53,5 +54,6 @@ namespace Lucilvio.Solo.Webills.UserAccount.GenerateNewPassword
         public string Password { get; }
     }
 
+    [Outbox]
     public record GenerateNewPasswordMessage(string Email) : Message;
 }

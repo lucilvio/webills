@@ -9,7 +9,6 @@ namespace Lucilvio.Solo.Architecture
         private TResponse _response;
 
         public TResponse Response => this._response;
-        public bool HasResponse => this._response is not null;
 
         public void SetResponse(TResponse response)
         {
@@ -23,9 +22,9 @@ namespace Lucilvio.Solo.Architecture
         }
     }
 
-    public abstract record MessageWithAuthorization<TResponse> : Message<TResponse>
+    public abstract record AuthorizedMessage<TResponse> : Message<TResponse>
     {
-        protected MessageWithAuthorization(string[] userRoles)
+        protected AuthorizedMessage(string[] userRoles)
         {
             this.UserRoles = userRoles;
         }

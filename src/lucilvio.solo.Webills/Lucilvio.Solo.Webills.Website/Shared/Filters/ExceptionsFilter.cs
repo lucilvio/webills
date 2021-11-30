@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Architecture.Handler.Authorization.Component;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

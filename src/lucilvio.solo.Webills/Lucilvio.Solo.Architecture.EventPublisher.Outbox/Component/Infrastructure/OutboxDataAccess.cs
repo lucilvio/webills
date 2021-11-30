@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component.Infrastructure
 {
-    internal class OutboxDataAccess : IOutboxDataAccess
+    internal class OutboxDataAccess
     {
         private readonly DbContext _dbContext;
 

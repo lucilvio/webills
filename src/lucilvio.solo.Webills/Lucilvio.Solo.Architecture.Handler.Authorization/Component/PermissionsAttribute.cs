@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Lucilvio.Solo.Architecture
+﻿namespace Lucilvio.Solo.Architecture.Handler.Authorization.Component
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class AllowedRolesAttribute : Attribute

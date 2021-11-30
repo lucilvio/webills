@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Lucilvio.Solo.Architecture
+﻿namespace Lucilvio.Solo.Architecture.Handler.Authorization.Component
 {
     public class AuthorizationInterceptor<TMessage> : IMessageHandler<TMessage> where TMessage : Message
     {
@@ -11,7 +6,7 @@ namespace Lucilvio.Solo.Architecture
 
         public AuthorizationInterceptor(IMessageHandler<TMessage> messageHandler)
         {
-            this._innerMessageHandler = messageHandler ?? throw new System.ArgumentNullException(nameof(messageHandler));
+            this._innerMessageHandler = messageHandler ?? throw new ArgumentNullException(nameof(messageHandler));
         }
 
         public async Task Execute(TMessage message)
@@ -49,7 +44,7 @@ namespace Lucilvio.Solo.Architecture
 
         private static IReadOnlyCollection<string> GetUserRoles(TMessage message)
         {
-            var userRolesProperty = message.GetType().GetProperty(nameof(MessageWithAuthorization<object>.UserRoles));
+            var userRolesProperty = message.GetType().GetProperty(nameof(AuthorizedMessage<object>.UserRoles));
 
             if (userRolesProperty is null)
                 return Array.Empty<string>();

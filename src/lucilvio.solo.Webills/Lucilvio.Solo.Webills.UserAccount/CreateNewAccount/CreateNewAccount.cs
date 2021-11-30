@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lucilvio.Solo.Architecture;
+using Lucilvio.Solo.Architecture.EventPublisher.Outbox.Component;
 using Lucilvio.Solo.Webills.UserAccount.Domain;
 
 namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
@@ -8,12 +9,12 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
     internal class CreateNewAccount : IMessageHandler<CreateNewAccountMessage>
     {
         private readonly CreateNewAccountDataAccess _dataAccess;
-        private readonly IEventPublisher _eventBus;
+        private readonly IEventPublisher _eventPublisher;
 
-        public CreateNewAccount(CreateNewAccountDataAccess dataAccess, IEventPublisher eventBus)
+        public CreateNewAccount(CreateNewAccountDataAccess dataAccess, IEventPublisher eventPublisher)
         {
             this._dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
-            this._eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+            this._eventPublisher = eventPublisher ?? throw new ArgumentNullException(nameof(eventPublisher));
         }
 
         public async Task Execute(CreateNewAccountMessage message)
@@ -31,7 +32,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
 
             await this._dataAccess.Persist(user);
 
-            await this._eventBus.Publish(new AccountCreated(new CreatedAccount(user)));
+            await this._eventPublisher.Publish(new AccountCreated(new CreatedAccount(user)));
         }
     }
 
@@ -48,6 +49,7 @@ namespace Lucilvio.Solo.Webills.UserAccount.CreateNewAccount
         public string UserName { get; }
     }
 
+    [Outbox]
     public record CreateNewAccountMessage(string Name, string Email, string Password,
         string PasswordConfirmation, bool TermsAccepted) : Message;
 

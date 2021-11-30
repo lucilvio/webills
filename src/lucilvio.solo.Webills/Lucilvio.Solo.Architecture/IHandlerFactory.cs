@@ -2,6 +2,6 @@
 {
     public interface IHandlerFactory<in TContainer>
     {
-        void Create(TContainer container, object parameters);
+        void Create(TContainer container, object configurations);
     }
 }
